@@ -88,7 +88,7 @@ inline fn __absorb_bcast_imem_avx2x4
 ) -> reg ptr u256[25] /* st */
    , inline int /* AT */
    , reg u64 /* buf */
-requires{0 <= LEN &&  0<=AT  && AT < 200 && AT + LEN + (TRAILB != 0 ? 1 : 0) <= 200 
+requires{0 <= LEN &&  0<=AT  && AT < RATE8 && AT + LEN + (TRAILB != 0 ? 1 : 0) <= 200 && 0 < RATE8 && RATE8 <= 200 
       && is_mem_init(buf,LEN) && is_arr_init(st,0,25*32)}
 requires{0 <= TRAILB && TRAILB < 256}
 ensures{is_arr_init(result.0,0,25*32) && result.1 == AT + LEN + (TRAILB != 0 ? 1 : 0)}
@@ -304,7 +304,7 @@ inline fn __absorb_imem_avx2x4
    , reg u64 /* buf1 */
    , reg u64 /* buf2 */
    , reg u64 /* buf3 */
-requires{0 <= LEN && 0<=AT && AT < 200 &&
+requires{0 <= LEN && 0<=AT && AT < RATE8 && 0 < RATE8 && RATE8 <= 200 &&
          AT + LEN + (TRAILB != 0 ? 1 : 0) <= 200 &&
          is_mem_init(buf0,LEN) && is_mem_init(buf1,LEN) && 
          is_mem_init(buf2,LEN) && is_mem_init(buf3,LEN) && 
@@ -429,7 +429,7 @@ inline fn __squeeze_imem_avx2x4
    , reg u64 /* buf2 */
    , reg u64 /* buf3 */
    , reg ptr u256[25] /* st */
-requires{0 <= LEN && 0 < RATE8 &&
+requires{0 <= LEN && 0 < RATE8 && RATE8 <= 200 &&
       is_mem_init(buf0,LEN) && is_mem_init(buf1,LEN) && 
       is_mem_init(buf2,LEN) && is_mem_init(buf3,LEN) && 
       is_arr_init(st,0,25*32)}

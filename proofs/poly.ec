@@ -1380,7 +1380,7 @@ module M = {
     trace___addratebit_avx2x4 <- [];
     trace___addratebit_avx2x4 <-
     (trace___addratebit_avx2x4 ++
-    [(Assert, (((is_init b_st 0 800) /\ (0 < rATE8)) /\ (rATE8 < 200)))]);
+    [(Assert, (((is_init b_st 0 800) /\ (0 < rATE8)) /\ (rATE8 <= 200)))]);
     t64 <- (W64.of_int 1);
     t64 <- (t64 `<<` (W8.of_int (((8 * rATE8) - 1) %% 64)));
     t128 <- (zeroextu128 t64);
@@ -2288,14 +2288,16 @@ module M = {
     trace_a1____absorb_array_avx2x4 <-
     (trace_a1____absorb_array_avx2x4 ++
     [(Assert,
-     (((((((((((0 <= (W64.to_uint offset)) /\ (0 <= lEN)) /\ (0 <= aT)) /\
-            (aT < 200)) /\
+     (((((((((((((0 <= (W64.to_uint offset)) /\ (0 <= lEN)) /\ (0 <= aT)) /\
+              (aT < rATE8)) /\
+             (0 < rATE8)) /\
+            (rATE8 <= 200)) /\
            (((W64.to_uint offset) + lEN) <= 1)) /\
           (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) <= 200)) /\
-         (is_init b_buf0 0 1)) /\
-        (is_init b_buf1 0 1)) /\
-       (is_init b_buf2 0 1)) /\
-      (is_init b_buf3 0 1)) /\
+         (is_init b_buf0 (W64.to_uint offset) lEN)) /\
+        (is_init b_buf1 (W64.to_uint offset) lEN)) /\
+       (is_init b_buf2 (W64.to_uint offset) lEN)) /\
+      (is_init b_buf3 (W64.to_uint offset) lEN)) /\
      (is_init b_st 0 800)))]);
     trace_a1____absorb_array_avx2x4 <-
     (trace_a1____absorb_array_avx2x4 ++
@@ -2303,11 +2305,8 @@ module M = {
     aLL <- (aT + lEN);
     if (((aT + lEN) < rATE8)) {
       (tmp__data_A1____addstate_array_avx2x4, tmp__trace) <@ a1____addstate_array_avx2x4 (
-      st, (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf0,
-      (BArray1.init_arr (W8.of_int (-1)) 1), buf1,
-      (BArray1.init_arr (W8.of_int (-1)) 1), buf2,
-      (BArray1.init_arr (W8.of_int (-1)) 1), buf3,
-      (BArray1.init_arr (W8.of_int (-1)) 1), offset, lEN, tRAILB);
+      st, (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf0, b_buf0, 
+      buf1, b_buf1, buf2, b_buf2, buf3, b_buf3, offset, lEN, tRAILB);
       (tmp__A1____addstate_array_avx2x4, tmp__A1____addstate_array_avx2x4_0,
       tmp__A1____addstate_array_avx2x4_1, tmp__A1____addstate_array_avx2x4_2) <-
       tmp__data_A1____addstate_array_avx2x4;
@@ -2320,9 +2319,7 @@ module M = {
       trace_a1____absorb_array_avx2x4 <-
       (trace_a1____absorb_array_avx2x4 ++
       [(Assert,
-       (((is_init b_st 0 800) /\
-        (aT = ((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)))) /\
-       (offset = (offset + (W64.of_int lEN)))))]);
+       ((is_init b_st 0 800) ))]);
       if ((tRAILB <> 0)) {
         (tmp__data___addratebit_avx2x4, tmp__trace) <@ __addratebit_avx2x4 (
         st, (BArray800.init_arr (W8.of_int (-1)) 800), rATE8);
@@ -2340,11 +2337,8 @@ module M = {
     } else {
       if ((aT <> 0)) {
         (tmp__data_A1____addstate_array_avx2x4, tmp__trace) <@ a1____addstate_array_avx2x4 (
-        st, (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf0,
-        (BArray1.init_arr (W8.of_int (-1)) 1), buf1,
-        (BArray1.init_arr (W8.of_int (-1)) 1), buf2,
-        (BArray1.init_arr (W8.of_int (-1)) 1), buf3,
-        (BArray1.init_arr (W8.of_int (-1)) 1), offset, (rATE8 - aT), 0);
+        st, (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf0, b_buf0,
+        buf1, b_buf1, buf2, b_buf2, buf3, b_buf3, offset, (rATE8 - aT), 0);
         (tmp__A1____addstate_array_avx2x4,
         tmp__A1____addstate_array_avx2x4_0,
         tmp__A1____addstate_array_avx2x4_1,
@@ -2374,11 +2368,8 @@ module M = {
       i <- (W64.of_int 0);
       while ((i \ult (W64.of_int iTERS))) {
         (tmp__data_A1____addstate_array_avx2x4, tmp__trace) <@ a1____addstate_array_avx2x4 (
-        st, (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf0,
-        (BArray1.init_arr (W8.of_int (-1)) 1), buf1,
-        (BArray1.init_arr (W8.of_int (-1)) 1), buf2,
-        (BArray1.init_arr (W8.of_int (-1)) 1), buf3,
-        (BArray1.init_arr (W8.of_int (-1)) 1), offset, rATE8, 0);
+        st, (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf0, b_buf0, 
+        buf1, b_buf1, buf2, b_buf2, buf3, b_buf3, offset, rATE8, 0);
         (tmp__A1____addstate_array_avx2x4,
         tmp__A1____addstate_array_avx2x4_0,
         tmp__A1____addstate_array_avx2x4_1,
@@ -2404,11 +2395,8 @@ module M = {
       }
       lEN <- (aLL %% rATE8);
       (tmp__data_A1____addstate_array_avx2x4, tmp__trace) <@ a1____addstate_array_avx2x4 (
-      st, (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf0,
-      (BArray1.init_arr (W8.of_int (-1)) 1), buf1,
-      (BArray1.init_arr (W8.of_int (-1)) 1), buf2,
-      (BArray1.init_arr (W8.of_int (-1)) 1), buf3,
-      (BArray1.init_arr (W8.of_int (-1)) 1), offset, lEN, tRAILB);
+      st, (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf0, b_buf0, 
+      buf1, b_buf1, buf2, b_buf2, buf3, b_buf3, offset, lEN, tRAILB);
       (tmp__A1____addstate_array_avx2x4, tmp__A1____addstate_array_avx2x4_0,
       tmp__A1____addstate_array_avx2x4_1, tmp__A1____addstate_array_avx2x4_2) <-
       tmp__data_A1____addstate_array_avx2x4;
@@ -2421,8 +2409,7 @@ module M = {
       trace_a1____absorb_array_avx2x4 <-
       (trace_a1____absorb_array_avx2x4 ++
       [(Assert,
-       (((is_init b_st 0 800) /\ (aT = (lEN + ((tRAILB <> 0) ? 1 : 0)))) /\
-       (offset = (offset + (W64.of_int lEN)))))]);
+       ((is_init b_st 0 800)))]);
       if ((tRAILB <> 0)) {
         (tmp__data___addratebit_avx2x4, tmp__trace) <@ __addratebit_avx2x4 (
         st, (BArray800.init_arr (W8.of_int (-1)) 800), rATE8);
@@ -2632,15 +2619,6 @@ module M = {
         lEN <- tmp__A32____aread_subu64_0;
         tRAIL <- tmp__A32____aread_subu64_1;
         t64 <- tmp__A32____aread_subu64_2;
-        trace_a32____aread_bcast_4subu64 <-
-        (trace_a32____aread_bcast_4subu64 ++
-        [(Assert,
-         (((dELTA =
-           (dELTA +
-           ((((lEN < 8) ? lEN : 8) < 0) ? 0 : ((lEN < 8) ? lEN : 8)))) /\
-          (lEN =
-          (lEN - ((((lEN < 8) ? lEN : 8) < 0) ? 0 : ((lEN < 8) ? lEN : 8))))) /\
-         (tRAIL = ((8 <= lEN) ? tRAIL : 0))))]);
         t128 <- (zeroextu128 t64);
         w <- (VPBROADCAST_4u64 (truncateu64 t128));
       }
@@ -2689,7 +2667,7 @@ module M = {
          (aT < 200)) /\
         (((W64.to_uint offset) + lEN) <= 32)) /\
        (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) <= 200)) /\
-      (is_init b_buf 0 32)) /\
+      (is_init b_buf (W64.to_uint offset) lEN)) /\
      (is_init b_st 0 800)))]);
     trace_a32____addstate_bcast_array_avx2x4 <-
     (trace_a32____addstate_bcast_array_avx2x4 ++
@@ -2706,8 +2684,7 @@ module M = {
           
         }
         (tmp__data_A32____aread_bcast_4subu64, tmp__trace) <@ a32____aread_bcast_4subu64 (
-        buf, (BArray32.init_arr (W8.of_int (-1)) 32), offset, dELTA, 
-        lEN, tRAILB);
+        buf, b_buf, offset, dELTA, lEN, tRAILB);
         (tmp__A32____aread_bcast_4subu64, tmp__A32____aread_bcast_4subu64_0,
         tmp__A32____aread_bcast_4subu64_1, tmp__A32____aread_bcast_4subu64_2) <-
         tmp__data_A32____aread_bcast_4subu64;
@@ -2737,14 +2714,17 @@ module M = {
           [(Assert,
            ((0 <= (W64.to_uint (offset + (W64.of_int dELTA)))) /\
            (((W64.to_uint (offset + (W64.of_int dELTA))) + 8) <= 32)))]);
+          trace_a32____addstate_bcast_array_avx2x4 <-
+          (trace_a32____addstate_bcast_array_avx2x4 ++
+          [(Assert,
+           (is_init b_buf (W64.to_uint (offset + (W64.of_int dELTA))) 8))]);
           t256 <-
           (VPBROADCAST_4u64
           (BArray32.get64d buf (W64.to_uint (offset + (W64.of_int dELTA)))));
           dELTA <- (dELTA + (8 - lO));
         } else {
           (tmp__data_A32____aread_bcast_4subu64, tmp__trace) <@ a32____aread_bcast_4subu64 (
-          buf, (BArray32.init_arr (W8.of_int (-1)) 32), offset, dELTA,
-          (8 - lO), 0);
+          buf, b_buf, offset, dELTA, (8 - lO), 0);
           (tmp__A32____aread_bcast_4subu64,
           tmp__A32____aread_bcast_4subu64_0,
           tmp__A32____aread_bcast_4subu64_1,
@@ -2783,6 +2763,9 @@ module M = {
         (trace_a32____addstate_bcast_array_avx2x4 ++
         [(Assert,
          ((0 <= (W64.to_uint offset)) /\ (((W64.to_uint offset) + 8) <= 32)))]);
+        trace_a32____addstate_bcast_array_avx2x4 <-
+        (trace_a32____addstate_bcast_array_avx2x4 ++
+        [(Assert, (is_init b_buf (W64.to_uint offset) 8))]);
         t256 <-
         (VPBROADCAST_4u64 (BArray32.get64d buf (W64.to_uint offset)));
         offset <- (offset + (W64.of_int 8));
@@ -2810,8 +2793,7 @@ module M = {
         
       }
       (tmp__data_A32____aread_bcast_4subu64, tmp__trace) <@ a32____aread_bcast_4subu64 (
-      buf, (BArray32.init_arr (W8.of_int (-1)) 32), offset, dELTA, lO,
-      tRAILB);
+      buf, b_buf, offset, dELTA, lO, tRAILB);
       (tmp__A32____aread_bcast_4subu64, tmp__A32____aread_bcast_4subu64_0,
       tmp__A32____aread_bcast_4subu64_1, tmp__A32____aread_bcast_4subu64_2) <-
       tmp__data_A32____aread_bcast_4subu64;
@@ -2872,11 +2854,13 @@ module M = {
     trace_a32____absorb_bcast_array_avx2x4 <-
     (trace_a32____absorb_bcast_array_avx2x4 ++
     [(Assert,
-     ((((((((0 <= (W64.to_uint offset)) /\ (0 <= lEN)) /\ (0 <= aT)) /\
-         (aT < 200)) /\
-        (((W64.to_uint offset) + lEN) <= 32)) /\
-       (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) <= 200)) /\
-      (is_init b_buf 0 32)) /\
+     ((((((((((0 <= (W64.to_uint offset)) /\ (0 <= lEN)) /\ (0 <= aT)) /\
+           (aT < rATE8)) /\
+          (((W64.to_uint offset) + lEN) <= 32)) /\
+         (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) <= 200)) /\
+        (0 < rATE8)) /\
+       (rATE8 <= 200)) /\
+      (is_init b_buf (W64.to_uint offset) lEN)) /\
      (is_init b_st 0 800)))]);
     trace_a32____absorb_bcast_array_avx2x4 <-
     (trace_a32____absorb_bcast_array_avx2x4 ++
@@ -2884,8 +2868,8 @@ module M = {
     aLL <- (aT + lEN);
     if (((aT + lEN) < rATE8)) {
       (tmp__data_A32____addstate_bcast_array_avx2x4, tmp__trace) <@ a32____addstate_bcast_array_avx2x4 (
-      st, (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf,
-      (BArray32.init_arr (W8.of_int (-1)) 32), offset, lEN, tRAILB);
+      st, (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf, b_buf, 
+      offset, lEN, tRAILB);
       (tmp__A32____addstate_bcast_array_avx2x4,
       tmp__A32____addstate_bcast_array_avx2x4_0,
       tmp__A32____addstate_bcast_array_avx2x4_1,
@@ -2900,9 +2884,7 @@ module M = {
       trace_a32____absorb_bcast_array_avx2x4 <-
       (trace_a32____absorb_bcast_array_avx2x4 ++
       [(Assert,
-       (((is_init b_st 0 800) /\
-        (aT = ((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)))) /\
-       (offset = (offset + (W64.of_int lEN)))))]);
+       ((is_init b_st 0 800)))]);
       if ((tRAILB <> 0)) {
         (tmp__data___addratebit_avx2x4, tmp__trace) <@ __addratebit_avx2x4 (
         st, (BArray800.init_arr (W8.of_int (-1)) 800), rATE8);
@@ -2922,8 +2904,8 @@ module M = {
       if ((aT <> 0)) {
         (tmp__data_A32____addstate_bcast_array_avx2x4, tmp__trace) <@ 
         a32____addstate_bcast_array_avx2x4 (st,
-        (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf,
-        (BArray32.init_arr (W8.of_int (-1)) 32), offset, (rATE8 - aT), 0);
+        (BArray800.init_arr (W8.of_int (-1)) 800), aT, buf, b_buf, offset,
+        (rATE8 - aT), 0);
         (tmp__A32____addstate_bcast_array_avx2x4,
         tmp__A32____addstate_bcast_array_avx2x4_0,
         tmp__A32____addstate_bcast_array_avx2x4_1,
@@ -2955,8 +2937,8 @@ module M = {
       while ((i \ult (W64.of_int iTERS))) {
         (tmp__data_A32____addstate_bcast_array_avx2x4, tmp__trace) <@ 
         a32____addstate_bcast_array_avx2x4 (st,
-        (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf,
-        (BArray32.init_arr (W8.of_int (-1)) 32), offset, rATE8, 0);
+        (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf, b_buf, offset,
+        rATE8, 0);
         (tmp__A32____addstate_bcast_array_avx2x4,
         tmp__A32____addstate_bcast_array_avx2x4_0,
         tmp__A32____addstate_bcast_array_avx2x4_1,
@@ -2983,8 +2965,8 @@ module M = {
       }
       lEN <- (aLL %% rATE8);
       (tmp__data_A32____addstate_bcast_array_avx2x4, tmp__trace) <@ a32____addstate_bcast_array_avx2x4 (
-      st, (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf,
-      (BArray32.init_arr (W8.of_int (-1)) 32), offset, lEN, tRAILB);
+      st, (BArray800.init_arr (W8.of_int (-1)) 800), 0, buf, b_buf, offset,
+      lEN, tRAILB);
       (tmp__A32____addstate_bcast_array_avx2x4,
       tmp__A32____addstate_bcast_array_avx2x4_0,
       tmp__A32____addstate_bcast_array_avx2x4_1,
@@ -2999,8 +2981,7 @@ module M = {
       trace_a32____absorb_bcast_array_avx2x4 <-
       (trace_a32____absorb_bcast_array_avx2x4 ++
       [(Assert,
-       (((is_init b_st 0 800) /\ (aT = (lEN + ((tRAILB <> 0) ? 1 : 0)))) /\
-       (offset = (offset + (W64.of_int lEN)))))]);
+       (is_init b_st 0 800))]);
       if ((tRAILB <> 0)) {
         (tmp__data___addratebit_avx2x4, tmp__trace) <@ __addratebit_avx2x4 (
         st, (BArray800.init_arr (W8.of_int (-1)) 800), rATE8);
@@ -3465,8 +3446,10 @@ module M = {
     trace_a128____squeeze_array_avx2x4 <-
     (trace_a128____squeeze_array_avx2x4 ++
     [(Assert,
-     ((((0 <= (W64.to_uint offset)) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
-     (((W64.to_uint offset) + lEN) <= 128)))]);
+     ((((((0 <= (W64.to_uint offset)) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
+       (((W64.to_uint offset) + lEN) <= 128)) /\
+      (0 < rATE8)) /\
+     (rATE8 <= 200)))]);
     iTERS <- (lEN %/ rATE8);
     lO <- (lEN %% rATE8);
     if ((0 < lEN)) {
@@ -3508,9 +3491,6 @@ module M = {
           buf3 <- tmp__A128____dumpstate_array_avx2x4_5;
           b_buf3 <- tmp__A128____dumpstate_array_avx2x4_6;
           offset <- tmp__A128____dumpstate_array_avx2x4_7;
-          trace_a128____squeeze_array_avx2x4 <-
-          (trace_a128____squeeze_array_avx2x4 ++
-          [(Assert, (offset = (offset + (W64.of_int rATE8))))]);
           i <- (i + (W64.of_int 1));
         }
       } else {
@@ -3552,9 +3532,6 @@ module M = {
         buf3 <- tmp__A128____dumpstate_array_avx2x4_5;
         b_buf3 <- tmp__A128____dumpstate_array_avx2x4_6;
         offset <- tmp__A128____dumpstate_array_avx2x4_7;
-        trace_a128____squeeze_array_avx2x4 <-
-        (trace_a128____squeeze_array_avx2x4 ++
-        [(Assert, (offset = (offset + (W64.of_int lO))))]);
       } else {
         
       }
@@ -4798,7 +4775,7 @@ qed.
 lemma __addratebit_avx2x4_trace _st _b_st _rATE8 :
       hoare [M.__addratebit_avx2x4 :
       (((_rATE8 = rATE8) /\ ((_b_st = b_st) /\ (_st = st))) /\
-      (((is_init _b_st 0 800) /\ (0 < _rATE8)) /\ (_rATE8 < 200))) ==>
+      (((is_init _b_st 0 800) /\ (0 < _rATE8)) /\ (_rATE8 <= 200))) ==>
       ((is_init res.`1.`2 0 800) /\ (valid (trace res)))].
 proof.
   proc;auto. rewrite /is_init /valid /trace /=. smt(BArray800.init_arrP).
@@ -4835,7 +4812,32 @@ lemma a1____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
        (res.`1.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
       (valid (trace res)))].
 proof.
-admitted.
+  proc. rewrite /=.
+  case (1 < _lEN). exfalso. smt().
+  seq 9:  (#pre /\ _lEN <= 1 /\ valid trace_a1____aread_subu64).
+  + auto. smt().
+  sp 1.
+  if.
+  + auto. smt(all_cat).
+  if. exfalso. smt().
+  if. exfalso. smt().
+  sp 1. if. exfalso. smt().
+  auto. move => &m /> . rewrite /valid /trace /=. move => 2? h *.
+  case(lEN{m} = 1).
+  + move => *. split.
+    + move => *. split.
+      + move => *. split.
+        + move => *.  split. smt().
+          rewrite !all_cat /=. split. rewrite to_uintD_small of_uintK ; smt(W64.to_uint_cmp).
+          smt().
+        move => *. split. smt().  
+        rewrite !all_cat /=. split. rewrite to_uintD_small of_uintK ; smt(W64.to_uint_cmp).
+        smt().
+      smt().
+    smt().
+  auto. smt().
+qed.
+
 
 lemma a1____addstate_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _tRAILB :
       hoare [M.a1____addstate_array_avx2x4 :
@@ -4865,7 +4867,95 @@ lemma a1____addstate_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf
        (res.`1.`4 = (_offset + (W64.of_int _lEN)))) /\
       (valid (trace res)))].
 proof.
-admitted.
+  proc. rewrite /=.
+  case (1 < _lEN). exfalso. smt().
+  seq 17: (#pre /\ _lEN <= 1 /\ valid  trace_a1____addstate_array_avx2x4).
+  + auto. smt().
+  sp. if.
+  + seq 1: ( _lEN <= 1  /\ valid  trace_a1____addstate_array_avx2x4 /\ lO = _aT %% 8 /\
+           _aT + _lEN + (if _tRAILB <> 0 then 1 else 0) <= 200 /\
+           is_init _b_buf0 (to_uint _offset) _lEN /\ offset = _offset /\
+           is_init _b_buf1 (to_uint _offset) _lEN /\  0 <= _aT /\ _aT < 200 /\
+           is_init _b_buf2 (to_uint _offset) _lEN /\
+           is_init _b_buf3 (to_uint _offset) _lEN /\ 0 <= _tRAILB /\ _tRAILB < 256 /\
+           aLL =  _aT + _lEN + (if (lO + _lEN < 8 && _tRAILB <> 0) then 1 else 0) /\
+           tRAILB =  (if (lO + _lEN < 8 && _tRAILB <> 0) then 0 else _tRAILB) /\
+           at = W64.of_int (4 * (_aT %/ 8) + (if (!(lO + _lEN < 8)) then 4 else 0)) /\ 
+           aT = (if(lO + _lEN < 8) then 0 else _aT + 8 - lO) /\
+           lEN = (if(lO + _lEN < 8) then 0 else _lEN - 8 + lO) /\
+           dELTA = (if(lO + _lEN < 8) then _lEN else 8-lO)).
+    + if.
+      + auto. ecall(a1____aread_subu64_trace buf3 b_buf3 offset dELTA lEN tRAILB).    
+        auto. ecall(a1____aread_subu64_trace buf2 b_buf2 offset dELTA lEN tRAILB).
+        auto. ecall(a1____aread_subu64_trace buf1 b_buf1 offset dELTA lEN tRAILB).   
+        auto. ecall(a1____aread_subu64_trace buf0 b_buf0 offset dELTA lEN tRAILB). auto.
+        move => &m /> . rewrite /valid /trace /= => *.
+        split.
+        + move => *. split. smt().
+          move => *. split. smt(). 
+          move => *. split. smt().
+          move => *. split. smt().
+          move => *. split. rewrite !to_uintK_small /=; smt(all_cat).
+          smt().
+        move => *. split. smt().
+        move => *. split. smt().
+        move => *. split. smt().
+        move => *. split. smt().
+        move => *. split. rewrite !to_uintK_small /=; smt(all_cat).
+        smt().
+      if. exfalso. smt().   
+      auto. ecall(a1____aread_subu64_trace buf3 b_buf3 offset dELTA (8-lO) tRAILB).    
+      auto. ecall(a1____aread_subu64_trace buf2 b_buf2 offset dELTA (8-lO) tRAILB).
+      auto. ecall(a1____aread_subu64_trace buf1 b_buf1 offset dELTA (8-lO) tRAILB).   
+      auto. ecall(a1____aread_subu64_trace buf0 b_buf0 offset dELTA (8-lO) tRAILB). auto.
+      move => &m /> . rewrite /valid /trace /= => *. 
+      split.
+      + move => *. split. smt().
+        move => *. smt(). 
+      move => *. split. smt().
+      move => *. split. smt().
+      move => *. split. smt().
+      move => *. split. rewrite !to_uintK_small /=; smt(all_cat).
+      smt().
+    sp.  
+    if. exfalso. smt().
+    sp.
+    if. 
+    + auto. ecall(a1____aread_subu64_trace buf3 b_buf3 offset dELTA lO tRAILB).    
+      auto. ecall(a1____aread_subu64_trace buf2 b_buf2 offset dELTA lO tRAILB).
+      auto. ecall(a1____aread_subu64_trace buf1 b_buf1 offset dELTA lO tRAILB).   
+      auto. ecall(a1____aread_subu64_trace buf0 b_buf0 offset dELTA lO tRAILB). auto.
+      move => &m /> . rewrite /valid /trace /is_init /= => *. 
+      split.
+      + split. smt(). move => *.
+        rewrite !to_uintD_small !to_uintK_small /=; smt(). 
+      move => /> *. split. smt().
+      move => *. split. smt().
+      move => *. split. smt().
+      move => *. split. move => *.
+      + split. split. smt(BArray800.init_arrP). smt().
+      rewrite !all_cat !to_uintK_small /= ; smt(). 
+      rewrite !all_cat !to_uintK_small /=; smt(). 
+    auto.  
+    smt( BArray800.init_arrP).
+  sp. if. exfalso. smt().
+  sp. if. 
+  + auto. ecall(a1____aread_subu64_trace buf3 b_buf3 offset dELTA lO tRAILB).    
+    auto. ecall(a1____aread_subu64_trace buf2 b_buf2 offset dELTA lO tRAILB).
+    auto. ecall(a1____aread_subu64_trace buf1 b_buf1 offset dELTA lO tRAILB).   
+    auto. ecall(a1____aread_subu64_trace buf0 b_buf0 offset dELTA lO tRAILB). auto.
+    move => &m /> . rewrite /valid /trace /is_init /= => *. 
+    split. smt().
+    move => *. split. smt().
+    move => *. split. smt().
+    move => *. split. smt().
+    move => *. split. move => *.
+    + split. split. smt(BArray800.init_arrP). smt().
+    rewrite !all_cat !to_uintK_small /= ; smt(). 
+    rewrite !all_cat !to_uintK_small /= ; smt(BArray800.init_arrP). 
+  auto.  
+  smt( BArray800.init_arrP).   
+qed.
 
 lemma a1____absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _rATE8 _tRAILB :
       hoare [M.a1____absorb_array_avx2x4 :
@@ -4882,19 +4972,67 @@ lemma a1____absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 
        ((_b_buf0 = b_buf0) /\
        ((_buf0 = buf0) /\ ((_aT = aT) /\ ((_b_st = b_st) /\ (_st = st))))))))))))))) /\
       (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((((((((((0 <= (W64.to_uint _offset)) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\
-             (_aT < 200)) /\
+      (((((((((((((0 <= (W64.to_uint _offset)) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\
+               (_aT < _rATE8)) /\
+              (0 < _rATE8)) /\
+             (_rATE8 <= 200)) /\
             (((W64.to_uint _offset) + _lEN) <= 1)) /\
            (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) <= 200)) /\
-          (is_init _b_buf0 0 1)) /\
-         (is_init _b_buf1 0 1)) /\
-        (is_init _b_buf2 0 1)) /\
-       (is_init _b_buf3 0 1)) /\
+          (is_init _b_buf0 (W64.to_uint _offset) _lEN)) /\
+         (is_init _b_buf1 (W64.to_uint _offset) _lEN)) /\
+        (is_init _b_buf2 (W64.to_uint _offset) _lEN)) /\
+       (is_init _b_buf3 (W64.to_uint _offset) _lEN)) /\
       (is_init _b_st 0 800)))) ==>
       ((is_init res.`1.`2 0 800) /\ (valid (trace res)))].
 proof.
-  proc.    
-admitted.
+ proc. rewrite /=.
+  case (1 < _lEN). exfalso. smt().
+  seq 18: (valid trace_a1____absorb_array_avx2x4 /\ #pre /\ _lEN <= 1).
+  + auto. smt().
+  sp. if.
+  + seq 8: (valid trace_a1____absorb_array_avx2x4 /\ 0<rATE8 /\ rATE8 <= 200).
+    + auto. ecall(a1____addstate_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800)
+ aT buf0 b_buf0 buf1 b_buf1 buf2 b_buf2 buf3 b_buf3 offset lEN tRAILB). auto.
+      move => &m />. rewrite /valid /trace /= => *. smt(all_cat BArray800.init_arrP).
+    if. auto.
+    + ecall(__addratebit_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) rATE8). auto.
+      move => &m />. rewrite /valid /trace /= => *. smt(all_cat BArray800.init_arrP).
+    auto. smt(BArray800.init_arrP).
+  seq 13: (valid trace_a1____absorb_array_avx2x4 /\ 0<rATE8 /\ rATE8 <= 200).
+  + wp. ecall(a1____addstate_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) 0 buf0 b_buf0 buf1 b_buf1 buf2 b_buf2 buf3 b_buf3 offset lEN tRAILB). auto.
+    pose offset0 :=  to_uint _offset +  (if _aT <> 0 then (_rATE8-_aT) else 0).
+    while (valid trace_a1____absorb_array_avx2x4 /\ 0<rATE8 /\ rATE8 <= 200 /\ _lEN <=1 /\
+           0 <= offset0 /\ 0 <= to_uint i /\ to_uint i <=iTERS /\ 0 <= to_uint _offset /\
+           to_uint offset =  offset0 +  to_uint i* rATE8 /\ iTERS <= 1 /\
+           (to_uint i < iTERS => to_uint offset + rATE8 <= _lEN) /\ to_uint _offset <= offset0 /\
+           is_init b_buf0  (to_uint _offset) _lEN /\ is_init b_buf1 (to_uint _offset)  _lEN /\
+           is_init b_buf2  (to_uint _offset) _lEN /\ is_init b_buf3 (to_uint _offset)  _lEN).
+    + auto. ecall(_keccakf1600_avx2x4_trace st b_st). auto.
+      ecall(a1____addstate_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) 0 buf0 b_buf0 buf1 b_buf1 buf2 b_buf2 buf3 b_buf3 offset rATE8 0). auto. 
+      move => &m />. rewrite /valid /trace /is_init /= => 12?.
+      rewrite ultE to_uintK_small /=. smt(). move => *.
+      split.  smt(BArray800.init_arrP). move => 11? h *.
+      split. smt(all_cat).
+      rewrite !to_uintD_small !to_uintK_small /=;1..3: smt().
+      split. smt(). split. smt().
+      split. move: h. rewrite W64.to_uint_eq to_uintD_small to_uintK_small /=; 1..3:smt().
+      + rewrite Ring.IntID.mulrDl. smt().
+      smt().
+    if.
+    + auto. ecall(_keccakf1600_avx2x4_trace st b_st). auto.
+      ecall(a1____addstate_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) aT buf0 b_buf0 buf1 b_buf1 buf2 b_buf2 buf3 b_buf3 offset (rATE8 - aT) 0). auto.       
+      move => &m />. rewrite /valid /trace /is_init /= => *. 
+      split. smt(BArray800.init_arrP). move => 12? h *. 
+      split. move : h. rewrite to_uint_eq to_uintD_small to_uintK_small /=;smt(all_cat). 
+      move => /> /= *. split. split;smt(). move => *.
+      smt(all_cat).
+    auto.  move => &m />. rewrite /valid /trace /is_init /= => *. 
+    split. smt(all_cat). move => *.
+    split. smt(BArray800.init_arrP). move => *.
+    smt(all_cat).
+  auto. if. auto. ecall(__addratebit_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) rATE8). auto. smt(all_cat BArray800.init_arrP).
+  auto. smt(BArray800.init_arrP).
+qed.
 
 lemma a32____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
       hoare [M.a32____aread_subu64 :
@@ -4920,7 +5058,7 @@ lemma a32____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
        (res.`1.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
       (valid (trace res)))].
 proof.
-  proc. rewrite /=.
+ proc. rewrite /=.
   seq 10: (#pre /\ valid  trace_a32____aread_subu64).
   + by auto.
   if.
@@ -5152,78 +5290,172 @@ lemma a32____addstate_bcast_array_avx2x4_trace _st _b_st _aT _buf _b_buf _offset
           (_aT < 200)) /\
          (((W64.to_uint _offset) + _lEN) <= 32)) /\
         (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) <= 200)) /\
-       (is_init _b_buf 0 32)) /\
+       (is_init _b_buf (W64.to_uint _offset) _lEN)) /\
       (is_init _b_st 0 800)))) ==>
       ((((is_init res.`1.`2 0 800) /\
         (res.`1.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
        (res.`1.`4 = (_offset + (W64.of_int _lEN)))) /\
       (valid (trace res)))].
 proof.
-  proc. rewrite /=.
+proc. rewrite /=.
   seq 11: (#pre /\ valid trace_a32____addstate_bcast_array_avx2x4).
   + by auto.
   sp.
-  seq 1: ( 0 <= _tRAILB /\ _tRAILB < 256 /\  0 <= to_uint _offset /\ lO = _aT %% 8 /\
-           0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\ to_uint _offset + _lEN <= 32 /\
-           (_aT + _lEN + if _tRAILB <> 0 then 1 else 0) <= 200 /\
-          valid trace_a32____addstate_bcast_array_avx2x4 /\
-          tRAILB = (if 0<lO && lO + _lEN < 8 then 0 else _tRAILB) /\
-          aLL = (if  0<lO && lO + _lEN < 8 && _tRAILB <> 0 then  _aT + _lEN + 1 else  _aT + _lEN) /\
-          lEN = (if 0<lO then if lO + _lEN < 8 then 0 else _lEN -8 + lO else _lEN) /\
-          aT = (if 0<lO then if lO + _lEN < 8 then 0 else _aT + 8 - lO else _aT) /\
-          at = (if 0<lO && !(lO + _lEN < 8) then W64.of_int ((32 * (_aT %/ 8)) + 32) else W64.of_int (32 * (_aT %/ 8))) /\
-          offset = ( if 0<lO then if lO+ _lEN < 8 then _offset +  W64.of_int _lEN else _offset + W64.of_int (8 - lO) else _offset)).
-  + if.
-    + if.
+  case (_aT%%8 + _lEN < 8).
+  + case (0 < _aT%%8).
+    + seq 1: (valid trace_a32____addstate_bcast_array_avx2x4 /\
+               lEN < 8 /\ tRAILB = 0 /\ aT + lEN = 0 /\ aLL = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0))  /\ offset = _offset + W64.of_int _lEN).
       + if.
-        + auto. ecall (a32____aread_bcast_4subu64_trace buf (BArray32.init_arr (W8.of_int (-1)) 32) offset dELTA lEN tRAILB).
-          auto. move => &m /> /=. rewrite /trace /valid /=.
-          move => *.
-          split. smt(BArray32.init_arrP).
-          move => /> *. split.
-          + rewrite !all_cat /= of_uintK /=. smt().
-          smt().  
-        auto.  ecall (a32____aread_bcast_4subu64_trace buf (BArray32.init_arr (W8.of_int (-1)) 32) offset dELTA lEN tRAILB). auto. move => &m /> /=. rewrite /trace /valid /=.
-        move => *. split. smt(BArray32.init_arrP).
-        move => /> *. split.
-        + rewrite !all_cat /= of_uintK /=. smt().
-        smt().
-      wp. if.  
-      + auto.  move => &m /> /=. rewrite /trace /valid /=. move => *.
-        split. rewrite !all_cat /= of_uintK /=. smt().
-        smt().
-      auto.  ecall (a32____aread_bcast_4subu64_trace buf (BArray32.init_arr (W8.of_int (-1)) 32) offset dELTA (8- lO)  0). auto. move => &m /> /=. rewrite /trace /valid /=. move => *.
-      split. smt(BArray32.init_arrP).
-      move => /> *.
-      rewrite !all_cat /= of_uintK /=. smt().
-      auto. smt().
-             seq 1: (
-            0 <= _tRAILB /\ _tRAILB < 256 /\  0 <= to_uint _offset /\ lO = _aT %% 8 /\
-           0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\ to_uint _offset + _lEN <= 32 /\
-           (_aT + _lEN + if _tRAILB <> 0 then 1 else 0) <= 200 /\
+        + if.
+          + auto. ecall (a32____aread_bcast_4subu64_trace buf b_buf offset dELTA lEN tRAILB). auto.
+            move => &m /> /=. rewrite /trace /valid /is_init /= => *. 
+            rewrite !to_uintK_small /=; smt(all_cat).
+          exfalso. smt().
+        by auto. 
+      if. exfalso. smt().  
+      sp. if. exfalso. smt().
+      auto. smt(BArray800.init_arrP all_cat).
+    seq 1: (valid trace_a32____addstate_bcast_array_avx2x4 /\ #pre /\  lEN < 8).      
+    if. exfalso. smt().
+    auto. smt(all_cat).
+    if. exfalso. smt().
+    sp.
+    if.
+    + auto. ecall (a32____aread_bcast_4subu64_trace buf b_buf offset dELTA lO tRAILB). auto.
+      move => &m /> /=. rewrite /trace /valid /is_init /= => *.
+      have h: ((aT{m} + lEN{m}) %% 8 = lEN{m}). move => *. rewrite -modzDm.
+      + have h2: (aT{m} %% 8 + lEN{m} %% 8 = lEN{m} %% 8). smt(). rewrite h2 /=. smt().
+      split. move => *.
+      + split. move => *. smt().
+        move => *. split. smt(BArray800.init_arrP).
+        rewrite !to_uintK_small /=; smt(all_cat).
+      move => *. split. smt().
+      move => *. rewrite !to_uintK_small /=; smt(all_cat BArray800.init_arrP).
+    auto. move => &m /> /=. rewrite /trace /valid /is_init /= => *.
+    smt(BArray800.init_arrP  W64.WRingA.addr0).
+  case(_aT%%8 = 0). 
+  + if. exfalso. smt().
+    seq 1: (valid trace_a32____addstate_bcast_array_avx2x4 /\
+          offset = _offset + W64.of_int(_lEN - _lEN%%8) /\
+          at =  W64.of_int (32 * (_aT %/ 8) + 32 * (_lEN %/ 8)) /\
+          aLL = _aT + _lEN /\ lEN =( _lEN + _aT) %% 8 /\
+          dELTA = 0 /\ _tRAILB = tRAILB /\ aT = _aT /\
+          _b_buf = b_buf /\ (0 <= _tRAILB /\ _tRAILB < 256) /\
+          0 <= to_uint _offset /\ 0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\
+          to_uint _offset + _lEN <= 32 /\
+          _aT + _lEN + (if _tRAILB <> 0 then 1 else 0) <= 200 /\
+          is_init _b_buf (to_uint _offset) _lEN /\
+          ! _aT %% 8 + _lEN < 8 /\  _aT %% 8 = 0 ).
+    + if. wp.
+      + while(
           valid trace_a32____addstate_bcast_array_avx2x4 /\
-          tRAILB = (if 0<lO && lO + _lEN < 8 then 0 else _tRAILB) /\
-          aLL = (if  0<lO && lO + _lEN < 8 && _tRAILB <> 0 then  _aT + _lEN + 1 else  _aT + _lEN) /\
-          lEN = (if 0<lO then if lO + _lEN < 8 then 0 else _lEN -8 + lO else _lEN) /\
-          aT = (if 0<lO then if lO + _lEN < 8 then 0 else _aT + 8 - lO else _aT) /\
-          at = (if 0<lO && !(lO + _lEN < 8) then W64.of_int ((32 * (_aT %/ 8)) + 32) else W64.of_int (32 * (_aT %/ 8))) /\
-          offset = ( if 0<lO then if lO+ _lEN < 8 then _offset +  W64.of_int _lEN else _offset + W64.of_int (8 - lO) else _offset) /\
-          offset =  offset + W64.of_int (lEN - ((aT + lEN)%%8)) /\
-          at =  at + W64.of_int (32*(lEN%/8)) /\
-          lEN = (aT+lEN) %% 8).
-    admit.  
-    (*+ while(valid trace_a32____addstate_bcast_array_avx2x4 /\ 0 <= to_uint at
-            to_uint at %% 32 = 0 /\ at = at + W64_of_int () /\
-            offset = offsest + W64.of_int).
-      auto. move => &m />. rewrite /trace /valid ultE /= => *.
-             split. smt(all_cat).*)
-  auto. sp. if.
-  + auto. ecall(a32____aread_bcast_4subu64_trace buf (BArray32.init_arr (W8.of_int (-1)) 32) offset dELTA lO tRAILB). auto. move => &m />. rewrite /valid /trace /= => *. 
-
-admit.
-admit.
+          to_uint at <=  32 * (aT %/ 8) + 32 * (lEN %/ 8) /\ to_uint at %% 32 = 0 /\
+          aLL = aT + lEN /\ offset = _offset + W64.of_int((to_uint at - (32 * (aT %/ 8)))%/4) /\
+          dELTA = 0 /\ _tRAILB = tRAILB /\  _lEN = lEN /\ 32 * (aT %/ 8) <= to_uint at /\
+          _b_buf = b_buf /\ (0 <= _tRAILB /\ _tRAILB < 256)  /\ lEN = _lEN /\
+          0 <= to_uint _offset /\ 0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\
+          to_uint _offset + _lEN <= 32 /\ _aT = aT /\ _lEN = lEN /\
+          _aT + _lEN + (if _tRAILB <> 0 then 1 else 0) <= 200 /\
+          is_init _b_buf (to_uint _offset) _lEN /\
+          ! _aT %% 8 + _lEN < 8 /\  _aT %% 8 = 0 ).
+        + auto. move => &m /> /=. rewrite /trace /valid /is_init /=. move => 14?.
+          rewrite ultE to_uintK_small /=. smt(). move => *.
+          split. rewrite !all_cat to_uintD_small to_uintK_small/=; smt().
+          rewrite to_uintD_small to_uintK_small/=; smt().
+        auto. move => &m /> /=. rewrite /trace /valid /is_init /=. move => *.
+        split. rewrite to_uintK_small/=; smt().
+        move => 2?. rewrite ultE to_uintK_small /=. smt(). move => *.
+        split. smt().
+        rewrite to_uint_eq to_uintK_small /=; smt().
+      auto.  move => &m /> /=. rewrite /trace /valid /is_init /=. move => *. smt().
+    sp.
+    if.
+    + auto.  ecall (a32____aread_bcast_4subu64_trace buf b_buf offset dELTA lEN tRAILB). auto.
+      move => &m /> /=. rewrite /trace /valid /is_init /= => *.
+      split. move => *.
+      + split. split. smt(modzDm). move => *.
+        + rewrite !to_uintD_small !to_uintK_small /=; smt().
+        move => *. split. smt(BArray800.init_arrP).
+        rewrite to_uintK_small /=; smt(all_cat).
+      move => *.
+      split. split. smt(modzDm). move => *.
+      + rewrite !to_uintD_small !to_uintK_small /=; smt().
+      move => *. split. smt(BArray800.init_arrP).
+      rewrite to_uintK_small /=; smt(all_cat).
+    auto.  smt(BArray800.init_arrP all_cat).
+  if.
+  + if. exfalso. smt().
+    seq 11: ( aLL = _aT + _lEN /\ at = W64.of_int (32 * (_aT %/ 8) + 32) /\
+              dELTA = 0 /\ _tRAILB = tRAILB /\ lEN = _lEN -8 + (_aT %% 8)  /\
+             offset = _offset + W64.of_int( 8 - (_aT %% 8)) /\
+             _b_buf = b_buf /\ aT = _aT + 8 - (_aT %% 8) /\
+             (0 <= _tRAILB /\ _tRAILB < 256) /\
+             0 <= to_uint _offset /\ 0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\
+             to_uint _offset + _lEN <= 32 /\
+             _aT + _lEN + (if _tRAILB <> 0 then 1 else 0) <= 200 /\
+             is_init _b_buf (to_uint _offset) _lEN /\
+             valid trace_a32____addstate_bcast_array_avx2x4 /\
+             ! _aT %% 8 + _lEN < 8 /\
+             aT %% 8 = 0).
+    + if.
+      + auto.  move => &m /> /=. rewrite /trace /valid /is_init /= => *.
+        rewrite !all_cat !to_uintK_small /=; smt().
+      auto. ecall(a32____aread_bcast_4subu64_trace buf b_buf offset dELTA (8 - lO) 0).
+      auto.  move => &m /> /=. rewrite /trace /valid /is_init /= => *.
+      split. smt(). move => *. 
+      rewrite !all_cat !to_uintK_small /=; smt().
+    seq 1: (valid trace_a32____addstate_bcast_array_avx2x4 /\
+          offset = _offset + W64.of_int(_lEN - lEN) /\
+          at =  W64.of_int (32 * (( _aT + 8 - (_aT %% 8)) %/ 8) + 32 * (( _lEN -8 + (_aT %% 8)) %/ 8)) /\
+          aLL = _aT + _lEN /\ lEN =( _lEN + _aT) %% 8 /\
+          dELTA = 0 /\ _tRAILB = tRAILB /\ aT%%8 = 0 /\
+          _b_buf = b_buf /\ (0 <= _tRAILB /\ _tRAILB < 256) /\
+          0 <= to_uint _offset /\ 0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\
+          to_uint _offset + _lEN <= 32 /\
+          _aT + _lEN + (if _tRAILB <> 0 then 1 else 0) <= 200 /\
+          is_init _b_buf (to_uint _offset) _lEN /\
+          ! _aT %% 8 + _lEN < 8 /\  aT %% 8 = 0 ).
+    + if. wp.
+      + while(
+          valid trace_a32____addstate_bcast_array_avx2x4 /\
+          to_uint at <=  32 * (aT %/ 8) + 32 * (lEN %/ 8) /\ to_uint at %% 32 = 0 /\
+          aLL = _aT + _lEN /\ offset = _offset + W64.of_int( 8 - (_aT %% 8)) + W64.of_int((to_uint at - (32 * (aT %/ 8)))%/4) /\
+           dELTA = 0 /\ _tRAILB = tRAILB /\  lEN =  _lEN -8 + (_aT %% 8) /\
+           32 * (aT %/ 8) <= to_uint at /\  aT = _aT + 8 - (_aT %% 8) /\
+          _b_buf = b_buf /\ (0 <= _tRAILB /\ _tRAILB < 256)  /\
+          0 <= to_uint _offset /\ 0 <= _lEN /\ 0 <= _aT /\ _aT < 200 /\
+          to_uint _offset + _lEN <= 32 /\
+          _aT + _lEN + (if _tRAILB <> 0 then 1 else 0) <= 200 /\
+          is_init _b_buf (to_uint _offset) _lEN /\
+          ! _aT %% 8 + _lEN < 8 /\  aT %% 8 = 0).
+        + auto. move => &m /> /=. rewrite /trace /valid /is_init /=. move => 15?.
+          rewrite ultE to_uintK_small /=. smt(). move => *.
+          split. rewrite !all_cat to_uintD_small to_uintK_small/=; smt().
+          rewrite to_uintD_small to_uintK_small/=; smt().
+        auto. move => &m /> /=. rewrite /trace /valid /is_init /=. move => *.
+        split. move => *. rewrite !to_uintK_small/=; smt().
+        move => 2?. rewrite ultE to_uintK_small /=. smt(). move => *.
+        split. smt().
+        rewrite to_uint_eq to_uintK_small /=; smt().
+      auto.  move => &m /> /=. rewrite /trace /valid /is_init /=. move => *. smt().
+    sp. wp.
+    if.
+     + auto.  ecall (a32____aread_bcast_4subu64_trace buf b_buf offset dELTA lEN tRAILB). auto.
+      move => &m /> /=. rewrite /trace /valid /is_init /= => *.
+      split. move => *.
+      + split. split. smt(modzDm). move => *.
+        + rewrite !to_uintD_small !to_uintK_small /=; smt().
+        move => *. split. smt(BArray800.init_arrP).
+        rewrite to_uintK_small /=; smt(all_cat).
+      move => *.
+      split. split. smt(modzDm). move => *.
+      + rewrite !to_uintD_small !to_uintK_small /=; smt().
+      move => *. split. smt(BArray800.init_arrP).
+      rewrite to_uintK_small /=; smt(all_cat).
+    auto.  smt(BArray800.init_arrP all_cat).     
+  exfalso. smt().
 qed.
-        
+
 lemma a32____absorb_bcast_array_avx2x4_trace _st _b_st _aT _buf _b_buf _offset _lEN _rATE8 _tRAILB :
       hoare [M.a32____absorb_bcast_array_avx2x4 :
       (((_tRAILB = tRAILB) /\
@@ -5233,23 +5465,69 @@ lemma a32____absorb_bcast_array_avx2x4_trace _st _b_st _aT _buf _b_buf _offset _
        ((_b_buf = b_buf) /\
        ((_buf = buf) /\ ((_aT = aT) /\ ((_b_st = b_st) /\ (_st = st))))))))) /\
       (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      ((((((((0 <= (W64.to_uint _offset)) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\
-          (_aT < 200)) /\
-         (((W64.to_uint _offset) + _lEN) <= 32)) /\
-        (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) <= 200)) /\
-       (is_init _b_buf 0 32)) /\
+      ((((((((((0 <= (W64.to_uint _offset)) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\
+            (_aT < _rATE8)) /\
+           (((W64.to_uint _offset) + _lEN) <= 32)) /\
+          (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) <= 200)) /\
+         (0 < _rATE8)) /\
+        (_rATE8 <= 200)) /\
+       (is_init _b_buf (W64.to_uint _offset) _lEN)) /\
       (is_init _b_st 0 800)))) ==>
-      (((is_init res.`1.`2 0 800) /\
-       (res.`1.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
+      (((is_init res.`1.`2 0 800) /\ (res.`1.`3 = ((_aT + _lEN) %% _rATE8) + (if _tRAILB <> 0 then 1 else 0))) /\
       (valid (trace res)))].
 proof.
   proc. rewrite /=.
-  seq 12:(#pre /\ valid trace_a32____absorb_bcast_array_avx2x4).
+  seq 12:(#pre /\ valid trace_a32____absorb_bcast_array_avx2x4 ).
   + by auto.
   sp.
   if.
-  + seq 8: (valid trace_a32____absorb_bcast_array_avx2x4 ).
-admit. admit. admit.
+  + seq 8: (valid trace_a32____absorb_bcast_array_avx2x4 /\ 0 < rATE8 /\ rATE8 <= 200 /\ aT = (_aT + _lEN)%%_rATE8 + (if _tRAILB <> 0 then 1 else 0)).
+    + auto. ecall (a32____addstate_bcast_array_avx2x4_trace st  (BArray800.init_arr (W8.of_int (-1)) 800) aT buf b_buf offset lEN  tRAILB). auto.
+      move => &m /> /=. rewrite /trace /valid /=. move => *. smt(all_cat BArray800.init_arrP).
+    if. 
+    + auto. ecall(__addratebit_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) rATE8).
+      auto. move => &m /> /=. rewrite /trace /valid /=. smt(all_cat BArray800.init_arrP).
+    auto. smt(BArray800.init_arrP).
+  seq 13: ( valid trace_a32____absorb_bcast_array_avx2x4 /\ 0 < rATE8 /\ rATE8 <= 200 /\
+           aT = (_aT + _lEN)%%_rATE8 + (if _tRAILB <> 0 then 1 else 0)).
+  + auto. ecall(a32____addstate_bcast_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) 0 buf b_buf offset lEN tRAILB). auto.
+    pose offset0 :=  to_uint _offset +  (if _aT <> 0 then (_rATE8 - _aT) else 0).
+    pose len0 :=  _lEN -  (if _aT <> 0 then (_rATE8 - _aT) else 0).
+    while( valid trace_a32____absorb_bcast_array_avx2x4 /\ 0 < rATE8 /\ rATE8 <= 200 /\
+           _aT < rATE8 /\ 0 <= to_uint i /\ to_uint i <=iTERS /\ 0 <= to_uint _offset /\
+           to_uint offset =  offset0 +  to_uint i* rATE8 /\
+            _rATE8 = rATE8 /\ iTERS <=_lEN /\ to_uint offset + len0%%rATE8 <= len0 + offset0  /\
+           is_init b_buf (to_uint _offset) _lEN /\ aLL = _aT + _lEN /\ iTERS = len0%/rATE8 /\
+           to_uint _offset + _lEN <= 32).
+    + auto. ecall(_keccakf1600_avx2x4_trace st b_st). auto.
+      ecall(a32____addstate_bcast_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) 0 buf b_buf offset rATE8 0). auto. 
+      move => &m />. rewrite /valid /trace /is_init /= => 12?.
+      rewrite ultE to_uintK_small /=. smt(). move => *.
+      split. smt(BArray800.init_arrP). move => 8? h *.
+      split. smt(all_cat).
+      rewrite !to_uintD_small !to_uintK_small /=;1..3: smt().
+      split. smt(). split. smt().
+      move: h. rewrite W64.to_uint_eq to_uintD_small to_uintK_small /=; 1..3:smt().
+      rewrite Ring.IntID.mulrDl. smt().
+    if.
+    + auto. ecall(_keccakf1600_avx2x4_trace st b_st). auto.
+      ecall(a32____addstate_bcast_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) aT buf b_buf offset (rATE8 - aT) 0). auto.
+      move => &m />. rewrite /valid /trace /is_init /= => *. 
+      split. smt(BArray800.init_arrP). move => 9? h *. 
+      split. move : h. rewrite to_uint_eq to_uintD_small to_uintK_small /=;1..3: smt().
+      + move => *.  smt(all_cat).
+      move => /> /= ? offset1 ?. rewrite ultE to_uintK_small /=. smt(). move => *.
+      have: (len0 %% rATE8{m} = (aT{m} + lEN{m}) %% rATE8{m}). 
+  + have /= ? := modzMDr (-1) (lEN{m} + aT{m}) (rATE8{m}).
+smt().
+      move => ?.
+      split; smt(all_cat).
+    auto.  move => &m />. rewrite /valid /trace /is_init /= => *. 
+    split. smt(all_cat). move => 3?.  rewrite ultE to_uintK_small /=. smt(). move => *.
+    split. smt(BArray800.init_arrP). move => *.
+    smt(all_cat).
+  auto. if. auto. ecall(__addratebit_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) rATE8). auto. smt(all_cat BArray800.init_arrP).
+  auto. smt(BArray800.init_arrP).
 qed.
 
 lemma a128____awrite_subu64_trace _buf _b_buf _offset _dELTA _lEN _w :
@@ -5263,11 +5541,14 @@ lemma a128____awrite_subu64_trace _buf _b_buf _offset _dELTA _lEN _w :
                     ((((W64.to_uint _offset) + _dELTA) +
                      ((_lEN < 8) ? _lEN : 8)) <=
                     128)) : true)) ==>
-      (((BBAnd.big (fun _ => true)
-        (fun k => ((is_init _b_buf k 1) ? (is_init res.`1.`2 k 1) : true))
+      ((((BBAnd.big (fun _ => true)
+        (fun k =>
+        (((is_init res.`1.`2 k 1) = ((is_init _b_buf k 1) \/
+        ((((W64.to_uint _offset) + _dELTA) <= k) /\
+        (k <
+        (((W64.to_uint _offset) + _dELTA) +
+        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))))))))
         (iota_ 0 128)) /\
-       ((is_init res.`1.`2 (W64.to_uint (_offset + (W64.of_int _dELTA)))
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) /\
        ((res.`1.`3 =
         (_dELTA +
         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
@@ -5338,29 +5619,26 @@ lemma a128____dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_
         (fun k =>
         ((is_init res.`1.`8 k 1) =
         ((is_init _b_buf3 k 1) \/
-        ((_offset \ule (W64.of_int k)) /\
-        ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)
-        ) /\
+        (((W64.to_uint _offset) <= k) /\
+        (k < ((W64.to_uint _offset) + _lEN)))))) (iota_ 0 128)) /\
        ((BBAnd.big (fun _ => true)
         (fun k =>
         ((is_init res.`1.`6 k 1) =
         ((is_init _b_buf2 k 1) \/
-        ((_offset \ule (W64.of_int k)) /\
-        ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)
-        ) /\
+        (((W64.to_uint _offset) <= k) /\
+        (k < ((W64.to_uint _offset) + _lEN)))))) (iota_ 0 128)) /\
        ((BBAnd.big (fun _ => true)
         (fun k =>
         ((is_init res.`1.`4 k 1) =
         ((is_init _b_buf1 k 1) \/
-        ((_offset \ule (W64.of_int k)) /\
-        ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)
-        ) /\
+        (((W64.to_uint _offset) <= k) /\
+        (k < ((W64.to_uint _offset) + _lEN)))))) (iota_ 0 128)) /\
        (BBAnd.big (fun _ => true)
        (fun k =>
        ((is_init res.`1.`2 k 1) =
        ((is_init _b_buf0 k 1) \/
-       ((_offset \ule (W64.of_int k)) /\
-       ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)))))) /\
+       (((W64.to_uint _offset) <= k) /\ (k < ((W64.to_uint _offset) + _lEN))))))
+       (iota_ 0 128)))))) /\
       (valid (trace res)))].
 proof.
   proc. rewrite /=.
@@ -5373,21 +5651,125 @@ proof.
           lEN = _lEN /\
           BBAnd.big (fun (_ : int) => true)
             (fun (k : int) =>
-               is_init b_buf0 k 1 = (is_init _b_buf0 k 1 \/ (_offset \ule W64.of_int k) /\
-                (W64.of_int k \ult _offset +  W64.of_int (_lEN - _lEN%%8) ))) (iota_ 0 128) /\
+               is_init b_buf0 k 1 = (is_init _b_buf0 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint  _offset + (_lEN - _lEN%%8)))) (iota_ 0 128) /\
           BBAnd.big (fun (_ : int) => true)
             (fun (k : int) =>
-               is_init b_buf1 k 1 = (is_init _b_buf1 k 1 \/ (_offset \ule W64.of_int k) /\
-                (W64.of_int k \ult _offset +  W64.of_int (_lEN - _lEN%%8) ))) (iota_ 0 128) /\
+               is_init b_buf1 k 1 = (is_init _b_buf1 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint  _offset + (_lEN - _lEN%%8) ))) (iota_ 0 128) /\
           BBAnd.big (fun (_ : int) => true)
             (fun (k : int) =>
-               is_init b_buf2 k 1 = (is_init _b_buf2 k 1 \/ (_offset \ule W64.of_int k) /\
-                (W64.of_int k \ult _offset +  W64.of_int (_lEN - _lEN%%8) ))) (iota_ 0 128) /\
+               is_init b_buf2 k 1 = (is_init _b_buf2 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint  _offset + (_lEN - _lEN%%8) ))) (iota_ 0 128) /\
           BBAnd.big (fun (_ : int) => true)
             (fun (k : int) =>
-               is_init b_buf3 k 1 = (is_init _b_buf3 k 1 \/ (_offset \ule W64.of_int k) /\
-                (W64.of_int k \ult _offset +  W64.of_int (_lEN - _lEN%%8) ))) (iota_ 0 128)).
-  + admit.
+               is_init b_buf3 k 1 = (is_init _b_buf3 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint  _offset + (_lEN - _lEN%%8) ))) (iota_ 0 128)).
+  + while(0 <= to_uint _offset /\ 0 <= _lEN /\ valid trace_a128____dumpstate_array_avx2x4 /\
+          to_uint _offset + _lEN <= 128 /\
+          0 <= to_sint i /\ to_sint i<=  8*(lEN%/8) /\ to_uint i%%8 = 0 /\
+          offset = _offset + i /\ lEN = _lEN /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf0 k 1 = (is_init _b_buf0 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint  offset))) (iota_ 0 128) /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf1 k 1 = (is_init _b_buf1 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint offset ))) (iota_ 0 128) /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf2 k 1 = (is_init _b_buf2 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint offset ))) (iota_ 0 128) /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf3 k 1 = (is_init _b_buf3 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint offset))) (iota_ 0 128)).
+    + auto. move => &m /> /=.
+      rewrite /is_init /valid /trace !and_iota  !all_cat /= => 7? h1 h2 h3 h4. 
+      rewrite sltE to_sint_unsigned /=. by auto. rewrite to_sintK_small /=. smt(). move => ?.
+      split.
+      + rewrite !to_uintM_small /=. smt().
+        rewrite !to_uintD_small /=. smt(). rewrite !to_uintM_small /=; smt().
+        + rewrite !to_uintM_small /=; smt().  rewrite !to_uintM_small /=; smt().
+         rewrite !to_uintM_small /=. smt().
+        smt(W64.to_uint_cmp).
+      split. rewrite !to_sintD_small to_sintK_small /=; smt().
+      split. rewrite !to_sintD_small to_sintK_small /= ; 1,3:smt(); rewrite to_sint_unsigned; smt(W64.to_uint_cmp).
+      split. rewrite !to_uintD_small  /=; smt().
+      split. smt(W64.WRingA.addrA).
+      split. move => k ?. have:= h1 k _. by auto.
+      + rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+      split. move => k ?. have:= h2 k _. by auto.
+      + rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+      split. move => k ?. have:= h3 k _. by auto.
+      + rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+      move => k ?. have:= h4 k _. by auto.
+      rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+    sp.
+    while(0 <= to_uint _offset /\ 0 <= _lEN /\ valid trace_a128____dumpstate_array_avx2x4 /\
+          to_uint _offset + _lEN <= 128 /\
+          0 <= to_sint i /\ to_sint i<=  32*(lEN%/32) /\ to_uint i%%32 = 0 /\
+          offset = _offset + i /\ lEN = _lEN /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf0 k 1 = (is_init _b_buf0 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint  offset))) (iota_ 0 128) /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf1 k 1 = (is_init _b_buf1 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint offset ))) (iota_ 0 128) /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf2 k 1 = (is_init _b_buf2 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint offset ))) (iota_ 0 128) /\
+          BBAnd.big (fun (_ : int) => true)
+            (fun (k : int) =>
+               is_init b_buf3 k 1 = (is_init _b_buf3 k 1 \/ (to_uint _offset <=  k) /\
+                (k < to_uint offset))) (iota_ 0 128)).
+    + auto. ecall(__4u64x4_u256x4_trace). auto.   move => &m /> /=.
+      rewrite /is_init /valid /trace !and_iota /= => 7? h1 h2 h3 h4. 
+      rewrite sltE to_sint_unsigned /=. by auto. rewrite to_sintK_small /=. smt(). move => *.
+      rewrite !all_cat /=. 
+      split.
+      + rewrite !to_uintM_small /=. smt().
+        rewrite !to_uintD_small /=. rewrite !to_uintM_small /=; smt(). 
+        + rewrite !to_uintM_small /=; smt().  rewrite !to_uintM_small /=; smt(). smt().
+          rewrite !to_uintM_small /=. smt().
+        smt(W64.to_uint_cmp).
+      split. rewrite !to_sintD_small to_sintK_small /=; smt().
+      split. rewrite !to_sintD_small to_sintK_small /= ; 1,3:smt(); rewrite to_sint_unsigned; smt(W64.to_uint_cmp).
+      split. rewrite !to_uintD_small  /=; smt().
+      split. smt(W64.WRingA.addrA).
+      split. move => k ?. have:= h1 k _. by auto.
+      + rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+      split. move => k ?. have:= h2 k _. by auto.
+      + rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+      split. move => k ?. have:= h3 k _. by auto.
+      + rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+      move => k ?. have:= h4 k _. by auto.
+      rewrite !to_uintD_small /=; smt(W64.to_uint_cmp).
+    auto.
+    move => &m /> . rewrite /is_init /valid /trace !and_iota /= => *. 
+    rewrite !to_sintK_small /=. by auto. split. smt().
+    move => 6?. rewrite !and_iota /=. move => *.
+    split. smt().
+    move => 4? i1 ?.  rewrite !and_iota /=. move => h1 2? h2 ? h3 h4 h5 h6.
+    split. smt(W64.to_uint_cmp).
+    split. move: h2. rewrite to_sint_unsigned; smt().
+    split. move : h1 h2. rewrite sltE to_sint_unsigned /=. by auto.
+    + rewrite to_sintK_small /=. smt().
+      have: ( to_uint i1 = 8 * (lEN{m} %/ 8) => i1 = W64.of_int (lEN{m} - lEN{m} %% 8) ).
+      + rewrite to_uint_eq /= to_uintK_small /=; smt(). 
+      smt(). 
+    move : h1 h2. rewrite sltE to_sint_unsigned /=. by auto.
+    rewrite to_sintK_small /=. smt().
+    have: ( to_uint i1 = 8 * (lEN{m} %/ 8) => to_uint i1 = lEN{m} - lEN{m} %% 8). smt().
+    move => *.
+    split. move => k ?. have:= h3 k _. smt(). rewrite to_uintD_small /=; smt().
+    split. move => k ?. have:= h4 k _. smt(). rewrite to_uintD_small /=; smt().
+    split. move => k ?. have:= h5 k _. smt(). rewrite to_uintD_small /=; smt().
+    move => k ?. have:= h6 k _. smt(). rewrite to_uintD_small /=; smt().
   if.
   + auto.
     ecall(a128____awrite_subu64_trace buf3 b_buf3 offset 0 (_lEN %% 8) t3). auto.
@@ -5396,21 +5778,24 @@ proof.
     ecall(a128____awrite_subu64_trace buf0 b_buf0 offset 0 (_lEN %% 8) t0). auto.
     move => &m />  /= 6?. rewrite /valid /trace /is_init !and_iota  /=  => h0 h1 h2 h3 *.
     split. rewrite !to_uintD_small !of_uintK /=; smt(W64.to_uint_cmp).
-    move => 3?.
-    rewrite !and_iota; move => h0' 5?.
-    rewrite !and_iota; move => h1' 5?.
-    rewrite !and_iota; move => h2' 5?.
+    move => 2? r0.
+    rewrite !and_iota; move => h0' 3? r1.
+    rewrite !and_iota; move => h1'  3? r2.
+    rewrite !and_iota; move => h2'  3? r3.
     rewrite !and_iota; move => h3' *.
-    have: ((to_uint (_offset + W64.of_int (lEN{m} - lEN{m} %% 8)) +
-     if (if lEN{m} %% 8 < 8 then lEN{m} %% 8 else 8) < 0 then 0
-     else if lEN{m} %% 8 < 8 then lEN{m} %% 8 else 8) = to_uint (_offset + W64.of_int lEN{m})).
-    + rewrite !to_uintD_small !of_uintK /=; smt(W64.to_uint_cmp). move => *.
-      split.
-    + split. smt(). admit. (*
-      split. move => k ?. have := h3 k _. smt(). have := h3' k _. smt().*) 
+    split. split. smt().
+    + split.  move => k ?. have := h3 k _. smt(). have := h3' k _. smt().
+      + rewrite !to_uintD_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+      split.  move => k ?. have := h2 k _. smt(). have := h2' k _. smt().
+      + rewrite !to_uintD_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+      split.  move => k ?. have := h1 k _. smt(). have := h1' k _. smt().
+      + rewrite !to_uintD_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+      move => k ?. have := h0 k _. smt(). have := h0' k _. smt().
+      rewrite !to_uintD_small !to_uintK_small /=; smt(W64.to_uint_cmp).     
     rewrite !all_cat !to_uintD_small !to_uintM_small /=;  smt(W64.to_uint_cmp).
-   auto. move => &m /> /=. rewrite !and_iota.  smt().
+  auto. move => &m /> /=. rewrite !and_iota.  smt().
 qed.
+
 
 
 
@@ -5427,41 +5812,159 @@ lemma a128____squeeze_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_bu
        ((_buf2 = buf2) /\
        ((_b_buf1 = b_buf1) /\
        ((_buf1 = buf1) /\ ((_b_buf0 = b_buf0) /\ (_buf0 = buf0))))))))))))) /\
-      ((((0 <= (W64.to_uint _offset)) /\ (0 <= _lEN)) /\
-       (is_init _b_st 0 800)) /\
-      (((W64.to_uint _offset) + _lEN) <= 128))) ==>
+      (((((0 <= (W64.to_uint _offset)) /\ (0 <= _lEN)) /\
+        (is_init _b_st 0 800)) /\
+       (((W64.to_uint _offset) + _lEN) <= 128)) /\
+      (0 < _rATE8) /\ _rATE8 <=200 )) ==>
       (((is_init res.`1.`11 0 800) /\
        ((BBAnd.big (fun _ => true)
         (fun k =>
         ((is_init res.`1.`8 k 1) =
         ((is_init _b_buf3 k 1) \/
-        ((_offset \ule (W64.of_int k)) /\
-        ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)
-        ) /\
+        (((W64.to_uint _offset) <= k) /\
+        (k < ((W64.to_uint _offset) + _lEN)))))) (iota_ 0 128)) /\
        ((BBAnd.big (fun _ => true)
         (fun k =>
         ((is_init res.`1.`6 k 1) =
         ((is_init _b_buf2 k 1) \/
-        ((_offset \ule (W64.of_int k)) /\
-        ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)
-        ) /\
+        (((W64.to_uint _offset) <= k) /\
+        (k < ((W64.to_uint _offset) + _lEN)))))) (iota_ 0 128)) /\
        ((BBAnd.big (fun _ => true)
         (fun k =>
         ((is_init res.`1.`4 k 1) =
         ((is_init _b_buf1 k 1) \/
-        ((_offset \ule (W64.of_int k)) /\
-        ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)
-        ) /\
+        (((W64.to_uint _offset) <= k) /\
+        (k < ((W64.to_uint _offset) + _lEN)))))) (iota_ 0 128)) /\
        (BBAnd.big (fun _ => true)
        (fun k =>
        ((is_init res.`1.`2 k 1) =
        ((is_init _b_buf0 k 1) \/
-       ((_offset \ule (W64.of_int k)) /\
-       ((W64.of_int k) \ult (_offset + (W64.of_int _lEN))))))) (iota_ 0 128)))))) /\
+       (((W64.to_uint _offset) <= k) /\ (k < ((W64.to_uint _offset) + _lEN))))))
+       (iota_ 0 128)))))) /\
       (valid (trace res)))].
 proof.
-admitted.
+proc. rewrite /=.
+  seq 15: (valid trace_a128____squeeze_array_avx2x4 /\ #pre).
+  + by auto.
+  sp.
+  if.
+  + seq 1: ( valid trace_a128____squeeze_array_avx2x4 /\ lO = _lEN %% _rATE8 /\
+             0 <= to_uint _offset /\  0 < _rATE8 /\ _rATE8 <= 200 /\
+             offset = _offset + W64.of_int (_rATE8 * (_lEN%/_rATE8)) /\
+             to_uint _offset + _lEN <= 128 /\ 0 < _lEN /\
+      BBAnd.big (fun (_ : int) => true)
+       (fun (k : int) =>
+        is_init b_buf3 k 1 =
+        (is_init _b_buf3 k 1 \/
+         to_uint _offset <= k /\ k < to_uint _offset + (_rATE8 * (_lEN%/_rATE8)))) (iota_ 0 128) /\
+      BBAnd.big (fun (_ : int) => true)
+       (fun (k : int) =>
+        is_init b_buf2 k 1 =
+        (is_init _b_buf2 k 1 \/
+         to_uint _offset <= k /\ k < to_uint _offset + (_rATE8 * (_lEN%/_rATE8)))) (iota_ 0 128) /\
+      BBAnd.big (fun (_ : int) => true)
+       (fun (k : int) =>
+        is_init b_buf1 k 1 =
+        (is_init _b_buf1 k 1 \/
+         to_uint _offset <= k /\ k < to_uint _offset + (_rATE8 * (_lEN%/_rATE8)))) (iota_ 0 128) /\
+      BBAnd.big (fun (_ : int) => true)
+       (fun (k : int) =>
+        is_init b_buf0 k 1 =
+        (is_init _b_buf0 k 1 \/
+         to_uint _offset <= k /\ k < to_uint _offset + (_rATE8 * (_lEN%/_rATE8)))) (iota_ 0 128)).
+    + if. sp.
+      + while(0 <= to_uint i /\ to_uint i <= iTERS /\ valid trace_a128____squeeze_array_avx2x4 /\
+              iTERS = _lEN %/ _rATE8 /\ lO = _lEN %% _rATE8 /\  0 < iTERS /\ _rATE8 <= _lEN
+          /\ 0 <= to_uint _offset /\ 0 < rATE8 /\ _rATE8 <= 200 /\ rATE8 = _rATE8 /\ lEN = _lEN /\
+      offset = _offset + i * W64.of_int (_rATE8) /\  to_uint _offset + _lEN <= 128 /\
+         ( to_uint i < iTERS => to_uint i * _rATE8 <= _lEN) /\
+         BBAnd.big (fun (_ : int) => true)
+          (fun (k : int) =>
+           is_init b_buf3 k 1 =
+          (is_init _b_buf3 k 1 \/
+           to_uint _offset <= k /\ k < to_uint _offset + (to_uint i * _rATE8))) (iota_ 0 128) /\
+         BBAnd.big (fun (_ : int) => true)
+          (fun (k : int) =>
+           is_init b_buf2 k 1 =
+           (is_init _b_buf2 k 1 \/
+            to_uint _offset <= k /\ k < to_uint _offset + (to_uint i * _rATE8))) (iota_ 0 128) /\
+         BBAnd.big (fun (_ : int) => true)
+          (fun (k : int) =>
+           is_init b_buf1 k 1 =
+           (is_init _b_buf1 k 1 \/
+            to_uint _offset <= k /\ k < to_uint _offset + (to_uint i * _rATE8))) (iota_ 0 128) /\
+         BBAnd.big (fun (_ : int) => true)
+          (fun (k : int) =>
+           is_init b_buf0 k 1 =
+           (is_init _b_buf0 k 1 \/
+             to_uint _offset <= k /\ k < to_uint _offset + (to_uint i * _rATE8))) (iota_ 0 128)).
+        + auto. ecall(a128____dumpstate_array_avx2x4_trace buf0 b_buf0 buf1 b_buf1 buf2 b_buf2 
+      buf3 b_buf3 offset rATE8 st (BArray800.init_arr (W8.of_int (-1)) 800)). auto.
+          ecall(_keccakf1600_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800)). auto.
+          move => &m /> /=. rewrite /valid /trace /is_init !and_iota /= => 9?.
+          rewrite ultE to_uintK_small /=. smt().  move => ? h0 h1 h2 h3 *.
+          split. smt(BArray800.init_arrP). move => *.
+          split. rewrite !to_uintD_small !to_uintM_small to_uintK_small /=; smt().
+          move => 5?. rewrite !and_iota /=. move => h0' h1' h2' h3' *.
+          rewrite !to_uintD_small /=. smt().
+          split. smt(). split. smt().
+          split. rewrite !all_cat /=. smt().
+          split. rewrite W64.WRingA.mulrDl mul1r_s W64.WRingA.addrA. smt().
+          split. smt().
+          split. move => k ?.  have:= h0 k _. smt(). have:= h0' k _. smt().
+          + rewrite !to_uintD_small !to_uintM_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+          split. move => k ?.  have:= h1 k _. smt(). have:= h1' k _. smt().
+          + rewrite !to_uintD_small !to_uintM_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+          split. move => k ?.  have:= h2 k _. smt(). have:= h2' k _. smt().
+          + rewrite !to_uintD_small !to_uintM_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+          move => k ?.  have:= h3 k _. smt(). have:= h3' k _. smt().
+          rewrite !to_uintD_small !to_uintM_small !to_uintK_small /=; smt(W64.to_uint_cmp).
+        auto. move => &m /> /=. rewrite /valid /trace /is_init !and_iota /= => *.
+        split. smt(all_cat).
+        move => 4? i ?. rewrite !and_iota ultE to_uintK_small /=. smt(). 
+        move => *. rewrite  -W64.of_intM. rewrite W64.WRingA.mulrC.
+        have: (i = W64.of_int (lEN{m} %/ rATE8{m})). 
+        + rewrite to_uint_eq to_uintK_small /=; smt(). move => hi.
+        split. move: hi. by auto. smt( W64.WRingA.mulrDl).
+      auto. move => &m /> /=  *.
+      split. have: (lEN{m} %/ rATE8{m} = 0). smt().
+      + have:(offset{m} = offset{m} + W64.of_int (_rATE8{m} * 0)). rewrite Ring.IntID.mulr0. by auto.
+      move => *. smt().
+    rewrite  !and_iota. smt().
+    if. 
+    + auto. ecall(a128____dumpstate_array_avx2x4_trace buf0 b_buf0 buf1 b_buf1 buf2 b_buf2
+ buf3 b_buf3 offset lO st (BArray800.init_arr (W8.of_int (-1)) 800)). auto.
+      ecall(_keccakf1600_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800)). auto.
+      move => &m /> /=. rewrite /valid /trace /is_init !and_iota /= => 6? h0 h1 h2 h3 *.
+      split. smt(BArray800.init_arrP). move => /> *.
+      split. rewrite !to_uintD_small !to_uintK_small /=; smt().
+      move => 5?. rewrite !and_iota  /= => h0' h1' h2' h3' *. 
+      have hh: (to_uint _offset + _rATE8 * (_lEN %/ _rATE8) + _lEN %% _rATE8 = to_uint _offset + _lEN). smt(). split.
+      + split. move => k ?.  have:= h0 k _. smt(). have:= h0' k _. smt().
+        + rewrite !to_uintD_small  !to_uintK_small /=; 1..3: smt().
+          rewrite hh. smt(W64.to_uint_cmp).
+        split. move => k ?.  have:= h1 k _. smt(). have:= h1' k _. smt().
+        + rewrite !to_uintD_small  !to_uintK_small /=; 1..3: smt().
+          rewrite hh. smt(W64.to_uint_cmp).
+        split. move => k ?.  have:= h2 k _. smt(). have:= h2' k _. smt().
+        + rewrite !to_uintD_small  !to_uintK_small /=; 1..3: smt().
+          rewrite hh. smt(W64.to_uint_cmp).
+        move => k ?.  have:= h3 k _. smt(). have:= h3' k _. smt().
+        rewrite !to_uintD_small  !to_uintK_small /=; 1..3: smt().
+        rewrite hh. smt(W64.to_uint_cmp).
+      rewrite !all_cat. smt().
+    auto. move => &m /> /=. rewrite /valid /trace /is_init !and_iota /= => 6? h0 h1 h2 h3 *.
+    split. smt(BArray800.init_arrP).
+    have h:( _lEN %% _rATE8 = 0 => _rATE8{m} * (_lEN %/ _rATE8) = _lEN). smt(divzpMr).
+    split.  move => k ?.  have:= h0 k _. smt().  smt().
+    split.  move => k ?.  have:= h1 k _; smt().
+    split.  move => k ?.  have:= h2 k _; smt().
+    move => k ?.  have:= h3 k _; smt().
+  auto.  move => &m /> /=. rewrite /valid /trace /is_init !and_iota /= => *.
+  smt(BArray800.init_arrP all_cat).
+qed.
 
+       
 lemma _shake256x4_A128__A32_A1_trace _out0 _b_out0 _out1 _b_out1 _out2 _b_out2 _out3 _b_out3 _seed _b_seed _nonces _b_nonces :
       hoare [M._shake256x4_A128__A32_A1 :
       (((_b_nonces = b_nonces) /\
@@ -5677,4 +6180,3 @@ proc; auto.
   auto. ecall( _poly_csubq_trace a (BArray512.init_arr (W8.of_int (-1)) 512)). auto. rewrite /is_init /valid /trace /=.
   smt(all_cat BArray32.init_arrP BArray512.init_arrP).
 qed.
-

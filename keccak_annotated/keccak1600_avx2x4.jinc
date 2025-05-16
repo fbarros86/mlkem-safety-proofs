@@ -31,7 +31,7 @@ inline fn __addratebit_avx2x4
 ( reg mut ptr u256[25] st
 , inline int RATE8
 ) -> reg ptr u256[25]
-requires{is_arr_init(st,0,800) && 0<RATE8 && RATE8 < 200 }
+requires{is_arr_init(st,0,800) && 0<RATE8 && RATE8 <= 200 }
 ensures{is_arr_init(result.0,0,800)}
 {
   reg u256 t256;

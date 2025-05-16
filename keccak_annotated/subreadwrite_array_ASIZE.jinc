@@ -197,8 +197,7 @@ inline fn __awrite_subu64
 requires{(0 <s LEN) ? 0 <= (int) offset + DELTA && 0 <= DELTA &&
  (int) offset + DELTA + min(LEN,8) <= ASIZE : true}
 ensures{ result.1 == DELTA + max(0,min(LEN,8)) && result.2 == LEN - max(0,min(LEN,8)) }
-ensures{is_arr_init(result.0,offset+DELTA,max(0,min(LEN,8)))}
-ensures{ \all (k \in 0:ASIZE) ((is_arr_init(buf,k,1) ? is_arr_init(result.0,k,1) : true))}
+ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || ((int) offset + DELTA <= k && k < (int) offset + DELTA + max(0,min(LEN,8)))))}
 {
   if (0 <s LEN) {
     if (8 <=s LEN) {
@@ -240,8 +239,7 @@ inline fn __awrite_subu128
 requires{(0 <s LEN) ? 0 <= (int) offset + DELTA && 0 <= DELTA && (int) offset + DELTA + min(LEN,16) <= ASIZE
          : true}
 ensures{ result.1 == DELTA + max(0,min(LEN,16)) && result.2 == LEN - max(0,min(LEN,16)) }
-ensures{is_arr_init(result.0,offset+DELTA,max(0,min(LEN,16)))}
-ensures{ \all (k \in 0:ASIZE) ((is_arr_init(buf,k,1) ? is_arr_init(result.0,k,1) : true))}
+ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || ((int)offset + DELTA <= k && k < (int)offset + DELTA + max(0,min(LEN,16)))))}
 {
   reg u64 t64;
   if (0 <s LEN) {
@@ -275,8 +273,7 @@ inline fn __awrite_subu256
 requires{(0 <s LEN) ? 0 <= (int) offset + DELTA && 0 <= DELTA && (int) offset + DELTA + min(LEN,32) <= ASIZE
          : true}
 ensures{ result.1 == DELTA + max(0,min(LEN,32)) && result.2 == LEN - max(0,min(LEN,32)) }
-ensures{is_arr_init(result.0,offset+DELTA,max(0,min(LEN,32)))}
-ensures{ \all (k \in 0:ASIZE) ((is_arr_init(buf,k,1) ? is_arr_init(result.0,k,1) : true))}
+ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || ((int)offset + DELTA <= k && k < (int)offset + DELTA + max(0,min(LEN,32)))))}
 {
   reg u128 t128;
   if (0 <s LEN) {
