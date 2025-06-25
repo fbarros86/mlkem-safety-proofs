@@ -135,7 +135,7 @@ inline fn __keccakf1600_pround_avx2( reg u256[7] state ) -> reg u256[7] {
 
 fn _keccakf1600_avx2(reg u256[7] state) -> reg u256[7]
 {
-  reg u64 r;
+  reg ui64 r;
   reg u256 rc;
 
   reg ptr u64[24] round_constants;

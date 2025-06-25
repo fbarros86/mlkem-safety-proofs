@@ -127,6 +127,7 @@ fn __nttunpack128(reg u256 r0 r1 r2 r3 r4 r5 r6 r7)
    135; 143; 151; 159; 167; 175; 183; 191; 199; 207; 215; 223; 231; 239; 247; 255].
  */
 
+#[smt="all_cat,BArray512.init_arrP"]
 fn _nttunpack(reg ptr u16[MLKEM_N] rp) -> reg ptr u16[MLKEM_N]
 requires {is_arr_init(rp,0,MLKEM_N*2)}
 ensures { is_arr_init(result.0,0,MLKEM_N*2)}

@@ -14,7 +14,7 @@ ensures:
      input
   - each entry in r is in the range [-q*(A+B)...q*(A+B))
 */
-
+#[smt="SBArray1536_512.is_init_cell_get,SBArray1536_512.is_init_cell_set,BArray512.init_arrP,all_cat"]
 inline
 fn __polyvec_add2(stack u16[MLKEM_VECN] r, stack u16[MLKEM_VECN] b) -> stack u16[MLKEM_VECN]
 requires {is_arr_init(r, 0,MLKEM_VECN*2) && is_arr_init(b, 0,MLKEM_VECN*2)}
@@ -38,7 +38,7 @@ ensures:
   - every 16-bit element in the output array encodes the same element in Zq
     as the corresponding element in the input array
 */
-
+#[smt="SBArray1536_512.is_init_cell_get,SBArray1536_512.is_init_cell_set,BArray512.init_arrP,all_cat"]
 inline
 fn __polyvec_csubq(stack u16[MLKEM_VECN] r) -> stack u16[MLKEM_VECN]
 requires {is_arr_init(r, 0, MLKEM_VECN * 2)}
@@ -72,8 +72,8 @@ u64 pvd_sllvdidx_s = 0x04;
 u32 pvd_mask_s = 0x7fe01ff8;
 
 inline
-fn __polyvec_decompress(reg u64 rp) -> stack u16[MLKEM_VECN]
-requires {is_mem_init(rp, 972)}
+fn __polyvec_decompress(reg ui64 rp) -> stack u16[MLKEM_VECN]
+requires {is_mem_init((64u) rp, 972)}
 ensures {is_arr_init(result.0,0, MLKEM_VECN * 2) }
 {
   inline int i k;
@@ -89,7 +89,7 @@ ensures {is_arr_init(result.0,0, MLKEM_VECN * 2) }
   {
     for i=0 to MLKEM_N/16
     {
-      f = (u256)[rp + 320 * k + 20 * i];
+      f = (u256)[(64u) (rp + 320 * k + 20 * i)];
       f = #VPERMQ(f, 0x94);
       f = #VPSHUFB_256(f, shufbidx);
       f = #VPSLLV_8u32(f, sllvdidx);
@@ -125,8 +125,8 @@ u8[32] pvc_shufbidx_s = {0, 1, 2, 3, 4, 8, 9, 10, 11, 12, -1, -1, -1, -1, -1, -1
                          9, 10, 11, 12, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 8};
 
 inline
-fn __polyvec_compress(reg u64 rp, stack u16[MLKEM_VECN] a)
-requires {is_arr_init(a, 0, MLKEM_VECN * 2 ) && is_mem_init(rp, 20 * MLKEM_VECN/16) }
+fn __polyvec_compress(reg ui64 rp, stack u16[MLKEM_VECN] a)
+requires {is_arr_init(a, 0, MLKEM_VECN * 2 ) && is_mem_init((64u) rp, 20 * MLKEM_VECN/16) }
 {
   inline int i;
   reg u256 f0 f1 f2 v v8 off shift1 mask shift2 sllvdidx shufbidx;
@@ -165,15 +165,15 @@ requires {is_arr_init(a, 0, MLKEM_VECN * 2 ) && is_mem_init(rp, 20 * MLKEM_VECN/
     t0 = (128u)f0;
     t1 = #VEXTRACTI128(f0, 1);
     t0 = #VPBLEND_8u16(t0, t1, 0xE0);
-    (u128)[rp + 20*i] = t0;
-    (u32)[rp + 20*i + 16] = #VPEXTR_32(t1, 0);
+    (u128)[(64u) (rp + 20*i)] = t0;
+    (u32)[(64u) (rp + 20*i + 16)] = #VPEXTR_32(t1, 0);
   }
 }
 
 /*
 __polyvec_compress_1: same as previous function but writes to the stack
 */
-
+#[smt="BArray1536.init_arrP,all_cat"]
 inline
 fn __polyvec_compress_1(reg ptr u8[MLKEM_POLYVECCOMPRESSEDBYTES] rp, stack u16[MLKEM_VECN] a) -> reg ptr u8[MLKEM_POLYVECCOMPRESSEDBYTES]
 requires {is_arr_init(a, 0, 2 * MLKEM_VECN)}
@@ -198,6 +198,7 @@ ensures {is_arr_init(result.0,0, 20 * MLKEM_VECN/16)}
 
   for i=0 to MLKEM_VECN/16
   {
+    #[prover=safety_inv] assert (0<=i && i<=48 && is_arr_init (rp,0,(20*i)));
     f0 = a[u256 i];
     f1 = #VPMULL_16u16(f0, v8);
     f2 = #VPADD_16u16(f0, off);
@@ -253,12 +254,12 @@ ensures:
 
 */
 inline
-fn __polyvec_frombytes(reg u64 ap) -> stack u16[MLKEM_VECN]
-requires {is_mem_init(ap, 3 * MLKEM_POLYBYTES)}
+fn __polyvec_frombytes(reg ui64 ap) -> stack u16[MLKEM_VECN]
+requires {is_mem_init((64u) ap, 3 * MLKEM_POLYBYTES)}
 ensures {is_arr_init(result.0,0,MLKEM_VECN*2)}
 {
   stack u16[MLKEM_VECN] r;
-  reg u64 pp;
+  reg ui64 pp;
 
   pp = ap;
   r[0:MLKEM_N] = _poly_frombytes(r[0:MLKEM_N], pp);
@@ -285,7 +286,7 @@ which cancels a lingering R^-1 mod q factor that remains from
 montgomery multiplications carried out in basemul.
 
 */
-
+#[smt="SBArray1536_512.is_init_cell_get,SBArray1536_512.is_init_cell_set,all_cat,BArray512.init_arrP"]
 inline
 fn __polyvec_invntt(stack u16[MLKEM_VECN] r) -> stack u16[MLKEM_VECN]
 requires {is_arr_init(r,0, MLKEM_VECN*2)}
@@ -309,7 +310,7 @@ Output range is (-2q,2q)
 
 */
 
-
+#[smt="SBArray1536_512.is_init_cell_get,SBArray1536_512.is_init_cell_set,all_cat,BArray512.init_arrP"]
 inline
 fn __polyvec_ntt(stack u16[MLKEM_VECN] r) -> stack u16[MLKEM_VECN]
 requires {is_arr_init(r,0, MLKEM_VECN*2)}
@@ -334,6 +335,7 @@ ensures:
   - every coefficient of the output encodes the same element in Zq
     as the corresponding input coefficient
 */
+#[smt="SBArray1536_512.is_init_cell_get,SBArray1536_512.is_init_cell_set,all_cat,BArray512.init_arrP"]
 inline
 fn __polyvec_reduce(stack u16[MLKEM_VECN] r) -> stack u16[MLKEM_VECN]
 requires {is_arr_init(r,0, MLKEM_VECN*2)}
@@ -356,7 +358,7 @@ __polyvec_pointwise_acc : computes the inner product of the two
  ensures: output coefficients in the range [-4q,4q]
     and affected by spurious R^-1 mod q factor
 */
-
+#[smt="SBArray1536_512.is_init_cell_get,SBArray1536_512.is_init_cell_set,BArray512.init_arrP,all_cat"]
 inline
 fn __polyvec_pointwise_acc(stack u16[MLKEM_N] r, stack u16[MLKEM_VECN] a b) -> stack u16[MLKEM_N]
 requires {is_arr_init(a,0, MLKEM_VECN*2) && is_arr_init(b,0,MLKEM_VECN*2)}
@@ -390,10 +392,10 @@ ensures:
 */
 
 inline
-fn __polyvec_tobytes(reg u64 rp, stack u16[MLKEM_VECN] a)
-requires {is_mem_init(rp, 3*MLKEM_POLYBYTES) && is_arr_init(a,0,MLKEM_VECN*2)}
+fn __polyvec_tobytes(reg ui64 rp, stack u16[MLKEM_VECN] a)
+requires {is_mem_init((64u) rp, 3*MLKEM_POLYBYTES) && is_arr_init(a,0,MLKEM_VECN*2)}
 {
-  reg u64 pp;
+  reg ui64 pp;
 
   pp = rp;
   a[0:MLKEM_N] = _poly_tobytes(pp, a[0:MLKEM_N]);

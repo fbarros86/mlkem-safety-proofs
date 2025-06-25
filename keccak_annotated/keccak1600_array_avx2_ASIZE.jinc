@@ -13,14 +13,14 @@ require "../common/subreadwrite_array_ASIZE.jinc"
 inline fn __addstate_array_avx2
 ( reg u256[7] st
 , reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int LEN
 , inline int TRAILB
 ) -> reg u256[7] /* st */
-   , reg u64 /* offset */
-requires{0<= offset && 0<= LEN && offset + LEN <= ASIZE && is_arr_init(buf,offset,LEN) && is_arr_init(st,0,7*32)}
+   , reg ui64 /* offset */
+requires{0<= offset && 0<= LEN && offset + LEN <= ASIZE && is_arr_init(buf,offset,LEN) && is_arr_init(st,0,7*32) && LEN <= 200}
 requires{0 <= TRAILB && TRAILB < 256}
-ensures{is_arr_init(result.0,0,7*32) && result.1 == offset + min(LEN,5*(8+32))}
+ensures{is_arr_init(result.0,0,7*32) && result.1 == offset + LEN}
 {
   reg u64 t64;
   reg u256 r0, r1, r2, r3, r4, r5, r6;
@@ -68,18 +68,18 @@ ensures{is_arr_init(result.0,0,7*32) && result.1 == offset + min(LEN,5*(8+32))}
 inline fn __absorb_array_avx2
 ( reg u256[7] st
 , reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int LEN
 , inline int RATE8
 , inline int TRAILB /* closes state if !=0 (i.e. adds trailbyte and padding) */
 ) -> reg u256[7] /* st */
-   , reg u64 /* offset */
-requires{0<= offset && 0<= LEN && offset + LEN <= ASIZE && 0<RATE8 && RATE8 <= 200 &&
+   , reg ui64 /* offset */
+requires{0<= offset && 0<= LEN && offset + LEN <= ASIZE && 0<RATE8 && RATE8 < 200 && LEN <=200 &&
          is_arr_init(buf,offset,LEN) && is_arr_init(st,0,7*32)}
 requires{0 <= TRAILB && TRAILB < 256}
 ensures{is_arr_init(result.0,0,7*32)}
 {
-  reg u64 i;
+  reg ui64 i;
   inline int ALL, ITERS;
 
   ALL = LEN + (TRAILB!=0 ? 1 : 0);
@@ -112,20 +112,21 @@ inline fn __pstate_array_avx2
 ( reg mut ptr u64[25] pst
 , inline int AT /* bytes (0 <= AT < 200) */
 , reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int LEN
 , inline int TRAILB
 ) -> reg ptr u64[25] /* pst */
    , inline int /* AT */
-   , reg u64 /* offset */
-requires{0<= offset && 0<= LEN && 0<=AT && AT<200 && AT + LEN + (TRAILB != 0 ? 1 : 0) <= 200 
+   , reg ui64 /* offset */
+requires{0<= offset && 0<= LEN && 0<=AT && AT<200 && AT + LEN + (TRAILB != 0 ? 1 : 0) < 200 
         && offset + LEN <= ASIZE && is_arr_init(buf,offset,LEN) && is_arr_init(pst,0,25*8)}
 requires{0 <= TRAILB && TRAILB < 256}
 ensures{is_arr_init(result.0,0,25*8) && result.1 == AT + LEN + (TRAILB != 0 ? 1 : 0)
           && result.2 == offset + LEN}
 {
   inline int DELTA, LO, ALL;
-  reg u64 at, t64;
+  reg ui64 at;
+  reg u64 t64;
   reg u256 t256;
   reg u128 t128;
 
@@ -139,7 +140,7 @@ ensures{is_arr_init(result.0,0,25*8) && result.1 == AT + LEN + (TRAILB != 0 ? 1 
       if ( TRAILB != 0 ) { ALL += 1; }
       DELTA, _, TRAILB, t64 = __aread_subu64(buf, offset, DELTA, LEN, TRAILB);
       t64 <<= 8*LO;
-      pst[(int) at] ^= t64;
+      pst[at] ^= t64;
       LO = 0;
       AT = 0;
       LEN = 0;
@@ -153,7 +154,7 @@ ensures{is_arr_init(result.0,0,25*8) && result.1 == AT + LEN + (TRAILB != 0 ? 1 
       LEN -= 8-LO;
       AT += 8-LO;
       t64 <<= 8*LO;
-      pst[(int) at] ^= t64;
+      pst[at] ^= t64;
       at += 1;
     }
   }
@@ -201,21 +202,21 @@ inline fn __pabsorb_array_avx2
 , inline int AT
 , reg u256[7] st
 , reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int LEN
 , inline int RATE8
 , inline int TRAILB /* closes state if !=0 (i.e. adds trailbyte and padding) */
 ) -> reg ptr u64[25] /* pst */
    , inline int /* AT */
    , reg u256[7] /* st */
-   , reg u64 /* offset */
+   , reg ui64 /* offset */
 requires{0 <= offset && 0 <= LEN && 0<=AT && AT<RATE8 && offset + LEN <= ASIZE &&
-         AT + LEN + (TRAILB != 0 ? 1 : 0) <= 200 && 0 < RATE8 && RATE8 <= 200 &&
+         AT + LEN + (TRAILB != 0 ? 1 : 0) < 200 && 0 < RATE8 && RATE8 < 200 &&
          is_arr_init(buf,offset,LEN) && is_arr_init(pst,0,25*8) && is_arr_init(st,0,7*32)}
 requires{0 <= TRAILB && TRAILB < 256}
 ensures{is_arr_init(result.0,0,25*8) && is_arr_init(result.2,0,32*7)}
 {
-  reg u64 i;
+  reg ui64 i;
   inline int ALL, ITERS;
 
   ALL = AT + LEN;
@@ -284,14 +285,15 @@ ensures{is_arr_init(result.0,0,25*8) && is_arr_init(result.2,0,32*7)}
 
 inline fn __dumpstate_array_avx2
 ( reg mut ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int LEN
 , reg u256[7] st
 ) -> reg ptr u8[ASIZE] /* buf */
-   , reg u64 /* offset */
-requires{0<= offset && 0<= LEN && offset + LEN <= ASIZE && is_arr_init(st,0,7*32)}
-ensures{is_arr_init(result.0,offset,LEN) && result.1 == max(0,min(LEN,(32*6 + 8*4)))}
-ensures{ \all (k \in 0:ASIZE) ((is_arr_init(buf,k,1) ? is_arr_init(result.0,k,1) : true))}
+   , reg ui64 /* offset */
+requires{0<= offset && 0<= LEN && offset + LEN <= ASIZE && is_arr_init(st,0,7*32) && LEN <= 200}
+ensures{result.1 == offset + LEN}
+ensures { \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || (offset <= k && k< offset + LEN)))}
+
 {
   reg u64 t;
   reg u128 t128_0, t128_1;
@@ -374,17 +376,17 @@ ensures{ \all (k \in 0:ASIZE) ((is_arr_init(buf,k,1) ? is_arr_init(result.0,k,1)
 
 inline fn __squeeze_array_avx2
 ( reg mut ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int LEN
 , reg u256[7] st
 , inline int RATE8
 ) -> reg ptr u8[ASIZE] /* buf */
    , reg u256[7] /* st */
-requires{0<= offset && 0<= LEN && 0< RATE8 && RATE8 <= 200 && offset + LEN <= ASIZE && is_arr_init(st,0,32*7)}
-ensures{is_arr_init(result.0,offset,LEN) && is_arr_init(result.1,0,32*7)} 
-ensures{ \all (k \in 0:ASIZE) ((is_arr_init(buf,k,1) ? is_arr_init(result.0,k,1) : true))}
+requires{0<= offset && 0<= LEN && 0< RATE8 && RATE8 < 200 && offset + LEN <= ASIZE && is_arr_init(st,0,32*7)}
+ensures{is_arr_init(result.1,0,32*7)} 
+ensures { \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || (offset <= k && k< offset + LEN)))}
 {
-  reg u64 i;
+  reg ui64 i;
   inline int ITERS, LO;
   ITERS = LEN/RATE8;
   LO = LEN%RATE8;

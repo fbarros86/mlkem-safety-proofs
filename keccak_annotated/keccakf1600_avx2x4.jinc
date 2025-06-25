@@ -52,9 +52,10 @@ inline fn keccakf1600_4x_theta_sum(reg ptr u256[25] a) -> reg u256[5]
   return c;
 }
 
+#[smt="all_cat,and_iota"]
 inline fn keccakf1600_4x_rol(reg u256[5] a, inline int x r, reg u256 r8 r56) -> reg u256[5]
 requires{is_arr_init(a,x*32,32) && 0<=x && x<5}
-ensures{\all (k \in 0:160) (is_arr_init(result.0,k,1) == is_arr_init(a,k,1))}
+ensures{ \all (k \in 0:160) (is_arr_init(result.0,k,1) == is_arr_init(a,k,1))}
 {
 	reg u256 t;
 
@@ -72,6 +73,7 @@ ensures{\all (k \in 0:160) (is_arr_init(result.0,k,1) == is_arr_init(a,k,1))}
 }
 
 // D[x] = C[x-1] ^ ROT(C[x+1], 1) 
+#[smt="all_cat,and_iota"]
 inline fn keccakf1600_4x_theta_rol(reg u256[5] c, reg u256 r8 r56) -> reg u256[5]
 {
   inline int x;
@@ -190,7 +192,7 @@ inline fn __keccakf1600_avx2x4(reg ptr u256[25] a) -> reg ptr u256[25]
   reg ptr u256[25] e;
 
   reg u256 rc r8 r56;
-  reg u64 c;
+  reg ui64 c;
 
   RC = KECCAK1600_RC;
   e = s_e;
@@ -200,8 +202,8 @@ inline fn __keccakf1600_avx2x4(reg ptr u256[25] a) -> reg ptr u256[25]
   c = 0;
   while(c < KECCAK_ROUNDS)
   {
-    //rc = RC.[(int) c];
-    rc = #VPBROADCAST_4u64(RC[(int) c]);
+    //rc = RC.[c];
+    rc = #VPBROADCAST_4u64(RC[c]);
 
     e = _keccakf1600_4x_round(e, a, rc, r8, r56);
 
@@ -209,8 +211,8 @@ inline fn __keccakf1600_avx2x4(reg ptr u256[25] a) -> reg ptr u256[25]
     a_s = a; s_e = e;
     a = a_s; e = s_e;
 
-    //rc = RC.[(int) c + 32];
-    rc = #VPBROADCAST_4u64(RC[(int) c+1]);
+    //rc = RC.[c + 32];
+    rc = #VPBROADCAST_4u64(RC[c+1]);
     a = _keccakf1600_4x_round(a, e, rc, r8, r56);
 
     // just an expensive pointer swap (#todo request feature)

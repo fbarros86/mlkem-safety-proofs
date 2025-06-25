@@ -4,7 +4,7 @@
 
 inline fn __aread_subu64
 ( reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , inline int TRAIL
@@ -13,7 +13,7 @@ inline fn __aread_subu64
    , inline int /* TRAIL */
    , reg u64 /* w */
 requires{(0 <s LEN) ? is_arr_init(buf,offset+DELTA,min(LEN,8)) && 0 <= DELTA &&
-                      0 <= (int) offset + DELTA && (int) offset + DELTA + min(LEN,8) <= ASIZE
+                      0 <= offset + DELTA && offset + DELTA + min(LEN,8) <= ASIZE
                     : true}
 requires{ 0 <= TRAIL && TRAIL < 256 }
 ensures{ result.0 == DELTA + max(0,min(LEN,8)) && result.1 == LEN - max(0,min(LEN,8)) &&
@@ -65,7 +65,7 @@ ensures{ result.0 == DELTA + max(0,min(LEN,8)) && result.1 == LEN - max(0,min(LE
 
 inline fn __aread_bcast_4subu64
 ( reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , inline int TRAIL
@@ -74,7 +74,7 @@ inline fn __aread_bcast_4subu64
    , inline int /* TRAIL */
    , reg u256 /* w */
 requires{(0 <s LEN) ? is_arr_init(buf,offset+DELTA,min(LEN,8)) && 0 <= DELTA &&
-                      0 <= (int) offset + DELTA && (int) offset + DELTA + min(LEN,8) <= ASIZE
+                      0 <= offset + DELTA && offset + DELTA + min(LEN,8) <= ASIZE
          : true}
 requires{ 0 <= TRAIL && TRAIL < 256 }
 ensures{ result.0 == DELTA + max(0,min(LEN,8)) && result.1 == LEN - max(0,min(LEN,8)) &&
@@ -101,7 +101,7 @@ ensures{ result.0 == DELTA + max(0,min(LEN,8)) && result.1 == LEN - max(0,min(LE
 
 inline fn __aread_subu128
 ( reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , inline int TRAIL
@@ -110,7 +110,7 @@ inline fn __aread_subu128
    , inline int /* TRAIL */
    , reg u128 /* w */
 requires{(0 <s LEN) ? is_arr_init(buf,offset+DELTA,min(LEN,16)) && 0 <= DELTA &&
-                      0 <= (int) offset + DELTA && (int) offset + DELTA + min(LEN,16) <= ASIZE
+                      0 <= offset + DELTA && offset + DELTA + min(LEN,16) <= ASIZE
          : true}
 requires{ 0 <= TRAIL && TRAIL < 256 }
 ensures{ result.0 == DELTA + max(0,min(LEN,16)) && result.1 == LEN - max(0,min(LEN,16)) &&
@@ -141,7 +141,7 @@ ensures{ result.0 == DELTA + max(0,min(LEN,16)) && result.1 == LEN - max(0,min(L
 
 inline fn __aread_subu256
 ( reg const ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , inline int TRAIL
@@ -150,7 +150,7 @@ inline fn __aread_subu256
    , inline int /* TRAIL */
    , reg u256 /* w */
 requires{(0 <s LEN) ? is_arr_init(buf,offset+DELTA,min(LEN,32)) && 0 <= DELTA &&
-                      0 <= (int) offset + DELTA && (int) offset + DELTA + min(LEN,32) <= ASIZE
+                      0 <= offset + DELTA && offset + DELTA + min(LEN,32) <= ASIZE
          : true}
 requires{ 0 <= TRAIL && TRAIL < 256 }         
 ensures{ result.0 == DELTA + max(0,min(LEN,32)) && result.1 == LEN - max(0,min(LEN,32)) &&
@@ -184,9 +184,10 @@ ensures{ result.0 == DELTA + max(0,min(LEN,32)) && result.1 == LEN - max(0,min(L
 /**
     WRITE A FIXED NUMBER OF BYTES FROM A WORD
 **/
+#[smt="all_cat,and_iota"]
 inline fn __awrite_subu64
 ( reg mut ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , reg u64 w
@@ -194,10 +195,10 @@ inline fn __awrite_subu64
    , inline int /* DELTA */
    , inline int /* LEN */
 
-requires{(0 <s LEN) ? 0 <= (int) offset + DELTA && 0 <= DELTA &&
- (int) offset + DELTA + min(LEN,8) <= ASIZE : true}
+requires{(0 <s LEN) ? 0 <= offset + DELTA && 0 <= DELTA &&
+ offset + DELTA + min(LEN,8) <= ASIZE : true}
 ensures{ result.1 == DELTA + max(0,min(LEN,8)) && result.2 == LEN - max(0,min(LEN,8)) }
-ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || ((int) offset + DELTA <= k && k < (int) offset + DELTA + max(0,min(LEN,8)))))}
+ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || offset + DELTA <= k && k < offset + DELTA + max(0,min(LEN,8))))}
 {
   if (0 <s LEN) {
     if (8 <=s LEN) {
@@ -227,19 +228,20 @@ ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1
   return buf, DELTA, LEN; 
 }
 
+#[smt="all_cat,and_iota"]
 inline fn __awrite_subu128
 ( reg mut ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , reg u128 w
 ) -> reg ptr u8[ASIZE] /* buf */
    , inline int /* DELTA */
    , inline int /* LEN */
-requires{(0 <s LEN) ? 0 <= (int) offset + DELTA && 0 <= DELTA && (int) offset + DELTA + min(LEN,16) <= ASIZE
+requires{(0 <s LEN) ? 0 <= offset + DELTA && 0 <= DELTA && offset + DELTA + min(LEN,16) <= ASIZE
          : true}
 ensures{ result.1 == DELTA + max(0,min(LEN,16)) && result.2 == LEN - max(0,min(LEN,16)) }
-ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || ((int)offset + DELTA <= k && k < (int)offset + DELTA + max(0,min(LEN,16)))))}
+ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || (offset + DELTA <= k && k < offset + DELTA + max(0,min(LEN,16)))))}
 {
   reg u64 t64;
   if (0 <s LEN) {
@@ -261,19 +263,20 @@ ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1
   return buf, DELTA, LEN;
 }
 
+#[smt="all_cat,and_iota"]
 inline fn __awrite_subu256
 ( reg mut ptr u8[ASIZE] buf
-, reg u64 offset
+, reg ui64 offset
 , inline int DELTA
 , inline int LEN
 , reg u256 w
 ) -> reg ptr u8[ASIZE] /* buf */
    , inline int /* DELTA */
    , inline int /* LEN */
-requires{(0 <s LEN) ? 0 <= (int) offset + DELTA && 0 <= DELTA && (int) offset + DELTA + min(LEN,32) <= ASIZE
+requires{(0 <s LEN) ? 0 <= offset + DELTA && 0 <= DELTA && offset + DELTA + min(LEN,32) <= ASIZE
          : true}
 ensures{ result.1 == DELTA + max(0,min(LEN,32)) && result.2 == LEN - max(0,min(LEN,32)) }
-ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || ((int)offset + DELTA <= k && k < (int)offset + DELTA + max(0,min(LEN,32)))))}
+ensures{ \all (k \in 0:ASIZE) (is_arr_init(result.0,k,1) == (is_arr_init(buf,k,1) || (offset + DELTA <= k && k < offset + DELTA + max(0,min(LEN,32)))))}
 {
   reg u128 t128;
   if (0 <s LEN) {

@@ -36,7 +36,10 @@ inline fn __state_init_avx2() -> reg u256[7]
   inline int i;
   reg u256[7] st;
 
-  for i=0 to 7 { st[i] = #set0_256(); }
+  for i=0 to 7 { 
+    #[prover=safety_inv] assert (0 <= i && i <= 7 && is_arr_init(st,0,32*i));
+    st[i] = #set0_256(); 
+  }
 
   return st;
 }
@@ -45,6 +48,7 @@ inline fn __state_init_avx2() -> reg u256[7]
    PSTATE - UNPERMUTED KECCAK STATE
    ================================
 */
+#[smt="all_cat,BArray224.init_arrP"]
 inline fn __pstate_init_avx2
 ( reg mut ptr u64[25] pst
 ) -> reg ptr u64[25], reg u256[7]
@@ -56,7 +60,10 @@ ensures{is_arr_init(result.0,0,200) && is_arr_init(result.1,0,224)}
   reg u256[7] st;
 
   z256 = #set0_256();
-  for i=0 to 25/4 { pst[u256 i] = z256; }
+  for i=0 to 25/4 { 
+    #[prover=safety_inv] assert (0 <= i && i <= 25/4 && is_arr_init(pst,0,32*i));
+    pst[u256 i] = z256; 
+  }
   z64 = 0;
   pst[24] = z64;
 
@@ -163,7 +170,7 @@ inline fn __state_from_pstate_avx2
   return st;
 }
 
-
+#[smt="all_cat,BArray224.init_arrP"]
 inline fn __addstate_r3456_avx2
 ( reg u256[7] st
 , reg u256 r3 r4 r5 r6
@@ -200,6 +207,7 @@ inline fn __addstate_r3456_avx2
   return st;
 }
 
+#[smt="all_cat,BArray224.init_arrP"]
 inline fn __addpst01_avx2
 ( reg u256[7] st
 , reg const ptr u64[25] pst
@@ -213,6 +221,7 @@ inline fn __addpst01_avx2
   return st;
 }
 
+#[smt="all_cat,BArray224.init_arrP"]
 inline fn __addpst23456_avx2  // remaining entries
 ( reg u256[7] st
 , reg const ptr u64[25] pst
@@ -249,6 +258,7 @@ inline fn __addpst23456_avx2  // remaining entries
   return st;
 }
 
+#[smt="all_cat,BArray224.init_arrP,BArray200.init_arrP"]
 fn _addpstate_avx2
 ( reg u256[7] st
 , reg const ptr u64[25] pst
