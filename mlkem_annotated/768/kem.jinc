@@ -1,5 +1,5 @@
 require "indcpa.jinc"
-require "verify.jinc"
+require "../../common/avx2/verify.jinc"
 
 inline
 fn __crypto_kem_keypair_jazz(reg ui64 pkp, reg ui64 skp, reg ptr u8[MLKEM_SYMBYTES*2] randomnessp)
@@ -25,7 +25,7 @@ requires{is_arr_init(randomnessp,0,MLKEM_SYMBYTES*2) && is_mem_init((64u)pkp,MLK
   skp += MLKEM_POLYVECBYTES;
   pkp = s_pkp;
 
-  for i=0 to MLKEM_INDCPA_PUBLICKEYBYTES/8
+  for i = 0 to MLKEM_INDCPA_PUBLICKEYBYTES/8
   {
     t64 = (u64)[(64u)(pkp + 8*i)];
     (u64)[(64u)skp] = t64;
@@ -38,7 +38,7 @@ requires{is_arr_init(randomnessp,0,MLKEM_SYMBYTES*2) && is_mem_init((64u)pkp,MLK
   h_pk = _sha3_256A_M1184(h_pk, pkp);
   skp = s_skp;
 
-  for i=0 to 4
+  for i = 0 to 4
   {
     t64 = h_pk[u64 i];
     (u64)[(64u)skp] = t64;
@@ -48,7 +48,7 @@ requires{is_arr_init(randomnessp,0,MLKEM_SYMBYTES*2) && is_mem_init((64u)pkp,MLK
   randomnessp = s_randomnessp;
   randomnessp2 = randomnessp[MLKEM_SYMBYTES:MLKEM_SYMBYTES];
 
-  for i=0 to MLKEM_SYMBYTES/8
+  for i = 0 to MLKEM_SYMBYTES/8
   {
     t64 = randomnessp2[u64 i];
     (u64)[(64u)skp] = t64;
@@ -72,8 +72,8 @@ requires{
   s_pkp = pkp;
   s_ctp = ctp;
   s_shkp = shkp;
-  
-  for i=0 to MLKEM_SYMBYTES/8
+
+  for i = 0 to MLKEM_SYMBYTES/8
   {
     t64 = randomnessp[u64 i];
     buf[u64 i] = t64;
@@ -89,7 +89,7 @@ requires{
 
   shkp = s_shkp;
 
-  for i=0 to MLKEM_SYMBYTES/8
+  for i = 0 to MLKEM_SYMBYTES/8
   {
     t64 = kr[u64 i];
     (u64)[(64u)(shkp + 8*i)] = t64;
@@ -120,7 +120,7 @@ requires{
   hp += 32 + (24 * MLKEM_K * MLKEM_N>>3);
 
   /* fixme: should loads be 256-bits long? */
-  for i=0 to MLKEM_SYMBYTES/8
+  for i = 0 to MLKEM_SYMBYTES/8
   {
     t64 = (u64)[(64u)(hp + 8*i)];
     buf.[u64 MLKEM_SYMBYTES + 8*i] = t64;
@@ -153,5 +153,5 @@ requires{
   shkp = s_shkp;
   cnd = s_cnd;
 
-   __cmov(shkp, kr[0:MLKEM_SYMBYTES], cnd); 
+  __cmov(shkp, kr[0:MLKEM_SYMBYTES], cnd);
 }

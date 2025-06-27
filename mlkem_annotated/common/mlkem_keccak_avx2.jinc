@@ -1,6 +1,9 @@
 
 from Keccak require "avx2/keccak1600_imem_avx2.jinc"
 from Keccak require "avx2/keccak1600_imem_avx2x4.jinc"
+
+/* instantiate the Keccak code with variants for reading/writing
+   from/to stack arrays with different sizes */
 namespace A1 {
   param int ASIZE = 1;
   from Keccak require "avx2/keccak1600_array_avx2_ASIZE.jinc"
@@ -42,22 +45,8 @@ namespace ABUFLEN {
   from Keccak require "avx2/keccak1600_array_avx2x4_ASIZE.jinc"
 }
 
-/*
-fn _sha3_256A_A32
-( #spill_to_mmx reg mut ptr u8[32] out
-, reg const ptr u8[32] in
-) -> reg ptr u8[32]
-{ reg u256[7] st;
-  reg ui64 offset;
-  st = __state_init_avx2();
-  offset = 0;
-  st, _ = A32::__absorb_array_avx2(st, in, offset, 32, R136, SHA3);
-  offset = 0;
-  out, _ = A32::__squeeze_array_avx2(out, offset, 32, st, R136);
-  return out;
-}
-*/
-
+/* SHA3-256 writing to a 32-byte stack array (256A) and reading from 1184 byte
+   memory region */
 #[smt="all_cat,BArray224.init_arrP,and_iota"]
 fn _sha3_256A_M1184
 ( #spill_to_mmx reg mut ptr u8[32] out
@@ -74,6 +63,25 @@ ensures {is_arr_init(result.0,0,32)}
   return out;
 }
 
+/* SHA3-256 writing to a 32-byte stack array (256A) and reading from 1568 byte
+   memory region */
+fn _sha3_256A_M1568
+( #spill_to_mmx reg mut ptr u8[32] out
+, #spill_to_mmx reg ui64 in
+) -> reg ptr u8[32]
+requires {is_mem_init((64u)in,1568)}
+ensures {is_arr_init(result.0,0,32)}
+{ reg u256[7] st;
+  reg ui64 offset;
+  st = __state_init_avx2();
+  st, _ = __absorb_imem_avx2(st, in, 1568, R136, SHA3);
+  offset = 0;
+  out, _ = A32::__squeeze_array_avx2(out, offset, 32, st, R136);
+  return out;
+}
+
+/* SHA3-512 writing to a 64-byte stack array (512A) and reading from 33 byte
+   stack array */
 #[smt="all_cat,BArray224.init_arrP,BArray33.init_arrP,and_iota"]
 fn _sha3_512A_A33
 ( #spill_to_mmx reg mut ptr u8[64] out
@@ -91,6 +99,8 @@ ensures {is_arr_init(result.0,0,64)}
   return out;
 }
 
+/* SHA3-512 writing to a 64-byte stack array (512A) and reading from 64 byte
+   stack array */
 #[smt="all_cat,BArray224.init_arrP,BArray64.init_arrP,and_iota"]
 fn _sha3_512A_A64
 ( reg mut ptr u8[64] out
@@ -108,6 +118,8 @@ ensures {is_arr_init(result.0,0,64)}
   return out;
 }
 
+/* SHAKE-256 writing to a 32-byte memory region (32M) and reading from 32 byte
+   stack array first, and then from a 1088 byte memory region */
 #[smt="all_cat,BArray224.init_arrP,BArray200.init_arrP"]
 fn _shake256_M32__M32_M1088
 ( reg ui64 out
@@ -126,6 +138,26 @@ requires {
   _, _ = __squeeze_imem_avx2(out, 32, st, R136);
 }
 
+/* SHAKE-256 writing to a 32-byte memory region (32M) and reading from 32 byte
+   stack array first, and then from a 1600 byte memory region */
+fn _shake256_M32__M32_M1600
+( reg ui64 out
+, reg ui64 in0 in1 // 32+MLKEM_INDCPA_CIPHERTEXTBYTES
+)
+requires {is_mem_init((64u) in0, 32) && is_mem_init((64u) in1, 1600) &&
+          is_mem_init((64u) out, 32)}
+{ reg u256[7] st;
+  stack u64[25] pst_s;
+  reg ptr u64[25] pst;
+  pst = pst_s;
+  pst, st = __pstate_init_avx2(pst);
+  pst, _, st, _ = __pabsorb_imem_avx2(pst, 0, st, in0, 32, R136, UNFINISHED);
+  pst, _, st, _ = __pabsorb_imem_avx2(pst, 32, st, in1, 1568, R136, SHAKE);
+  _, _ = __squeeze_imem_avx2(out, 32, st, R136);
+}
+
+/* SHAKE-256 writing to a 128-byte stack array (A128) and reading from 32 byte
+   stack array first, and then from a 1 byte stack array next */
 #[smt="all_cat,BArray800.init_arrP,BArray32.init_arrP,and_iota,SBArray4_1.is_init_cell_get"]
 fn _shake256_A128__A32_A1
 ( reg mut ptr u8[128] out
@@ -138,6 +170,7 @@ ensures {is_arr_init(result.0,0,128)}
   stack u64[25] pst_s;
   reg ptr u64[25] pst;
   reg ui64 offset;
+  pst = pst_s;
   pst_s = pst;
   pst, st = __pstate_init_avx2(pst);
   offset = 0;
@@ -150,6 +183,9 @@ ensures {is_arr_init(result.0,0,128)}
   return out;
 }
 
+/* 4-way parallel SHAKE-256 writing to 128-byte stack arrays (A128) and reading from 32 byte
+   stack array first (same input on all lanes), and then from 1 byte stack arrays next */
+#[smt="all_cat,and_iota,BArray800.init_arrP,BArray32.init_arrP,SBArray4_1.is_init_cell_get"]
 fn _shake256x4_A128__A32_A1
 ( reg mut ptr u8[128] out0 out1 out2 out3
 , reg const ptr u8[32] seed
@@ -180,6 +216,8 @@ ensures {is_arr_init(result.0,0, 128) &&
   return out0, out1, out2, out3;
 }
 
+/* SHAKE-128 absorb reading from a 32-byte stack array (A32) first and from 2 byte
+   stack array next */
 #[smt="all_cat,BArray200.init_arrP,BArray32.init_arrP,BArray224.init_arrP,BArray2.init_arrP"]
 fn _shake128_absorb_A32_A2
 ( reg const ptr u8[32] seed
@@ -201,6 +239,8 @@ ensures {is_arr_init(result.0,0,32*7)}
   return st;
 }
 
+/* 4-way SHAKE-128 absorb reading from a 32-byte stack array (A32) first (same on all
+   lanes) and from 2 byte stack arrays next */
 #[smt="all_cat,BArray32.init_arrP,BArray800.init_arrP,SBArray8_2.is_init_cell_get"]
 fn _shake128x4_absorb_A32_A2
 ( reg mut ptr u256[25] st
@@ -220,9 +260,11 @@ ensures {is_arr_init(result.0,0,32*25)}
   return st;
 }
 
+/* SHAKE-128 squeeze the next 504 bytes and keep the full state
+   at the end so it can be resumed */
 fn _shake128_squeeze3blocks
 ( reg mut ptr u8[ABUFLEN::ASIZE] buf
-, reg u256[7] st 
+, reg u256[7] st
 ) -> reg ptr u8[ABUFLEN::ASIZE]
 requires {is_arr_init(st, 0, 32*7)}
 ensures {is_arr_init(result.0,0,ABUFLEN::ASIZE)}
@@ -238,6 +280,9 @@ ensures {is_arr_init(result.0,0,ABUFLEN::ASIZE)}
  return buf;
 }
 
+/* SHAKE-128 squeeze the next 168 bytes and keep the full state
+   at the end so it can be resumed */
+#[smt="all_cat,and_iota,BArray224.init_arrP,SBArray536_200.is_init_cell_get,BArray536.init_arrP"]
 fn _shake128_next_state
 ( reg mut ptr u8[ABUFLEN::ASIZE] buf
 ) -> reg ptr u8[ABUFLEN::ASIZE] /* buf */
@@ -248,13 +293,15 @@ ensures {is_arr_init(result.0,0,ABUFLEN::ASIZE)}
  reg ptr u64[25] pst;
  reg ui64 offset;
  pst = buf[u64 2*(168/8) : 25];
- st = __state_from_pstate_avx2(pst); 
+ st = __state_from_pstate_avx2(pst);
  st = _keccakf1600_avx2(st);
  offset = 2*168;
  buf, _ = ABUFLEN::__dumpstate_array_avx2(buf, offset, 200, st);
  return buf;
 }
 
+/* 4-way parallel SHAKE-128 squeeze the next 504 bytes and keep the full states
+   at the end so they can be resumed */
 fn _shake128x4_squeeze3blocks
 ( reg mut ptr u256[25] st
 , reg mut ptr u8[4*ABUFLEN::ASIZE] buf

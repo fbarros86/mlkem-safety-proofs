@@ -19,7 +19,17 @@ SBArray1088_128 SBArray536_200 SBArray1536_512 SBArray2048_512
 SBArray4608_512 SBArray2144_536 SBArray1088_960 SBArray4608_1536
 SBArray4608_2048.
 
-abbrev sample_shuffle_table =
+abbrev  gen_matrix_indexes =
+(BArray32.of_list8
+[(W8.of_int 0); (W8.of_int 0); (W8.of_int 1); (W8.of_int 0); (W8.of_int 2);
+(W8.of_int 0); (W8.of_int 0); (W8.of_int 1); (W8.of_int 1); (W8.of_int 1);
+(W8.of_int 2); (W8.of_int 1); (W8.of_int 0); (W8.of_int 2); (W8.of_int 1);
+(W8.of_int 2); (W8.of_int 0); (W8.of_int 0); (W8.of_int 0); (W8.of_int 1);
+(W8.of_int 0); (W8.of_int 2); (W8.of_int 1); (W8.of_int 0); (W8.of_int 1);
+(W8.of_int 1); (W8.of_int 1); (W8.of_int 2); (W8.of_int 2); (W8.of_int 0);
+(W8.of_int 2); (W8.of_int 1)]).
+
+abbrev  sample_shuffle_table =
 (BArray2048.of_list8
 [(W8.of_int (-1)); (W8.of_int (-1)); (W8.of_int (-1)); (W8.of_int (-1));
 (W8.of_int (-1)); (W8.of_int (-1)); (W8.of_int (-1)); (W8.of_int (-1));
@@ -529,19 +539,19 @@ abbrev sample_shuffle_table =
 (W8.of_int (-1)); (W8.of_int 0); (W8.of_int 2); (W8.of_int 4); (W8.of_int 6);
 (W8.of_int 8); (W8.of_int 10); (W8.of_int 12); (W8.of_int 14)]).
 
-abbrev sample_q =
+abbrev [-printing] sample_q =
 (W256.of_int
 5881923629679188442283784376194736327817742869488325897419002016668082834689).
 
-abbrev sample_mask =
+abbrev [-printing] sample_mask =
 (W256.of_int
 7235349132933696807194982583513801520701008426120364839270295361446620368895).
 
-abbrev sample_ones =
+abbrev [-printing] sample_ones =
 (W256.of_int
 454086624460063511464984254936031011189294057512315937409637584344757371137).
 
-abbrev sample_load_shuffle =
+abbrev  sample_load_shuffle =
 (BArray32.of_list8
 [(W8.of_int 0); (W8.of_int 1); (W8.of_int 1); (W8.of_int 2); (W8.of_int 3);
 (W8.of_int 4); (W8.of_int 4); (W8.of_int 5); (W8.of_int 6); (W8.of_int 7);
@@ -551,17 +561,7 @@ abbrev sample_load_shuffle =
 (W8.of_int 11); (W8.of_int 11); (W8.of_int 12); (W8.of_int 13);
 (W8.of_int 14); (W8.of_int 14); (W8.of_int 15)]).
 
-abbrev gen_matrix_indexes =
-(BArray32.of_list8
-[(W8.of_int 0); (W8.of_int 0); (W8.of_int 1); (W8.of_int 0); (W8.of_int 2);
-(W8.of_int 0); (W8.of_int 0); (W8.of_int 1); (W8.of_int 1); (W8.of_int 1);
-(W8.of_int 2); (W8.of_int 1); (W8.of_int 0); (W8.of_int 2); (W8.of_int 1);
-(W8.of_int 2); (W8.of_int 0); (W8.of_int 0); (W8.of_int 0); (W8.of_int 1);
-(W8.of_int 0); (W8.of_int 2); (W8.of_int 1); (W8.of_int 0); (W8.of_int 1);
-(W8.of_int 1); (W8.of_int 1); (W8.of_int 2); (W8.of_int 2); (W8.of_int 0);
-(W8.of_int 2); (W8.of_int 1)]).
-
-abbrev pvc_shufbidx_s =
+abbrev  pvc_shufbidx_s =
 (BArray32.of_list8
 [(W8.of_int 0); (W8.of_int 1); (W8.of_int 2); (W8.of_int 3); (W8.of_int 4);
 (W8.of_int 8); (W8.of_int 9); (W8.of_int 10); (W8.of_int 11); (W8.of_int 12);
@@ -572,21 +572,21 @@ abbrev pvc_shufbidx_s =
 (W8.of_int 0); (W8.of_int 1); (W8.of_int 2); (W8.of_int 3); (W8.of_int 4);
 (W8.of_int 8)]).
 
-abbrev pvc_sllvdidx_s = (W64.of_int 12).
+abbrev [-printing] pvc_sllvdidx_s = (W64.of_int 12).
 
-abbrev pvc_shift2_s = (W64.of_int 288230380513787905).
+abbrev [-printing] pvc_shift2_s = (W64.of_int 288230380513787905).
 
-abbrev pvc_mask_s = (W16.of_int 1023).
+abbrev [-printing] pvc_mask_s = (W16.of_int 1023).
 
-abbrev pvc_shift1_s = (W16.of_int 4096).
+abbrev [-printing] pvc_shift1_s = (W16.of_int 4096).
 
-abbrev pvc_off_s = (W16.of_int 15).
+abbrev [-printing] pvc_off_s = (W16.of_int 15).
 
-abbrev pvd_mask_s = (W32.of_int 2145394680).
+abbrev [-printing] pvd_mask_s = (W32.of_int 2145394680).
 
-abbrev pvd_sllvdidx_s = (W64.of_int 4).
+abbrev [-printing] pvd_sllvdidx_s = (W64.of_int 4).
 
-abbrev pvd_shufbdidx_s =
+abbrev  pvd_shufbdidx_s =
 (BArray32.of_list8
 [(W8.of_int 0); (W8.of_int 1); (W8.of_int 1); (W8.of_int 2); (W8.of_int 2);
 (W8.of_int 3); (W8.of_int 3); (W8.of_int 4); (W8.of_int 5); (W8.of_int 6);
@@ -596,24 +596,13 @@ abbrev pvd_shufbdidx_s =
 (W8.of_int 8); (W8.of_int 8); (W8.of_int 9); (W8.of_int 9); (W8.of_int 10);
 (W8.of_int 10); (W8.of_int 11)]).
 
-abbrev pvd_q_s = (W32.of_int 218182660).
+abbrev [-printing] pvd_q_s = (W32.of_int 218182660).
 
-abbrev pfm_idx_s =
-(BArray16.of_list8
-[(W8.of_int 0); (W8.of_int 1); (W8.of_int 4); (W8.of_int 5); (W8.of_int 8);
-(W8.of_int 9); (W8.of_int 12); (W8.of_int 13); (W8.of_int 2); (W8.of_int 3);
-(W8.of_int 6); (W8.of_int 7); (W8.of_int 10); (W8.of_int 11); (W8.of_int 14);
-(W8.of_int 15)]).
+abbrev [-printing] pd_shift_s = (W32.of_int 8390656).
 
-abbrev pfm_shift_s =
-(BArray16.of_list32
-[(W32.of_int 3); (W32.of_int 2); (W32.of_int 1); (W32.of_int 0)]).
+abbrev [-printing] pd_mask_s = (W32.of_int 15728655).
 
-abbrev pd_shift_s = (W32.of_int 8390656).
-
-abbrev pd_mask_s = (W32.of_int 15728655).
-
-abbrev pd_jshufbidx =
+abbrev  pd_jshufbidx =
 (BArray32.of_list8
 [(W8.of_int 0); (W8.of_int 0); (W8.of_int 0); (W8.of_int 0); (W8.of_int 1);
 (W8.of_int 1); (W8.of_int 1); (W8.of_int 1); (W8.of_int 2); (W8.of_int 2);
@@ -623,28 +612,39 @@ abbrev pd_jshufbidx =
 (W8.of_int 6); (W8.of_int 6); (W8.of_int 6); (W8.of_int 7); (W8.of_int 7);
 (W8.of_int 7); (W8.of_int 7)]).
 
-abbrev pc_permidx_s =
+abbrev  pc_permidx_s =
 (BArray32.of_list32
 [(W32.of_int 0); (W32.of_int 4); (W32.of_int 1); (W32.of_int 5);
 (W32.of_int 2); (W32.of_int 6); (W32.of_int 3); (W32.of_int 7)]).
 
-abbrev pc_shift2_s = (W16.of_int 4097).
+abbrev [-printing] pc_shift2_s = (W16.of_int 4097).
 
-abbrev pc_mask_s = (W16.of_int 15).
+abbrev [-printing] pc_mask_s = (W16.of_int 15).
 
-abbrev pc_shift1_s = (W16.of_int 512).
+abbrev [-printing] pc_shift1_s = (W16.of_int 512).
 
-abbrev rOL8 =
+abbrev  pfm_idx_s =
+(BArray16.of_list8
+[(W8.of_int 0); (W8.of_int 1); (W8.of_int 4); (W8.of_int 5); (W8.of_int 8);
+(W8.of_int 9); (W8.of_int 12); (W8.of_int 13); (W8.of_int 2); (W8.of_int 3);
+(W8.of_int 6); (W8.of_int 7); (W8.of_int 10); (W8.of_int 11); (W8.of_int 14);
+(W8.of_int 15)]).
+
+abbrev  pfm_shift_s =
+(BArray16.of_list32
+[(W32.of_int 3); (W32.of_int 2); (W32.of_int 1); (W32.of_int 0)]).
+
+abbrev [-printing] rOL8 =
 (W256.of_int
 13620818001941277694121380808605999856886653716761013959207994299728839901191
 ).
 
-abbrev rOL56 =
+abbrev [-printing] rOL56 =
 (W256.of_int
 10910488462195273559651782724632284871561478246514020268633800075540923875841
 ).
 
-abbrev kECCAK_RHOTATES_RIGHT =
+abbrev  kECCAK_RHOTATES_RIGHT =
 (BArray192.of_list256
 [(W256.of_int 144373339913893657577751063007562604548177214458152943091773);
 (W256.of_int 232252764209307188274174373867837442080505530800860351692863);
@@ -653,7 +653,7 @@ abbrev kECCAK_RHOTATES_RIGHT =
 (W256.of_int 276192476357013953622045746931053922384479139705868246843454);
 (W256.of_int 313855086769334038206421612937983674734430261968315659321364)]).
 
-abbrev kECCAK_RHOTATES_LEFT =
+abbrev  kECCAK_RHOTATES_LEFT =
 (BArray192.of_list256
 [(W256.of_int 257361171150853911329517531560668107745210100483895842570243);
 (W256.of_int 169481746855440380633094220700393270212881784141188433969153);
@@ -662,7 +662,7 @@ abbrev kECCAK_RHOTATES_LEFT =
 (W256.of_int 125542034707733615285222847637176789908908175236180538818562);
 (W256.of_int 87879424295413530700846981630247037558957052973733126340652)]).
 
-abbrev kECCAK1600_RC =
+abbrev  kECCAK1600_RC =
 (BArray192.of_list64
 [(W64.of_int 1); (W64.of_int 32898); (W64.of_int (-9223372036854742902));
 (W64.of_int (-9223372034707259392)); (W64.of_int 32907);
@@ -676,14 +676,14 @@ abbrev kECCAK1600_RC =
 (W64.of_int (-9223372036854742912)); (W64.of_int 2147483649);
 (W64.of_int (-9223372034707259384))]).
 
-abbrev jdmontx16 =
+abbrev  jdmontx16 =
 (BArray32.of_list16
 [(W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353);
 (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353);
 (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353);
 (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353); (W16.of_int 1353)]).
 
-abbrev mqinvx16 =
+abbrev  mqinvx16 =
 (BArray32.of_list16
 [(W16.of_int 15099); (W16.of_int 15099); (W16.of_int 15099);
 (W16.of_int 15099); (W16.of_int 15099); (W16.of_int 15099);
@@ -692,35 +692,35 @@ abbrev mqinvx16 =
 (W16.of_int 15099); (W16.of_int 15099); (W16.of_int 15099);
 (W16.of_int 15099)]).
 
-abbrev hhqx16 =
+abbrev  hhqx16 =
 (BArray32.of_list16
 [(W16.of_int 832); (W16.of_int 832); (W16.of_int 832); (W16.of_int 832);
 (W16.of_int 832); (W16.of_int 832); (W16.of_int 832); (W16.of_int 832);
 (W16.of_int 832); (W16.of_int 832); (W16.of_int 832); (W16.of_int 832);
 (W16.of_int 832); (W16.of_int 832); (W16.of_int 832); (W16.of_int 832)]).
 
-abbrev hqx16_m1 =
+abbrev  hqx16_m1 =
 (BArray32.of_list16
 [(W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664);
 (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664);
 (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664);
 (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664); (W16.of_int 1664)]).
 
-abbrev hqx16_p1 =
+abbrev  hqx16_p1 =
 (BArray32.of_list16
 [(W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665);
 (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665);
 (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665);
 (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665); (W16.of_int 1665)]).
 
-abbrev maskx16 =
+abbrev  maskx16 =
 (BArray32.of_list16
 [(W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095);
 (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095);
 (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095);
 (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095); (W16.of_int 4095)]).
 
-abbrev jflox16 =
+abbrev  jflox16 =
 (BArray32.of_list16
 [(W16.of_int (-10079)); (W16.of_int (-10079)); (W16.of_int (-10079));
 (W16.of_int (-10079)); (W16.of_int (-10079)); (W16.of_int (-10079));
@@ -729,14 +729,14 @@ abbrev jflox16 =
 (W16.of_int (-10079)); (W16.of_int (-10079)); (W16.of_int (-10079));
 (W16.of_int (-10079))]).
 
-abbrev jfhix16 =
+abbrev  jfhix16 =
 (BArray32.of_list16
 [(W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441);
 (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441);
 (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441);
 (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441); (W16.of_int 1441)]).
 
-abbrev jvx16 =
+abbrev  jvx16 =
 (BArray32.of_list16
 [(W16.of_int 20159); (W16.of_int 20159); (W16.of_int 20159);
 (W16.of_int 20159); (W16.of_int 20159); (W16.of_int 20159);
@@ -745,7 +745,7 @@ abbrev jvx16 =
 (W16.of_int 20159); (W16.of_int 20159); (W16.of_int 20159);
 (W16.of_int 20159)]).
 
-abbrev jqinvx16 =
+abbrev  jqinvx16 =
 (BArray32.of_list16
 [(W16.of_int (-3327)); (W16.of_int (-3327)); (W16.of_int (-3327));
 (W16.of_int (-3327)); (W16.of_int (-3327)); (W16.of_int (-3327));
@@ -754,14 +754,14 @@ abbrev jqinvx16 =
 (W16.of_int (-3327)); (W16.of_int (-3327)); (W16.of_int (-3327));
 (W16.of_int (-3327))]).
 
-abbrev jqx16 =
+abbrev  jqx16 =
 (BArray32.of_list16
 [(W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329);
 (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329);
 (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329);
 (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329); (W16.of_int 3329)]).
 
-abbrev jzetas_inv_exp =
+abbrev  jzetas_inv_exp =
 (BArray800.of_list16
 [(W16.of_int (-23131)); (W16.of_int (-7756)); (W16.of_int 20258);
 (W16.of_int 23860); (W16.of_int 17443); (W16.of_int (-23210));
@@ -882,7 +882,7 @@ abbrev jzetas_inv_exp =
 (W16.of_int 1932); (W16.of_int 0); (W16.of_int 0); (W16.of_int 0);
 (W16.of_int 0)]).
 
-abbrev jzetas_exp =
+abbrev  jzetas_exp =
 (BArray800.of_list16
 [(W16.of_int 31499); (W16.of_int 31499); (W16.of_int 2571);
 (W16.of_int 2571); (W16.of_int 14746); (W16.of_int 14746); (W16.of_int 2970);
@@ -1001,7 +1001,7 @@ abbrev jzetas_exp =
 (W16.of_int 1628); (W16.of_int 0); (W16.of_int 0); (W16.of_int 0);
 (W16.of_int 0)]).
 
-abbrev jzetas_inv =
+abbrev  jzetas_inv =
 (BArray256.of_list16
 [(W16.of_int 1701); (W16.of_int 1807); (W16.of_int 1460); (W16.of_int 2371);
 (W16.of_int 2338); (W16.of_int 2333); (W16.of_int 308); (W16.of_int 108);
@@ -1036,7 +1036,7 @@ abbrev jzetas_inv =
 (W16.of_int 3127); (W16.of_int 3042); (W16.of_int 1907); (W16.of_int 1836);
 (W16.of_int 1517); (W16.of_int 359); (W16.of_int 758); (W16.of_int 1441)]).
 
-abbrev jzetas =
+abbrev  jzetas =
 (BArray256.of_list16
 [(W16.of_int 2285); (W16.of_int 2571); (W16.of_int 2970); (W16.of_int 1812);
 (W16.of_int 1493); (W16.of_int 1422); (W16.of_int 287); (W16.of_int 202);
@@ -12778,8 +12778,9 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     ((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 32)) /\
-     (is_init b_st 0 224)))))]);
+     (((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 32)) /\
+      (is_init b_st 0 224)) /\
+     (lEN <= 200)))))]);
     trace_a32____dumpstate_array_avx2 <-
     (trace_a32____dumpstate_array_avx2 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -13223,24 +13224,10 @@ module M(SC:Syscall_t) = {
           trace_a32____squeeze_array_avx2 <-
           (trace_a32____squeeze_array_avx2 ++
           [(Assert,
-           (((0 <=
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224))) /\
-            (((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224)) <=
-            18446744073709551615)) /\
-           (((0 <=
-             (param_6 +
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224)))) /\
-            ((param_6 +
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224))) <=
-            18446744073709551615)) /\
-           (result_2 =
-           (param_6 +
-           ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                          param_5 : 224)))))))]);
+           (((0 <= param_5) /\ (param_5 <= 18446744073709551615)) /\
+           (((0 <= (param_6 + param_5)) /\
+            ((param_6 + param_5) <= 18446744073709551615)) /\
+           (result_2 = (param_6 + param_5)))))]);
           trace_a32____squeeze_array_avx2 <-
           (trace_a32____squeeze_array_avx2 ++
           [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
@@ -13281,24 +13268,10 @@ module M(SC:Syscall_t) = {
         trace_a32____squeeze_array_avx2 <-
         (trace_a32____squeeze_array_avx2 ++
         [(Assert,
-         (((0 <=
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224))) /\
-          (((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224)) <=
-          18446744073709551615)) /\
-         (((0 <=
-           (param_1 +
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224)))) /\
-          ((param_1 +
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224))) <=
-          18446744073709551615)) /\
-         (result =
-         (param_1 +
-         ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                        param_0 : 224)))))))]);
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_1 + param_0)) /\
+          ((param_1 + param_0) <= 18446744073709551615)) /\
+         (result = (param_1 + param_0)))))]);
         trace_a32____squeeze_array_avx2 <-
         (trace_a32____squeeze_array_avx2 ++
         [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
@@ -14877,9 +14850,10 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     (((((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 33)) /\
-        (0 < rATE8)) /\
-       (rATE8 < 200)) /\
+     ((((((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 33)) /\
+         (0 < rATE8)) /\
+        (rATE8 < 200)) /\
+       (lEN <= 200)) /\
       (is_init b_buf offset lEN)) /\
      (is_init b_st 0 224)))))]);
     trace_a33____absorb_array_avx2 <-
@@ -16304,9 +16278,10 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     (((((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 64)) /\
-        (0 < rATE8)) /\
-       (rATE8 < 200)) /\
+     ((((((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 64)) /\
+         (0 < rATE8)) /\
+        (rATE8 < 200)) /\
+       (lEN <= 200)) /\
       (is_init b_buf offset lEN)) /\
      (is_init b_st 0 224)))))]);
     trace_a64____absorb_array_avx2 <-
@@ -16581,8 +16556,9 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     ((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 64)) /\
-     (is_init b_st 0 224)))))]);
+     (((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 64)) /\
+      (is_init b_st 0 224)) /\
+     (lEN <= 200)))))]);
     trace_a64____dumpstate_array_avx2 <-
     (trace_a64____dumpstate_array_avx2 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -17026,24 +17002,10 @@ module M(SC:Syscall_t) = {
           trace_a64____squeeze_array_avx2 <-
           (trace_a64____squeeze_array_avx2 ++
           [(Assert,
-           (((0 <=
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224))) /\
-            (((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224)) <=
-            18446744073709551615)) /\
-           (((0 <=
-             (param_6 +
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224)))) /\
-            ((param_6 +
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224))) <=
-            18446744073709551615)) /\
-           (result_2 =
-           (param_6 +
-           ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                          param_5 : 224)))))))]);
+           (((0 <= param_5) /\ (param_5 <= 18446744073709551615)) /\
+           (((0 <= (param_6 + param_5)) /\
+            ((param_6 + param_5) <= 18446744073709551615)) /\
+           (result_2 = (param_6 + param_5)))))]);
           trace_a64____squeeze_array_avx2 <-
           (trace_a64____squeeze_array_avx2 ++
           [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
@@ -17084,24 +17046,10 @@ module M(SC:Syscall_t) = {
         trace_a64____squeeze_array_avx2 <-
         (trace_a64____squeeze_array_avx2 ++
         [(Assert,
-         (((0 <=
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224))) /\
-          (((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224)) <=
-          18446744073709551615)) /\
-         (((0 <=
-           (param_1 +
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224)))) /\
-          ((param_1 +
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224))) <=
-          18446744073709551615)) /\
-         (result =
-         (param_1 +
-         ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                        param_0 : 224)))))))]);
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_1 + param_0)) /\
+          ((param_1 + param_0) <= 18446744073709551615)) /\
+         (result = (param_1 + param_0)))))]);
         trace_a64____squeeze_array_avx2 <-
         (trace_a64____squeeze_array_avx2 ++
         [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
@@ -17324,8 +17272,9 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     ((((0 <= offset) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
-     ((offset + lEN) <= 128)))))]);
+     (((((0 <= offset) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
+      ((offset + lEN) <= 128)) /\
+     (lEN <= 200)))))]);
     trace_a128____dumpstate_array_avx2x4 <-
     (trace_a128____dumpstate_array_avx2x4 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -18414,8 +18363,9 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     ((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 536)) /\
-     (is_init b_st 0 224)))))]);
+     (((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= 536)) /\
+      (is_init b_st 0 224)) /\
+     (lEN <= 200)))))]);
     trace_aBUFLEN____dumpstate_array_avx2 <-
     (trace_aBUFLEN____dumpstate_array_avx2 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -18865,8 +18815,9 @@ module M(SC:Syscall_t) = {
     [(Assert,
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
-     ((((0 <= offset) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
-     ((offset + lEN) <= 536)))))]);
+     (((((0 <= offset) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
+      ((offset + lEN) <= 536)) /\
+     (lEN <= 200)))))]);
     trace_aBUFLEN____dumpstate_array_avx2x4 <-
     (trace_aBUFLEN____dumpstate_array_avx2x4 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -20191,24 +20142,10 @@ module M(SC:Syscall_t) = {
     trace__shake128_squeeze3blocks <-
     (trace__shake128_squeeze3blocks ++
     [(Assert,
-     (((0 <=
-       ((((param_10 < 224) ? param_10 : 224) < 0) ? 0 : ((param_10 < 224) ? 
-                                                        param_10 : 224))) /\
-      (((((param_10 < 224) ? param_10 : 224) < 0) ? 0 : ((param_10 < 224) ? 
-                                                        param_10 : 224)) <=
-      18446744073709551615)) /\
-     (((0 <=
-       (param_11 +
-       ((((param_10 < 224) ? param_10 : 224) < 0) ? 0 : ((param_10 < 224) ? 
-                                                        param_10 : 224)))) /\
-      ((param_11 +
-       ((((param_10 < 224) ? param_10 : 224) < 0) ? 0 : ((param_10 < 224) ? 
-                                                        param_10 : 224))) <=
-      18446744073709551615)) /\
-     (result_5 =
-     (param_11 +
-     ((((param_10 < 224) ? param_10 : 224) < 0) ? 0 : ((param_10 < 224) ? 
-                                                      param_10 : 224)))))))]);
+     (((0 <= param_10) /\ (param_10 <= 18446744073709551615)) /\
+     (((0 <= (param_11 + param_10)) /\
+      ((param_11 + param_10) <= 18446744073709551615)) /\
+     (result_5 = (param_11 + param_10)))))]);
     trace__shake128_squeeze3blocks <-
     (trace__shake128_squeeze3blocks ++
     [(Assert, ((0 <= result_5) /\ (result_5 <= 18446744073709551615)))]);
@@ -20237,24 +20174,10 @@ module M(SC:Syscall_t) = {
     trace__shake128_squeeze3blocks <-
     (trace__shake128_squeeze3blocks ++
     [(Assert,
-     (((0 <=
-       ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                      param_5 : 224))) /\
-      (((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                      param_5 : 224)) <=
-      18446744073709551615)) /\
-     (((0 <=
-       (param_6 +
-       ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                      param_5 : 224)))) /\
-      ((param_6 +
-       ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                      param_5 : 224))) <=
-      18446744073709551615)) /\
-     (result_2 =
-     (param_6 +
-     ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                    param_5 : 224)))))))]);
+     (((0 <= param_5) /\ (param_5 <= 18446744073709551615)) /\
+     (((0 <= (param_6 + param_5)) /\
+      ((param_6 + param_5) <= 18446744073709551615)) /\
+     (result_2 = (param_6 + param_5)))))]);
     trace__shake128_squeeze3blocks <-
     (trace__shake128_squeeze3blocks ++
     [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
@@ -20283,24 +20206,10 @@ module M(SC:Syscall_t) = {
     trace__shake128_squeeze3blocks <-
     (trace__shake128_squeeze3blocks ++
     [(Assert,
-     (((0 <=
-       ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224))) /\
-      (((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224)) <=
-      18446744073709551615)) /\
-     (((0 <=
-       (param_1 +
-       ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224)))) /\
-      ((param_1 +
-       ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224))) <=
-      18446744073709551615)) /\
-     (result =
-     (param_1 +
-     ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                    param_0 : 224)))))))]);
+     (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+     (((0 <= (param_1 + param_0)) /\
+      ((param_1 + param_0) <= 18446744073709551615)) /\
+     (result = (param_1 + param_0)))))]);
     trace__shake128_squeeze3blocks <-
     (trace__shake128_squeeze3blocks ++
     [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
@@ -20376,24 +20285,10 @@ module M(SC:Syscall_t) = {
     trace__shake128_next_state <-
     (trace__shake128_next_state ++
     [(Assert,
-     (((0 <=
-       ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224))) /\
-      (((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224)) <=
-      18446744073709551615)) /\
-     (((0 <=
-       (param_1 +
-       ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224)))) /\
-      ((param_1 +
-       ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                      param_0 : 224))) <=
-      18446744073709551615)) /\
-     (result =
-     (param_1 +
-     ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                    param_0 : 224)))))))]);
+     (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+     (((0 <= (param_1 + param_0)) /\
+      ((param_1 + param_0) <= 18446744073709551615)) /\
+     (result = (param_1 + param_0)))))]);
     trace__shake128_next_state <-
     (trace__shake128_next_state ++
     [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
@@ -21323,266 +21218,6 @@ module M(SC:Syscall_t) = {
     ));
     rp <- (BArray512.set256d rp 480 aim);
     return (rp, b_rp, trace__poly_basemul);
-  }
-  proc _poly_compress (rp:int, a:BArray512.t, b_a:BArray512.t) : BArray512.t *
-                                                                 BArray512.t *
-                                                                 trace = {
-    var x16p:BArray32.t;
-    var v:W256.t;
-    var shift1:W256.t;
-    var mask:W256.t;
-    var shift2:W256.t;
-    var permidx:W256.t;
-    var i:int;
-    var f0:W256.t;
-    var f1:W256.t;
-    var f2:W256.t;
-    var f3:W256.t;
-    var param:BArray512.t;
-    var result:BArray512.t;
-    var b_result:BArray512.t;
-    var trace__poly_compress:trace;
-    b_result <- witness;
-    param <- witness;
-    result <- witness;
-    x16p <- witness;
-    trace__poly_compress <- [];
-    trace__poly_compress <-
-    (trace__poly_compress ++
-    [(Assert,
-     (((0 <= rp) /\ (rp <= 18446744073709551615)) /\
-     ((is_init b_a 0 512) /\ (is_valid rp 128))))]);
-    trace__poly_compress <-
-    (trace__poly_compress ++
-    [(Assert, ((0 <= rp) /\ (rp <= 18446744073709551615)))]);
-    param <- a;
-    (result, b_result, tmp__trace) <@ _poly_csubq (param,
-    (BArray512.init_arr (W8.of_int 255) 512));
-    trace__poly_compress <- (trace__poly_compress ++ tmp__trace);
-    trace__poly_compress <-
-    (trace__poly_compress ++ [(Assert, (is_init b_result 0 512))]);
-    a <- result;
-    x16p <- jvx16;
-    v <- (BArray32.get256 x16p 0);
-    shift1 <- (VPBROADCAST_16u16 pc_shift1_s);
-    mask <- (VPBROADCAST_16u16 pc_mask_s);
-    shift2 <- (VPBROADCAST_16u16 pc_shift2_s);
-    permidx <- (BArray32.get256 pc_permidx_s 0);
-    i <- 0;
-    while ((i < 4)) {
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert, ((0 <= ((4 * i) * 32)) /\ ((((4 * i) * 32) + 32) <= 512)))]);
-      f0 <- (BArray512.get256 a (4 * i));
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert,
-       ((0 <= (((4 * i) + 1) * 32)) /\ (((((4 * i) + 1) * 32) + 32) <= 512)))]);
-      f1 <- (BArray512.get256 a ((4 * i) + 1));
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert,
-       ((0 <= (((4 * i) + 2) * 32)) /\ (((((4 * i) + 2) * 32) + 32) <= 512)))]);
-      f2 <- (BArray512.get256 a ((4 * i) + 2));
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert,
-       ((0 <= (((4 * i) + 3) * 32)) /\ (((((4 * i) + 3) * 32) + 32) <= 512)))]);
-      f3 <- (BArray512.get256 a ((4 * i) + 3));
-      f0 <- (VPMULH_16u16 f0 v);
-      f1 <- (VPMULH_16u16 f1 v);
-      f2 <- (VPMULH_16u16 f2 v);
-      f3 <- (VPMULH_16u16 f3 v);
-      f0 <- (VPMULHRS_16u16 f0 shift1);
-      f1 <- (VPMULHRS_16u16 f1 shift1);
-      f2 <- (VPMULHRS_16u16 f2 shift1);
-      f3 <- (VPMULHRS_16u16 f3 shift1);
-      f0 <- (VPAND_256 f0 mask);
-      f1 <- (VPAND_256 f1 mask);
-      f2 <- (VPAND_256 f2 mask);
-      f3 <- (VPAND_256 f3 mask);
-      f0 <- (VPACKUS_16u16 f0 f1);
-      f2 <- (VPACKUS_16u16 f2 f3);
-      f0 <- (VPMADDUBSW_256 f0 shift2);
-      f2 <- (VPMADDUBSW_256 f2 shift2);
-      f0 <- (VPACKUS_16u16 f0 f2);
-      f0 <- (VPERMD permidx f0);
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert, ((0 <= (32 * i)) /\ ((32 * i) <= 18446744073709551615)))]);
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert,
-       ((0 <= (rp + (32 * i))) /\ ((rp + (32 * i)) <= 18446744073709551615)))]);
-      trace__poly_compress <-
-      (trace__poly_compress ++
-      [(Assert,
-       ((0 <= (rp + (32 * i))) /\ ((rp + (32 * i)) <= 18446744073709551615)))]);
-      trace__poly_compress <-
-      (trace__poly_compress ++ [(Assert, (is_valid (rp + (32 * i)) 32))]);
-      Glob.mem <- (storeW256 Glob.mem (rp + (32 * i)) f0);
-      i <- (i + 1);
-    }
-    b_a <- (BArray512.init_arr (W8.of_int 255) 512);
-    return (a, b_a, trace__poly_compress);
-  }
-  proc _poly_compress_1 (rp:BArray128.t, b_rp:BArray128.t, a:BArray512.t,
-                         b_a:BArray512.t) : BArray128.t * BArray128.t *
-                                            BArray512.t * BArray512.t * trace = {
-    var x16p:BArray32.t;
-    var v:W256.t;
-    var shift1:W256.t;
-    var mask:W256.t;
-    var shift2:W256.t;
-    var permidx:W256.t;
-    var i:int;
-    var f0:W256.t;
-    var f1:W256.t;
-    var f2:W256.t;
-    var f3:W256.t;
-    var param:BArray512.t;
-    var result:BArray512.t;
-    var b_result:BArray512.t;
-    var trace__poly_compress_1:trace;
-    b_result <- witness;
-    param <- witness;
-    result <- witness;
-    x16p <- witness;
-    trace__poly_compress_1 <- [];
-    trace__poly_compress_1 <-
-    (trace__poly_compress_1 ++ [(Assert, (is_init b_a 0 512))]);
-    param <- a;
-    (result, b_result, tmp__trace) <@ _poly_csubq (param,
-    (BArray512.init_arr (W8.of_int 255) 512));
-    trace__poly_compress_1 <- (trace__poly_compress_1 ++ tmp__trace);
-    trace__poly_compress_1 <-
-    (trace__poly_compress_1 ++ [(Assert, (is_init b_result 0 512))]);
-    a <- result;
-    x16p <- jvx16;
-    v <- (BArray32.get256 x16p 0);
-    shift1 <- (VPBROADCAST_16u16 pc_shift1_s);
-    mask <- (VPBROADCAST_16u16 pc_mask_s);
-    shift2 <- (VPBROADCAST_16u16 pc_shift2_s);
-    permidx <- (BArray32.get256 pc_permidx_s 0);
-    i <- 0;
-    while ((i < 4)) {
-      trace__poly_compress_1 <-
-      (trace__poly_compress_1 ++
-      [(Assert, (((0 <= i) /\ (i <= 4)) /\ (is_init b_rp 0 (32 * i))))]);
-      trace__poly_compress_1 <-
-      (trace__poly_compress_1 ++
-      [(Assert, ((0 <= ((4 * i) * 32)) /\ ((((4 * i) * 32) + 32) <= 512)))]);
-      f0 <- (BArray512.get256 a (4 * i));
-      trace__poly_compress_1 <-
-      (trace__poly_compress_1 ++
-      [(Assert,
-       ((0 <= (((4 * i) + 1) * 32)) /\ (((((4 * i) + 1) * 32) + 32) <= 512)))]);
-      f1 <- (BArray512.get256 a ((4 * i) + 1));
-      trace__poly_compress_1 <-
-      (trace__poly_compress_1 ++
-      [(Assert,
-       ((0 <= (((4 * i) + 2) * 32)) /\ (((((4 * i) + 2) * 32) + 32) <= 512)))]);
-      f2 <- (BArray512.get256 a ((4 * i) + 2));
-      trace__poly_compress_1 <-
-      (trace__poly_compress_1 ++
-      [(Assert,
-       ((0 <= (((4 * i) + 3) * 32)) /\ (((((4 * i) + 3) * 32) + 32) <= 512)))]);
-      f3 <- (BArray512.get256 a ((4 * i) + 3));
-      f0 <- (VPMULH_16u16 f0 v);
-      f1 <- (VPMULH_16u16 f1 v);
-      f2 <- (VPMULH_16u16 f2 v);
-      f3 <- (VPMULH_16u16 f3 v);
-      f0 <- (VPMULHRS_16u16 f0 shift1);
-      f1 <- (VPMULHRS_16u16 f1 shift1);
-      f2 <- (VPMULHRS_16u16 f2 shift1);
-      f3 <- (VPMULHRS_16u16 f3 shift1);
-      f0 <- (VPAND_256 f0 mask);
-      f1 <- (VPAND_256 f1 mask);
-      f2 <- (VPAND_256 f2 mask);
-      f3 <- (VPAND_256 f3 mask);
-      f0 <- (VPACKUS_16u16 f0 f1);
-      f2 <- (VPACKUS_16u16 f2 f3);
-      f0 <- (VPMADDUBSW_256 f0 shift2);
-      f2 <- (VPMADDUBSW_256 f2 shift2);
-      f0 <- (VPACKUS_16u16 f0 f2);
-      f0 <- (VPERMD permidx f0);
-      trace__poly_compress_1 <-
-      (trace__poly_compress_1 ++
-      [(Assert, ((0 <= (32 * i)) /\ (((32 * i) + 32) <= 128)))]);
-      b_rp <-
-      (BArray128.set256d b_rp (32 * i)
-      (W256.of_int
-      115792089237316195423570985008687907853269984665640564039457584007913129639935
-      ));
-      rp <- (BArray128.set256d rp (32 * i) f0);
-      i <- (i + 1);
-    }
-    b_a <- (BArray512.init_arr (W8.of_int 255) 512);
-    return (rp, b_rp, a, b_a, trace__poly_compress_1);
-  }
-  proc _poly_decompress (rp:BArray512.t, b_rp:BArray512.t, ap:int) : 
-  BArray512.t * BArray512.t * trace = {
-    var x16p:BArray32.t;
-    var q:W256.t;
-    var x32p:BArray32.t;
-    var shufbidx:W256.t;
-    var mask:W256.t;
-    var shift:W256.t;
-    var f:W256.t;
-    var i:int;
-    var h:W128.t;
-    var sh:W128.t;
-    var trace__poly_decompress:trace;
-    x16p <- witness;
-    x32p <- witness;
-    trace__poly_decompress <- [];
-    trace__poly_decompress <-
-    (trace__poly_decompress ++
-    [(Assert,
-     (((0 <= ap) /\ (ap <= 18446744073709551615)) /\ (is_valid ap 128)))]);
-    trace__poly_decompress <-
-    (trace__poly_decompress ++
-    [(Assert, ((0 <= ap) /\ (ap <= 18446744073709551615)))]);
-    x16p <- jqx16;
-    q <- (BArray32.get256 x16p 0);
-    x32p <- pd_jshufbidx;
-    shufbidx <- (BArray32.get256 x32p 0);
-    mask <- (VPBROADCAST_8u32 pd_mask_s);
-    shift <- (VPBROADCAST_8u32 pd_shift_s);
-    i <- 0;
-    while ((i < 16)) {
-      trace__poly_decompress <-
-      (trace__poly_decompress ++
-      [(Assert, ((0 <= (8 * i)) /\ ((8 * i) <= 18446744073709551615)))]);
-      trace__poly_decompress <-
-      (trace__poly_decompress ++
-      [(Assert,
-       ((0 <= (ap + (8 * i))) /\ ((ap + (8 * i)) <= 18446744073709551615)))]);
-      trace__poly_decompress <-
-      (trace__poly_decompress ++
-      [(Assert,
-       ((0 <= (ap + (8 * i))) /\ ((ap + (8 * i)) <= 18446744073709551615)))]);
-      trace__poly_decompress <-
-      (trace__poly_decompress ++ [(Assert, (is_valid (ap + (8 * i)) 8))]);
-      h <- (zeroextu128 (loadW64 Glob.mem (ap + (8 * i))));
-      sh <- h;
-      f <- (VPBROADCAST_2u128 sh);
-      f <- (VPSHUFB_256 f shufbidx);
-      f <- (VPAND_256 f mask);
-      f <- (VPMULL_16u16 f shift);
-      f <- (VPMULHRS_16u16 f q);
-      trace__poly_decompress <-
-      (trace__poly_decompress ++
-      [(Assert, ((0 <= (i * 32)) /\ (((i * 32) + 32) <= 512)))]);
-      b_rp <-
-      (BArray512.set256d b_rp (i * 32)
-      (W256.of_int
-      115792089237316195423570985008687907853269984665640564039457584007913129639935
-      ));
-      rp <- (BArray512.set256 rp i f);
-      i <- (i + 1);
-    }
-    return (rp, b_rp, trace__poly_decompress);
   }
   proc _poly_frombytes (rp:BArray512.t, b_rp:BArray512.t, ap:int) : BArray512.t *
                                                                     BArray512.t *
@@ -24817,28 +24452,619 @@ module M(SC:Syscall_t) = {
     b_a <- (BArray512.init_arr (W8.of_int 255) 512);
     return (rp, b_rp, a, b_a, trace__poly_tomsg_1);
   }
+  proc _poly_compress (rp:int, a:BArray512.t, b_a:BArray512.t) : BArray512.t *
+                                                                 BArray512.t *
+                                                                 trace = {
+    var x16p:BArray32.t;
+    var v:W256.t;
+    var shift1:W256.t;
+    var mask:W256.t;
+    var shift2:W256.t;
+    var permidx:W256.t;
+    var i:int;
+    var f0:W256.t;
+    var f1:W256.t;
+    var f2:W256.t;
+    var f3:W256.t;
+    var param:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var trace__poly_compress:trace;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    x16p <- witness;
+    trace__poly_compress <- [];
+    trace__poly_compress <-
+    (trace__poly_compress ++
+    [(Assert,
+     (((0 <= rp) /\ (rp <= 18446744073709551615)) /\
+     ((is_init b_a 0 512) /\ (is_valid rp 128))))]);
+    trace__poly_compress <-
+    (trace__poly_compress ++
+    [(Assert, ((0 <= rp) /\ (rp <= 18446744073709551615)))]);
+    param <- a;
+    (result, b_result, tmp__trace) <@ _poly_csubq (param,
+    (BArray512.init_arr (W8.of_int 255) 512));
+    trace__poly_compress <- (trace__poly_compress ++ tmp__trace);
+    trace__poly_compress <-
+    (trace__poly_compress ++ [(Assert, (is_init b_result 0 512))]);
+    a <- result;
+    x16p <- jvx16;
+    v <- (BArray32.get256 x16p 0);
+    shift1 <- (VPBROADCAST_16u16 pc_shift1_s);
+    mask <- (VPBROADCAST_16u16 pc_mask_s);
+    shift2 <- (VPBROADCAST_16u16 pc_shift2_s);
+    permidx <- (BArray32.get256 pc_permidx_s 0);
+    i <- 0;
+    while ((i < 4)) {
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert, ((0 <= ((4 * i) * 32)) /\ ((((4 * i) * 32) + 32) <= 512)))]);
+      f0 <- (BArray512.get256 a (4 * i));
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert,
+       ((0 <= (((4 * i) + 1) * 32)) /\ (((((4 * i) + 1) * 32) + 32) <= 512)))]);
+      f1 <- (BArray512.get256 a ((4 * i) + 1));
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert,
+       ((0 <= (((4 * i) + 2) * 32)) /\ (((((4 * i) + 2) * 32) + 32) <= 512)))]);
+      f2 <- (BArray512.get256 a ((4 * i) + 2));
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert,
+       ((0 <= (((4 * i) + 3) * 32)) /\ (((((4 * i) + 3) * 32) + 32) <= 512)))]);
+      f3 <- (BArray512.get256 a ((4 * i) + 3));
+      f0 <- (VPMULH_16u16 f0 v);
+      f1 <- (VPMULH_16u16 f1 v);
+      f2 <- (VPMULH_16u16 f2 v);
+      f3 <- (VPMULH_16u16 f3 v);
+      f0 <- (VPMULHRS_16u16 f0 shift1);
+      f1 <- (VPMULHRS_16u16 f1 shift1);
+      f2 <- (VPMULHRS_16u16 f2 shift1);
+      f3 <- (VPMULHRS_16u16 f3 shift1);
+      f0 <- (VPAND_256 f0 mask);
+      f1 <- (VPAND_256 f1 mask);
+      f2 <- (VPAND_256 f2 mask);
+      f3 <- (VPAND_256 f3 mask);
+      f0 <- (VPACKUS_16u16 f0 f1);
+      f2 <- (VPACKUS_16u16 f2 f3);
+      f0 <- (VPMADDUBSW_256 f0 shift2);
+      f2 <- (VPMADDUBSW_256 f2 shift2);
+      f0 <- (VPACKUS_16u16 f0 f2);
+      f0 <- (VPERMD permidx f0);
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert, ((0 <= (32 * i)) /\ ((32 * i) <= 18446744073709551615)))]);
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert,
+       ((0 <= (rp + (32 * i))) /\ ((rp + (32 * i)) <= 18446744073709551615)))]);
+      trace__poly_compress <-
+      (trace__poly_compress ++
+      [(Assert,
+       ((0 <= (rp + (32 * i))) /\ ((rp + (32 * i)) <= 18446744073709551615)))]);
+      trace__poly_compress <-
+      (trace__poly_compress ++ [(Assert, (is_valid (rp + (32 * i)) 32))]);
+      Glob.mem <- (storeW256 Glob.mem (rp + (32 * i)) f0);
+      i <- (i + 1);
+    }
+    b_a <- (BArray512.init_arr (W8.of_int 255) 512);
+    return (a, b_a, trace__poly_compress);
+  }
+  proc _poly_compress_1 (rp:BArray128.t, b_rp:BArray128.t, a:BArray512.t,
+                         b_a:BArray512.t) : BArray128.t * BArray128.t *
+                                            BArray512.t * BArray512.t * trace = {
+    var x16p:BArray32.t;
+    var v:W256.t;
+    var shift1:W256.t;
+    var mask:W256.t;
+    var shift2:W256.t;
+    var permidx:W256.t;
+    var i:int;
+    var f0:W256.t;
+    var f1:W256.t;
+    var f2:W256.t;
+    var f3:W256.t;
+    var param:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var trace__poly_compress_1:trace;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    x16p <- witness;
+    trace__poly_compress_1 <- [];
+    trace__poly_compress_1 <-
+    (trace__poly_compress_1 ++ [(Assert, (is_init b_a 0 512))]);
+    param <- a;
+    (result, b_result, tmp__trace) <@ _poly_csubq (param,
+    (BArray512.init_arr (W8.of_int 255) 512));
+    trace__poly_compress_1 <- (trace__poly_compress_1 ++ tmp__trace);
+    trace__poly_compress_1 <-
+    (trace__poly_compress_1 ++ [(Assert, (is_init b_result 0 512))]);
+    a <- result;
+    x16p <- jvx16;
+    v <- (BArray32.get256 x16p 0);
+    shift1 <- (VPBROADCAST_16u16 pc_shift1_s);
+    mask <- (VPBROADCAST_16u16 pc_mask_s);
+    shift2 <- (VPBROADCAST_16u16 pc_shift2_s);
+    permidx <- (BArray32.get256 pc_permidx_s 0);
+    i <- 0;
+    while ((i < 4)) {
+      trace__poly_compress_1 <-
+      (trace__poly_compress_1 ++
+      [(Assert, ((0 <= ((4 * i) * 32)) /\ ((((4 * i) * 32) + 32) <= 512)))]);
+      f0 <- (BArray512.get256 a (4 * i));
+      trace__poly_compress_1 <-
+      (trace__poly_compress_1 ++
+      [(Assert,
+       ((0 <= (((4 * i) + 1) * 32)) /\ (((((4 * i) + 1) * 32) + 32) <= 512)))]);
+      f1 <- (BArray512.get256 a ((4 * i) + 1));
+      trace__poly_compress_1 <-
+      (trace__poly_compress_1 ++
+      [(Assert,
+       ((0 <= (((4 * i) + 2) * 32)) /\ (((((4 * i) + 2) * 32) + 32) <= 512)))]);
+      f2 <- (BArray512.get256 a ((4 * i) + 2));
+      trace__poly_compress_1 <-
+      (trace__poly_compress_1 ++
+      [(Assert,
+       ((0 <= (((4 * i) + 3) * 32)) /\ (((((4 * i) + 3) * 32) + 32) <= 512)))]);
+      f3 <- (BArray512.get256 a ((4 * i) + 3));
+      f0 <- (VPMULH_16u16 f0 v);
+      f1 <- (VPMULH_16u16 f1 v);
+      f2 <- (VPMULH_16u16 f2 v);
+      f3 <- (VPMULH_16u16 f3 v);
+      f0 <- (VPMULHRS_16u16 f0 shift1);
+      f1 <- (VPMULHRS_16u16 f1 shift1);
+      f2 <- (VPMULHRS_16u16 f2 shift1);
+      f3 <- (VPMULHRS_16u16 f3 shift1);
+      f0 <- (VPAND_256 f0 mask);
+      f1 <- (VPAND_256 f1 mask);
+      f2 <- (VPAND_256 f2 mask);
+      f3 <- (VPAND_256 f3 mask);
+      f0 <- (VPACKUS_16u16 f0 f1);
+      f2 <- (VPACKUS_16u16 f2 f3);
+      f0 <- (VPMADDUBSW_256 f0 shift2);
+      f2 <- (VPMADDUBSW_256 f2 shift2);
+      f0 <- (VPACKUS_16u16 f0 f2);
+      f0 <- (VPERMD permidx f0);
+      trace__poly_compress_1 <-
+      (trace__poly_compress_1 ++
+      [(Assert, ((0 <= (32 * i)) /\ (((32 * i) + 32) <= 128)))]);
+      b_rp <-
+      (BArray128.set256d b_rp (32 * i)
+      (W256.of_int
+      115792089237316195423570985008687907853269984665640564039457584007913129639935
+      ));
+      rp <- (BArray128.set256d rp (32 * i) f0);
+      i <- (i + 1);
+    }
+    b_a <- (BArray512.init_arr (W8.of_int 255) 512);
+    return (rp, b_rp, a, b_a, trace__poly_compress_1);
+  }
+  proc _poly_decompress (rp:BArray512.t, b_rp:BArray512.t, ap:int) : 
+  BArray512.t * BArray512.t * trace = {
+    var x16p:BArray32.t;
+    var q:W256.t;
+    var x32p:BArray32.t;
+    var shufbidx:W256.t;
+    var mask:W256.t;
+    var shift:W256.t;
+    var f:W256.t;
+    var i:int;
+    var h:W128.t;
+    var sh:W128.t;
+    var trace__poly_decompress:trace;
+    x16p <- witness;
+    x32p <- witness;
+    trace__poly_decompress <- [];
+    trace__poly_decompress <-
+    (trace__poly_decompress ++
+    [(Assert,
+     (((0 <= ap) /\ (ap <= 18446744073709551615)) /\ (is_valid ap 128)))]);
+    trace__poly_decompress <-
+    (trace__poly_decompress ++
+    [(Assert, ((0 <= ap) /\ (ap <= 18446744073709551615)))]);
+    x16p <- jqx16;
+    q <- (BArray32.get256 x16p 0);
+    x32p <- pd_jshufbidx;
+    shufbidx <- (BArray32.get256 x32p 0);
+    mask <- (VPBROADCAST_8u32 pd_mask_s);
+    shift <- (VPBROADCAST_8u32 pd_shift_s);
+    i <- 0;
+    while ((i < 16)) {
+      trace__poly_decompress <-
+      (trace__poly_decompress ++
+      [(Assert, ((0 <= (8 * i)) /\ ((8 * i) <= 18446744073709551615)))]);
+      trace__poly_decompress <-
+      (trace__poly_decompress ++
+      [(Assert,
+       ((0 <= (ap + (8 * i))) /\ ((ap + (8 * i)) <= 18446744073709551615)))]);
+      trace__poly_decompress <-
+      (trace__poly_decompress ++
+      [(Assert,
+       ((0 <= (ap + (8 * i))) /\ ((ap + (8 * i)) <= 18446744073709551615)))]);
+      trace__poly_decompress <-
+      (trace__poly_decompress ++ [(Assert, (is_valid (ap + (8 * i)) 8))]);
+      h <- (zeroextu128 (loadW64 Glob.mem (ap + (8 * i))));
+      sh <- h;
+      f <- (VPBROADCAST_2u128 sh);
+      f <- (VPSHUFB_256 f shufbidx);
+      f <- (VPAND_256 f mask);
+      f <- (VPMULL_16u16 f shift);
+      f <- (VPMULHRS_16u16 f q);
+      trace__poly_decompress <-
+      (trace__poly_decompress ++
+      [(Assert, ((0 <= (i * 32)) /\ (((i * 32) + 32) <= 512)))]);
+      b_rp <-
+      (BArray512.set256d b_rp (i * 32)
+      (W256.of_int
+      115792089237316195423570985008687907853269984665640564039457584007913129639935
+      ));
+      rp <- (BArray512.set256 rp i f);
+      i <- (i + 1);
+    }
+    return (rp, b_rp, trace__poly_decompress);
+  }
   proc __polyvec_add2 (r:BArray1536.t, b_r:BArray1536.t, b:BArray1536.t,
                        b_b:BArray1536.t) : BArray1536.t * BArray1536.t *
                                            trace = {
+    var i:int;
+    var param:BArray512.t;
+    var param_0:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var b_param_0:BArray512.t;
+    var trace___polyvec_add2:trace;
+    b_param <- witness;
+    b_param_0 <- witness;
+    b_result <- witness;
+    param <- witness;
+    param_0 <- witness;
+    result <- witness;
+    trace___polyvec_add2 <- [];
+    trace___polyvec_add2 <-
+    (trace___polyvec_add2 ++
+    [(Assert, ((is_init b_r 0 1536) /\ (is_init b_b 0 1536)))]);
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_add2 <-
+      (trace___polyvec_add2 ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_add2 <-
+      (trace___polyvec_add2 ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_add2 <-
+      (trace___polyvec_add2 ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param_0 <- (SBArray1536_512.get_sub16 b_r (256 * i));
+      param_0 <- (SBArray1536_512.get_sub16 r (256 * i));
+      b_param <- (SBArray1536_512.get_sub16 b_b (256 * i));
+      param <- (SBArray1536_512.get_sub16 b (256 * i));
+      (result, b_result, tmp__trace) <@ _poly_add2 (param_0, b_param_0,
+      param, b_param);
+      trace___polyvec_add2 <- (trace___polyvec_add2 ++ tmp__trace);
+      trace___polyvec_add2 <-
+      (trace___polyvec_add2 ++ [(Assert, (is_init b_result 0 512))]);
+      b_r <-
+      (SBArray1536_512.set_sub16 b_r (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      r <- (SBArray1536_512.set_sub16 r (256 * i) result);
+      i <- (i + 1);
+    }
+    b_r <- (BArray1536.init_arr (W8.of_int 255) 1536);
+    return (r, b_r, trace___polyvec_add2);
+  }
+  proc __polyvec_csubq (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
+                                                            BArray1536.t *
+                                                            trace = {
+    var i:int;
+    var param:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var trace___polyvec_csubq:trace;
+    b_param <- witness;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    trace___polyvec_csubq <- [];
+    trace___polyvec_csubq <-
+    (trace___polyvec_csubq ++ [(Assert, (is_init b_r 0 1536))]);
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_csubq <-
+      (trace___polyvec_csubq ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_csubq <-
+      (trace___polyvec_csubq ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param <- (SBArray1536_512.get_sub16 b_r (256 * i));
+      param <- (SBArray1536_512.get_sub16 r (256 * i));
+      (result, b_result, tmp__trace) <@ _poly_csubq (param, b_param);
+      trace___polyvec_csubq <- (trace___polyvec_csubq ++ tmp__trace);
+      trace___polyvec_csubq <-
+      (trace___polyvec_csubq ++ [(Assert, (is_init b_result 0 512))]);
+      b_r <-
+      (SBArray1536_512.set_sub16 b_r (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      r <- (SBArray1536_512.set_sub16 r (256 * i) result);
+      i <- (i + 1);
+    }
+    b_r <- (BArray1536.init_arr (W8.of_int 255) 1536);
+    return (r, b_r, trace___polyvec_csubq);
+  }
+  proc __polyvec_frombytes (ap:int) : BArray1536.t * BArray1536.t * trace = {
+    var r:BArray1536.t;
+    var i:int;
+    var pp:int;
+    var param:int;
+    var param_0:BArray512.t;
+    var result:BArray512.t;
+    var b_r:BArray1536.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var trace___polyvec_frombytes:trace;
+    b_param <- witness;
+    b_r <- witness;
+    b_result <- witness;
+    param_0 <- witness;
+    r <- witness;
+    result <- witness;
+    trace___polyvec_frombytes <- [];
+    trace___polyvec_frombytes <-
+    (trace___polyvec_frombytes ++
+    [(Assert,
+     (((0 <= ap) /\ (ap <= 18446744073709551615)) /\ (is_valid ap 1152)))]);
+    trace___polyvec_frombytes <-
+    (trace___polyvec_frombytes ++
+    [(Assert, ((0 <= ap) /\ (ap <= 18446744073709551615)))]);
+    b_r <- (BArray1536.init_arr (W8.of_int 0) 1536);
+    pp <- ap;
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_frombytes <-
+      (trace___polyvec_frombytes ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_frombytes <-
+      (trace___polyvec_frombytes ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param <- (SBArray1536_512.get_sub16 b_r (256 * i));
+      param_0 <- (SBArray1536_512.get_sub16 r (256 * i));
+      param <- pp;
+      (result, b_result, tmp__trace) <@ _poly_frombytes (param_0, b_param,
+      param);
+      trace___polyvec_frombytes <- (trace___polyvec_frombytes ++ tmp__trace);
+      trace___polyvec_frombytes <-
+      (trace___polyvec_frombytes ++ [(Assert, (is_init b_result 0 512))]);
+      b_r <-
+      (SBArray1536_512.set_sub16 b_r (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      r <- (SBArray1536_512.set_sub16 r (256 * i) result);
+      trace___polyvec_frombytes <-
+      (trace___polyvec_frombytes ++
+      [(Assert, ((0 <= (pp + 384)) /\ ((pp + 384) <= 18446744073709551615)))]);
+      pp <- (pp + 384);
+      i <- (i + 1);
+    }
+    return (r, b_r, trace___polyvec_frombytes);
+  }
+  proc __polyvec_invntt (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
+                                                             BArray1536.t *
+                                                             trace = {
+    var i:int;
+    var param:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var trace___polyvec_invntt:trace;
+    b_param <- witness;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    trace___polyvec_invntt <- [];
+    trace___polyvec_invntt <-
+    (trace___polyvec_invntt ++ [(Assert, (is_init b_r 0 1536))]);
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_invntt <-
+      (trace___polyvec_invntt ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_invntt <-
+      (trace___polyvec_invntt ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param <- (SBArray1536_512.get_sub16 b_r (256 * i));
+      param <- (SBArray1536_512.get_sub16 r (256 * i));
+      (result, b_result, tmp__trace) <@ _poly_invntt (param, b_param);
+      trace___polyvec_invntt <- (trace___polyvec_invntt ++ tmp__trace);
+      trace___polyvec_invntt <-
+      (trace___polyvec_invntt ++ [(Assert, (is_init b_result 0 512))]);
+      b_r <-
+      (SBArray1536_512.set_sub16 b_r (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      r <- (SBArray1536_512.set_sub16 r (256 * i) result);
+      i <- (i + 1);
+    }
+    b_r <- (BArray1536.init_arr (W8.of_int 255) 1536);
+    return (r, b_r, trace___polyvec_invntt);
+  }
+  proc __polyvec_ntt (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
+                                                          BArray1536.t *
+                                                          trace = {
+    var i:int;
+    var param:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var trace___polyvec_ntt:trace;
+    b_param <- witness;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    trace___polyvec_ntt <- [];
+    trace___polyvec_ntt <-
+    (trace___polyvec_ntt ++ [(Assert, (is_init b_r 0 1536))]);
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_ntt <-
+      (trace___polyvec_ntt ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_ntt <-
+      (trace___polyvec_ntt ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param <- (SBArray1536_512.get_sub16 b_r (256 * i));
+      param <- (SBArray1536_512.get_sub16 r (256 * i));
+      (result, b_result, tmp__trace) <@ _poly_ntt (param, b_param);
+      trace___polyvec_ntt <- (trace___polyvec_ntt ++ tmp__trace);
+      trace___polyvec_ntt <-
+      (trace___polyvec_ntt ++ [(Assert, (is_init b_result 0 512))]);
+      b_r <-
+      (SBArray1536_512.set_sub16 b_r (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      r <- (SBArray1536_512.set_sub16 r (256 * i) result);
+      i <- (i + 1);
+    }
+    b_r <- (BArray1536.init_arr (W8.of_int 255) 1536);
+    return (r, b_r, trace___polyvec_ntt);
+  }
+  proc __polyvec_reduce (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
+                                                             BArray1536.t *
+                                                             trace = {
+    var i:int;
+    var param:BArray512.t;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var trace___polyvec_reduce:trace;
+    b_param <- witness;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    trace___polyvec_reduce <- [];
+    trace___polyvec_reduce <-
+    (trace___polyvec_reduce ++ [(Assert, (is_init b_r 0 1536))]);
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_reduce <-
+      (trace___polyvec_reduce ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_reduce <-
+      (trace___polyvec_reduce ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param <- (SBArray1536_512.get_sub16 b_r (256 * i));
+      param <- (SBArray1536_512.get_sub16 r (256 * i));
+      (result, b_result, tmp__trace) <@ __poly_reduce (param, b_param);
+      trace___polyvec_reduce <- (trace___polyvec_reduce ++ tmp__trace);
+      trace___polyvec_reduce <-
+      (trace___polyvec_reduce ++ [(Assert, (is_init b_result 0 512))]);
+      b_r <-
+      (SBArray1536_512.set_sub16 b_r (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      r <- (SBArray1536_512.set_sub16 r (256 * i) result);
+      i <- (i + 1);
+    }
+    b_r <- (BArray1536.init_arr (W8.of_int 255) 1536);
+    return (r, b_r, trace___polyvec_reduce);
+  }
+  proc __polyvec_tobytes (rp:int, a:BArray1536.t, b_a:BArray1536.t) : trace = {
+    var i:int;
+    var pp:int;
+    var param:BArray512.t;
+    var param_0:int;
+    var result:BArray512.t;
+    var b_result:BArray512.t;
+    var b_param:BArray512.t;
+    var trace___polyvec_tobytes:trace;
+    b_param <- witness;
+    b_result <- witness;
+    param <- witness;
+    result <- witness;
+    trace___polyvec_tobytes <- [];
+    trace___polyvec_tobytes <-
+    (trace___polyvec_tobytes ++
+    [(Assert,
+     (((0 <= rp) /\ (rp <= 18446744073709551615)) /\
+     ((is_valid rp 1152) /\ (is_init b_a 0 1536))))]);
+    trace___polyvec_tobytes <-
+    (trace___polyvec_tobytes ++
+    [(Assert, ((0 <= rp) /\ (rp <= 18446744073709551615)))]);
+    pp <- rp;
+    i <- 0;
+    while ((i < 3)) {
+      trace___polyvec_tobytes <-
+      (trace___polyvec_tobytes ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_tobytes <-
+      (trace___polyvec_tobytes ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      param_0 <- pp;
+      b_param <- (SBArray1536_512.get_sub16 b_a (256 * i));
+      param <- (SBArray1536_512.get_sub16 a (256 * i));
+      (result, b_result, tmp__trace) <@ _poly_tobytes (param_0, param,
+      b_param);
+      trace___polyvec_tobytes <- (trace___polyvec_tobytes ++ tmp__trace);
+      trace___polyvec_tobytes <-
+      (trace___polyvec_tobytes ++ [(Assert, (is_init b_result 0 512))]);
+      b_a <-
+      (SBArray1536_512.set_sub16 b_a (256 * i)
+      (BArray512.init_arr (W8.of_int 255) 512));
+      a <- (SBArray1536_512.set_sub16 a (256 * i) result);
+      trace___polyvec_tobytes <-
+      (trace___polyvec_tobytes ++
+      [(Assert, ((0 <= (pp + 384)) /\ ((pp + 384) <= 18446744073709551615)))]);
+      pp <- (pp + 384);
+      i <- (i + 1);
+    }
+    return (trace___polyvec_tobytes);
+  }
+  proc __polyvec_pointwise_acc (r:BArray512.t, b_r:BArray512.t,
+                                a:BArray1536.t, b_a:BArray1536.t,
+                                b:BArray1536.t, b_b:BArray1536.t) : BArray512.t *
+                                                                    BArray512.t *
+                                                                    trace = {
+    var t:BArray512.t;
+    var i:int;
     var param:BArray512.t;
     var param_0:BArray512.t;
     var result:BArray512.t;
     var param_1:BArray512.t;
     var param_2:BArray512.t;
-    var result_0:BArray512.t;
     var param_3:BArray512.t;
+    var result_0:BArray512.t;
     var param_4:BArray512.t;
+    var param_5:BArray512.t;
+    var param_6:BArray512.t;
     var result_1:BArray512.t;
     var b_result:BArray512.t;
+    var b_t:BArray512.t;
+    var b_result_0:BArray512.t;
     var b_param:BArray512.t;
     var b_param_0:BArray512.t;
-    var b_result_0:BArray512.t;
     var b_param_1:BArray512.t;
-    var b_param_2:BArray512.t;
     var b_result_1:BArray512.t;
+    var b_param_2:BArray512.t;
     var b_param_3:BArray512.t;
     var b_param_4:BArray512.t;
-    var trace___polyvec_add2:trace;
+    var trace___polyvec_pointwise_acc:trace;
     b_param <- witness;
     b_param_0 <- witness;
     b_param_1 <- witness;
@@ -24848,122 +25074,76 @@ module M(SC:Syscall_t) = {
     b_result <- witness;
     b_result_0 <- witness;
     b_result_1 <- witness;
+    b_t <- witness;
     param <- witness;
     param_0 <- witness;
     param_1 <- witness;
     param_2 <- witness;
     param_3 <- witness;
     param_4 <- witness;
+    param_5 <- witness;
+    param_6 <- witness;
     result <- witness;
     result_0 <- witness;
     result_1 <- witness;
-    trace___polyvec_add2 <- [];
-    trace___polyvec_add2 <-
-    (trace___polyvec_add2 ++
-    [(Assert, ((is_init b_r 0 1536) /\ (is_init b_b 0 1536)))]);
-    b_param_4 <- (SBArray1536_512.get_sub16 b_r 0);
-    param_4 <- (SBArray1536_512.get_sub16 r 0);
-    b_param_3 <- (SBArray1536_512.get_sub16 b_b 0);
-    param_3 <- (SBArray1536_512.get_sub16 b 0);
-    (result_1, b_result_1, tmp__trace) <@ _poly_add2 (param_4, b_param_4,
-    param_3, b_param_3);
-    trace___polyvec_add2 <- (trace___polyvec_add2 ++ tmp__trace);
-    trace___polyvec_add2 <-
-    (trace___polyvec_add2 ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    r <- (SBArray1536_512.set_sub16 r 0 result_1);
-    b_param_2 <- (SBArray1536_512.get_sub16 b_r 256);
-    param_2 <- (SBArray1536_512.get_sub16 r 256);
-    b_param_1 <- (SBArray1536_512.get_sub16 b_b 256);
-    param_1 <- (SBArray1536_512.get_sub16 b 256);
-    (result_0, b_result_0, tmp__trace) <@ _poly_add2 (param_2, b_param_2,
-    param_1, b_param_1);
-    trace___polyvec_add2 <- (trace___polyvec_add2 ++ tmp__trace);
-    trace___polyvec_add2 <-
-    (trace___polyvec_add2 ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 256 result_0);
-    b_param_0 <- (SBArray1536_512.get_sub16 b_r 512);
-    param_0 <- (SBArray1536_512.get_sub16 r 512);
-    b_param <- (SBArray1536_512.get_sub16 b_b 512);
-    param <- (SBArray1536_512.get_sub16 b 512);
-    (result, b_result, tmp__trace) <@ _poly_add2 (param_0, b_param_0, 
-    param, b_param);
-    trace___polyvec_add2 <- (trace___polyvec_add2 ++ tmp__trace);
-    trace___polyvec_add2 <-
-    (trace___polyvec_add2 ++ [(Assert, (is_init b_result 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 512
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 512 result);
-    return (r, b_r, trace___polyvec_add2);
-  }
-  proc __polyvec_csubq (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
-                                                            BArray1536.t *
-                                                            trace = {
-    var param:BArray512.t;
-    var result:BArray512.t;
-    var param_0:BArray512.t;
-    var result_0:BArray512.t;
-    var param_1:BArray512.t;
-    var result_1:BArray512.t;
-    var b_result:BArray512.t;
-    var b_param:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_param_1:BArray512.t;
-    var trace___polyvec_csubq:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    param <- witness;
-    param_0 <- witness;
-    param_1 <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    trace___polyvec_csubq <- [];
-    trace___polyvec_csubq <-
-    (trace___polyvec_csubq ++ [(Assert, (is_init b_r 0 1536))]);
-    b_param_1 <- (SBArray1536_512.get_sub16 b_r 0);
-    param_1 <- (SBArray1536_512.get_sub16 r 0);
-    (result_1, b_result_1, tmp__trace) <@ _poly_csubq (param_1, b_param_1);
-    trace___polyvec_csubq <- (trace___polyvec_csubq ++ tmp__trace);
-    trace___polyvec_csubq <-
-    (trace___polyvec_csubq ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    r <- (SBArray1536_512.set_sub16 r 0 result_1);
-    b_param_0 <- (SBArray1536_512.get_sub16 b_r 256);
-    param_0 <- (SBArray1536_512.get_sub16 r 256);
-    (result_0, b_result_0, tmp__trace) <@ _poly_csubq (param_0, b_param_0);
-    trace___polyvec_csubq <- (trace___polyvec_csubq ++ tmp__trace);
-    trace___polyvec_csubq <-
-    (trace___polyvec_csubq ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 256 result_0);
-    b_param <- (SBArray1536_512.get_sub16 b_r 512);
-    param <- (SBArray1536_512.get_sub16 r 512);
-    (result, b_result, tmp__trace) <@ _poly_csubq (param, b_param);
-    trace___polyvec_csubq <- (trace___polyvec_csubq ++ tmp__trace);
-    trace___polyvec_csubq <-
-    (trace___polyvec_csubq ++ [(Assert, (is_init b_result 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 512
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 512 result);
-    return (r, b_r, trace___polyvec_csubq);
+    t <- witness;
+    trace___polyvec_pointwise_acc <- [];
+    trace___polyvec_pointwise_acc <-
+    (trace___polyvec_pointwise_acc ++
+    [(Assert, ((is_init b_a 0 1536) /\ (is_init b_b 0 1536)))]);
+    b_t <- (BArray512.init_arr (W8.of_int 0) 512);
+    b_param_4 <- b_r;
+    param_6 <- r;
+    b_param_3 <- (SBArray1536_512.get_sub16 b_a 0);
+    param_5 <- (SBArray1536_512.get_sub16 a 0);
+    b_param_2 <- (SBArray1536_512.get_sub16 b_b 0);
+    param_4 <- (SBArray1536_512.get_sub16 b 0);
+    (result_1, b_result_1, tmp__trace) <@ _poly_basemul (param_6, b_param_4,
+    param_5, b_param_3, param_4, b_param_2);
+    trace___polyvec_pointwise_acc <-
+    (trace___polyvec_pointwise_acc ++ tmp__trace);
+    trace___polyvec_pointwise_acc <-
+    (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result_1 0 512))]);
+    r <- result_1;
+    i <- 1;
+    while ((i < 3)) {
+      trace___polyvec_pointwise_acc <-
+      (trace___polyvec_pointwise_acc ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      trace___polyvec_pointwise_acc <-
+      (trace___polyvec_pointwise_acc ++
+      [(Assert,
+       ((0 <= ((256 * i) * 2)) /\ ((((256 * i) * 2) + 512) <= 1536)))]);
+      b_param_1 <- b_t;
+      param_3 <- t;
+      b_param_0 <- (SBArray1536_512.get_sub16 b_a (256 * i));
+      param_2 <- (SBArray1536_512.get_sub16 a (256 * i));
+      b_param <- (SBArray1536_512.get_sub16 b_b (256 * i));
+      param_1 <- (SBArray1536_512.get_sub16 b (256 * i));
+      (result_0, b_result_0, tmp__trace) <@ _poly_basemul (param_3,
+      b_param_1, param_2, b_param_0, param_1, b_param);
+      trace___polyvec_pointwise_acc <-
+      (trace___polyvec_pointwise_acc ++ tmp__trace);
+      trace___polyvec_pointwise_acc <-
+      (trace___polyvec_pointwise_acc ++
+      [(Assert, (is_init b_result_0 0 512))]);
+      b_t <- (BArray512.init_arr (W8.of_int 255) 512);
+      t <- result_0;
+      param_0 <- r;
+      param <- t;
+      (result, b_result, tmp__trace) <@ _poly_add2 (param_0,
+      (BArray512.init_arr (W8.of_int 255) 512), param,
+      (BArray512.init_arr (W8.of_int 255) 512));
+      trace___polyvec_pointwise_acc <-
+      (trace___polyvec_pointwise_acc ++ tmp__trace);
+      trace___polyvec_pointwise_acc <-
+      (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result 0 512))]);
+      r <- result;
+      i <- (i + 1);
+    }
+    b_r <- (BArray512.init_arr (W8.of_int 255) 512);
+    return (r, b_r, trace___polyvec_pointwise_acc);
   }
   proc __polyvec_decompress (rp:int) : BArray1536.t * BArray1536.t * trace = {
     var r:BArray1536.t;
@@ -25244,532 +25424,6 @@ module M(SC:Syscall_t) = {
       i <- (i + 1);
     }
     return (rp, b_rp, trace___polyvec_compress_1);
-  }
-  proc __polyvec_frombytes (ap:int) : BArray1536.t * BArray1536.t * trace = {
-    var r:BArray1536.t;
-    var pp:int;
-    var param:int;
-    var param_0:BArray512.t;
-    var result:BArray512.t;
-    var param_1:int;
-    var param_2:BArray512.t;
-    var result_0:BArray512.t;
-    var param_3:int;
-    var param_4:BArray512.t;
-    var result_1:BArray512.t;
-    var b_r:BArray1536.t;
-    var b_result:BArray512.t;
-    var b_param:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_param_1:BArray512.t;
-    var trace___polyvec_frombytes:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_r <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    param_0 <- witness;
-    param_2 <- witness;
-    param_4 <- witness;
-    r <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    trace___polyvec_frombytes <- [];
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++
-    [(Assert,
-     (((0 <= ap) /\ (ap <= 18446744073709551615)) /\ (is_valid ap 1152)))]);
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++
-    [(Assert, ((0 <= ap) /\ (ap <= 18446744073709551615)))]);
-    b_r <- (BArray1536.init_arr (W8.of_int 0) 1536);
-    pp <- ap;
-    b_param_1 <- (SBArray1536_512.get_sub16 b_r 0);
-    param_4 <- (SBArray1536_512.get_sub16 r 0);
-    param_3 <- pp;
-    (result_1, b_result_1, tmp__trace) <@ _poly_frombytes (param_4,
-    b_param_1, param_3);
-    trace___polyvec_frombytes <- (trace___polyvec_frombytes ++ tmp__trace);
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    r <- (SBArray1536_512.set_sub16 r 0 result_1);
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++
-    [(Assert, ((0 <= (pp + 384)) /\ ((pp + 384) <= 18446744073709551615)))]);
-    pp <- (pp + 384);
-    b_param_0 <- (SBArray1536_512.get_sub16 b_r 256);
-    param_2 <- (SBArray1536_512.get_sub16 r 256);
-    param_1 <- pp;
-    (result_0, b_result_0, tmp__trace) <@ _poly_frombytes (param_2,
-    b_param_0, param_1);
-    trace___polyvec_frombytes <- (trace___polyvec_frombytes ++ tmp__trace);
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 256 result_0);
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++
-    [(Assert, ((0 <= (pp + 384)) /\ ((pp + 384) <= 18446744073709551615)))]);
-    pp <- (pp + 384);
-    b_param <- (SBArray1536_512.get_sub16 b_r 512);
-    param_0 <- (SBArray1536_512.get_sub16 r 512);
-    param <- pp;
-    (result, b_result, tmp__trace) <@ _poly_frombytes (param_0, b_param,
-    param);
-    trace___polyvec_frombytes <- (trace___polyvec_frombytes ++ tmp__trace);
-    trace___polyvec_frombytes <-
-    (trace___polyvec_frombytes ++ [(Assert, (is_init b_result 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 512
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 512 result);
-    return (r, b_r, trace___polyvec_frombytes);
-  }
-  proc __polyvec_invntt (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
-                                                             BArray1536.t *
-                                                             trace = {
-    var param:BArray512.t;
-    var result:BArray512.t;
-    var param_0:BArray512.t;
-    var result_0:BArray512.t;
-    var param_1:BArray512.t;
-    var result_1:BArray512.t;
-    var b_result:BArray512.t;
-    var b_param:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_param_1:BArray512.t;
-    var trace___polyvec_invntt:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    param <- witness;
-    param_0 <- witness;
-    param_1 <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    trace___polyvec_invntt <- [];
-    trace___polyvec_invntt <-
-    (trace___polyvec_invntt ++ [(Assert, (is_init b_r 0 1536))]);
-    b_param_1 <- (SBArray1536_512.get_sub16 b_r 0);
-    param_1 <- (SBArray1536_512.get_sub16 r 0);
-    (result_1, b_result_1, tmp__trace) <@ _poly_invntt (param_1, b_param_1);
-    trace___polyvec_invntt <- (trace___polyvec_invntt ++ tmp__trace);
-    trace___polyvec_invntt <-
-    (trace___polyvec_invntt ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    r <- (SBArray1536_512.set_sub16 r 0 result_1);
-    b_param_0 <- (SBArray1536_512.get_sub16 b_r 256);
-    param_0 <- (SBArray1536_512.get_sub16 r 256);
-    (result_0, b_result_0, tmp__trace) <@ _poly_invntt (param_0, b_param_0);
-    trace___polyvec_invntt <- (trace___polyvec_invntt ++ tmp__trace);
-    trace___polyvec_invntt <-
-    (trace___polyvec_invntt ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 256 result_0);
-    b_param <- (SBArray1536_512.get_sub16 b_r 512);
-    param <- (SBArray1536_512.get_sub16 r 512);
-    (result, b_result, tmp__trace) <@ _poly_invntt (param, b_param);
-    trace___polyvec_invntt <- (trace___polyvec_invntt ++ tmp__trace);
-    trace___polyvec_invntt <-
-    (trace___polyvec_invntt ++ [(Assert, (is_init b_result 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 512
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 512 result);
-    return (r, b_r, trace___polyvec_invntt);
-  }
-  proc __polyvec_ntt (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
-                                                          BArray1536.t *
-                                                          trace = {
-    var param:BArray512.t;
-    var result:BArray512.t;
-    var param_0:BArray512.t;
-    var result_0:BArray512.t;
-    var param_1:BArray512.t;
-    var result_1:BArray512.t;
-    var b_result:BArray512.t;
-    var b_param:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_param_1:BArray512.t;
-    var trace___polyvec_ntt:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    param <- witness;
-    param_0 <- witness;
-    param_1 <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    trace___polyvec_ntt <- [];
-    trace___polyvec_ntt <-
-    (trace___polyvec_ntt ++ [(Assert, (is_init b_r 0 1536))]);
-    b_param_1 <- (SBArray1536_512.get_sub16 b_r 0);
-    param_1 <- (SBArray1536_512.get_sub16 r 0);
-    (result_1, b_result_1, tmp__trace) <@ _poly_ntt (param_1, b_param_1);
-    trace___polyvec_ntt <- (trace___polyvec_ntt ++ tmp__trace);
-    trace___polyvec_ntt <-
-    (trace___polyvec_ntt ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    r <- (SBArray1536_512.set_sub16 r 0 result_1);
-    b_param_0 <- (SBArray1536_512.get_sub16 b_r 256);
-    param_0 <- (SBArray1536_512.get_sub16 r 256);
-    (result_0, b_result_0, tmp__trace) <@ _poly_ntt (param_0, b_param_0);
-    trace___polyvec_ntt <- (trace___polyvec_ntt ++ tmp__trace);
-    trace___polyvec_ntt <-
-    (trace___polyvec_ntt ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 256 result_0);
-    b_param <- (SBArray1536_512.get_sub16 b_r 512);
-    param <- (SBArray1536_512.get_sub16 r 512);
-    (result, b_result, tmp__trace) <@ _poly_ntt (param, b_param);
-    trace___polyvec_ntt <- (trace___polyvec_ntt ++ tmp__trace);
-    trace___polyvec_ntt <-
-    (trace___polyvec_ntt ++ [(Assert, (is_init b_result 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 512
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 512 result);
-    return (r, b_r, trace___polyvec_ntt);
-  }
-  proc __polyvec_reduce (r:BArray1536.t, b_r:BArray1536.t) : BArray1536.t *
-                                                             BArray1536.t *
-                                                             trace = {
-    var param:BArray512.t;
-    var result:BArray512.t;
-    var param_0:BArray512.t;
-    var result_0:BArray512.t;
-    var param_1:BArray512.t;
-    var result_1:BArray512.t;
-    var b_result:BArray512.t;
-    var b_param:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_param_1:BArray512.t;
-    var trace___polyvec_reduce:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    param <- witness;
-    param_0 <- witness;
-    param_1 <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    trace___polyvec_reduce <- [];
-    trace___polyvec_reduce <-
-    (trace___polyvec_reduce ++ [(Assert, (is_init b_r 0 1536))]);
-    b_param_1 <- (SBArray1536_512.get_sub16 b_r 0);
-    param_1 <- (SBArray1536_512.get_sub16 r 0);
-    (result_1, b_result_1, tmp__trace) <@ __poly_reduce (param_1, b_param_1);
-    trace___polyvec_reduce <- (trace___polyvec_reduce ++ tmp__trace);
-    trace___polyvec_reduce <-
-    (trace___polyvec_reduce ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    r <- (SBArray1536_512.set_sub16 r 0 result_1);
-    b_param_0 <- (SBArray1536_512.get_sub16 b_r 256);
-    param_0 <- (SBArray1536_512.get_sub16 r 256);
-    (result_0, b_result_0, tmp__trace) <@ __poly_reduce (param_0, b_param_0);
-    trace___polyvec_reduce <- (trace___polyvec_reduce ++ tmp__trace);
-    trace___polyvec_reduce <-
-    (trace___polyvec_reduce ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 256 result_0);
-    b_param <- (SBArray1536_512.get_sub16 b_r 512);
-    param <- (SBArray1536_512.get_sub16 r 512);
-    (result, b_result, tmp__trace) <@ __poly_reduce (param, b_param);
-    trace___polyvec_reduce <- (trace___polyvec_reduce ++ tmp__trace);
-    trace___polyvec_reduce <-
-    (trace___polyvec_reduce ++ [(Assert, (is_init b_result 0 512))]);
-    b_r <-
-    (SBArray1536_512.set_sub16 b_r 512
-    (BArray512.init_arr (W8.of_int 255) 512));
-    r <- (SBArray1536_512.set_sub16 r 512 result);
-    return (r, b_r, trace___polyvec_reduce);
-  }
-  proc __polyvec_pointwise_acc (r:BArray512.t, b_r:BArray512.t,
-                                a:BArray1536.t, b_a:BArray1536.t,
-                                b:BArray1536.t, b_b:BArray1536.t) : BArray512.t *
-                                                                    BArray512.t *
-                                                                    trace = {
-    var t:BArray512.t;
-    var param:BArray512.t;
-    var param_0:BArray512.t;
-    var result:BArray512.t;
-    var param_1:BArray512.t;
-    var param_2:BArray512.t;
-    var param_3:BArray512.t;
-    var result_0:BArray512.t;
-    var param_4:BArray512.t;
-    var param_5:BArray512.t;
-    var result_1:BArray512.t;
-    var param_6:BArray512.t;
-    var param_7:BArray512.t;
-    var param_8:BArray512.t;
-    var result_2:BArray512.t;
-    var param_9:BArray512.t;
-    var param_10:BArray512.t;
-    var param_11:BArray512.t;
-    var result_3:BArray512.t;
-    var b_result:BArray512.t;
-    var b_t:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_result_2:BArray512.t;
-    var b_param_1:BArray512.t;
-    var b_param_2:BArray512.t;
-    var b_param_3:BArray512.t;
-    var b_result_3:BArray512.t;
-    var b_param_4:BArray512.t;
-    var b_param_5:BArray512.t;
-    var b_param_6:BArray512.t;
-    var trace___polyvec_pointwise_acc:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_param_2 <- witness;
-    b_param_3 <- witness;
-    b_param_4 <- witness;
-    b_param_5 <- witness;
-    b_param_6 <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    b_result_2 <- witness;
-    b_result_3 <- witness;
-    b_t <- witness;
-    param <- witness;
-    param_0 <- witness;
-    param_1 <- witness;
-    param_2 <- witness;
-    param_3 <- witness;
-    param_4 <- witness;
-    param_5 <- witness;
-    param_6 <- witness;
-    param_7 <- witness;
-    param_8 <- witness;
-    param_9 <- witness;
-    param_10 <- witness;
-    param_11 <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    result_2 <- witness;
-    result_3 <- witness;
-    t <- witness;
-    trace___polyvec_pointwise_acc <- [];
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++
-    [(Assert, ((is_init b_a 0 1536) /\ (is_init b_b 0 1536)))]);
-    b_t <- (BArray512.init_arr (W8.of_int 0) 512);
-    b_param_6 <- b_r;
-    param_11 <- r;
-    b_param_5 <- (SBArray1536_512.get_sub16 b_a 0);
-    param_10 <- (SBArray1536_512.get_sub16 a 0);
-    b_param_4 <- (SBArray1536_512.get_sub16 b_b 0);
-    param_9 <- (SBArray1536_512.get_sub16 b 0);
-    (result_3, b_result_3, tmp__trace) <@ _poly_basemul (param_11, b_param_6,
-    param_10, b_param_5, param_9, b_param_4);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ tmp__trace);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result_3 0 512))]);
-    r <- result_3;
-    b_param_3 <- b_t;
-    param_8 <- t;
-    b_param_2 <- (SBArray1536_512.get_sub16 b_a 256);
-    param_7 <- (SBArray1536_512.get_sub16 a 256);
-    b_param_1 <- (SBArray1536_512.get_sub16 b_b 256);
-    param_6 <- (SBArray1536_512.get_sub16 b 256);
-    (result_2, b_result_2, tmp__trace) <@ _poly_basemul (param_8, b_param_3,
-    param_7, b_param_2, param_6, b_param_1);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ tmp__trace);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result_2 0 512))]);
-    t <- result_2;
-    param_5 <- r;
-    param_4 <- t;
-    (result_1, b_result_1, tmp__trace) <@ _poly_add2 (param_5,
-    (BArray512.init_arr (W8.of_int 255) 512), param_4,
-    (BArray512.init_arr (W8.of_int 255) 512));
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ tmp__trace);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result_1 0 512))]);
-    r <- result_1;
-    param_3 <- t;
-    b_param_0 <- (SBArray1536_512.get_sub16 b_a 512);
-    param_2 <- (SBArray1536_512.get_sub16 a 512);
-    b_param <- (SBArray1536_512.get_sub16 b_b 512);
-    param_1 <- (SBArray1536_512.get_sub16 b 512);
-    (result_0, b_result_0, tmp__trace) <@ _poly_basemul (param_3,
-    (BArray512.init_arr (W8.of_int 255) 512), param_2, b_param_0, param_1,
-    b_param);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ tmp__trace);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result_0 0 512))]);
-    t <- result_0;
-    param_0 <- r;
-    param <- t;
-    (result, b_result, tmp__trace) <@ _poly_add2 (param_0,
-    (BArray512.init_arr (W8.of_int 255) 512), param,
-    (BArray512.init_arr (W8.of_int 255) 512));
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ tmp__trace);
-    trace___polyvec_pointwise_acc <-
-    (trace___polyvec_pointwise_acc ++ [(Assert, (is_init b_result 0 512))]);
-    r <- result;
-    b_r <- (BArray512.init_arr (W8.of_int 255) 512);
-    return (r, b_r, trace___polyvec_pointwise_acc);
-  }
-  proc __polyvec_tobytes (rp:int, a:BArray1536.t, b_a:BArray1536.t) : trace = {
-    var pp:int;
-    var param:BArray512.t;
-    var param_0:int;
-    var result:BArray512.t;
-    var param_1:BArray512.t;
-    var param_2:int;
-    var result_0:BArray512.t;
-    var param_3:BArray512.t;
-    var param_4:int;
-    var result_1:BArray512.t;
-    var b_result:BArray512.t;
-    var b_param:BArray512.t;
-    var b_result_0:BArray512.t;
-    var b_param_0:BArray512.t;
-    var b_result_1:BArray512.t;
-    var b_param_1:BArray512.t;
-    var trace___polyvec_tobytes:trace;
-    b_param <- witness;
-    b_param_0 <- witness;
-    b_param_1 <- witness;
-    b_result <- witness;
-    b_result_0 <- witness;
-    b_result_1 <- witness;
-    param <- witness;
-    param_1 <- witness;
-    param_3 <- witness;
-    result <- witness;
-    result_0 <- witness;
-    result_1 <- witness;
-    trace___polyvec_tobytes <- [];
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++
-    [(Assert,
-     (((0 <= rp) /\ (rp <= 18446744073709551615)) /\
-     ((is_valid rp 1152) /\ (is_init b_a 0 1536))))]);
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++
-    [(Assert, ((0 <= rp) /\ (rp <= 18446744073709551615)))]);
-    pp <- rp;
-    param_4 <- pp;
-    b_param_1 <- (SBArray1536_512.get_sub16 b_a 0);
-    param_3 <- (SBArray1536_512.get_sub16 a 0);
-    (result_1, b_result_1, tmp__trace) <@ _poly_tobytes (param_4, param_3,
-    b_param_1);
-    trace___polyvec_tobytes <- (trace___polyvec_tobytes ++ tmp__trace);
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++ [(Assert, (is_init b_result_1 0 512))]);
-    b_a <-
-    (SBArray1536_512.set_sub16 b_a 0 (BArray512.init_arr (W8.of_int 255) 512)
-    );
-    a <- (SBArray1536_512.set_sub16 a 0 result_1);
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++
-    [(Assert, ((0 <= (pp + 384)) /\ ((pp + 384) <= 18446744073709551615)))]);
-    pp <- (pp + 384);
-    param_2 <- pp;
-    b_param_0 <- (SBArray1536_512.get_sub16 b_a 256);
-    param_1 <- (SBArray1536_512.get_sub16 a 256);
-    (result_0, b_result_0, tmp__trace) <@ _poly_tobytes (param_2, param_1,
-    b_param_0);
-    trace___polyvec_tobytes <- (trace___polyvec_tobytes ++ tmp__trace);
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++ [(Assert, (is_init b_result_0 0 512))]);
-    b_a <-
-    (SBArray1536_512.set_sub16 b_a 256
-    (BArray512.init_arr (W8.of_int 255) 512));
-    a <- (SBArray1536_512.set_sub16 a 256 result_0);
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++
-    [(Assert, ((0 <= (pp + 384)) /\ ((pp + 384) <= 18446744073709551615)))]);
-    pp <- (pp + 384);
-    param_0 <- pp;
-    b_param <- (SBArray1536_512.get_sub16 b_a 512);
-    param <- (SBArray1536_512.get_sub16 a 512);
-    (result, b_result, tmp__trace) <@ _poly_tobytes (param_0, param,
-    b_param);
-    trace___polyvec_tobytes <- (trace___polyvec_tobytes ++ tmp__trace);
-    trace___polyvec_tobytes <-
-    (trace___polyvec_tobytes ++ [(Assert, (is_init b_result 0 512))]);
-    return (trace___polyvec_tobytes);
-  }
-  proc comp_u64_l_int_and_u64_l_int (a:W64.t, b:int, c:W64.t, d:int) : 
-  bool * trace = {
-    var c3:bool;
-    var _of_:bool;
-    var _cf_:bool;
-    var _sf_:bool;
-    var _zf_:bool;
-    var c1:bool;
-    var bc1:W8.t;
-    var c2:bool;
-    var bc2:W8.t;
-    var  _0:bool;
-    var  _1:bool;
-    var  _2:bool;
-    var trace_comp_u64_l_int_and_u64_l_int:trace;
-    trace_comp_u64_l_int_and_u64_l_int <- [];
-    (_of_, _cf_, _sf_,  _0, _zf_) <- (CMP_64 a (W64.of_int b));
-    c1 <- (_uLT _of_ _cf_ _sf_ _zf_);
-    bc1 <- (SETcc c1);
-    (_of_, _cf_, _sf_,  _1, _zf_) <- (CMP_64 c (W64.of_int d));
-    c2 <- (_uLT _of_ _cf_ _sf_ _zf_);
-    bc2 <- (SETcc c2);
-    (_of_, _cf_, _sf_,  _2, _zf_) <- (TEST_8 bc1 bc2);
-    c3 <- (_NEQ _of_ _cf_ _sf_ _zf_);
-    return (c3, trace_comp_u64_l_int_and_u64_l_int);
   }
   proc __gen_matrix_buf_rejection_filter48 (pol:BArray512.t,
                                             b_pol:BArray512.t, counter:W64.t,
@@ -26163,42 +25817,33 @@ module M(SC:Syscall_t) = {
     var bounds:W256.t;
     var ones:W256.t;
     var sst:BArray2048.t;
+    var saved_buf_offset:W64.t;
     var condition_loop:bool;
-    var param:int;
-    var param_0:W64.t;
-    var param_1:int;
-    var param_2:W64.t;
-    var result:bool;
-    var param_3:W64.t;
+    var param:W64.t;
+    var param_0:W256.t;
+    var param_1:BArray2048.t;
+    var param_2:W256.t;
+    var param_3:W256.t;
     var param_4:W256.t;
-    var param_5:BArray2048.t;
-    var param_6:W256.t;
-    var param_7:W256.t;
-    var param_8:W256.t;
-    var param_9:W64.t;
-    var param_10:BArray536.t;
-    var param_11:W64.t;
-    var param_12:BArray512.t;
+    var param_5:W64.t;
+    var param_6:BArray536.t;
+    var param_7:W64.t;
+    var param_8:BArray512.t;
+    var result:W64.t;
     var result_0:W64.t;
-    var result_1:W64.t;
-    var result_2:BArray512.t;
-    var param_13:int;
-    var param_14:W64.t;
-    var param_15:int;
-    var param_16:W64.t;
-    var result_3:bool;
+    var result_1:BArray512.t;
+    var param_9:W64.t;
+    var param_10:W256.t;
+    var param_11:BArray2048.t;
+    var param_12:W256.t;
+    var param_13:W256.t;
+    var param_14:W256.t;
+    var param_15:W64.t;
+    var param_16:BArray536.t;
     var param_17:W64.t;
-    var param_18:W256.t;
-    var param_19:BArray2048.t;
-    var param_20:W256.t;
-    var param_21:W256.t;
-    var param_22:W256.t;
-    var param_23:W64.t;
-    var param_24:BArray536.t;
-    var param_25:W64.t;
-    var param_26:BArray512.t;
-    var result_4:W64.t;
-    var result_5:BArray512.t;
+    var param_18:BArray512.t;
+    var result_2:W64.t;
+    var result_3:BArray512.t;
     var b_result:BArray512.t;
     var b_param:BArray512.t;
     var b_result_0:BArray512.t;
@@ -26208,20 +25853,21 @@ module M(SC:Syscall_t) = {
     b_param_0 <- witness;
     b_result <- witness;
     b_result_0 <- witness;
-    param_5 <- witness;
-    param_10 <- witness;
-    param_12 <- witness;
-    param_19 <- witness;
-    param_24 <- witness;
-    param_26 <- witness;
-    result_2 <- witness;
-    result_5 <- witness;
+    param_1 <- witness;
+    param_6 <- witness;
+    param_8 <- witness;
+    param_11 <- witness;
+    param_16 <- witness;
+    param_18 <- witness;
+    result_1 <- witness;
+    result_3 <- witness;
     sst <- witness;
     trace__gen_matrix_buf_rejection <- [];
     trace__gen_matrix_buf_rejection <-
     (trace__gen_matrix_buf_rejection ++
     [(Assert,
-     ((((is_init b_buf 0 536) /\ (0 <= (W64.to_uint counter))) /\
+     (((((is_init b_buf 0 536) /\ (0 <= (W64.to_uint counter))) /\
+       ((W64.to_uint counter) <= 256)) /\
       (0 <= (W64.to_uint buf_offset))) /\
      ((W64.to_uint buf_offset) < 536)))]);
     ms <- (init_msf);
@@ -26230,125 +25876,94 @@ module M(SC:Syscall_t) = {
     bounds <- sample_q;
     ones <- sample_ones;
     sst <- sample_shuffle_table;
+    saved_buf_offset <- buf_offset;
     buf_offset <- buf_offset;
-    param_16 <- buf_offset;
-    param_15 <- 457;
-    param_14 <- counter;
-    param_13 <- 225;
-    (result_3, tmp__trace) <@ comp_u64_l_int_and_u64_l_int (param_16,
-    param_15, param_14, param_13);
-    trace__gen_matrix_buf_rejection <-
-    (trace__gen_matrix_buf_rejection ++ tmp__trace);
-    trace__gen_matrix_buf_rejection <-
-    (trace__gen_matrix_buf_rejection ++
-    [(Assert,
-     ((result_3 = ((W64.to_uint param_16) < param_15)) /\
-     ((W64.to_uint param_14) < param_13)))]);
-    condition_loop <- result_3;
+    condition_loop <- (buf_offset \ult (W64.of_int 457));
     while (condition_loop) {
       ms <- (update_msf condition_loop ms);
-      (* Erased call to spill *)
-      b_param_0 <- b_pol;
-      param_26 <- pol;
-      param_25 <- counter;
-      param_24 <- buf;
-      param_23 <- buf_offset;
-      param_22 <- load_shuffle;
-      param_21 <- mask;
-      param_20 <- bounds;
-      param_19 <- sst;
-      param_18 <- ones;
-      param_17 <- ms;
-      (result_5, b_result_0, result_4, tmp__trace) <@ __gen_matrix_buf_rejection_filter48 (
-      param_26, b_param_0, param_25, param_24,
-      (BArray536.init_arr (W8.of_int 255) 536), param_23, param_22, param_21,
-      param_20, param_19, (BArray2048.init_arr (W8.of_int 255) 2048),
-      param_18, param_17);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++ tmp__trace);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++
-      [(Assert, (0 <= (W64.to_uint result_4)))]);
-      b_pol <- b_result_0;
-      pol <- result_5;
-      counter <- result_4;
-      (* Erased call to unspill *)
-      buf_offset <- (buf_offset + (W64.of_int 48));
-      param_16 <- buf_offset;
-      param_15 <- 457;
-      param_14 <- counter;
-      param_13 <- 225;
-      (result_3, tmp__trace) <@ comp_u64_l_int_and_u64_l_int (param_16,
-      param_15, param_14, param_13);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++ tmp__trace);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++
-      [(Assert,
-       ((result_3 = ((W64.to_uint param_16) < param_15)) /\
-       ((W64.to_uint param_14) < param_13)))]);
-      condition_loop <- result_3;
+      condition_loop <- (counter \ult (W64.of_int 225));
+      if (condition_loop) {
+        ms <- (update_msf condition_loop ms);
+        b_param_0 <- b_pol;
+        param_18 <- pol;
+        param_17 <- counter;
+        param_16 <- buf;
+        param_15 <- buf_offset;
+        param_14 <- load_shuffle;
+        param_13 <- mask;
+        param_12 <- bounds;
+        param_11 <- sst;
+        param_10 <- ones;
+        param_9 <- ms;
+        (result_3, b_result_0, result_2, tmp__trace) <@ __gen_matrix_buf_rejection_filter48 (
+        param_18, b_param_0, param_17, param_16,
+        (BArray536.init_arr (W8.of_int 255) 536), param_15, param_14,
+        param_13, param_12, param_11,
+        (BArray2048.init_arr (W8.of_int 255) 2048), param_10, param_9);
+        trace__gen_matrix_buf_rejection <-
+        (trace__gen_matrix_buf_rejection ++ tmp__trace);
+        trace__gen_matrix_buf_rejection <-
+        (trace__gen_matrix_buf_rejection ++
+        [(Assert,
+         (((W64.to_uint param_17) <= (W64.to_uint result_2)) /\
+         ((W64.to_uint result_2) <= 256)))]);
+        b_pol <- b_result_0;
+        pol <- result_3;
+        counter <- result_2;
+        saved_buf_offset <- (saved_buf_offset + (W64.of_int 48));
+        buf_offset <- saved_buf_offset;
+        buf_offset <- (protect_64 buf_offset ms);
+      } else {
+        ms <- (update_msf (! condition_loop) ms);
+        buf_offset <- (W64.of_int 504);
+      }
+      condition_loop <- (buf_offset \ult (W64.of_int 457));
     }
     ms <- (update_msf (! condition_loop) ms);
-    param_2 <- buf_offset;
-    param_1 <- 481;
-    param_0 <- counter;
-    param <- 256;
-    (result, tmp__trace) <@ comp_u64_l_int_and_u64_l_int (param_2, param_1,
-    param_0, param);
-    trace__gen_matrix_buf_rejection <-
-    (trace__gen_matrix_buf_rejection ++ tmp__trace);
-    trace__gen_matrix_buf_rejection <-
-    (trace__gen_matrix_buf_rejection ++
-    [(Assert,
-     ((result = ((W64.to_uint param_2) < param_1)) /\
-     ((W64.to_uint param_0) < param)))]);
-    condition_loop <- result;
+    buf_offset <- saved_buf_offset;
+    buf_offset <- (protect_64 buf_offset ms);
+    condition_loop <- (buf_offset \ult (W64.of_int 481));
     while (condition_loop) {
       ms <- (update_msf condition_loop ms);
-      (* Erased call to spill *)
-      b_param <- b_pol;
-      param_12 <- pol;
-      param_11 <- counter;
-      param_10 <- buf;
-      param_9 <- buf_offset;
-      param_8 <- load_shuffle;
-      param_7 <- mask;
-      param_6 <- bounds;
-      param_5 <- sst;
-      param_4 <- ones;
-      param_3 <- ms;
-      (result_2, b_result, result_1, result_0, tmp__trace) <@ __gen_matrix_buf_rejection_filter24 (
-      param_12, b_param, param_11, param_10,
-      (BArray536.init_arr (W8.of_int 255) 536), param_9, param_8, param_7,
-      param_6, param_5, (BArray2048.init_arr (W8.of_int 255) 2048), param_4,
-      param_3);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++ tmp__trace);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++
-      [(Assert,
-       (((W64.of_int 0) \ule result_1) /\ (result_1 \ule (W64.of_int 256))))]);
-      b_pol <- b_result;
-      pol <- result_2;
-      counter <- result_1;
-      ms <- result_0;
-      (* Erased call to unspill *)
-      buf_offset <- (buf_offset + (W64.of_int 24));
-      param_2 <- buf_offset;
-      param_1 <- 481;
-      param_0 <- counter;
-      param <- 256;
-      (result, tmp__trace) <@ comp_u64_l_int_and_u64_l_int (param_2, 
-      param_1, param_0, param);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++ tmp__trace);
-      trace__gen_matrix_buf_rejection <-
-      (trace__gen_matrix_buf_rejection ++
-      [(Assert,
-       ((result = ((W64.to_uint param_2) < param_1)) /\
-       ((W64.to_uint param_0) < param)))]);
-      condition_loop <- result;
+      condition_loop <- (counter \ult (W64.of_int 256));
+      if (condition_loop) {
+        ms <- (update_msf condition_loop ms);
+        (* Erased call to spill *)
+        b_param <- b_pol;
+        param_8 <- pol;
+        param_7 <- counter;
+        param_6 <- buf;
+        param_5 <- buf_offset;
+        param_4 <- load_shuffle;
+        param_3 <- mask;
+        param_2 <- bounds;
+        param_1 <- sst;
+        param_0 <- ones;
+        param <- ms;
+        (result_1, b_result, result_0, result, tmp__trace) <@ __gen_matrix_buf_rejection_filter24 (
+        param_8, b_param, param_7, param_6,
+        (BArray536.init_arr (W8.of_int 255) 536), param_5, param_4, param_3,
+        param_2, param_1, (BArray2048.init_arr (W8.of_int 255) 2048),
+        param_0, param);
+        trace__gen_matrix_buf_rejection <-
+        (trace__gen_matrix_buf_rejection ++ tmp__trace);
+        trace__gen_matrix_buf_rejection <-
+        (trace__gen_matrix_buf_rejection ++
+        [(Assert,
+         (((W64.of_int (W64.to_uint param_7)) \ule result_0) /\
+         ((W64.to_uint result_0) <= 256)))]);
+        b_pol <- b_result;
+        pol <- result_1;
+        counter <- result_0;
+        ms <- result;
+        (* Erased call to unspill *)
+        buf_offset <- (protect_64 buf_offset ms);
+        buf_offset <- (buf_offset + (W64.of_int 24));
+      } else {
+        ms <- (update_msf (! condition_loop) ms);
+        buf_offset <- (W64.of_int 504);
+      }
+      condition_loop <- (buf_offset \ult (W64.of_int 481));
     }
     return (pol, b_pol, counter, trace__gen_matrix_buf_rejection);
   }
@@ -26429,7 +26044,8 @@ module M(SC:Syscall_t) = {
     trace___gen_matrix_fill_polynomial <-
     (trace___gen_matrix_fill_polynomial ++
     [(Assert,
-     (((W64.of_int 0) \ule result_2) /\ (result_2 \ule (W64.of_int 256))))]);
+     (((W64.of_int (W64.to_uint param_6)) \ule result_2) /\
+     ((W64.to_uint result_2) <= 256)))]);
     b_pol <- b_result_1;
     pol <- result_3;
     counter <- result_2;
@@ -26457,7 +26073,8 @@ module M(SC:Syscall_t) = {
       trace___gen_matrix_fill_polynomial <-
       (trace___gen_matrix_fill_polynomial ++
       [(Assert,
-       (((W64.of_int 0) \ule result) /\ (result \ule (W64.of_int 256))))]);
+       (((W64.of_int (W64.to_uint param_1)) \ule result) /\
+       ((W64.to_uint result) <= 256)))]);
       b_pol <- b_result;
       pol <- result_0;
       counter <- result;
@@ -27771,14 +27388,11 @@ module M(SC:Syscall_t) = {
       t64 <- (loadW64 Glob.mem pkp);
       trace___indcpa_enc_0 <-
       (trace___indcpa_enc_0 ++
-      [(Assert, ((0 <= (8 * i)) /\ ((8 * i) <= 18446744073709551615)))]);
-      trace___indcpa_enc_0 <-
-      (trace___indcpa_enc_0 ++
-      [(Assert, ((0 <= (8 * i)) /\ (((8 * i) + 8) <= 32)))]);
+      [(Assert, ((0 <= (i * 8)) /\ (((i * 8) + 8) <= 32)))]);
       b_publicseed <-
-      (BArray32.set64d b_publicseed (8 * i) (W64.of_int 18446744073709551615)
+      (BArray32.set64d b_publicseed (i * 8) (W64.of_int 18446744073709551615)
       );
-      publicseed <- (BArray32.set64d publicseed (8 * i) t64);
+      publicseed <- (BArray32.set64 publicseed i t64);
       trace___indcpa_enc_0 <-
       (trace___indcpa_enc_0 ++
       [(Assert, ((0 <= (pkp + 8)) /\ ((pkp + 8) <= 18446744073709551615)))]);
@@ -28306,11 +27920,11 @@ module M(SC:Syscall_t) = {
       t64 <- (loadW64 Glob.mem pkp);
       trace___indcpa_enc_1 <-
       (trace___indcpa_enc_1 ++
-      [(Assert, ((0 <= (8 * i)) /\ (((8 * i) + 8) <= 32)))]);
+      [(Assert, ((0 <= (i * 8)) /\ (((i * 8) + 8) <= 32)))]);
       b_publicseed <-
-      (BArray32.set64d b_publicseed (8 * i) (W64.of_int 18446744073709551615)
+      (BArray32.set64d b_publicseed (i * 8) (W64.of_int 18446744073709551615)
       );
-      publicseed <- (BArray32.set64d publicseed (8 * i) t64);
+      publicseed <- (BArray32.set64 publicseed i t64);
       trace___indcpa_enc_1 <-
       (trace___indcpa_enc_1 ++
       [(Assert, ((0 <= (pkp + 8)) /\ ((pkp + 8) <= 18446744073709551615)))]);
@@ -28867,7 +28481,7 @@ module M(SC:Syscall_t) = {
       trace___cmov <-
       (trace___cmov ++ [(Assert, (is_valid (dst + (32 * i)) 32))]);
       g <- (loadW256 Glob.mem (dst + (32 * i)));
-      f <- (VPBLENDVB_256 f g m);
+      f <- (BLENDV_32u8 f g m);
       trace___cmov <-
       (trace___cmov ++
       [(Assert, ((0 <= (32 * i)) /\ ((32 * i) <= 18446744073709551615)))]);
@@ -29727,6 +29341,7 @@ module M(SC:Syscall_t) = {
   }
 }.
 
+(* The post and trace are valid. *)
 
 lemma __shuffle8_trace _a _b :
       hoare [M(Syscall).__shuffle8 :
@@ -29826,14 +29441,14 @@ lemma keccakf1600_rho_offsets_trace _i :
       hoare [M(Syscall).keccakf1600_rho_offsets :
       ((_i = i) /\ true) ==> (true /\ (valid res.`2))].
 proof.
-proc; inline *; auto; while(true); auto .
+proc; inline *; while (true); auto .
 qed .
 
 lemma keccakf1600_rhotates_trace _x _y :
       hoare [M(Syscall).keccakf1600_rhotates :
       (((_y = y) /\ (_x = x)) /\ true) ==> (true /\ (valid res.`2))].
 proof.
-proc; inline *; auto . while(true); auto.
+proc; inline *; auto; while(true); auto .
 qed .
 
 lemma __keccakf1600_pround_avx2_trace _state _b_state :
@@ -29857,15 +29472,17 @@ proof.
 proc; auto .
 while ((valid trace__keccakf1600_avx2) /\ is_init b_state 0 224 /\ 0 <=  r).
 auto .
-ecall (__keccakf1600_pround_avx2_trace param ( BArray224.init_arr (W8.of_int 255) 224)).
+ecall (__keccakf1600_pround_avx2_trace param (BArray224.init_arr
+                                             (W8.of_int 255) 224)).
 auto .
 rewrite /is_init /valid /=.
 smt (all_cat BArray224.init_arrP ).
 auto .
-ecall (__keccakf1600_pround_avx2_trace param ( BArray224.init_arr (W8.of_int 255) 224)).
+ecall (__keccakf1600_pround_avx2_trace param (BArray224.init_arr
+                                             (W8.of_int 255) 224)).
 auto .
 rewrite /is_init /valid /= .
-smt (all_cat  BArray224.init_arrP).
+smt (all_cat BArray224.init_arrP ).
 qed .
 
 lemma __mread_subu64_trace _buf _lEN _tRAIL :
@@ -29896,7 +29513,7 @@ lemma __mread_subu64_trace _buf _lEN _tRAIL :
        (res.`3 = ((8 <= _lEN) ? _tRAIL : 0)))))) /\
       (valid res.`5))].
 proof.
-  proc; rewrite /=.
+proc; rewrite /=.
   seq 4: (#pre /\ valid  trace___mread_subu64).
   + by auto.
   if.
@@ -29905,6 +29522,7 @@ proof.
   have:= is_valid_bound _ _ h => /= *;
   smt(all_cat is_validP).
 qed .
+
 
 lemma __mread_bcast_4subu64_trace _buf _lEN _tRAIL :
       hoare [M(Syscall).__mread_bcast_4subu64 :
@@ -29934,7 +29552,7 @@ lemma __mread_bcast_4subu64_trace _buf _lEN _tRAIL :
        (res.`3 = ((8 <= _lEN) ? _tRAIL : 0)))))) /\
       (valid res.`5))].
 proof.
-proc; rewrite /= .
+  proc; rewrite /= .
   seq 3: (#pre /\ valid trace___mread_bcast_4subu64).
   + by auto.
   if. auto. smt().
@@ -30072,7 +29690,7 @@ lemma __mwrite_subu64_trace _buf _lEN _w :
        (_lEN - ((0 < ((_lEN < 8) ? _lEN : 8)) ? ((_lEN < 8) ? _lEN : 8) : 0))))))) /\
       (valid res.`3))].
 proof.
-  proc; rewrite /=.
+ proc; rewrite /=.
   seq 3: (#pre /\ valid  trace___mwrite_subu64).
   + by auto.
   if.
@@ -30194,7 +29812,7 @@ while ((valid trace___pstate_init_avx2) /\  (((0 <= i) /\ (i <= 6)) /\
                                             (is_init b_pst 0 (32 * i)))).
 auto .
 rewrite /is_init /valid /=.
-smt (all_cat).
+smt (all_cat BArray224.init_arrP).
 auto .
 rewrite /is_init /valid /= .
 smt (all_cat BArray224.init_arrP).
@@ -30252,8 +29870,9 @@ lemma __addpst23456_avx2_trace _st _b_st _pst _b_pst :
       ((is_init res.`2 0 224) /\ (valid res.`3))].
 proof.
 proc; auto .
-ecall (__addstate_r3456_avx2_trace param_3 ( BArray224.init_arr (W8.of_int 255) 224) param_2 param_1 param_0 
-       param).
+ecall (__addstate_r3456_avx2_trace param_3 (BArray224.init_arr
+                                           (W8.of_int 255) 224) param_2 
+       param_1 param_0 param).
 auto .
 rewrite /is_init /valid /= .
 smt (all_cat BArray224.init_arrP).
@@ -30266,12 +29885,15 @@ lemma _addpstate_avx2_trace _st _b_st _pst _b_pst :
       ((is_init res.`2 0 224) /\ (valid res.`3))].
 proof.
 proc; auto .
-ecall (__addpst23456_avx2_trace param_0 (BArray224.init_arr (W8.of_int 255) 224) param (BArray200.init_arr (W8.of_int 255) 200)).
+ecall (__addpst23456_avx2_trace param_0 (BArray224.init_arr (W8.of_int 255)
+                                        224) param (BArray200.init_arr
+                                                   (W8.of_int 255) 200)).
 auto .
-ecall (__addpst01_avx2_trace param_2 (BArray224.init_arr (W8.of_int 255) 224) param_1 ( BArray200.init_arr (W8.of_int 255) 200)).
+ecall (__addpst01_avx2_trace param_2 (BArray224.init_arr (W8.of_int 255) 224) 
+       param_1 (BArray200.init_arr (W8.of_int 255) 200)).
 auto .
 rewrite /is_init /valid /= .
-smt (all_cat  BArray224.init_arrP  BArray200.init_arrP).
+smt (all_cat BArray224.init_arrP BArray200.init_arrP).
 qed .
 
 lemma __stavx2_pos_avx2_trace _pOS :
@@ -30463,7 +30085,7 @@ lemma __pstate_imem_avx2_trace _pst _b_pst _aT _buf _lEN _tRAILB :
       (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
       (((0 <= _buf) /\ (_buf <= 18446744073709551615)) /\
       ((((((0 <= _lEN) /\ (0 <= _aT)) /\ (_aT < 200)) /\
-        ((((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) ) < 200)) /\
+        (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) < 200)) /\
        (is_valid _buf _lEN)) /\
       (is_init _b_pst 0 200)))))) ==>
       ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
@@ -30474,7 +30096,7 @@ lemma __pstate_imem_avx2_trace _pst _b_pst _aT _buf _lEN _tRAILB :
        (res.`4 = (_buf + _lEN)))))) /\
       (valid res.`5))].
 proof.
-  proc; rewrite /=.
+ proc; rewrite /=.
   seq 9: (is_valid  _buf _lEN /\ valid trace___pstate_imem_avx2 /\
           0 <= _tRAILB /\ _tRAILB < 256 /\ 0 <= _lEN /\ 0 <= _aT /\ 0<=_buf /\
           aT %% 8 = 0 /\ _aT + _lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\ 0<= aT /\ aT < 200 /\
@@ -30577,8 +30199,7 @@ lemma __pabsorb_imem_avx2_trace _pst _b_pst _aT _st _b_st _buf _lEN _rATE8 _tRAI
       (((0 <= _buf) /\ (_buf <= 18446744073709551615)) /\
       (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
       (((0 <= _buf) /\ (_buf <= 18446744073709551615)) /\
-      ((((((((0 <= _lEN) /\ (0 <= _aT)) /\ (_aT < _rATE8)) /\
-          (0 < _rATE8)) /\
+      ((((((((0 <= _lEN) /\ (0 <= _aT)) /\ (_aT < _rATE8)) /\ (0 < _rATE8)) /\
          (_rATE8 < 200)) /\
         (is_valid _buf _lEN)) /\
        (is_init _b_pst 0 200)) /\
@@ -30586,8 +30207,8 @@ lemma __pabsorb_imem_avx2_trace _pst _b_pst _aT _st _b_st _buf _lEN _rATE8 _tRAI
       ((((0 <= res.`6) /\ (res.`6 <= 18446744073709551615)) /\
        ((is_init res.`2 0 200) /\ (is_init res.`5 0 224))) /\
       (valid res.`7))].
-proof.
-  proc. rewrite /= .
+  proof.
+   proc. rewrite /= .
   seq 43: (#pre /\ valid trace___pabsorb_imem_avx2) . by auto.
   sp.
   if .
@@ -30665,6 +30286,7 @@ proof.
     move => &m /> 2? h *.  smt(BArray224.init_arrP BArray200.init_arrP all_cat).
   auto.  smt(BArray224.init_arrP BArray200.init_arrP all_cat).
 qed .
+
 
 lemma __dumpstate_imem_avx2_trace _buf _lEN _st _b_st :
       hoare [M(Syscall).__dumpstate_imem_avx2 :
@@ -30842,12 +30464,13 @@ proof.
   auto. smt(BArray224.init_arrP).
 qed .
 
+
 lemma keccakf1600_4x_theta_sum_trace _a _b_a :
       hoare [M(Syscall).keccakf1600_4x_theta_sum :
       (((_b_a = b_a) /\ (_a = a)) /\ (is_init _b_a 0 800)) ==>
       ((is_init res.`2 0 160) /\ (valid res.`3))].
 proof.
-proc;auto.
+proc; auto .
   while(is_init b_c 0 (32*5) /\ 0<=y /\ is_init b_a 0 800 /\ valid trace_keccakf1600_4x_theta_sum).
   + auto.
     while(is_init b_c 0 (32*5) /\ 0<=y /\ is_init b_a 0 800 /\
@@ -30878,13 +30501,16 @@ lemma keccakf1600_4x_theta_rol_trace _c _b_c _r8 _r56 :
       (((_r56 = r56) /\ ((_r8 = r8) /\ ((_b_c = b_c) /\ (_c = c)))) /\
       (is_init _b_c 0 160)) ==> ((is_init res.`2 0 160) /\ (valid res.`3))].
 proof.
-  proc; auto.
-  while (is_init b_c 0 160 /\ is_init b_d 0 (x*32) /\ 0<=x /\ x<=5 /\ valid  trace_keccakf1600_4x_theta_rol).
-  + auto. ecall (keccakf1600_4x_rol_trace param_3 b_param param_2 param_1 param_0 param).
-    auto . rewrite /is_init /valid /= => &m /> *. smt(all_cat and_iota).
+proc; auto .
+while ((valid trace_keccakf1600_4x_theta_rol) /\ is_init b_c 0 160 /\ is_init b_d 0 (x*32) /\ 0<=x /\ x<=5).
+auto .
+ecall (keccakf1600_4x_rol_trace param_3 b_param param_2 param_1 param_0 param).
+auto .
+rewrite /is_init /valid /= => &m /> *.
+smt (all_cat and_iota).
 auto .
 rewrite /is_init /valid /= .
-smt (all_cat).
+smt (all_cat and_iota).
 qed .
 
 lemma keccakf1600_4x_rol_sum_trace _a _b_a _d _b_d _y _r8 _r56 :
@@ -30981,14 +30607,18 @@ smt (all_cat BArray800.init_arrP).
 auto . smt(BArray800.init_arrP).
 qed .
 
+    
 lemma _keccakf1600_avx2x4_trace _a _b_a :
       hoare [M(Syscall)._keccakf1600_avx2x4 :
       (((_b_a = b_a) /\ (_a = a)) /\ (is_init _b_a 0 800)) ==>
       ((is_init res.`2 0 800) /\ (valid res.`3))].
 proof.
 proc; auto .
-ecall (__keccakf1600_avx2x4_trace param (BArray800.init_arr (W8.of_int 255) 800)).
-auto . smt(all_cat BArray800.init_arrP).
+ecall (__keccakf1600_avx2x4_trace param (BArray800.init_arr (W8.of_int 255)
+                                        800)).
+auto .
+rewrite /is_init /valid /= .
+smt (all_cat BArray800.init_arrP).
 qed .
 
 lemma __state_init_avx2x4_trace _st _b_st :
@@ -31027,137 +30657,46 @@ proof.
 proc; inline *; auto .
 qed .
 
-lemma a1____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a1____aread_subu64 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 8) ? _lEN : 8)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 1)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))) /\
-       (res.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat).
-qed .
 
-lemma a1____addstate_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _tRAILB :
-      hoare [M(Syscall).a1____addstate_array_avx2x4 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf3 = b_buf3) /\
-       ((_buf3 = buf3) /\
-       ((_b_buf2 = b_buf2) /\
-       ((_buf2 = buf2) /\
-       ((_b_buf1 = b_buf1) /\
-       ((_buf1 = buf1) /\
-       ((_b_buf0 = b_buf0) /\
-       ((_buf0 = buf0) /\ ((_aT = aT) /\ ((_b_st = b_st) /\ (_st = st)))))))))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      (((((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\ (_aT < 200)) /\
-            ((_offset + _lEN) <= 1)) /\
-           (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) < 200)) /\
-          (is_init _b_buf0 _offset _lEN)) /\
-         (is_init _b_buf1 _offset _lEN)) /\
-        (is_init _b_buf2 _offset _lEN)) /\
-       (is_init _b_buf3 _offset _lEN)) /\
-      (is_init _b_st 0 800))))))) ==>
-      ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       (((is_init res.`2 0 800) /\
-        (res.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
-       (res.`4 = (_offset + _lEN)))))) /\
-      (valid res.`5))].
-proof.
-  proc; rewrite /= .
-  case (1 < _lEN). exfalso. smt().
-  seq 28: (#pre /\ _lEN <= 1 /\ valid  trace_a1____addstate_array_avx2x4). auto. smt().
-  seq 12: ( _lEN <= 1 /\ valid  trace_a1____addstate_array_avx2x4 /\
-            is_init b_buf0 _offset _lEN /\ is_init b_buf1 _offset _lEN /\
-            is_init b_buf2 _offset _lEN /\ is_init b_buf3  _offset _lEN /\
-            lO = (if _aT %% 8 = 0 then (_aT + _lEN)%%8 else 0) /\ 0 <= _tRAILB /\ _tRAILB < 256 /\
-            aLL =  _aT + _lEN + (if (_aT%%8 <> 0 && _aT%%8 + _lEN < 8 && _tRAILB <> 0) then 1 else 0) /\ 
-            tRAILB =  (if (_aT%%8 <> 0 && _aT %%8  + _lEN < 8 && _tRAILB <> 0) then 0 else _tRAILB) /\
-            dELTA = 0 /\  offset = _offset + _lEN - lO /\  0 <= _lEN /\
-            0 <= at /\ (if lO <> 0 || tRAILB <> 0  then at <= 96 else true) /\ 0 <= _offset /\ _offset + _lEN <= 1 ).
-  + seq 6:( valid  trace_a1____addstate_array_avx2x4 /\ 0 <= _tRAILB /\ _tRAILB < 256 /\
-            is_init b_buf0 _offset _lEN /\ is_init b_buf1 _offset _lEN /\
-            is_init b_buf2 _offset _lEN /\ is_init b_buf3  _offset _lEN /\
-            (aT + lEN)%%8 = (if _aT %% 8 = 0 then (_aT + _lEN)%%8 else 0) /\
-            aLL =  _aT + _lEN + (if (_aT%%8 <> 0 && _aT%%8 + _lEN < 8 && _tRAILB <> 0) then 1 else 0) /\ lEN <= 1 /\
-            tRAILB =  (if (_aT%%8 <> 0 && _aT%%8 + _lEN < 8 && _tRAILB <> 0) then 0 else _tRAILB) /\
-            dELTA = _lEN - (aT + lEN)%%8 /\  offset = _offset /\ 0 <= _lEN /\
-            0 <= at /\ (if (aT + lEN)%%8 <> 0 || tRAILB <> 0 then at <= 96 else true) /\ 0 <= _offset /\ _offset + _lEN <= 1).
-    + sp. if.
-      + if.
-        + auto.
-          ecall (a1____aread_subu64_trace param_27 b_param_3 param_26 param_25 param_24 param_23).
-          auto .
-          ecall (a1____aread_subu64_trace param_32 b_param_4 param_31 param_30 param_29 param_28).
-          auto .
-          ecall (a1____aread_subu64_trace param_37 b_param_5 param_36 param_35 param_34 param_33).
-          auto .
-          ecall (a1____aread_subu64_trace param_42 b_param_6 param_41 param_40 param_39 param_38).
-          auto . move => &m /> . rewrite /valid /= => *. smt(all_cat). 
-        if. exfalso. smt(). 
-        auto.
-        ecall (a1____aread_subu64_trace param_47 b_param_7 param_46 param_45 param_44 param_43).
-        auto .
-        ecall (a1____aread_subu64_trace param_52 b_param_8 param_51 param_50 param_49 param_48).
-        auto .
-        ecall (a1____aread_subu64_trace param_57 b_param_9 param_56 param_55 param_54 param_53).
-        auto .
-        ecall (a1____aread_subu64_trace param_62 b_param_10 param_61 param_60 param_59 param_58).
-        auto . move => &m /> . rewrite /valid /= => *.
-        smt(all_cat).
-      auto. rewrite /valid /= => &m /> *. smt(all_cat). 
-    sp. if. exfalso. smt().
-    auto. move => &m /> *. smt(all_cat).
-  if.
-  + auto.
-    ecall (a1____aread_subu64_trace param_3 b_param param_2 param_1 param_0 param). auto .
-    ecall (a1____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 param_4). auto .
-    ecall (a1____aread_subu64_trace param_13 b_param_1 param_12 param_11 param_10 param_9). auto .
-    ecall (a1____aread_subu64_trace param_18 b_param_2 param_17 param_16 param_15 param_14). auto .
-    rewrite /valid /= => &m /> * . 
-    smt(BArray800.init_arrP all_cat).
-  auto. rewrite /valid /= => &m />. smt(BArray800.init_arrP all_cat).        
-qed .
 
+require import Keccak_ASIZE.
+
+clone KECCAK_ARRAY_ASIZE as KECCAK1 with
+  op size <= 1, 
+  theory BArrayS <= BArray1.
+
+
+clone KECCAK_ARRAY_ASIZE as KECCAK2 with
+  op size <= 2, 
+  theory BArrayS <= BArray2.
+
+ 
+clone KECCAK_ARRAY_ASIZE as KECCAK32 with
+  op size <= 32, 
+  theory BArrayS <= BArray32.
+
+clone KECCAK_ARRAY_ASIZE as KECCAK33 with
+  op size <= 33, 
+  theory BArrayS <= BArray33.
+
+clone KECCAK_ARRAY_ASIZE as KECCAK64 with
+  op size <= 64, 
+  theory BArrayS <= BArray64.
+
+clone KECCAK_ARRAY_ASIZE as KECCAK128 with
+  op size <= 128, 
+  theory BArrayS <= BArray128.
+
+clone KECCAK_ARRAY_ASIZE as KECCAK536 with
+  op size <= 536, 
+  theory BArrayS <= BArray536.
+
+equiv a1_absorb_array_avx2x4_eq : M(Syscall).a1____absorb_array_avx2x4 ~ KECCAK1.M.__absorb_array_avx2x4 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim.
+qed.
+
+  
 lemma a1____absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _rATE8 _tRAILB :
       hoare [M(Syscall).a1____absorb_array_avx2x4 :
       (((_tRAILB = tRAILB) /\
@@ -31192,289 +30731,14 @@ lemma a1____absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 
        (is_init res.`2 0 800)) /\
       (valid res.`5))].
 proof.
- proc. rewrite /=.
-  case (1 < _lEN). exfalso. smt().
-  seq 60: (valid trace_a1____absorb_array_avx2x4 /\ #pre /\ _lEN <= 1). auto. smt().
-  sp. if .
-  + seq 20: (valid trace_a1____absorb_array_avx2x4 /\ 0<rATE8 /\ rATE8 < 200 /\
-             0 <= offset /\ offset <= 1). auto.
-    + ecall (a1____addstate_array_avx2x4_trace param_9 (BArray800.init_arr (W8.of_int 255) 800) param_8 param_7 b_param_2 param_6 b_param_1 param_5 b_param_0 param_4 b_param param_3 param_2 param_1).
-      auto. smt(all_cat BArray800.init_arrP).
-    if. auto.
-    + ecall (__addratebit_avx2x4_trace param_0 (BArray800.init_arr (W8.of_int 255) 800) param).
-      auto. smt(all_cat BArray800.init_arrP).
-    auto. smt(all_cat BArray800.init_arrP).
-  seq 26: (valid trace_a1____absorb_array_avx2x4 /\ 0<rATE8 /\ rATE8 < 200 /\
-           0 <= offset /\ offset <= 1).
-  + wp. ecall (a1____addstate_array_avx2x4_trace param_20 (BArray800.init_arr (W8.of_int 255) 800) param_19  param_18 b_param_6 param_17 b_param_5 param_16 b_param_4 param_15 
-       b_param_3 param_14 param_13 param_12). auto.
-    pose offset0 := _offset +  (if _aT <> 0 then (_rATE8-_aT) else 0).
-    while (valid trace_a1____absorb_array_avx2x4 /\ 0<rATE8 /\ rATE8 < 200 /\ _lEN <=1 /\
-           0 <= offset0 /\ 0 <= i /\ i <=iTERS /\ 0 <=  _offset /\
-           offset =  offset0 +   i* rATE8 /\ iTERS <= 1 /\
-           (i < iTERS =>  offset + rATE8 <= _lEN) /\  _offset <= offset0 /\
-           is_init b_buf0 _offset _lEN /\ is_init b_buf1  _offset _lEN /\
-           is_init b_buf2 _offset _lEN /\ is_init b_buf3  _offset  _lEN).
-    + auto. ecall (_keccakf1600_avx2x4_trace param_21 (BArray800.init_arr (W8.of_int 255) 800)).
-      auto .
-      ecall (a1____addstate_array_avx2x4_trace param_30 (BArray800.init_arr (W8.of_int 255) 800) param_29 
-       param_28 b_param_10 param_27 b_param_9 param_26 b_param_8 param_25 
-       b_param_7 param_24 param_23 param_22).
-      auto . rewrite /is_init /valid /= => &m /> *.  smt(all_cat BArray800.init_arrP).
-    if. auto.
-    + ecall (_keccakf1600_avx2x4_trace param_31 (BArray800.init_arr (W8.of_int 255) 800)). auto .
-      ecall (a1____addstate_array_avx2x4_trace param_40 (BArray800.init_arr (W8.of_int 255) 800) 
-       param_39 param_38 b_param_14 param_37 b_param_13 param_36 b_param_12 
-       param_35 b_param_11 param_34 param_33 param_32). auto.
-      rewrite /is_init /valid /= => &m /> *.  
-      split. smt(BArray800.init_arrP). move => /> *.
-      split. smt(all_cat BArray800.init_arrP). move => /> *.
-      split. split. smt(). split. smt(). split. smt(). split. smt(). smt().
-      smt(all_cat BArray800.init_arrP).
-    auto. rewrite /is_init /valid /= => &m /> *.  smt(all_cat BArray800.init_arrP).
-  auto.       
-  if. auto.
-  + ecall (__addratebit_avx2x4_trace param_11 (BArray800.init_arr (W8.of_int 255) 800) param_10).
-    auto . rewrite /is_init /valid /= => &m /> *.  smt(all_cat BArray800.init_arrP).
-  auto. rewrite /is_init /valid /= => &m /> *.  smt(all_cat BArray800.init_arrP).
+ conseq ( a1_absorb_array_avx2x4_eq) (KECCAK1.__absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
 qed.
 
-
-lemma a2____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a2____aread_subu64 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 8) ? _lEN : 8)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 2)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))) /\
-       (res.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat).
-qed .
-
-lemma a2____aread_subu128_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a2____aread_subu128 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 16) ? _lEN : 16)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 2)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))) /\
-       (res.`3 = ((16 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a2____aread_subu64_trace param_3 b_param param_2 param_1 param_0 param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a2____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a2____aread_subu256_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a2____aread_subu256 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 32) ? _lEN : 32)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 2)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))) /\
-       (res.`3 = ((32 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a2____aread_subu128_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a2____aread_subu128_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a2____addstate_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a2____addstate_array_avx2 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\ ((_buf = buf) /\ ((_b_st = b_st) /\ (_st = st))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 2)) /\
-        (is_init _b_buf _offset _lEN)) /\
-       (is_init _b_st 0 224)) /\
-      (_lEN <= 200))))))) ==>
-      ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       ((is_init res.`2 0 224) /\ (res.`3 = (_offset + _lEN)))))) /\
-      (valid res.`4))].
-proof.
-  proc; rewrite /=.
-  seq 27 : (#pre /\ valid trace_a2____addstate_array_avx2).
-  + by auto.
-  seq 17: ( valid  trace_a2____addstate_array_avx2 /\ _lEN <= 200 /\ is_init b_st 0 224 /\
-            is_init b_buf _offset dELTA  /\  0  <= _lEN /\ 0<=tRAILB /\ tRAILB <256 /\
-            dELTA  =  _lEN  /\  _offset + _lEN <= 2 /\ offset = _offset /\ 0 <=offset /\
-              lEN = 0).
-  + auto.
-    ecall(a2____aread_subu64_trace param_53 b_param_8 param_52 param_51 param_50 param_49). auto.  
-    rewrite /is_init /valid /trace /=.  smt(all_cat).
-  seq 14: ( valid  trace_a2____addstate_array_avx2 /\ _lEN <= 200 /\ is_init b_st 0 224 /\
-            is_init b_buf  _offset dELTA  /\  0  <= _lEN /\ 0<=tRAILB /\ tRAILB <256 /\
-            0 <= offset /\ dELTA  = _lEN /\ lEN = 0 /\ offset = _offset /\ _offset + _lEN <=2).
-  + auto.
-    ecall(a2____aread_subu256_trace param_48 b_param_7 param_47 param_46 param_45 param_44). auto.  
-    rewrite /is_init /valid /trace /=. move => &m /> *. smt(all_cat).
-  if. exfalso. smt().
-  auto. smt(BArray224.init_arrP all_cat). 
+  equiv a2_pabsorb_array_avx2_eq : M(Syscall).a2____pabsorb_array_avx2 ~ KECCAK2.M.__pabsorb_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim.
 qed.
-  
-
-
-lemma a2____pstate_array_avx2_trace _pst _b_pst _aT _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a2____pstate_array_avx2 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\
-       ((_buf = buf) /\ ((_aT = aT) /\ ((_b_pst = b_pst) /\ (_pst = pst)))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\ (_aT < 200)) /\
-         ((((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0))) < 200)) /\
-        ((_offset + _lEN) <= 2)) /\
-       (is_init _b_buf _offset _lEN)) /\
-      (is_init _b_pst 0 200))))))) ==>
-      ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       (((is_init res.`2 0 200) /\
-        (res.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
-       (res.`4 = (_offset + _lEN)))))) /\
-      (valid res.`5))].
-proof.
-admitted. (*proved for a32*)
 
 lemma a2____pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB :
       hoare [M(Syscall).a2____pabsorb_array_avx2 :
@@ -31494,7 +30758,7 @@ lemma a2____pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _offs
       (((((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\
              (_aT < _rATE8)) /\
             ((_offset + _lEN) <= 2)) /\
-           ((((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) ) < 200)) /\
+           (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) < 200)) /\
           (0 < _rATE8)) /\
          (_rATE8 < 200)) /\
         (is_init _b_buf _offset _lEN)) /\
@@ -31504,98 +30768,15 @@ lemma a2____pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _offs
        ((is_init res.`2 0 200) /\ (is_init res.`5 0 224))) /\
       (valid res.`7))].
 proof.
-admitted. (*proved for a32*)
+  conseq ( a2_pabsorb_array_avx2_eq) (KECCAK2.__pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
+qed.
 
+  equiv a2_absorb_array_avx2x4_eq : M(Syscall).a2____absorb_array_avx2x4 ~ KECCAK2.M.__absorb_array_avx2x4 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim.
+qed.
 
-lemma a2____addstate_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _tRAILB :
-      hoare [M(Syscall).a2____addstate_array_avx2x4 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf3 = b_buf3) /\
-       ((_buf3 = buf3) /\
-       ((_b_buf2 = b_buf2) /\
-       ((_buf2 = buf2) /\
-       ((_b_buf1 = b_buf1) /\
-       ((_buf1 = buf1) /\
-       ((_b_buf0 = b_buf0) /\
-       ((_buf0 = buf0) /\ ((_aT = aT) /\ ((_b_st = b_st) /\ (_st = st)))))))))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      (((((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\ (_aT < 200)) /\
-            ((_offset + _lEN) <= 2)) /\
-           (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) < 200)) /\
-          (is_init _b_buf0 _offset _lEN)) /\
-         (is_init _b_buf1 _offset _lEN)) /\
-        (is_init _b_buf2 _offset _lEN)) /\
-       (is_init _b_buf3 _offset _lEN)) /\
-      (is_init _b_st 0 800))))))) ==>
-      ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       (((is_init res.`2 0 800) /\
-        (res.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
-       (res.`4 = (_offset + _lEN)))))) /\
-      (valid res.`5))].
-proof.
-proc; rewrite /= .
-  case (2 < _lEN). exfalso. smt().
-  pose at_len_mod:= (if _aT %% 8 = 0 then (_aT + _lEN)%%8 else if _aT%%8 + _lEN < 8 then 0 else (_lEN + _aT%%8)%%8 ).
-  seq 28: (#pre /\ _lEN <= 2 /\ valid  trace_a2____addstate_array_avx2x4). auto. smt().
-  seq 12: ( _lEN <= 2 /\ valid  trace_a2____addstate_array_avx2x4 /\
-            is_init b_buf0 _offset _lEN /\ is_init b_buf1 _offset _lEN /\
-            is_init b_buf2 _offset _lEN /\ is_init b_buf3  _offset _lEN /\
-            lO =  at_len_mod /\ 0 <= _tRAILB /\ _tRAILB < 256 /\
-            aLL =  _aT + _lEN + (if (_aT%%8 <> 0 && _aT%%8 + _lEN < 8 && _tRAILB <> 0) then 1 else 0) /\ 
-            tRAILB =  (if (_aT%%8 <> 0 && _aT %%8  + _lEN < 8 && _tRAILB <> 0) then 0 else _tRAILB) /\
-            dELTA = 0 /\  offset = _offset + _lEN - lO /\  0 <= _lEN /\
-            0 <= at /\ (if lO <> 0 || tRAILB <> 0  then at <= 96 else true) /\ 0 <= _offset /\ _offset + _lEN <= 2 ).
-  + seq 6:( valid  trace_a2____addstate_array_avx2x4 /\ 0 <= _tRAILB /\ _tRAILB < 256 /\
-            is_init b_buf0 _offset _lEN /\ is_init b_buf1 _offset _lEN /\
-            is_init b_buf2 _offset _lEN /\ is_init b_buf3  _offset _lEN /\
-            (aT + lEN)%%8 =  at_len_mod  /\
-            aLL =  _aT + _lEN + (if (_aT%%8 <> 0 && _aT%%8 + _lEN < 8 && _tRAILB <> 0) then 1 else 0) /\ lEN <= 2 /\
-            tRAILB =  (if (_aT%%8 <> 0 && _aT%%8 + _lEN < 8 && _tRAILB <> 0) then 0 else _tRAILB) /\
-            dELTA = _lEN - (aT + lEN)%%8 /\  offset = _offset /\ 0 <= _lEN /\
-            0 <= at /\ (if (aT + lEN)%%8 <> 0 || tRAILB <> 0 then at <= 96 else true) /\ 0 <= _offset /\ _offset + _lEN <= 2).
-    + sp. if.
-      + if.
-        + auto.
-          ecall (a2____aread_subu64_trace param_27 b_param_3 param_26 param_25 param_24 param_23).
-          auto .
-          ecall (a2____aread_subu64_trace param_32 b_param_4 param_31 param_30 param_29 param_28).
-          auto .
-          ecall (a2____aread_subu64_trace param_37 b_param_5 param_36 param_35 param_34 param_33).
-          auto .
-          ecall (a2____aread_subu64_trace param_42 b_param_6 param_41 param_40 param_39 param_38).
-          auto . move => &m /> . rewrite /valid /= => *. smt(all_cat). 
-        if. exfalso. smt(). 
-        auto.
-        ecall (a2____aread_subu64_trace param_47 b_param_7 param_46 param_45 param_44 param_43).
-        auto .
-        ecall (a2____aread_subu64_trace param_52 b_param_8 param_51 param_50 param_49 param_48).
-        auto .
-        ecall (a2____aread_subu64_trace param_57 b_param_9 param_56 param_55 param_54 param_53).
-        auto .
-        ecall (a2____aread_subu64_trace param_62 b_param_10 param_61 param_60 param_59 param_58).
-        auto . move => &m /> . rewrite /valid /= => *. smt(all_cat).
-      auto. rewrite /valid /= => &m /> *. smt(all_cat). 
-    sp. if. exfalso. smt().
-    auto. move => &m /> *. smt(all_cat).
-  if.
-  + auto.
-    ecall (a2____aread_subu64_trace param_3 b_param param_2 param_1 param_0 param). auto .
-    ecall (a2____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 param_4). auto .
-    ecall (a2____aread_subu64_trace param_13 b_param_1 param_12 param_11 param_10 param_9). auto .
-    ecall (a2____aread_subu64_trace param_18 b_param_2 param_17 param_16 param_15 param_14). auto .
-    rewrite /valid /= => &m /> * . 
-    smt(BArray800.init_arrP all_cat).
-  auto. rewrite /valid /= => &m />. smt(BArray800.init_arrP all_cat).        
-qed .
 
 lemma a2____absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _rATE8 _tRAILB :
       hoare [M(Syscall).a2____absorb_array_avx2x4 :
@@ -31630,639 +30811,14 @@ lemma a2____absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 
       ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
        (is_init res.`2 0 800)) /\
       (valid res.`5))].
-proof. 
-  proc; rewrite /=.
-  seq 60: (valid trace_a2____absorb_array_avx2x4 /\ #pre). by auto.
-  sp.
-  if .
-  + seq 20: ( 0 <= offset /\ offset <= 2 /\ valid trace_a2____absorb_array_avx2x4 /\
-              0<=aT /\ aT<=200 /\ 0 < rATE8 /\ rATE8 < 200).
-    + auto.
-      ecall (a2____addstate_array_avx2x4_trace param_9 (BArray800.init_arr (W8.of_int 255) 800)
-             param_8  param_7 b_param_2 param_6 b_param_1 param_5 b_param_0 param_4 b_param param_3              param_2 param_1). auto .
-      rewrite /valid /= => &m /> *. smt(all_cat BArray800.init_arrP) .
-    if. auto.
-    + ecall (__addratebit_avx2x4_trace param_0 (BArray800.init_arr (W8.of_int 255) 800) param).           auto. rewrite /valid /= => &m /> *. smt(all_cat BArray800.init_arrP) .
-    auto. smt(all_cat BArray800.init_arrP).
-  seq 6: (valid  trace_a2____absorb_array_avx2x4 /\ 0 <= offset /\
-          is_init b_buf0 offset lEN /\ is_init b_buf1 offset lEN /\
-          is_init b_buf2 offset lEN /\ is_init b_buf3 offset lEN /\   offset + lEN  <= 2 /\
-          0 < rATE8 /\ rATE8 < 200 /\ 0<=lEN /\ 0<=tRAILB /\ tRAILB < 256 ).
-  + auto.
-    while ( valid trace_a2____absorb_array_avx2x4 /\ 0 <= offset /\ 0<=i /\ i<=iTERS /\
-            iTERS = lEN %/ rATE8 /\ rATE8 * iTERS <= lEN /\ aLL =_aT + _lEN /\ lEN <= 2 /\
-            lEN + offset - i * rATE8 = _offset + _lEN /\ _offset + _lEN <= 2 /\
-            is_init b_buf0 offset ((iTERS - i)*rATE8 +  aLL%%rATE8) /\  aLL =_aT + _lEN /\
-            is_init b_buf1 offset ((iTERS - i)*rATE8 +  aLL%%rATE8) /\
-            is_init b_buf2 offset ((iTERS - i)*rATE8 +  aLL%%rATE8) /\
-            is_init b_buf3 offset ((iTERS - i)*rATE8 +  aLL%%rATE8) /\
-            0 < rATE8 /\ rATE8 < 200 /\ 0<=lEN /\ 0<=tRAILB /\ tRAILB < 256).
-    + auto. ecall (_keccakf1600_avx2x4_trace param_21 (BArray800.init_arr (W8.of_int 255) 800)).
-      auto.
-      ecall(a2____addstate_array_avx2x4_trace param_30 (BArray800.init_arr (W8.of_int 255) 800)
-                  param_29 param_28 b_param_10 param_27 b_param_9 param_26 b_param_8
-                  param_25 b_param_7 param_24 param_23 param_22). auto.
-      rewrite /valid /is_init /= => &m /> *.
-      have ?: (rATE8{m} <= (lEN{m} %/ rATE8{m} - i{m}) * rATE8{m} ). smt().
-      split. smt(BArray800.init_arrP). smt(all_cat).
-    if. 
-    + auto. ecall ( _keccakf1600_avx2x4_trace param_31 (BArray800.init_arr (W8.of_int 255) 800)).   
-      auto.
-      ecall(a2____addstate_array_avx2x4_trace param_40 (BArray800.init_arr (W8.of_int 255) 800)  
-             param_39 param_38 b_param_14 param_37 b_param_13 param_36 b_param_12
-             param_35 b_param_11 param_34 param_33 param_32). auto.
-      rewrite /valid /is_init /= => &m /> *. split. smt(BArray800.init_arrP).
-      move => *. 
-      have: ((lEN{m} - (rATE8{m} - aT{m})) %/ rATE8{m} * rATE8{m} +
-   (aT{m} + lEN{m}) %% rATE8{m} = lEN{m} - (rATE8{m} - aT{m}) ).
-      + have h: ((lEN{m} - (rATE8{m} - aT{m})) %/ rATE8{m} * rATE8{m} = lEN{m} - (rATE8{m} - aT{m}) - (lEN{m} - (rATE8{m} - aT{m}))%%rATE8{m}). smt().  rewrite h.
-        have h1: ((lEN{m} - (rATE8{m} - aT{m})) %% rATE8{m} = (lEN{m} + aT{m} - rATE8{m}) %% rATE8{m}). smt(). have h2:((lEN{m} + aT{m} - rATE8{m}) %% rATE8{m} = (lEN{m} + aT{m}) %% rATE8{m}). 
-have /= ? := modzMDr (-1) (lEN{m} + aT{m}) (rATE8{m}). smt(). smt(). 
-      smt(all_cat).
-    auto. smt(all_cat).          
-  seq 20: ( 0 <= offset /\ offset <= 2 /\ valid trace_a2____absorb_array_avx2x4 /\
-              0<=aT /\ aT<=200 /\ 0 < rATE8 /\ rATE8 < 200).
-  + auto.
-      ecall (a2____addstate_array_avx2x4_trace param_20 (BArray800.init_arr (W8.of_int 255) 800)
-             param_19  param_18 b_param_6 param_17 b_param_5 param_16 b_param_4 param_15
-             b_param_3 param_14  param_13 param_12). auto .
-      rewrite /valid /= => &m /> *. smt(all_cat BArray800.init_arrP) .
-    if. auto.
-    + ecall (__addratebit_avx2x4_trace param_11 (BArray800.init_arr (W8.of_int 255) 800) param_10).           auto. rewrite /valid /= => &m /> *. smt(all_cat BArray800.init_arrP) .
-    auto. smt(all_cat BArray800.init_arrP).
-qed .
-
-
-
-
-
-
-lemma a32____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a32____aread_subu64 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 8) ? _lEN : 8)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 32)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))) /\
-       (res.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
 proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat).
-qed .
-
-lemma a32____aread_bcast_4subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a32____aread_bcast_4subu64 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 8) ? _lEN : 8)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 32)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))) /\
-       (res.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a32____aread_subu64_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a32____aread_subu128_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a32____aread_subu128 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 16) ? _lEN : 16)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 32)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))) /\
-       (res.`3 = ((16 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a32____aread_subu64_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a32____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a32____aread_subu256_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a32____aread_subu256 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 32) ? _lEN : 32)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 32)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))) /\
-       (res.`3 = ((32 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a32____aread_subu128_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a32____aread_subu128_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a32____awrite_subu64_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a32____awrite_subu64 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 32)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) /\
-          (((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) <=
-         18446744073709551615)))))))))) (iota_ 0 32))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))))))
-        (iota_ 0 32)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-       (res.`4 =
-       (_lEN - ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))))) /\
-      (valid res.`5))].
-proof.
-proc;auto .
-rewrite /is_init /valid /= . smt (all_cat and_iota).
-qed .
-
-lemma a32____awrite_subu128_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a32____awrite_subu128 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 32)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))) /\
-          (((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))) <=
-         18446744073709551615)))))))))) (iota_ 0 32))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))))))
-        (iota_ 0 32)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-       (res.`4 =
-       (_lEN -
-       ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))))) /\
-      (valid res.`5))].
-proof.
-proc; rewrite /=.
-  seq 7: (#pre /\ valid trace_a32____awrite_subu128). by auto.
-  if.
-  + if.
-    + auto.  move => &m />.
-      smt(all_cat and_iota). 
-    auto. ecall (a32____awrite_subu64_trace param_3 b_param param_2 param_1 param_0 param). auto.
-    move => &m />.  rewrite  /is_init /valid /=. move => *.
-    smt(all_cat and_iota).
-  auto. move => /> *. smt(all_cat and_iota).
+ conseq ( a2_absorb_array_avx2x4_eq) (KECCAK2.__absorb_array_avx2x4_trace _st _b_st _aT _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
 qed.
 
-
-
-lemma a32____awrite_subu256_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a32____awrite_subu256 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 32)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))) /\
-          (((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))) <=
-         18446744073709551615)))))))))) (iota_ 0 32))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))))))
-        (iota_ 0 32)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-       (res.`4 =
-       (_lEN -
-       ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-auto .
-ecall (a32____awrite_subu128_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /= => &m /> *.
-smt (all_cat and_iota).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-qed .
-
-lemma a32____addstate_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a32____addstate_array_avx2 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\ ((_buf = buf) /\ ((_b_st = b_st) /\ (_st = st))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 32)) /\
-        (is_init _b_buf _offset _lEN)) /\
-       (is_init _b_st 0 224)) /\
-      (_lEN <= 200))))))) ==>
-      ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       ((is_init res.`2 0 224) /\ (res.`3 = (_offset + _lEN)))))) /\
-      (valid res.`4))].
-proof.
-  proc; rewrite /=.
-  seq 27 : (#pre /\ valid trace_a32____addstate_array_avx2).
-  + by auto.
-  seq 31: ( valid  trace_a32____addstate_array_avx2 /\ _lEN <= 200 /\
-            is_init b_buf _offset dELTA  /\  0  <= _lEN /\ 0<=tRAILB /\ tRAILB <256 /\
-            dELTA  =  _lEN  /\_offset + _lEN <= 32 /\ offset = _offset /\ 0<= offset /\
-              lEN = 0).
-  + auto.
-    ecall(a32____aread_subu256_trace param_48 b_param_7 param_47 param_46 param_45 param_44). auto. 
-    ecall(a32____aread_subu64_trace param_53 b_param_8 param_52 param_51 param_50 param_49). auto.  
-    rewrite /is_init /valid /trace /=. move => &m /> *.
-    smt(all_cat).
-  if. exfalso. smt().
-  auto. smt(all_cat BArray224.init_arrP).
-qed.
-
-lemma a32____pstate_array_avx2_trace _pst _b_pst _aT _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a32____pstate_array_avx2 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\
-       ((_buf = buf) /\ ((_aT = aT) /\ ((_b_pst = b_pst) /\ (_pst = pst)))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\ (_aT < 200)) /\
-         ((((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) ) < 200)) /\
-        ((_offset + _lEN) <= 32)) /\
-       (is_init _b_buf _offset _lEN)) /\
-      (is_init _b_pst 0 200))))))) ==>
-      ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       (((is_init res.`2 0 200) /\
-        (res.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
-       (res.`4 = (_offset + _lEN)))))) /\
-      (valid res.`5))].
-proof.
-  proc; rewrite /=.
-  seq 16: ( is_init b_buf _offset _lEN /\ valid trace_a32____pstate_array_avx2 /\  0 <= _offset /\
-          0 <= _tRAILB /\ _tRAILB < 256 /\0 <= _lEN /\0 <= _aT /\ offset = _offset /\
-          aT %% 8 = 0 /\ _aT + _lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\ 0<= aT /\ aT < 200 /\
-          aLL = _aT + _lEN + (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-          tRAILB =( if 0 < lO /\ lO + _lEN < 8 then 0 else _tRAILB) /\ lO = _aT %% 8 /\
-          at=(if 0 < lO /\ lO + _lEN < 8 then _aT %/ 8 else  aT%/8)/\ _offset + _lEN <=32 /\
-          lEN =(if 0 < lO then if lO + _lEN < 8 then 0 else  _lEN - 8 + lO else _lEN)  /\
-          aT =(if 0 < lO then if lO + _lEN < 8 then 0 else  _aT + 8 - lO else _aT)  /\
-          dELTA = if 0 < lO then if lO + _lEN < 8 then _lEN else 8 - lO else 0).
-  + sp. if.
-    + if.
-      + auto. ecall(a32____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 param_4).           auto. rewrite  /valid /= => &m /> *. smt(all_cat).
-      if.
-      + auto.  rewrite /valid /= => &m /> *. smt(all_cat).
-      auto. ecall(a32____aread_subu64_trace param_13 b_param_1 param_12 param_11 param_10 param_9).       auto. rewrite /valid /= => &m /> *. smt(all_cat).
-    auto. rewrite  /valid /= => &m /> *. smt().
-  seq 1:(is_init b_buf  _offset _lEN /\ valid trace_a32____pstate_array_avx2 /\
-          0 <= _tRAILB /\ _tRAILB < 256 /\ 0<= _aT /\ 0<= _offset /\ 0 <= at /\
-          aT %% 8 = 0 /\ _aT + _lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\ 0 <= aT /\
-          aLL = _aT + _lEN + (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-          offset + dELTA =  _offset + _lEN - lEN /\  _offset + _lEN <=32 /\
-          lEN <= _lEN /\ 0<=lEN /\ 0<=dELTA /\ 0<= offset /\ offset + dELTA <=32 /\
-          tRAILB =( if 0 < lO /\ lO + _lEN < 8 then 0 else _tRAILB) /\ lEN < 32 /\
-          8 * at <= _aT + _lEN - lEN /\  _offset + _lEN = offset + lEN + dELTA).
-  + if. auto.
-    + while(is_init b_buf  _offset _lEN /\ valid trace_a32____pstate_array_avx2 /\
-          _lEN < 200 /\ 32 <= lEN /\ lEN <= _lEN /\ _offset + _lEN <=32 /\
-          0 <= _tRAILB /\ _tRAILB < 256 /\  0 <= aT /\ _aT + _lEN = aT + lEN /\  0<= _offset /\
-          aT %% 8 = 0 /\ aT + lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\ aT%/8 <=  at /\
-          aLL = _aT + _lEN + (if 0 < lO /\ lO + lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-          offset =  _offset + (_lEN - lEN) +( at - aT%/8) * 8 /\
-          tRAILB =( if 0 < lO /\ lO + _lEN < 8 then 0 else _tRAILB) /\
-          (at - aT%/8) %% 4 = 0 /\ dELTA = 0 /\
-          0<= offset /\
-          (at < aT %/ 8 + 4 * (lEN %/ 32) =>  32 <= (lEN - (at - aT%/8) * 8)) /\
-          (at - aT%/8) * 8 <= lEN - lEN%%32 /\ at <= aT %/ 8 + 4 * (lEN %/ 32)).
-      + auto. smt(all_cat).
-      auto. smt(all_cat).
-    auto. smt().
-  seq 1:(is_init b_buf _offset _lEN /\ valid trace_a32____pstate_array_avx2 /\ 0<= _offset /\
-          0 <= _tRAILB /\ _tRAILB < 256 /\ 0<= _aT /\  _offset + _lEN <= 32 /\ 0<=at /\
-          aT %% 8 = 0 /\ _aT + _lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\ 0 <= aT /\
-          aLL = _aT + _lEN + (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-          offset + dELTA =  _offset + _lEN - lEN /\
-          lEN <= _lEN /\ 0<=lEN /\ 0<=dELTA /\ 0<= offset /\ offset + dELTA + lEN <=32 /\ _offset + _lEN = offset + lEN + dELTA /\
-          tRAILB =( if 0 < lO /\ lO + _lEN < 8 then 0 else _tRAILB) /\ lEN < 16 /\
-          8 * at <= _aT + _lEN - lEN).
-  + if.
-    + auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat).
-    auto.  rewrite /trace /is_init /valid /= => &m /> *. smt().
-  seq 1:(is_init b_buf _offset _lEN /\ valid trace_a32____pstate_array_avx2 /\ 0<=_offset /\
-          0 <= _tRAILB /\ _tRAILB < 256 /\ 0<= _aT /\  _offset + _lEN <= 32 /\ 0 <=at /\
-          aT %% 8 = 0 /\ _aT + _lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\ 0 <= aT /\
-          aLL = _aT + _lEN + (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-          offset + dELTA =  _offset + _lEN - lEN /\
-          lEN <= _lEN /\ 0<=lEN /\ 0<=dELTA /\ 0<= offset /\ offset + dELTA + lEN <=32 /\   _offset +  _lEN = offset + lEN + dELTA /\
-          tRAILB =( if 0 < lO /\ lO + _lEN < 8 then 0 else _tRAILB) /\ lEN < 8 /\
-          8 * at <= _aT + _lEN - lEN).
-  + if.
-    + auto. smt(all_cat).
-    auto. rewrite /trace /is_init /valid /= => &m /> *. smt().
-  sp. if.  
-  + auto. ecall(a32____aread_subu64_trace param_3 b_param param_2 param_1 param_0 param). auto.   
-    rewrite /trace /is_init /valid /= => &m /> *.
-    split. move => *.  
-    + split. smt(all_cat BArray200.init_arrP).
-      move => *. split. smt( BArray200.init_arrP).
-      smt(all_cat).  
-    move => *. split. smt(all_cat BArray200.init_arrP). move => *. split. smt(BArray200.init_arrP). smt(all_cat).
-  auto. rewrite /trace /is_init /valid /= => &m /> *. smt(all_cat BArray200.init_arrP).
+equiv a32_pabsorb_array_avx2_eq : M(Syscall).a32____pabsorb_array_avx2 ~ KECCAK32.M.__pabsorb_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim.
 qed.
 
 lemma a32____pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB :
@@ -32283,7 +30839,7 @@ lemma a32____pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _off
       (((((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\
              (_aT < _rATE8)) /\
             ((_offset + _lEN) <= 32)) /\
-           ((((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0))) < 200)) /\
+           (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) < 200)) /\
           (0 < _rATE8)) /\
          (_rATE8 < 200)) /\
         (is_init _b_buf _offset _lEN)) /\
@@ -32293,134 +30849,15 @@ lemma a32____pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _off
        ((is_init res.`2 0 200) /\ (is_init res.`5 0 224))) /\
       (valid res.`7))].
 proof.
-  proc; rewrite /=.
-  seq 53: (valid trace_a32____pabsorb_array_avx2 /\ #pre). by auto.
-  sp.
-  if .
-  + seq 14: ( 0 <= offset /\ offset <= 32 /\ valid trace_a32____pabsorb_array_avx2 /\
-              0<=aT /\ aT<200 /\ 0 < rATE8 /\ rATE8 < 200).
-    + auto.
-      ecall (a32____pstate_array_avx2_trace param_10 (BArray200.init_arr (W8.of_int 255) 200)
-             param_9  param_8 b_param param_7 param_6 param_5). auto .
-      rewrite /valid /=. smt(all_cat BArray200.init_arrP) .
-    if. sp.
-    + if.  auto.
-      + ecall(__addratebit_avx2_trace param_0 (BArray224.init_arr (W8.of_int 255) 224) param). auto.
-        ecall (__addpst01_avx2_trace param_2 (BArray224.init_arr (W8.of_int 255) 224)
-               param_1 (BArray200.init_arr (W8.of_int 255) 200)). auto .
-        while( 0 <= offset /\ offset <= 32 /\ valid trace_a32____pabsorb_array_avx2 /\
-               0<=i /\  0<=aT /\ aT<200). auto. smt(all_cat).
-        auto. rewrite /valid /= => &m /> *. smt(all_cat BArray200.init_arrP BArray224.init_arrP).
-      auto .
-      ecall (_addpstate_avx2_trace param_4 (BArray224.init_arr (W8.of_int 255) 224)  param_3
-              (BArray200.init_arr (W8.of_int 255) 200)). auto.
-      while (0 <= offset /\ offset < W64.modulus /\ valid trace_a32____pabsorb_array_avx2 /\
-               0<=i /\  0<=aT /\ aT<200 /\ 0 < rATE8 /\ rATE8 < 200). auto. smt(all_cat).
-      auto .  rewrite /valid /= => &m /> *. smt(all_cat BArray200.init_arrP BArray224.init_arrP).
-    auto. smt(all_cat BArray200.init_arrP BArray224.init_arrP).     
-  seq 6: (valid  trace_a32____pabsorb_array_avx2 /\ 0 <= offset /\
-          is_init b_buf offset lEN /\  offset + lEN  <= 32 /\ 0<=aT /\
-          aT<200 /\ 0 < rATE8 /\ rATE8 < 200 /\ 0<=lEN /\ 0<=tRAILB /\ tRAILB < 256 ).
-  + auto.
-    while ( valid  trace_a32____pabsorb_array_avx2 /\ 0 <= offset /\ 0<=i /\ i<=iTERS /\
-            iTERS = lEN %/ rATE8 /\ rATE8 * iTERS <= lEN /\ aLL =_aT + _lEN /\ lEN <= 32 /\
-            lEN + offset - i * rATE8 = _offset + _lEN /\ _offset + _lEN <=32 /\
-            is_init b_buf offset ((iTERS - i)*rATE8 +  aLL%%rATE8) /\ aT = 0 /\ aLL =_aT + _lEN /\
-            aT<rATE8 /\ 0 < rATE8 /\ rATE8 < 200 /\ 0<=lEN /\ 0<=tRAILB /\ tRAILB < 256).
-    + auto. ecall (_keccakf1600_avx2_trace param_24 (BArray224.init_arr (W8.of_int 255) 224)). auto.
-      ecall(a32____addstate_array_avx2_trace param_29 (BArray224.init_arr (W8.of_int 255) 224)
-                  param_28 b_param_2 param_27 param_26 param_25). auto. 
-      rewrite /valid /is_init /= => &m /> *.
-      have ?: (rATE8{m} <= (lEN{m} %/ rATE8{m} - i{m}) * rATE8{m} ). smt().
-      split. smt(BArray224.init_arrP). move => *.
-      smt(all_cat).
-    auto. 
-    if. 
-    + auto. ecall ( _keccakf1600_avx2_trace param_30 (BArray224.init_arr (W8.of_int 255) 224)).   
-      auto. ecall (_addpstate_avx2_trace param_32 (BArray224.init_arr (W8.of_int 255) 224)  
-                   param_31 (BArray200.init_arr (W8.of_int 255) 200)). auto.
-      ecall (a32____pstate_array_avx2_trace param_38 (BArray200.init_arr (W8.of_int 255) 200)
-             param_37 param_36 b_param_3 param_35 param_34 param_33). auto.
-      rewrite /valid /is_init /= => &m /> *. split. smt(BArray200.init_arrP).
-      move => *. split. smt(BArray224.init_arrP). move => *.
-      have: ((lEN{m} - (rATE8{m} - aT{m})) %/ rATE8{m} * rATE8{m} +
-   (aT{m} + lEN{m}) %% rATE8{m} = lEN{m} - (rATE8{m} - aT{m}) ).
-      + have h: ((lEN{m} - (rATE8{m} - aT{m})) %/ rATE8{m} * rATE8{m} = lEN{m} - (rATE8{m} - aT{m}) - (lEN{m} - (rATE8{m} - aT{m}))%%rATE8{m}). smt().  rewrite h.
-        have h1: ((lEN{m} - (rATE8{m} - aT{m})) %% rATE8{m} = (lEN{m} + aT{m} - rATE8{m}) %% rATE8{m}). smt(). have h2:((lEN{m} + aT{m} - rATE8{m}) %% rATE8{m} = (lEN{m} + aT{m}) %% rATE8{m}). 
-have /= ? := modzMDr (-1) (lEN{m} + aT{m}) (rATE8{m}). smt(). smt(). 
-      smt(all_cat). 
-    auto. smt(all_cat).          
-  if.  
-  + auto. 
-    ecall (__addratebit_avx2_trace param_12 (BArray224.init_arr (W8.of_int 255) 224) param_11).
-    auto .
-    ecall (a32____addstate_array_avx2_trace param_17 (BArray224.init_arr (W8.of_int 255) 224) 
-           param_16 b_param_0 param_15 param_14 param_13). auto .
-    rewrite /valid /= => &m /> *.  smt(all_cat BArray200.init_arrP BArray224.init_arrP).
-  if.
-  + auto .
-    ecall (a32____pstate_array_avx2_trace param_23 (BArray200.init_arr (W8.of_int 255) 200) param_22           param_21 b_param_1 param_20 param_19 param_18).
-    auto . rewrite /valid /= => &m /> *.  smt(all_cat BArray200.init_arrP BArray224.init_arrP).
-  auto.  smt(all_cat BArray200.init_arrP BArray224.init_arrP).
-qed .
-
-lemma a32____dumpstate_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st :
-      hoare [M(Syscall).a32____dumpstate_array_avx2 :
-      (((_b_st = b_st) /\
-       ((_st = st) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 32)) /\
-      (is_init _b_st 0 224)))))) ==>
-      ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
-       (((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-         ((0 <= (_offset + _lEN)) /\
-         ((_offset + _lEN) <= 18446744073709551615)))))) (iota_ 0 32))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
-        (iota_ 0 32)))) /\
-       (((0 <=
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224))) /\
-        (((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)) <=
-        18446744073709551615)) /\
-       (res.`3 = _offset +
-       ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)))))) /\
-      (valid res.`4))].
-proof.
-  proc; rewrite /= .
-  seq 47: (#pre /\ valid trace_a32____dumpstate_array_avx2). by auto.
-  sp.
-  seq 1: ( valid trace_a32____dumpstate_array_avx2 /\
-          (forall k, 0 <= k < 32 => is_init_cell b_buf k = (is_init_cell _b_buf k \/ _offset <=k  /\ k < _offset + (if _lEN < 8 then _lEN else 8))) /\ 0<=_lEN /\ lEN = _lEN - (if _lEN < 8 then _lEN else 8) /\
-          dELTA = (if _lEN < 8 then _lEN else 8) /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 32).
-  + if.
-    + auto.
-      ecall(a32____awrite_subu256_trace param_48 b_param_8 param_47 param_46 param_45 param_44).
-      auto. rewrite /valid /is_init /= => &m /> *.  smt(all_cat and_iota).
-    auto.
-    ecall(a32____awrite_subu256_trace param_53 b_param_9 param_52 param_51  param_50 param_49). 
-    auto. rewrite /valid /is_init /= => &m /> *.  smt(all_cat and_iota). 
-  seq 13: ( valid trace_a32____dumpstate_array_avx2 /\
-          (forall k, 0 <= k < 32 => is_init_cell b_buf k = (is_init_cell _b_buf k \/ _offset <=k /\             k < _offset + _lEN)) /\ lEN = 0 /\ 0 <= _lEN
-            /\ dELTA = _lEN /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 32).
-  + auto. ecall(a32____awrite_subu256_trace param_43 b_param_7 param_42 param_41 param_40 param_39).
-    auto.  rewrite /valid /is_init /= => &m /> *. 
-    smt(all_cat and_iota).
-  if. exfalso. smt().
-  auto. rewrite /valid /= => &m /> *. split.  smt(and_iota). smt(all_cat).
+ conseq ( a32_pabsorb_array_avx2_eq) (KECCAK32.__pabsorb_array_avx2_trace _pst _b_pst _aT _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
 qed.
+
+equiv a32_squeeze_array_avx2_eq : M(Syscall).a32____squeeze_array_avx2 ~ KECCAK32.M.__squeeze_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim. 
+qed.
+
 
 lemma a32____squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8 :
       hoare [M(Syscall).a32____squeeze_array_avx2 :
@@ -32433,8 +30870,7 @@ lemma a32____squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8 
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
       (((0 <= (_offset + _lEN)) /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 < _rATE8)) /\
-        (_rATE8 < 200)) /\
+      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 < _rATE8)) /\ (_rATE8 < 200)) /\
        ((_offset + _lEN) <= 32)) /\
       (is_init _b_st 0 224)))))) ==>
       ((((foldr (fun x => (fun acc => (x /\ acc))) true
@@ -32454,120 +30890,15 @@ lemma a32____squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8 
        (is_init res.`4 0 224)) /\
       (valid res.`5))].
 proof.
-  proc; rewrite /= .
-  seq 19: (#pre /\ valid trace_a32____squeeze_array_avx2). by auto.
-  sp. if .
-  + seq 1: (lO = _lEN %% rATE8/\offset + lO <= 32 /\ 0 <= offset/\offset = _offset + _lEN - lO /\
-            0 < rATE8 /\ rATE8 < 200 /\ 0 <= _lEN /\ 0<= _offset /\  _offset + _lEN <=32 /\
-           (forall k, 0 <= k < 32 => is_init_cell b_buf k = (is_init_cell _b_buf k \/ _offset <=k /\             k < _offset + _lEN - lO)) /\ valid trace_a32____squeeze_array_avx2).
-    + if .
-      + while(valid trace_a32____squeeze_array_avx2 /\ lO = _lEN %% rATE8 /\ iTERS = _lEN%/rATE8 /\
-             _offset + iTERS * rATE8 + lO <= 32 /\ offset = _offset + i*rATE8 /\ 0<=i /\ i<=iTERS/\
-             0 < rATE8 /\ rATE8 < 200 /\ 0 <= _lEN /\ 0<= _offset /\  _offset + _lEN <=32 /\
-            (forall k, 0 <= k < 32 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-             _offset <=k /\ k < offset ))).
-        + auto .
-          ecall (a32____dumpstate_array_avx2_trace param_7 b_param_0 param_6 param_5 param_4 (BArray224.init_arr (W8.of_int 255) 224)). auto .
-          ecall (_keccakf1600_avx2_trace param_8 (BArray224.init_arr (W8.of_int 255) 224)). auto .
-          rewrite /valid /is_init /= => &m /> ? h *. 
-          have h1: (_offset + i{m} * rATE8{m} + rATE8{m} = _offset + (i{m} + 1) * rATE8{m}). smt().
-          split. smt( BArray224.init_arrP).
-          move=> *. rewrite h1. split. smt().
-          move => *. split. smt(all_cat). split. smt().
-          smt(and_iota).
-        auto .
-        rewrite /valid /is_init /= => &m /> *.  smt(and_iota all_cat).
-      auto. smt(and_iota all_cat).
-    if.
-    + auto.
-      ecall (a32____dumpstate_array_avx2_trace param_2 b_param param_1 param_0 
-              param (BArray224.init_arr (W8.of_int 255) 224)). auto .
-      ecall (_keccakf1600_avx2_trace param_3 (BArray224.init_arr (W8.of_int 255) 224)).
-      auto .
-      rewrite /valid /is_init /= => &m /> *.  split. smt(BArray224.init_arrP).
-      move => *. split. smt(). move => *. split. smt(and_iota).  smt(all_cat).
-    auto.  smt(and_iota all_cat BArray224.init_arrP).
-  auto.  smt(and_iota all_cat BArray224.init_arrP).
+conseq ( a32_squeeze_array_avx2_eq) (KECCAK32.__squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8) => //.
+ smt().
 qed.
 
-lemma a32____addstate_bcast_array_avx2x4_trace _st _b_st _aT _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a32____addstate_bcast_array_avx2x4 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\
-       ((_buf = buf) /\ ((_aT = aT) /\ ((_b_st = b_st) /\ (_st = st)))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 <= _aT)) /\ (_aT < 200)) /\
-         ((_offset + _lEN) <= 32)) /\
-        (((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)) < 200)) /\
-       (is_init _b_buf _offset _lEN)) /\
-      (is_init _b_st 0 800))))))) ==>
-      ((((0 <= res.`4) /\ (res.`4 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       (((is_init res.`2 0 800) /\
-        (res.`3 = ((_aT + _lEN) + ((_tRAILB <> 0) ? 1 : 0)))) /\
-       (res.`4 = (_offset + _lEN)))))) /\
-      (valid res.`5))].
-proof.
-  proc; rewrite /= .
-  seq 10: (#pre /\ valid trace_a32____addstate_bcast_array_avx2x4). by auto.
-  seq 6: ( valid trace_a32____addstate_bcast_array_avx2x4 /\ 0<=_offset /\ 0<=lEN /\
-           lEN + offset = _lEN + _offset /\ _lEN + _offset <=32 /\ aT%%8 = 0 /\
-           0 <= _tRAILB /\ _tRAILB < 256 /\ dELTA = 0 /\
-           aT + lEN + ((_tRAILB <> 0) ? 1 : 0) < 200 /\
-           (if 0<lO /\ lO + _lEN < 8 then true else aT + lEN = _aT + _lEN)
-           /\ _aT + _lEN <= 200 /\ 0<=_aT /\ _aT < 200 /\
-           at = (if 0 < lO /\ lO + _lEN < 8 then 32*(_aT%/8) else 32*(aT%/8)) /\
-           tRAILB = (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 0 else _tRAILB) /\
-           aLL = _aT + _lEN + (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-           lO = _aT %% 8 /\ is_init b_buf offset lEN /\ _offset <= offset /\ lEN <= _lEN).
-  + sp.
-    if. 
-    + if.
-      + auto.
-        ecall (a32____aread_bcast_4subu64_trace param_8 b_param_0 param_7 param_6 param_5 param_4). 
-        auto. rewrite /is_init /valid /= => &m /> *. smt(all_cat).
-      if. auto. rewrite /is_init /valid /= => &m /> *. smt(all_cat).
-      auto.
-      ecall(a32____aread_bcast_4subu64_trace param_13 b_param_1 param_12 param_11 param_10 param_9).
-      auto.  rewrite /is_init /valid /= => &m /> *. smt(all_cat).
-    auto. smt(all_cat).   
-  seq 2: ( valid trace_a32____addstate_bcast_array_avx2x4 /\ 0<=_offset /\ 0<=lEN /\ 0<=at /\
-           lEN + offset = _lEN + _offset /\ _lEN + _offset <=32 /\ aT%%8 = 0 /\ lO = lEN /\
-           at + 32 <= 800 /\ offset = _offset + _lEN - lEN /\ 0 <= _tRAILB /\ _tRAILB < 256 /\
-           tRAILB = (if 0 < _aT%%8 /\ _aT%%8 + _lEN < 8 /\ _tRAILB <> 0 then 0 else _tRAILB)
-           /\ dELTA = 0 /\ lEN < 8 /\
-           aLL = _aT + _lEN + (if 0 < _aT%%8 /\ _aT%%8 + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-           is_init b_buf offset lEN /\ _offset <= offset /\ lEN <= _lEN).
-  + if. auto. 
-    + while (valid trace_a32____addstate_bcast_array_avx2x4 /\ 0<=_offset /\ 0<=lEN /\ 0<=at /\
-             lEN + offset - ((at - 32 * (aT %/ 8))%/4)  = _lEN + _offset /\
-           _lEN + _offset <=32 /\ aT + lEN = _aT + _lEN /\ _aT + _lEN < 200 /\ 0<=_aT /\ 
-           aT%%8 = 0 /\ at%%32 = 0 /\ lO = _aT%%8 /\ at <=  32 * (aT %/ 8) + 32 * (lEN %/ 8) /\
-           0 <= _tRAILB /\ _tRAILB < 256 /\ 
-           tRAILB = (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 0 else _tRAILB) /\ dELTA = 0 /\
-           aLL = _aT + _lEN + (if 0 < lO /\ lO + _lEN < 8 /\ _tRAILB <> 0 then 1 else 0) /\
-           lO = _aT %% 8 /\  aT + lEN + ((_tRAILB <> 0) ? 1 : 0) <=  200 /\
-           is_init b_buf offset ((32 * (aT %/ 8) + 32 * (lEN %/ 8) - at)%/4 + lEN%%8) /\
-           _offset <= offset /\ lEN <= _lEN).
-      + auto. rewrite /is_init /valid /= => &m /> *. split; smt(all_cat). 
-      auto. rewrite /is_init /valid /= => &m /> *. split. split; smt(all_cat).
-      smt().
-    auto.  rewrite /is_init /valid /= => &m /> *. smt().
-  if.
-  + auto. ecall (a32____aread_bcast_4subu64_trace param_3 b_param param_2 param_1 param_0 param).
-    auto . rewrite /is_init /valid /= => &m /> *. 
-    smt(all_cat BArray800.init_arrP). 
-  auto. rewrite /is_init /valid /= => &m /> *.
-  smt(all_cat BArray800.init_arrP).
-qed .
+equiv a32_absorb_bcast_array_avx2x4_eq : M(Syscall).a32____absorb_bcast_array_avx2x4 ~ KECCAK32.M.__absorb_bcast_array_avx2x4 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim.
+qed.
+
 
 lemma a32____absorb_bcast_array_avx2x4_trace _st _b_st _aT _buf _b_buf _offset _lEN _rATE8 _tRAILB :
       hoare [M(Syscall).a32____absorb_bcast_array_avx2x4 :
@@ -32594,242 +30925,15 @@ lemma a32____absorb_bcast_array_avx2x4_trace _st _b_st _aT _buf _b_buf _offset _
        ((is_init res.`2 0 800) /\
        (res.`3 = (((_aT + _lEN) %% _rATE8) + ((_tRAILB <> 0) ? 1 : 0))))) /\
       (valid res.`5))].
-proof.
-  proc. rewrite /=.
-  seq 36:(#pre /\ valid trace_a32____absorb_bcast_array_avx2x4 ).
-  + by auto.
-  sp.
-  if.
-  + seq 14: (valid trace_a32____absorb_bcast_array_avx2x4 /\ 0 < rATE8 /\ rATE8 < 200 /\ aT = (_aT + _lEN)%%_rATE8 + (if _tRAILB <> 0 then 1 else 0) /\ 0<= offset /\ offset <= 32).
-    + auto. ecall (a32____addstate_bcast_array_avx2x4_trace st  (BArray800.init_arr (W8.of_int (-1)) 800) aT buf b_buf offset lEN  tRAILB). auto.
-      move => &m /> /=. rewrite /trace /valid /=. move => *. smt(all_cat BArray800.init_arrP).
-    if. 
-    + auto. ecall(__addratebit_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) rATE8).
-      auto. move => &m /> /=. rewrite /trace /valid /=. smt(all_cat BArray800.init_arrP).
-    auto. smt(BArray800.init_arrP).
-  seq 20: ( valid trace_a32____absorb_bcast_array_avx2x4 /\ 0 < rATE8 /\ rATE8 < 200 /\
-            0<= offset /\ offset <= 32 /\
-            aT = (_aT + _lEN)%%_rATE8 + (if _tRAILB <> 0 then 1 else 0)).
-  + auto. ecall(a32____addstate_bcast_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) 0 buf b_buf offset lEN tRAILB). auto.
-    pose offset0 :=  _offset +  (if _aT <> 0 then (_rATE8 - _aT) else 0).
-    pose len0 :=  _lEN -  (if _aT <> 0 then (_rATE8 - _aT) else 0).
-    while( valid trace_a32____absorb_bcast_array_avx2x4 /\ 0 < rATE8 /\ rATE8 < 200 /\
-           _aT < rATE8 /\ 0 <= i /\ i <=iTERS /\ 0 <= _offset /\
-           offset =  offset0 +  i* rATE8 /\ offset <= 32 /\
-            _rATE8 = rATE8 /\ iTERS <=_lEN /\ iTERS*rATE8 + len0%%rATE8 <= len0  /\
-           is_init b_buf (_offset) _lEN /\ aLL = _aT + _lEN /\ iTERS = len0%/rATE8 /\
-            _offset + _lEN <= 32).
-    + auto. ecall(_keccakf1600_avx2x4_trace st (BArray800.init_arr (W8.of_int 255) 800)). auto.
-      ecall(a32____addstate_bcast_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) 0 buf b_buf offset rATE8 0). auto. 
-      move => &m />. rewrite /valid /trace /is_init /= => *.
-      split. split. smt().  split. smt(). split. smt().  split. split. smt().
-      move => i.  have: (offset0 + i{!m} * rATE8{m} + rATE8{m} = offset0 + (i{!m} + 1) * rATE8{m}). smt(). smt(). smt(BArray800.init_arrP). move => *.
-      split. smt(all_cat). smt().
-    if.
-    + auto. ecall(_keccakf1600_avx2x4_trace st ((BArray800.init_arr (W8.of_int (-1)) 800))). auto.
-      ecall(a32____addstate_bcast_array_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) aT buf b_buf offset (rATE8 - aT) 0). auto.
-      move => &m />. rewrite /valid /trace /is_init /= => *. 
-      split. smt(BArray800.init_arrP). move => *. 
-      have: (len0 %% rATE8{m} = (aT{m} + lEN{m}) %% rATE8{m}). 
-      + have /= ? := modzMDr (-1) (lEN{m} + aT{m}) (rATE8{m}). smt().
-        move => ?.
-      split; smt(all_cat).
-    auto.  move => &m />. rewrite /valid /trace /is_init /= => *. 
-    split. smt(all_cat).  move => *.
-    split. smt(BArray800.init_arrP). move => *.
-    smt(all_cat).
-  auto. if. auto. ecall(__addratebit_avx2x4_trace st (BArray800.init_arr (W8.of_int (-1)) 800) rATE8). auto. smt(all_cat BArray800.init_arrP).
-  auto. smt(BArray800.init_arrP).
+  proof.
+   conseq ( a32_absorb_bcast_array_avx2x4_eq) (KECCAK32.__absorb_bcast_array_avx2x4_trace  _st _b_st _aT _buf _b_buf _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
 qed.
 
-lemma a33____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a33____aread_subu64 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 8) ? _lEN : 8)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 33)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))) /\
-       (res.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat).
-qed .
-
-lemma a33____aread_subu128_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a33____aread_subu128 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 16) ? _lEN : 16)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 33)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))) /\
-       (res.`3 = ((16 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a33____aread_subu64_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a33____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a33____aread_subu256_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a33____aread_subu256 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 32) ? _lEN : 32)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 33)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))) /\
-       (res.`3 = ((32 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a33____aread_subu128_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a33____aread_subu128_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a33____addstate_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a33____addstate_array_avx2 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\ ((_buf = buf) /\ ((_b_st = b_st) /\ (_st = st))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 33)) /\
-        (is_init _b_buf _offset _lEN)) /\
-       (is_init _b_st 0 224)) /\
-      (_lEN <= 200))))))) ==>
-      ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       ((is_init res.`2 0 224) /\ (res.`3 = (_offset + _lEN)))))) /\
-      (valid res.`4))].
-proof.
-admitted. (*generic version in a64*)
+  equiv a33_absorb_array_avx2_eq : M(Syscall).a33____absorb_array_avx2 ~ KECCAK33.M.__absorb_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim. 
+qed.
 
 lemma a33____absorb_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB :
       hoare [M(Syscall).a33____absorb_array_avx2 :
@@ -32843,472 +30947,26 @@ lemma a33____absorb_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _rATE8 _
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
       (((0 <= (_offset + _lEN)) /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
-      (((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 33)) /\
-         (0 < _rATE8)) /\
-        (_rATE8 < 200)) /\
+      ((((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 33)) /\
+          (0 < _rATE8)) /\
+         (_rATE8 < 200)) /\
+        (_lEN <= 200)) /\
        (is_init _b_buf _offset _lEN)) /\
       (is_init _b_st 0 224))))))) ==>
       ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
        (is_init res.`2 0 224)) /\
       (valid res.`4))].
 proof.
-admitted. (*generic version in a64*)
+  conseq ( a33_absorb_array_avx2_eq) (KECCAK33.__absorb_array_avx2_trace  _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
+qed.
 
-lemma a64____aread_subu64_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a64____aread_subu64 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 8) ? _lEN : 8)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 64)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))) /\
-       (res.`3 = ((8 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat).
-qed .
 
-lemma a64____aread_subu128_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a64____aread_subu128 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 16) ? _lEN : 16)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 64)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))) /\
-       (res.`3 = ((16 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a64____aread_subu64_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a64____aread_subu64_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
 
-lemma a64____aread_subu256_trace _buf _b_buf _offset _dELTA _lEN _tRAIL :
-      hoare [M(Syscall).a64____aread_subu256 :
-      (((_tRAIL = tRAIL) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAIL) /\ (_tRAIL < 256)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? ((((is_init _b_buf (_offset + _dELTA)
-                       ((_lEN < 32) ? _lEN : 32)) /\
-                      (0 <= _dELTA)) /\
-                     (0 <= (_offset + _dELTA))) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 64)) : true)))))))))))) ==>
-      ((((res.`1 =
-         (_dELTA +
-         ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-        (res.`2 =
-        (_lEN -
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))) /\
-       (res.`3 = ((32 <= _lEN) ? _tRAIL : 0))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-if .
-auto .
-ecall (a64____aread_subu128_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (a64____aread_subu128_trace param_8 b_param_0 param_7 param_6 param_5 
-       param_4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-qed .
-
-lemma a64____awrite_subu64_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a64____awrite_subu64 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 64)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) /\
-          (((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) <=
-         18446744073709551615)))))))))) (iota_ 0 64))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))))))
-        (iota_ 0 64)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-       (res.`4 =
-       (_lEN - ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat and_iota).
-qed .
-
-lemma a64____awrite_subu128_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a64____awrite_subu128 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 64)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))) /\
-          (((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))) <=
-         18446744073709551615)))))))))) (iota_ 0 64))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))))))
-        (iota_ 0 64)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-       (res.`4 =
-       (_lEN -
-       ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-auto .
-ecall (a64____awrite_subu64_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /= => &m  /> *.
-smt (all_cat and_iota).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-qed .
-
-lemma a64____awrite_subu256_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a64____awrite_subu256 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 64)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))) /\
-          (((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))) <=
-         18446744073709551615)))))))))) (iota_ 0 64))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))))))
-        (iota_ 0 64)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-       (res.`4 =
-       (_lEN -
-       ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-auto .
-ecall (a64____awrite_subu128_trace param_3 b_param param_2 param_1 param_0 
-       param).
-auto .
-rewrite /is_init /valid /= => &m /> *.
-smt (all_cat and_iota ).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-qed .
-
-lemma a64____addstate_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _tRAILB :
-      hoare [M(Syscall).a64____addstate_array_avx2 :
-      (((_tRAILB = tRAILB) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf = b_buf) /\ ((_buf = buf) /\ ((_b_st = b_st) /\ (_st = st))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _tRAILB) /\ (_tRAILB < 256)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 64)) /\
-        (is_init _b_buf _offset _lEN)) /\
-       (is_init _b_st 0 224)) /\
-      (_lEN <= 200))))))) ==>
-      ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
-       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-       (((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)) /\
-       ((is_init res.`2 0 224) /\ (res.`3 = (_offset + _lEN)))))) /\
-      (valid res.`4))].
-proof.
-  proc; rewrite /= .
-  seq 58: ( valid trace_a64____addstate_array_avx2 /\ 0<=_offset /\ 0<=_lEN /\ _lEN <= 200 /\
-           _offset + _lEN <= 64 /\  _offset = offset /\ dELTA = (if _lEN < 40 then _lEN else 40) /\
-           is_init b_buf (offset + dELTA) lEN /\
-           lEN = (if _lEN < 40 then 0 else _lEN - 40) /\ 0<=tRAILB /\ tRAILB <256).
-  + auto. ecall (a64____aread_subu256_trace param_48 b_param_7 param_47 param_46 param_45 param_44).
-    auto. ecall (a64____aread_subu64_trace param_53 b_param_8 param_52 param_51 param_50 param_49).
-    auto. rewrite /valid /= => &m /> *. smt(all_cat).
-  if.
-  + seq 27: ( valid trace_a64____addstate_array_avx2 /\ 0<=_offset /\ 0<=_lEN /\ _lEN <= 200 /\
-           _offset + _lEN <= 64 /\  _offset = offset /\ dELTA = (if _lEN < 80 then _lEN else 80) /\
-           is_init b_buf (offset + dELTA) lEN /\
-           lEN = (if _lEN < 80 then 0 else _lEN - 80) /\ 0<=tRAILB /\ tRAILB <256).
-    + auto.
-      ecall (a64____aread_subu256_trace param_38 b_param_5 param_37 param_36 param_35 param_34).
-      auto .
-      ecall (a64____aread_subu64_trace param_43 b_param_6 param_42 param_41  param_40 param_39).
-      auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat).
-    seq 27: ( valid trace_a64____addstate_array_avx2 /\ 0<=_offset /\ 0<=_lEN /\ _lEN <= 200 /\
-           _offset + _lEN <= 64 /\  _offset = offset /\dELTA = (if _lEN < 120 then _lEN else 120) /\
-           is_init b_buf (offset + dELTA) lEN /\
-           lEN = (if _lEN < 120 then 0 else _lEN - 120) /\ 0<=tRAILB /\ tRAILB <256).
-    + auto .
-      ecall (a64____aread_subu256_trace param_28 b_param_3 param_27 param_26 param_25 param_24).
-      auto.
-      ecall (a64____aread_subu64_trace param_33 b_param_4 param_32 param_31 param_30 param_29).
-      auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat).
-    seq 27: ( valid trace_a64____addstate_array_avx2 /\ 0<=_offset /\ 0<=_lEN /\  _lEN <= 200 /\
-           _offset + _lEN <= 64 /\  _offset = offset /\ dELTA = (if _lEN < 160 then _lEN else 160)/\
-           is_init b_buf (offset + dELTA) lEN /\
-           lEN = (if _lEN < 160 then 0 else _lEN - 160) /\ 0<=tRAILB /\ tRAILB <256).
-    + auto.
-      ecall (a64____aread_subu256_trace param_18 b_param_1 param_17 param_16 param_15 param_14).
-      auto .
-      ecall (a64____aread_subu64_trace param_23 b_param_2 param_22 param_21 param_20 param_19).
-      auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat).
-    seq 27: ( valid trace_a64____addstate_array_avx2 /\ 0<=_offset /\ 0<=_lEN /\ _lEN <= 200 /\
-           _offset + _lEN <= 64 /\  _offset = offset /\ dELTA = (if _lEN < 200 then _lEN else 200)/\
-           is_init b_buf (offset + dELTA) lEN /\
-           lEN = (if _lEN < 200 then 0 else _lEN - 200) /\ 0<=tRAILB /\ tRAILB <256).
-    + auto.
-      ecall (a64____aread_subu256_trace param_8 b_param param_7 param_6 param_5 param_4).
-      auto .
-      ecall (a64____aread_subu64_trace param_13 b_param_0 param_12 param_11 param_10 param_9).
-      auto . rewrite /valid /is_init /= => &m /> *. smt(all_cat).
-    auto .
-    ecall (__addstate_r3456_avx2_trace param_3 (BArray224.init_arr (W8.of_int 255) 224) param_2 
-          param_1 param_0 param). auto. rewrite /valid /is_init /= => &m /> *.
-    smt(all_cat BArray224.init_arrP).
-  auto . smt(all_cat BArray224.init_arrP).
-qed .
+  equiv a64_absorb_array_avx2_eq : M(Syscall).a64____absorb_array_avx2 ~ KECCAK64.M.__absorb_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim. 
+qed.
 
 lemma a64____absorb_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB :
       hoare [M(Syscall).a64____absorb_array_avx2 :
@@ -33322,176 +30980,25 @@ lemma a64____absorb_array_avx2_trace _st _b_st _buf _b_buf _offset _lEN _rATE8 _
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
       (((0 <= (_offset + _lEN)) /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
-      (((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 64)) /\
-         (0 < _rATE8)) /\
-        (_rATE8 < 200)) /\
+      ((((((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 64)) /\
+          (0 < _rATE8)) /\
+         (_rATE8 < 200)) /\
+        (_lEN <= 200)) /\
        (is_init _b_buf _offset _lEN)) /\
       (is_init _b_st 0 224))))))) ==>
       ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
        (is_init res.`2 0 224)) /\
       (valid res.`4))].
 proof.
-  proc; rewrite /=.
-  seq 23: (valid trace_a64____absorb_array_avx2 /\ 0 <= offset /\ 0<=lEN /\
-   is_init b_buf offset lEN /\ offset + lEN <=64 /\ 0<=tRAILB /\ tRAILB < 256).
-  + sp. 
-    if .
-    + auto .
-      while (valid trace_a64____absorb_array_avx2 /\ 0 <= _offset /\ 0<=_lEN /\ 0 < rATE8 /\
-             rATE8 <200 /\ is_init b_buf _offset _lEN /\ _offset + _lEN <=64 /\
-             0<=tRAILB /\ tRAILB < 256 /\ iTERS * rATE8 <= _lEN /\
-             offset = _offset + i*rATE8 /\ 0 <= i /\ i<=iTERS /\ iTERS = _lEN%/rATE8).
-      + auto .
-        ecall (_keccakf1600_avx2_trace param_6 (BArray224.init_arr (W8.of_int 255) 224)). auto .
-        ecall (a64____addstate_array_avx2_trace param_11 (BArray224.init_arr (W8.of_int 255) 224) 
-            param_10 b_param_0 param_9 param_8 param_7). auto.
-        rewrite /valid /is_init /= => &m /> *. split.
-        + have ?: ( (i{m} + 1)* rATE8{m} <=  _lEN %/ rATE8{m} * rATE8{m}). smt().
-          smt(BArray224.init_arrP).
-        move => /> *. smt(all_cat).
-      auto.  rewrite /valid /is_init /= => &m /> *.  smt(all_cat).
-    auto.  rewrite /valid /is_init /= => &m /> *.  smt(all_cat).
-  seq 12: ( 0<=offset /\ offset <= 64 /\ valid trace_a64____absorb_array_avx2).
-  + auto. 
-    ecall (a64____addstate_array_avx2_trace param_5 (BArray224.init_arr (W8.of_int 255) 224) 
-       param_4 b_param param_3 param_2 param_1). auto.
-    rewrite /valid /is_init /= => &m /> *.  smt(all_cat BArray224.init_arrP).
-  if. auto. ecall (__addratebit_avx2_trace param_0 (BArray224.init_arr (W8.of_int 255) 224) param).
-  + auto . rewrite /valid /is_init /= => &m /> *.  smt(all_cat BArray224.init_arrP).
-  auto .
-  smt(all_cat BArray224.init_arrP).
-qed .
+  conseq ( a64_absorb_array_avx2_eq) (KECCAK64.__absorb_array_avx2_trace  _st _b_st _buf _b_buf _offset _lEN _rATE8 _tRAILB) => //.
+ smt().
+qed.
 
-lemma a64____dumpstate_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st :
-      hoare [M(Syscall).a64____dumpstate_array_avx2 :
-      (((_b_st = b_st) /\
-       ((_st = st) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 64)) /\
-      (is_init _b_st 0 224)))))) ==>
-      ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
-       (((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-         ((0 <= (_offset + _lEN)) /\
-         ((_offset + _lEN) <= 18446744073709551615)))))) (iota_ 0 64))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
-        (iota_ 0 64)))) /\
-       (((0 <=
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224))) /\
-        (((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)) <=
-        18446744073709551615)) /\
-       (((0 <=
-         (_offset +
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)))) /\
-        ((_offset +
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224))) <=
-        18446744073709551615)) /\
-       (res.`3 =
-       (_offset +
-       ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)))))))) /\
-      (valid res.`4))].
-proof.
-  proc; rewrite /= .
-  seq 47: (#pre /\ valid trace_a64____dumpstate_array_avx2). by auto.
-  sp.
-  seq 1: ( valid trace_a64____dumpstate_array_avx2 /\
-          (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/ _offset <=k  /\ k < _offset + (if _lEN < 8 then _lEN else 8))) /\ 0<=_lEN /\ lEN = _lEN - (if _lEN < 8 then _lEN else 8) /\
-          dELTA = (if _lEN < 8 then _lEN else 8) /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-  + if. auto.
-    + ecall(a64____awrite_subu256_trace param_48 b_param_8 param_47 param_46 param_45 param_44).
-      auto. rewrite /valid /is_init /= => &m /> *.  smt(all_cat and_iota).
-    auto.
-    ecall(a64____awrite_subu256_trace param_53 b_param_9 param_52 param_51  param_50 param_49). 
-    auto. rewrite /valid /is_init /= => &m /> *.  smt(all_cat and_iota). 
-  seq 13:( valid trace_a64____dumpstate_array_avx2 /\
-          (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/ _offset <=k  /\ k < _offset + (if _lEN < 40 then _lEN else 40))) /\ 0<=_lEN /\ lEN = _lEN - (if _lEN < 40 then _lEN else 40) /\
-          dELTA = (if _lEN < 40 then _lEN else 40) /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-  + auto. ecall(a64____awrite_subu256_trace param_43 b_param_7 param_42 param_41 param_40 param_39).
-    auto.  rewrite /valid /is_init /= => &m /> *. 
-    smt(all_cat and_iota).
-  if.
-  + pose len x := (if _lEN < x then _lEN else x).
-    seq 17:( valid trace_a64____dumpstate_array_avx2 /\
-          (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-            _offset <=k  /\ k < _offset + len 48)) /\ 0<=_lEN /\ lEN = _lEN - len 48 /\
-          dELTA = len 48 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-    + auto.
-      ecall(a64____awrite_subu64_trace param_38 b_param_6 param_37 param_36 param_35 param_34).
-      auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-    if.
-    + seq 18: (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 80)) /\ 0<=_lEN /\ lEN = _lEN - len 80 /\
-              dELTA = len 80 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + auto.
-        ecall(a64____awrite_subu256_trace param_33 b_param_5 param_32 param_31 param_30 param_29).
-        auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-      seq 1:  (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 88)) /\ 0<=_lEN /\ lEN = _lEN - len 88/\
-              dELTA = len 88 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + if. auto.   
-        + ecall(a64____awrite_subu64_trace param_28 b_param_4 param_27 param_26 param_25 param_24).
-          auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-        auto. smt(all_cat).
-      seq 1:  (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 120)) /\ 0<=_lEN /\ lEN = _lEN - len 120/\
-              dELTA = len 120 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + if. auto.   
-        + ecall(a64____awrite_subu256_trace param_23 b_param_3 param_22 param_21 param_20 param_19).
-          auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-        auto. smt(all_cat). 
-      seq 1:  (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 128)) /\ 0<=_lEN /\ lEN = _lEN - len 128/\
-              dELTA = len 128 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + if. auto.   
-        + ecall(a64____awrite_subu64_trace param_18 b_param_2 param_17 param_16 param_15 param_14).
-          auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-        auto. smt(all_cat).
-      seq 1:  (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 160)) /\ 0<=_lEN /\ lEN = _lEN - len 160/\
-              dELTA = len 160 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + if. auto.   
-        + ecall(a64____awrite_subu256_trace param_13 b_param_1 param_12 param_11 param_10 param_9).
-          auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-        auto. smt(all_cat).
-      seq 1:  (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 168)) /\ 0<=_lEN /\ lEN = _lEN - len 168/\
-              dELTA = len 168 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + if. auto.   
-        + ecall(a64____awrite_subu64_trace param_8 b_param_0 param_7 param_6 param_5 param_4).
-          auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-        auto. smt(all_cat).
-      seq 1:  (valid trace_a64____dumpstate_array_avx2 /\
-              (forall k, 0 <= k < 64 => is_init_cell b_buf k = (is_init_cell _b_buf k \/
-               _offset <=k  /\ k < _offset + len 200)) /\ 0<=_lEN /\ lEN = _lEN - len 200/\
-              dELTA = len 200 /\ offset = _offset /\ 0<=_offset /\ _offset + _lEN <= 64).
-      + if. auto.   
-        + ecall(a64____awrite_subu256_trace param_3 b_param param_2 param_1 param_0 param).
-          auto. rewrite /valid /is_init /= => &m /> *. smt(all_cat and_iota).
-        auto. smt(all_cat).
-      auto. smt(all_cat and_iota).
-    auto. smt(all_cat and_iota).
-  auto. smt(all_cat and_iota).
-qed .
 
+equiv a64_squeeze_array_avx2_eq : M(Syscall).a64____squeeze_array_avx2 ~ KECCAK64.M.__squeeze_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim. 
+qed.
 lemma a64____squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8 :
       hoare [M(Syscall).a64____squeeze_array_avx2 :
       (((_rATE8 = rATE8) /\
@@ -33503,8 +31010,7 @@ lemma a64____squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8 
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
       (((0 <= (_offset + _lEN)) /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 < _rATE8)) /\
-        (_rATE8 < 200)) /\
+      ((((((0 <= _offset) /\ (0 <= _lEN)) /\ (0 < _rATE8)) /\ (_rATE8 < 200)) /\
        ((_offset + _lEN) <= 64)) /\
       (is_init _b_st 0 224)))))) ==>
       ((((foldr (fun x => (fun acc => (x /\ acc))) true
@@ -33523,186 +31029,17 @@ lemma a64____squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8 
         (iota_ 0 64)))) /\
        (is_init res.`4 0 224)) /\
       (valid res.`5))].
- proof.
-admitted. (*done in a32*)
-
-  
-lemma a128____awrite_subu64_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).a128____awrite_subu64 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 128)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) /\
-          (((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) <=
-         18446744073709551615)))))))))) (iota_ 0 128))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))))))
-        (iota_ 0 128)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-       (res.`4 =
-       (_lEN - ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))))) /\
-      (valid res.`5))].
 proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat and_iota).
-qed .
-
-lemma a128____dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _st _b_st :
-      hoare [M(Syscall).a128____dumpstate_array_avx2x4 :
-      (((_b_st = b_st) /\
-       ((_st = st) /\
-       ((_lEN = lEN) /\
-       ((_offset = offset) /\
-       ((_b_buf3 = b_buf3) /\
-       ((_buf3 = buf3) /\
-       ((_b_buf2 = b_buf2) /\
-       ((_buf2 = buf2) /\
-       ((_b_buf1 = b_buf1) /\
-       ((_buf1 = buf1) /\ ((_b_buf0 = b_buf0) /\ (_buf0 = buf0)))))))))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\
-       ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((0 <= _offset) /\ (0 <= _lEN)) /\ (is_init _b_st 0 800)) /\
-      ((_offset + _lEN) <= 128)))))) ==>
-      ((((0 <= res.`9) /\ (res.`9 <= 18446744073709551615)) /\
-       ((((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-        (((0 <= (_offset + _lEN)) /\
-         ((_offset + _lEN) <= 18446744073709551615)) /\
-        (res.`9 = (_offset + _lEN)))) /\
-       (((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-         ((0 <= (_offset + _lEN)) /\
-         ((_offset + _lEN) <= 18446744073709551615)))))) (iota_ 0 128))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`8 k 1) =
-        ((is_init _b_buf3 k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
-        (iota_ 0 128)))) /\
-       (((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-         ((0 <= (_offset + _lEN)) /\
-         ((_offset + _lEN) <= 18446744073709551615)))))) (iota_ 0 128))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`6 k 1) =
-        ((is_init _b_buf2 k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
-        (iota_ 0 128)))) /\
-       (((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-         ((0 <= (_offset + _lEN)) /\
-         ((_offset + _lEN) <= 18446744073709551615)))))) (iota_ 0 128))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`4 k 1) =
-        ((is_init _b_buf1 k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
-        (iota_ 0 128)))) /\
-       ((foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        (((0 <= k) /\ (k <= 18446744073709551615)) /\
-        (((0 <= k) /\ (k <= 18446744073709551615)) /\
-        (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-        ((0 <= (_offset + _lEN)) /\
-        ((_offset + _lEN) <= 18446744073709551615)))))) (iota_ 0 128))) /\
-       (foldr (fun x => (fun acc => (x /\ acc))) true
-       (map
-       (fun k =>
-       ((is_init res.`2 k 1) =
-       ((is_init _b_buf0 k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
-       (iota_ 0 128))))))))) /\
-      (valid res.`10))].
-proof.
-  proc; rewrite /= .
-  pose fold_len (_b b:BArray128.t) l := forall k, 0 <= k < 128 => is_init_cell b k =
-                                        (is_init_cell _b k \/ _offset <=k /\ k < _offset + l).
-  seq 21:( valid trace_a128____dumpstate_array_avx2x4 /\ i = 32*(lEN %/ 32) /\0<=_offset /\
-           0<=_lEN /\ _offset + _lEN <=128 /\ fold_len _b_buf0 b_buf0 i /\
-           fold_len _b_buf1 b_buf1 i /\  fold_len _b_buf2 b_buf2 i /\
-           fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
-  + while (valid trace_a128____dumpstate_array_avx2x4 /\ 0<=i /\ i<= 32*(lEN %/ 32) /\0<=_offset /\
-           0<=_lEN /\ _offset + _lEN <=128 /\ fold_len _b_buf0 b_buf0 i /\
-           fold_len _b_buf1 b_buf1 i  /\  fold_len _b_buf2 b_buf2  i /\ i%%32 = 0 /\
-           fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
-    + auto. ecall (__4u64x4_u256x4_trace param_22 param_21 param_20 param_19).
-      auto. rewrite /is_init /valid /fold_len /= => &m /> *.  smt(all_cat).
-    auto. smt(all_cat and_iota).
-  seq 1:( valid trace_a128____dumpstate_array_avx2x4 /\ i = 8*(lEN %/ 8) /\0<=_offset /\
-           0<=_lEN /\ _offset + _lEN <=128 /\ fold_len _b_buf0 b_buf0 i /\
-           fold_len _b_buf1 b_buf1 i /\  fold_len _b_buf2 b_buf2 i /\
-           fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
-  + while (valid trace_a128____dumpstate_array_avx2x4 /\ 0<=i /\ i<= 8*(lEN %/ 8) /\0<=_offset /\
-           0<=_lEN /\ _offset + _lEN <=128 /\ fold_len _b_buf0 b_buf0 i /\
-           fold_len _b_buf1 b_buf1 i  /\  fold_len _b_buf2 b_buf2  i /\ i%%8 = 0 /\
-           fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
-    + auto. rewrite /is_init /valid /fold_len /= => &m /> *.  smt(all_cat).
-    auto. smt(all_cat).                                      
-  if .
-  + auto. ecall(a128____awrite_subu64_trace param_3 b_param param_2 param_1 param_0 param).
-    auto. ecall(a128____awrite_subu64_trace param_8 b_param_0 param_7 param_6 param_5 param_4).
-    auto. ecall(a128____awrite_subu64_trace param_13 b_param_1 param_12 param_11 param_10 param_9).
-    auto. ecall(a128____awrite_subu64_trace param_18 b_param_2 param_17 param_16 param_15 param_14).
-    auto .  rewrite /is_init /valid /fold_len /= => &m /> *.  smt(and_iota all_cat).
-  auto. smt(and_iota).
+conseq ( a64_squeeze_array_avx2_eq) (KECCAK64.__squeeze_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st _rATE8) => //.
+ smt().
 qed.
+
+
+equiv a128_squeeze_array_avx2x4_eq : M(Syscall).a128____squeeze_array_avx2x4 ~ KECCAK128.M.__squeeze_array_avx2x4 : ={arg}==> ={res}.
+proof.
+    proc; inline *; sim. 
+qed.
+
 
 lemma a128____squeeze_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _st _b_st _rATE8 :
       hoare [M(Syscall).a128____squeeze_array_avx2x4 :
@@ -33785,262 +31122,15 @@ lemma a128____squeeze_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_bu
        (iota_ 0 128))))))))) /\
       (valid res.`12))].
 proof.
-  proc; rewrite /= .
-  pose fold_len (_b b:BArray128.t) l := forall k, 0 <= k < 128 => is_init_cell b k =
-                                        (is_init_cell _b k \/ _offset <=k /\ k < _offset + l).
-  sp. if .
-  + seq 1: ( valid trace_a128____squeeze_array_avx2x4 /\ 0<=_offset /\ _offset + _lEN <=128 /\
-             0 <= _lEN /\ offset = _offset + _lEN - lO /\ lO = _lEN%%rATE8 /\ 0<rATE8 /\ rATE8<200
-         /\  fold_len _b_buf0 b_buf0 (_lEN - lO) /\ fold_len _b_buf1 b_buf1 (_lEN - lO)  /\
-             fold_len _b_buf2 b_buf2 (_lEN - lO) /\ fold_len _b_buf3 b_buf3 (_lEN - lO)).
-    + auto .
-      if .
-      + while ( valid trace_a128____squeeze_array_avx2x4 /\ 0<=_offset /\ _offset + _lEN <=128 /\
-             0 <= _lEN /\ offset = _offset + i*rATE8 /\ lO = _lEN%%rATE8 /\ 0<rATE8 /\ rATE8<200
-         /\  fold_len _b_buf0 b_buf0 (i*rATE8) /\ fold_len _b_buf1 b_buf1 (i*rATE8)  /\
-             fold_len _b_buf2 b_buf2 (i*rATE8) /\ fold_len _b_buf3 b_buf3 (i*rATE8) /\ 0<=i /\
-             i<=iTERS /\ iTERS = _lEN%/rATE8 /\ iTERS * rATE8 <= _lEN).
-        + auto.
-          ecall (a128____dumpstate_array_avx2x4_trace param_13 b_param_6 param_12 b_param_5
-                param_11 b_param_4 param_10 b_param_3 param_9 param_8 
-                param_7 (BArray800.init_arr (W8.of_int 255) 800)). auto.
-          ecall (_keccakf1600_avx2x4_trace param_14 (BArray800.init_arr (W8.of_int 255) 800)).
-          auto .  rewrite /is_init /valid /fold_len /= => &m /> *. 
-          split. smt(BArray800.init_arrP). move => *.
-          split. smt(). smt(all_cat and_iota).
-        auto. rewrite /is_init /valid /fold_len /= => &m /> *. smt(and_iota all_cat).           
-      auto. rewrite /is_init /valid /fold_len /= => &m /> *. smt(and_iota all_cat). 
-    if.
-    + auto.
-      ecall (a128____dumpstate_array_avx2x4_trace param_5 b_param_2 param_4 
-              b_param_1 param_3 b_param_0 param_2 b_param param_1 param_0 param 
-              (BArray800.init_arr (W8.of_int 255) 800)). auto.
-      auto .
-      ecall (_keccakf1600_avx2x4_trace param_6 (BArray800.init_arr (W8.of_int 255) 800)). auto.
-      rewrite /is_init /valid /fold_len /= => &m /> *. smt(and_iota all_cat BArray800.init_arrP). 
-    auto.
-    rewrite /is_init /valid /fold_len /= => &m /> *. 
-    rewrite !and_iota /=. smt(BArray800.init_arrP).
-  auto. rewrite /is_init /valid /fold_len /= => &m /> *. 
-  rewrite !and_iota /=. smt(BArray800.init_arrP).
-qed .
+conseq ( a128_squeeze_array_avx2x4_eq) (KECCAK128.__squeeze_array_avx2x4_trace  _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _st _b_st _rATE8) => //.
+ smt().
+qed.
 
-lemma aBUFLEN____awrite_subu64_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).aBUFLEN____awrite_subu64 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 8) ? _lEN : 8)) /\
-       (((_lEN < 8) ? _lEN : 8) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8))) /\
-       (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 8) ? _lEN : 8)) <= 536)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) /\
-          (((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))) <=
-         18446744073709551615)))))))))) (iota_ 0 536))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8))))))))
-        (iota_ 0 536)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))) /\
-       (res.`4 =
-       (_lEN - ((((_lEN < 8) ? _lEN : 8) < 0) ? 0 : ((_lEN < 8) ? _lEN : 8)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto .
-rewrite /is_init /valid /= .
-smt (all_cat and_iota).
-qed .
+  equiv aBUFLEN_dumpstate_array_avx2_eq : M(Syscall).aBUFLEN____dumpstate_array_avx2 ~ KECCAK536.M.__dumpstate_array_avx2 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim. 
+qed.  
 
-lemma aBUFLEN____awrite_subu128_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).aBUFLEN____awrite_subu128 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 16) ? _lEN : 16)) /\
-       (((_lEN < 16) ? _lEN : 16) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16))) /\
-       (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 16) ? _lEN : 16)) <= 536)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))) /\
-          (((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))) <=
-         18446744073709551615)))))))))) (iota_ 0 536))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16))))))))
-        (iota_ 0 536)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))) /\
-       (res.`4 =
-       (_lEN -
-       ((((_lEN < 16) ? _lEN : 16) < 0) ? 0 : ((_lEN < 16) ? _lEN : 16)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-auto .
-ecall (aBUFLEN____awrite_subu64_trace param_3 b_param param_2 param_1 
-       param_0 param).
-auto .
-rewrite /is_init /valid /= => &m /> *.
-smt (all_cat and_iota).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-qed .
-
-lemma aBUFLEN____awrite_subu256_trace _buf _b_buf _offset _dELTA _lEN _w :
-      hoare [M(Syscall).aBUFLEN____awrite_subu256 :
-      (((_w = w) /\
-       ((_lEN = lEN) /\
-       ((_dELTA = dELTA) /\
-       ((_offset = offset) /\ ((_b_buf = b_buf) /\ (_buf = buf)))))) /\
-      (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-      (((0 <= (_offset + _dELTA)) /\
-       ((_offset + _dELTA) <= 18446744073709551615)) /\
-      (((0 <= ((_lEN < 32) ? _lEN : 32)) /\
-       (((_lEN < 32) ? _lEN : 32) <= 18446744073709551615)) /\
-      (((0 <= ((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32))) /\
-       (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <=
-       18446744073709551615)) /\
-      ((0 < _lEN) ? (((0 <= (_offset + _dELTA)) /\ (0 <= _dELTA)) /\
-                    (((_offset + _dELTA) + ((_lEN < 32) ? _lEN : 32)) <= 536)) : true))))))))) ==>
-      ((((foldr (fun x => (fun acc => (x /\ acc))) true
-         (map
-         (fun k =>
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= k) /\ (k <= 18446744073709551615)) /\
-         (((0 <= _dELTA) /\ (_dELTA <= 18446744073709551615)) /\
-         (((0 <= (_offset + _dELTA)) /\
-          ((_offset + _dELTA) <= 18446744073709551615)) /\
-         (((0 <=
-           ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))) /\
-          (((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)) <=
-          18446744073709551615)) /\
-         ((0 <=
-          ((_offset + _dELTA) +
-          ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-         (((_offset + _dELTA) +
-          ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))) <=
-         18446744073709551615)))))))))) (iota_ 0 536))) /\
-        (foldr (fun x => (fun acc => (x /\ acc))) true
-        (map
-        (fun k =>
-        ((is_init res.`2 k 1) =
-        ((is_init _b_buf k 1) \/
-        (((_offset + _dELTA) <= k) /\
-        (k <
-        ((_offset + _dELTA) +
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32))))))))
-        (iota_ 0 536)))) /\
-       ((res.`3 =
-        (_dELTA +
-        ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))) /\
-       (res.`4 =
-       (_lEN -
-       ((((_lEN < 32) ? _lEN : 32) < 0) ? 0 : ((_lEN < 32) ? _lEN : 32)))))) /\
-      (valid res.`5))].
-proof.
-proc; auto . sp.
-if .
-auto .
-if .
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-auto .
-ecall (aBUFLEN____awrite_subu128_trace param_3 b_param param_2 param_1 
-       param_0 param).
-auto .
-rewrite /is_init /valid /= => &m /> *.
-smt (all_cat and_iota).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat and_iota).
-qed .
 
 lemma aBUFLEN____dumpstate_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st :
       hoare [M(Syscall).aBUFLEN____dumpstate_array_avx2 :
@@ -34052,8 +31142,9 @@ lemma aBUFLEN____dumpstate_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st :
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
       (((0 <= (_offset + _lEN)) /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 536)) /\
-      (is_init _b_st 0 224)))))) ==>
+      (((((0 <= _offset) /\ (0 <= _lEN)) /\ ((_offset + _lEN) <= 536)) /\
+       (is_init _b_st 0 224)) /\
+      (_lEN <= 200)))))) ==>
       ((((0 <= res.`3) /\ (res.`3 <= 18446744073709551615)) /\
        (((foldr (fun x => (fun acc => (x /\ acc))) true
          (map
@@ -34069,22 +31160,21 @@ lemma aBUFLEN____dumpstate_array_avx2_trace _buf _b_buf _offset _lEN _st _b_st :
         ((is_init res.`2 k 1) =
         ((is_init _b_buf k 1) \/ ((_offset <= k) /\ (k < (_offset + _lEN))))))
         (iota_ 0 536)))) /\
-       (((0 <=
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224))) /\
-        (((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)) <=
-        18446744073709551615)) /\
-       (((0 <=
-         (_offset +
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)))) /\
-        ((_offset +
-         ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224))) <=
-        18446744073709551615)) /\
-       (res.`3 =
-       (_offset +
-       ((((_lEN < 224) ? _lEN : 224) < 0) ? 0 : ((_lEN < 224) ? _lEN : 224)))))))) /\
+       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
+       (((0 <= (_offset + _lEN)) /\
+        ((_offset + _lEN) <= 18446744073709551615)) /\
+       (res.`3 = (_offset + _lEN)))))) /\
       (valid res.`4))].
 proof.
-admitted. (*done for a64*)
+  conseq (aBUFLEN_dumpstate_array_avx2_eq) (KECCAK536.__dumpstate_array_avx2_trace  _buf _b_buf _offset _lEN _st _b_st) => //. 
+ smt().
+qed.
+
+
+  equiv aBUFLEN_dumpstate_array_avx2x4_eq : M(Syscall).aBUFLEN____dumpstate_array_avx2x4 ~ KECCAK536.M.__dumpstate_array_avx2x4 : ={arg}==> ={res}.
+  proof.
+    proc; inline *; sim. 
+qed.
 
 lemma aBUFLEN____dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _st _b_st :
       hoare [M(Syscall).aBUFLEN____dumpstate_array_avx2x4 :
@@ -34102,8 +31192,9 @@ lemma aBUFLEN____dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
       (((0 <= (_offset + _lEN)) /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
-      ((((0 <= _offset) /\ (0 <= _lEN)) /\ (is_init _b_st 0 800)) /\
-      ((_offset + _lEN) <= 536)))))) ==>
+      (((((0 <= _offset) /\ (0 <= _lEN)) /\ (is_init _b_st 0 800)) /\
+       ((_offset + _lEN) <= 536)) /\
+      (_lEN <= 200)))))) ==>
       ((((0 <= res.`9) /\ (res.`9 <= 18446744073709551615)) /\
        ((((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
         (((0 <= (_offset + _lEN)) /\
@@ -34167,7 +31258,9 @@ lemma aBUFLEN____dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 
        (iota_ 0 536))))))))) /\
       (valid res.`10))].
 proof.
-admitted. (*done for 128*)
+ conseq (aBUFLEN_dumpstate_array_avx2x4_eq) (KECCAK536.__dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _buf3 _b_buf3 _offset _lEN _st _b_st) => //. 
+ smt().
+qed.
 
 lemma _sha3_256A_M1184_trace _out _b_out _in :
       hoare [M(Syscall)._sha3_256A_M1184 :
@@ -34186,7 +31279,7 @@ ecall (__absorb_imem_avx2_trace param_8 (BArray224.init_arr (W8.of_int 255)
 auto .
 ecall (__state_init_avx2_trace).
 auto .
-rewrite /is_init /valid /=  => &m /> *.
+rewrite /is_init /valid /= => &m /> *.
 smt (all_cat BArray224.init_arrP and_iota).
 qed .
 
@@ -34207,8 +31300,8 @@ ecall (a33____absorb_array_avx2_trace param_9 (BArray224.init_arr
 auto .
 ecall (__state_init_avx2_trace).
 auto .
-rewrite /is_init /valid /=  => &m /> *.
-smt (all_cat  BArray33.init_arrP BArray224.init_arrP and_iota).
+rewrite /is_init /valid /= => &m /> * .
+smt (all_cat BArray224.init_arrP BArray33.init_arrP and_iota).
 qed .
 
 lemma _sha3_512A_A64_trace _out _b_out _in _b_in :
@@ -34229,7 +31322,7 @@ auto .
 ecall (__state_init_avx2_trace).
 auto .
 rewrite /is_init /valid /= => &m /> *.
-smt (all_cat  BArray64.init_arrP BArray224.init_arrP and_iota).
+smt (all_cat BArray224.init_arrP BArray64.init_arrP and_iota).
 qed .
 
 lemma _shake256_M32__M32_M1088_trace _out _in0 _in1 :
@@ -34266,7 +31359,7 @@ auto .
 ecall (__pstate_init_avx2_trace param_17 b_param).
 auto .
 rewrite /is_init /valid /= => &m /> *.
-smt (all_cat  BArray224.init_arrP BArray200.init_arrP).
+smt (all_cat BArray224.init_arrP BArray200.init_arrP).
 qed .
 
 lemma _shake256x4_A128__A32_A1_trace _out0 _b_out0 _out1 _b_out1 _out2 _b_out2 _out3 _b_out3 _seed _b_seed _nonces _b_nonces :
@@ -34307,7 +31400,7 @@ ecall (a32____absorb_bcast_array_avx2x4_trace param_23 (BArray800.init_arr
 auto .
 ecall (__state_init_avx2x4_trace param_24 b_param_7).
 auto .
-rewrite /is_init /valid /= => &m /> * .
+rewrite /is_init /valid /= => &m /> *.
 smt (all_cat  BArray800.init_arrP BArray32.init_arrP and_iota SBArray4_1.is_init_cell_get).
 qed .
 
@@ -34335,8 +31428,9 @@ ecall (a32____pabsorb_array_avx2_trace param_14 (BArray200.init_arr
 auto .
 ecall (__pstate_init_avx2_trace param_15 b_param).
 auto .
-rewrite /is_init /valid /=  => &m /> * .
-smt (all_cat  BArray200.init_arrP BArray32.init_arrP BArray224.init_arrP BArray2.init_arrP).
+rewrite /is_init /valid /= .
+smt (all_cat BArray200.init_arrP BArray32.init_arrP BArray224.init_arrP 
+     BArray2.init_arrP).
 qed .
 
 lemma _shake128x4_absorb_A32_A2_trace _st _b_st _seed _b_seed _pos _b_pos :
@@ -34361,8 +31455,8 @@ ecall (a32____absorb_bcast_array_avx2x4_trace param_15 (BArray800.init_arr
 auto .
 ecall (__state_init_avx2x4_trace param_16 b_param_3).
 auto .
-rewrite /is_init /valid /= => &m /> *.
-smt (all_cat BArray32.init_arrP BArray800.init_arrP SBArray8_2.is_init_cell_get ).
+rewrite /is_init /valid /= .
+smt (all_cat BArray32.init_arrP BArray800.init_arrP SBArray8_2.is_init_cell_get).
 qed .
 
 lemma _shake128_squeeze3blocks_trace _buf _b_buf _st _b_st :
@@ -34388,28 +31482,30 @@ ecall (aBUFLEN____dumpstate_array_avx2_trace param_12 b_param_1 param_11
 auto .
 ecall (_keccakf1600_avx2_trace param_13 (BArray224.init_arr (W8.of_int 255)
                                         224)).
-auto .
-  rewrite /is_init /valid /=  => &m /> *.
-  split.  smt(BArray224.init_arrP). move => *.
-  split. smt(). move => *.  smt(and_iota all_cat).
-qed .
+auto.
+rewrite /is_init /valid /= => &m /> *. 
+split.  smt(BArray224.init_arrP). move => *.
+split. smt(). move => *.  smt(and_iota all_cat).
+qed.
+
 
 lemma _shake128_next_state_trace _buf _b_buf :
       hoare [M(Syscall)._shake128_next_state :
-      (((_b_buf = b_buf) /\ (_buf = buf)) /\ is_init _b_buf 0 536) ==>
+      (((_b_buf = b_buf) /\ (_buf = buf)) /\ (is_init _b_buf 0 536)) ==>
       ((is_init res.`2 0 536) /\ (valid res.`3))].
 proof.
-  proc; auto .
-ecall (aBUFLEN____dumpstate_array_avx2_trace param_2 ( BArray536.init_arr (W8.of_int 255) 536) param_1 
-       param_0 param (BArray224.init_arr (W8.of_int 255) 224)).
+proc; auto .
+ecall (aBUFLEN____dumpstate_array_avx2_trace param_2 (BArray536.init_arr
+                                                     (W8.of_int 255) 536) 
+       param_1 param_0 param (BArray224.init_arr (W8.of_int 255) 224)).
 auto .
 ecall (_keccakf1600_avx2_trace param_3 (BArray224.init_arr (W8.of_int 255)
                                        224)).
 auto .
 ecall (__state_from_pstate_avx2_trace param_4 b_param).
 auto .
-rewrite /is_init /valid /= => &m /> *. 
-  smt (all_cat and_iota BArray224.init_arrP SBArray536_200.is_init_cell_get BArray536.init_arrP).
+rewrite /is_init /valid /= => &m /> *.
+ smt (all_cat and_iota BArray224.init_arrP SBArray536_200.is_init_cell_get BArray536.init_arrP).
 qed .
 
 lemma _shake128x4_squeeze3blocks_trace _st _b_st _buf _b_buf :
@@ -34417,7 +31513,7 @@ lemma _shake128x4_squeeze3blocks_trace _st _b_st _buf _b_buf :
       (((_b_buf = b_buf) /\ ((_buf = buf) /\ ((_b_st = b_st) /\ (_st = st)))) /\
       (is_init _b_st 0 800)) ==> ((is_init res.`4 0 2144) /\ (valid res.`5))].
 proof.
-  proc; rewrite /= . auto.
+proc; auto .
 ecall (aBUFLEN____dumpstate_array_avx2x4_trace param_5 b_param_2 param_4 
        b_param_1 param_3 b_param_0 param_2 b_param param_1 param_0 param 
        (BArray800.init_arr (W8.of_int 255) 800)).
@@ -34436,7 +31532,8 @@ ecall (aBUFLEN____dumpstate_array_avx2x4_trace param_21 b_param_10 param_20
        b_param_9 param_19 b_param_8 param_18 b_param_7 param_17 param_16 
        param_15 (BArray800.init_arr (W8.of_int 255) 800)).
 auto .
-ecall (_keccakf1600_avx2x4_trace param_22 ( BArray800.init_arr (W8.of_int 255) 800) ).
+ecall (_keccakf1600_avx2x4_trace param_22 (BArray800.init_arr (W8.of_int 255)
+                                          800)).
 auto .
 rewrite /is_init /valid /= => &m /> *. split.  smt( BArray800.init_arrP). move => *.
 split.  smt(). move => *. split. smt(). move => *. split. 
@@ -34558,62 +31655,6 @@ rewrite /is_init /valid /= .
 smt (all_cat).
 qed .
 
-lemma _poly_compress_trace _rp _a _b_a :
-      hoare [M(Syscall)._poly_compress :
-      (((_b_a = b_a) /\ ((_a = a) /\ (_rp = rp))) /\
-      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
-      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
-      ((is_init _b_a 0 512) /\ (is_valid _rp 128))))) ==>
-      ((is_init res.`2 0 512) /\ (valid res.`3))].
-proof.
-proc; auto .
-while ((valid trace__poly_compress) /\ 0<=i /\ is_valid rp 128 /\ 0<=rp).
-auto .
-  rewrite /is_init /valid /=  => &m /> 2? h *.
-  have:= is_valid_bound _ _ h => /= *.
-  smt (all_cat is_validP).
-auto .
-ecall (_poly_csubq_trace param (BArray512.init_arr (W8.of_int 255) 512)).
-auto .
-rewrite /is_init /valid /=  => &m />  *.
-smt (all_cat BArray512.init_arrP).
-qed .
-
-lemma _poly_compress_1_trace _rp _b_rp _a _b_a :
-      hoare [M(Syscall)._poly_compress_1 :
-      (((_b_a = b_a) /\ ((_a = a) /\ ((_b_rp = b_rp) /\ (_rp = rp)))) /\
-      (is_init _b_a 0 512)) ==>
-      (((is_init res.`2 0 128) /\ (is_init res.`4 0 512)) /\ (valid res.`5))].
-proof.
-proc; auto .
-while ((valid trace__poly_compress_1) /\  0<=i /\ is_init b_rp 0 (32*i) /\ i<=4).
-auto .
-rewrite /is_init /valid /=.
-smt (all_cat).
-auto .
-ecall (_poly_csubq_trace param (BArray512.init_arr (W8.of_int 255) 512)).
-auto .
-rewrite /is_init /valid /= .
-smt (all_cat BArray512.init_arrP).
-qed .
-
-lemma _poly_decompress_trace _rp _b_rp _ap :
-      hoare [M(Syscall)._poly_decompress :
-      (((_ap = ap) /\ ((_b_rp = b_rp) /\ (_rp = rp))) /\
-      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\
-      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\ (is_valid _ap 128)))) ==>
-      ((is_init res.`2 0 512) /\ (valid res.`3))].
-proof.
-proc; auto .
-while ((valid trace__poly_decompress) /\ 0<=ap /\0<=i /\ is_init b_rp 0 (32*i) /\ i<=16 /\ is_valid ap 128).
-auto .
-  rewrite /is_init /valid /= => &m /> 5? h *.
-  have:= is_valid_bound _ _ h => /= *. smt(all_cat is_validP).
-auto .
-rewrite /is_init /valid /= .
-smt (all_cat).
-qed .
-
 lemma _poly_frombytes_trace _rp _b_rp _ap :
       hoare [M(Syscall)._poly_frombytes :
       (((_ap = ap) /\ ((_b_rp = b_rp) /\ (_rp = rp))) /\
@@ -34662,12 +31703,12 @@ lemma _poly_frommont_trace _rp _b_rp :
       ((is_init res.`2 0 512) /\ (valid res.`3))].
 proof.
 proc; auto .
-while ((valid trace__poly_frommont) /\ 0<=i).
+while ((valid trace__poly_frommont) /\  (0 <= i)).
 auto .
 ecall (__fqmulx16_trace param_2 param_1 param_0 param).
 auto .
 rewrite /is_init /valid /=.
-smt (all_cat).
+smt (all_cat BArray512.init_arrP).
 auto .
 rewrite /is_init /valid /= .
 smt (all_cat BArray512.init_arrP).
@@ -34679,7 +31720,9 @@ lemma _poly_frommsg_1_trace _rp _b_rp _ap _b_ap :
       (is_init _b_ap 0 32)) ==> ((is_init res.`2 0 512) /\ (valid res.`3))].
 proof.
 proc; auto .
-while ((valid trace__poly_frommsg_1) /\ 0 <= i /\ i <= 4 /\ is_init b_rp 0 (32*i*2) /\ is_init b_rp (8*32) (32*i*2)).
+while ((valid trace__poly_frommsg_1) /\  ((((0 <= i) /\ (i <= 4)) /\
+                                          (is_init b_rp 0 ((32 * i) * 2))) /\
+                                         (is_init b_rp 256 ((32 * i) * 2)))).
 auto .
 rewrite /is_init /valid /=.
 smt (all_cat).
@@ -34694,7 +31737,8 @@ lemma __cbd2_trace _rp _b_rp _buf _b_buf :
       (is_init _b_buf 0 128)) ==> ((is_init res.`2 0 512) /\ (valid res.`3))].
 proof.
 proc; auto .
-while ((valid trace___cbd2) /\ 0 <= i /\ i <= 4 /\ is_init b_rp 0 (32 * i * 4)).
+while ((valid trace___cbd2) /\  (((0 <= i) /\ (i <= 4)) /\
+                                (is_init b_rp 0 ((32 * i) * 4)))).
 auto .
 rewrite /is_init /valid /=.
 smt (all_cat).
@@ -34712,7 +31756,7 @@ proc; auto .
 ecall (__cbd2_trace param_0 b_param_0 param b_param).
 auto .
 rewrite /is_init /valid /= .
-smt (all_cat SBArray128_128.is_init_cell_get BArray512.init_arrP).
+smt (all_cat BArray512.init_arrP SBArray128_128.is_init_cell_get).
 qed .
 
 lemma _poly_getnoise_eta1_4x_trace _r0 _b_r0 _r1 _b_r1 _r2 _b_r2 _r3 _b_r3 _seed _b_seed _nonce :
@@ -34749,7 +31793,7 @@ ecall (_shake256x4_A128__A32_A1_trace param_12 b_param_7 param_11 b_param_6
                                                     (W8.of_int 255) 32) 
        param_7 b_param_3).
 auto .
-rewrite /is_init /valid /= => &m /> * .
+rewrite /is_init /valid /= .
 smt (all_cat BArray128.init_arrP BArray32.init_arrP BArray512.init_arrP).
 qed .
 
@@ -34791,7 +31835,7 @@ ecall (__invntt___butterfly64x_trace param_27 param_26 param_25 param_24
        param_23 param_22 param_21 param_20 param_19 param_18 param_17 
        param_16 param_15).
 auto .
-rewrite /is_init /valid /=.
+rewrite /is_init /valid /= => &m /> *.
 smt (all_cat BArray512.init_arrP).
 auto .
 while ((valid trace__poly_invntt) /\  ((0 <= i) /\
@@ -35015,7 +32059,7 @@ lemma _poly_sub_trace _rp _b_rp _ap _b_ap _bp _b_bp :
       ((is_init res.`2 0 512) /\ (valid res.`3))].
 proof.
 proc; auto .
-while ((valid trace__poly_sub) /\ is_init b_rp 0 (32*i) /\ 0 <= i /\ i <= 16).
+while ((valid trace__poly_sub) /\  ((0 <= i) /\ (is_init b_rp 0 (32 * i)))).
 auto .
 rewrite /is_init /valid /=.
 smt (all_cat).
@@ -35033,7 +32077,7 @@ lemma _poly_tobytes_trace _rp _a _b_a :
       ((is_init res.`2 0 512) /\ (valid res.`3))].
 proof.
 proc; auto .
-while ((valid trace__poly_tobytes) /\ 0<= rp /\ 0 <= i /\ is_valid rp 384).
+while ((valid trace__poly_tobytes) /\  0<= rp /\ 0 <= i /\ is_valid rp 384).
 auto .
 ecall (__shuffle8_trace param_0 param).
 auto .
@@ -35075,15 +32119,73 @@ lemma _poly_tomsg_1_trace _rp _b_rp _a _b_a :
       (((is_init res.`2 0 32) /\ (is_init res.`4 0 512)) /\ (valid res.`5))].
 proof.
 proc; auto .
-while ((valid trace__poly_tomsg_1) /\ is_init b_rp 0 (i*4) /\ 0 <= i /\ i <= 8 ).
+while ((valid trace__poly_tomsg_1) /\  (((0 <= i) /\ (i <= 8)) /\
+                                       (is_init b_rp 0 (4 * i)))).
 auto .
-rewrite /is_init /valid /= => &m /> *. 
+rewrite /is_init /valid /=.
+smt (all_cat BArray512.init_arrP).
+auto .
+ecall (_poly_csubq_trace param (BArray512.init_arr (W8.of_int 255) 512)).
+auto .
+rewrite /is_init /valid /= .
+smt (all_cat BArray512.init_arrP).
+qed .
+
+lemma _poly_compress_trace _rp _a _b_a :
+      hoare [M(Syscall)._poly_compress :
+      (((_b_a = b_a) /\ ((_a = a) /\ (_rp = rp))) /\
+      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
+      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
+      ((is_init _b_a 0 512) /\ (is_valid _rp 128))))) ==>
+      ((is_init res.`2 0 512) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace__poly_compress) /\ 0<=i /\ is_valid rp 128 /\ 0<=rp).
+auto .
+  rewrite /is_init /valid /=  => &m /> 2? h *.
+  have:= is_valid_bound _ _ h => /= *.
+  smt (all_cat is_validP).
+auto .
+ecall (_poly_csubq_trace param (BArray512.init_arr (W8.of_int 255) 512)).
+auto .
+rewrite /is_init /valid /=  => &m />  *.
+smt (all_cat BArray512.init_arrP).
+qed .
+
+lemma _poly_compress_1_trace _rp _b_rp _a _b_a :
+      hoare [M(Syscall)._poly_compress_1 :
+      (((_b_a = b_a) /\ ((_a = a) /\ ((_b_rp = b_rp) /\ (_rp = rp)))) /\
+      (is_init _b_a 0 512)) ==>
+      (((is_init res.`2 0 128) /\ (is_init res.`4 0 512)) /\ (valid res.`5))].
+proof.
+proc; auto .
+while ((valid trace__poly_compress_1) /\  0<=i /\ is_init b_rp 0 (32*i) /\ i<=4).
+auto .
+rewrite /is_init /valid /=.
 smt (all_cat).
 auto .
 ecall (_poly_csubq_trace param (BArray512.init_arr (W8.of_int 255) 512)).
 auto .
 rewrite /is_init /valid /= .
 smt (all_cat BArray512.init_arrP).
+qed .
+
+
+lemma _poly_decompress_trace _rp _b_rp _ap :
+      hoare [M(Syscall)._poly_decompress :
+      (((_ap = ap) /\ ((_b_rp = b_rp) /\ (_rp = rp))) /\
+      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\
+      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\ (is_valid _ap 128)))) ==>
+      ((is_init res.`2 0 512) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace__poly_decompress) /\ 0<=ap /\0<=i /\ is_init b_rp 0 (32*i) /\ i<=16 /\ is_valid ap 128).
+auto .
+  rewrite /is_init /valid /= => &m /> 5? h *.
+  have:= is_valid_bound _ _ h => /= *. smt(all_cat is_validP).
+auto .
+rewrite /is_init /valid /= .
+smt (all_cat).
 qed .
 
 lemma __polyvec_add2_trace _r _b_r _b _b_b :
@@ -35093,15 +32195,16 @@ lemma __polyvec_add2_trace _r _b_r _b _b_b :
       ((is_init res.`2 0 1536) /\ (valid res.`3))].
 proof.
 proc; auto .
+while ((valid trace___polyvec_add2) /\ 0<=i /\ is_init b_r 0 1536 /\ is_init b_b 0 1536).
+auto .
 ecall (_poly_add2_trace param_0 b_param_0 param b_param).
 auto .
-ecall (_poly_add2_trace param_2 b_param_2 param_1 b_param_1).
-auto .
-ecall (_poly_add2_trace param_4 b_param_4 param_3 b_param_3).
-auto .
-rewrite /is_init /valid /= .
+rewrite /is_init /valid /= => &m /> *.
 smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
      BArray512.init_arrP all_cat).
+auto .
+rewrite /is_init /valid /= => &m /> * .
+smt (BArray1536.init_arrP).
 qed .
 
 lemma __polyvec_csubq_trace _r _b_r :
@@ -35110,11 +32213,132 @@ lemma __polyvec_csubq_trace _r _b_r :
       ((is_init res.`2 0 1536) /\ (valid res.`3))].
 proof.
 proc; auto .
+while ((valid trace___polyvec_csubq) /\ 0<=i /\ is_init b_r 0 1536).
+auto .
 ecall (_poly_csubq_trace param b_param).
 auto .
-ecall (_poly_csubq_trace param_0 b_param_0).
+rewrite /is_init /valid /=.
+smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
+     BArray512.init_arrP all_cat).
 auto .
-ecall (_poly_csubq_trace param_1 b_param_1).
+rewrite /is_init /valid /= .
+smt ( BArray1536.init_arrP).
+qed .
+
+lemma __polyvec_frombytes_trace _ap :
+      hoare [M(Syscall).__polyvec_frombytes :
+      ((_ap = ap) /\
+      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\
+      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\ (is_valid _ap 1152)))) ==>
+      ((is_init res.`2 0 1536) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace___polyvec_frombytes) /\ 0<=i /\ 0<=pp /\  is_valid (pp-i*384) 1152 /\ is_init b_r 0 (i*512) /\ i<=3).
+auto .
+ecall (_poly_frombytes_trace param_0 b_param param).
+auto .
+rewrite /is_init /valid /=  => &m /> 3?  h *. have:= is_valid_bound _ _ h => /= *.
+smt (is_validP all_cat SBArray1536_512.is_init_cell_set BArray1536.init_arrP BArray512.init_arrP).
+auto .
+rewrite /is_init /valid /= .
+smt (all_cat).
+qed .
+
+lemma __polyvec_invntt_trace _r _b_r :
+      hoare [M(Syscall).__polyvec_invntt :
+      (((_b_r = b_r) /\ (_r = r)) /\ (is_init _b_r 0 1536)) ==>
+      ((is_init res.`2 0 1536) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace___polyvec_invntt) /\ 0<=i /\ is_init b_r 0 1536).
+auto .
+ecall (_poly_invntt_trace param b_param).
+auto .
+rewrite /is_init /valid /=.
+smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
+     all_cat BArray512.init_arrP).
+auto .
+rewrite /is_init /valid /= .
+smt (BArray1536.init_arrP).
+qed .
+
+lemma __polyvec_ntt_trace _r _b_r :
+      hoare [M(Syscall).__polyvec_ntt :
+      (((_b_r = b_r) /\ (_r = r)) /\ (is_init _b_r 0 1536)) ==>
+      ((is_init res.`2 0 1536) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace___polyvec_ntt) /\ 0<=i /\ is_init b_r 0 1536).
+auto .
+ecall (_poly_ntt_trace param b_param).
+auto .
+rewrite /is_init /valid /=.
+smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
+     all_cat BArray512.init_arrP).
+auto .
+rewrite /is_init /valid /= .
+smt (BArray1536.init_arrP).
+qed .
+
+lemma __polyvec_reduce_trace _r _b_r :
+      hoare [M(Syscall).__polyvec_reduce :
+      (((_b_r = b_r) /\ (_r = r)) /\ (is_init _b_r 0 1536)) ==>
+      ((is_init res.`2 0 1536) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace___polyvec_reduce) /\ 0<=i /\ is_init b_r 0 1536).
+auto .
+ecall (__poly_reduce_trace param b_param).
+auto .
+rewrite /is_init /valid /=.
+smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
+     all_cat BArray512.init_arrP).
+auto .
+rewrite /is_init /valid /= .
+smt (BArray1536.init_arrP).
+qed .
+
+lemma __polyvec_tobytes_trace _rp _a _b_a :
+      hoare [M(Syscall).__polyvec_tobytes :
+      (((_b_a = b_a) /\ ((_a = a) /\ (_rp = rp))) /\
+      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
+      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
+      ((is_valid _rp 1152) /\ (is_init _b_a 0 1536))))) ==>
+      (true /\ (valid res))].
+proof.
+proc; auto .
+while (valid trace___polyvec_tobytes /\ 0<=i /\ 0<=pp /\ is_valid (pp-i*384) 1152 /\ is_init b_a 0 1536).
+auto .
+ecall (_poly_tobytes_trace param_0 param b_param).
+auto .
+rewrite /is_init /valid /= => &m /> 3? h *. have:= is_valid_bound _ _ h => /= *.
+smt (all_cat is_validP BArray512.init_arrP SBArray1536_512.is_init_cell_get  SBArray1536_512.is_init_cell_set).
+by auto .
+qed .
+
+lemma __polyvec_pointwise_acc_trace _r _b_r _a _b_a _b _b_b :
+      hoare [M(Syscall).__polyvec_pointwise_acc :
+      (((_b_b = b_b) /\
+       ((_b = b) /\
+       ((_b_a = b_a) /\ ((_a = a) /\ ((_b_r = b_r) /\ (_r = r)))))) /\
+      ((is_init _b_a 0 1536) /\ (is_init _b_b 0 1536))) ==>
+      ((is_init res.`2 0 512) /\ (valid res.`3))].
+proof.
+proc; auto .
+while ((valid trace___polyvec_pointwise_acc) /\ 0<=i /\ is_init b_a 0 1536 /\ is_init b_b 0 1536 ).
+auto .
+ecall (_poly_add2_trace param_0 (BArray512.init_arr (W8.of_int 255) 512) 
+       param (BArray512.init_arr (W8.of_int 255) 512)).
+auto .
+ecall (_poly_basemul_trace param_3 b_param_1 param_2 b_param_0 param_1 
+       b_param).
+auto .
+rewrite /is_init /valid /=.
+smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
+     BArray512.init_arrP all_cat).
+auto .
+ecall (_poly_basemul_trace param_6 b_param_4 param_5 b_param_3 param_4 
+       b_param_2).
 auto .
 rewrite /is_init /valid /= .
 smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
@@ -35128,8 +32352,8 @@ lemma __polyvec_decompress_trace _rp :
       (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\ (is_valid _rp 972)))) ==>
       ((is_init res.`2 0 1536) /\ (valid res.`3))].
 proof.
-  proc; auto .
-  while ((valid trace___polyvec_decompress) /\ is_init b_r 0 (k*512) /\
+proc; auto .
+while ((valid trace___polyvec_decompress) /\ is_init b_r 0 (k*512) /\
          is_valid rp 972 /\ 0<=k /\ k<=3 /\ 0<= rp).
 auto .
 while (is_init b_r 0 (32 * (16*k + i))  /\ valid trace___polyvec_decompress /\
@@ -35137,7 +32361,6 @@ while (is_init b_r 0 (32 * (16*k + i))  /\ valid trace___polyvec_decompress /\
   auto .
   rewrite /is_init /valid /= => &m /> 2? h *.
   have := is_valid_bound _ _ h => /= *.
-
 smt (all_cat is_validP).
 auto .
 rewrite /is_init /valid /=.
@@ -35185,131 +32408,6 @@ rewrite /is_init /valid /= .
 smt (BArray1536.init_arrP all_cat).
 qed .
 
-lemma __polyvec_frombytes_trace _ap :
-      hoare [M(Syscall).__polyvec_frombytes :
-      ((_ap = ap) /\
-      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\
-      (((0 <= _ap) /\ (_ap <= 18446744073709551615)) /\ (is_valid _ap 1152)))) ==>
-      ((is_init res.`2 0 1536) /\ (valid res.`3))].
-proof.
-proc; auto .
-ecall (_poly_frombytes_trace param_0 b_param param).
-auto .
-ecall (_poly_frombytes_trace param_2 b_param_0 param_1).
-auto .
-ecall (_poly_frombytes_trace param_4 b_param_1 param_3).
-auto .
-rewrite /is_init /valid /= => &m /> 2?  h *. have:= is_valid_bound _ _ h => /= *.
-smt (is_validP all_cat SBArray1536_512.is_init_cell_set BArray1536.init_arrP BArray512.init_arrP).
-qed .
-
-lemma __polyvec_invntt_trace _r _b_r :
-      hoare [M(Syscall).__polyvec_invntt :
-      (((_b_r = b_r) /\ (_r = r)) /\ (is_init _b_r 0 1536)) ==>
-      ((is_init res.`2 0 1536) /\ (valid res.`3))].
-proof.
-proc; auto .
-ecall (_poly_invntt_trace param b_param).
-auto .
-ecall (_poly_invntt_trace param_0 b_param_0).
-auto .
-ecall (_poly_invntt_trace param_1 b_param_1).
-auto .
-rewrite /is_init /valid /= .
-smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
-     all_cat BArray512.init_arrP).
-qed .
-
-lemma __polyvec_ntt_trace _r _b_r :
-      hoare [M(Syscall).__polyvec_ntt :
-      (((_b_r = b_r) /\ (_r = r)) /\ (is_init _b_r 0 1536)) ==>
-      ((is_init res.`2 0 1536) /\ (valid res.`3))].
-proof.
-proc; auto .
-ecall (_poly_ntt_trace param b_param).
-auto .
-ecall (_poly_ntt_trace param_0 b_param_0).
-auto .
-ecall (_poly_ntt_trace param_1 b_param_1).
-auto .
-rewrite /is_init /valid /= .
-smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
-     all_cat BArray512.init_arrP).
-qed .
-
-lemma __polyvec_reduce_trace _r _b_r :
-      hoare [M(Syscall).__polyvec_reduce :
-      (((_b_r = b_r) /\ (_r = r)) /\ (is_init _b_r 0 1536)) ==>
-      ((is_init res.`2 0 1536) /\ (valid res.`3))].
-proof.
-proc; auto .
-ecall (__poly_reduce_trace param b_param).
-auto .
-ecall (__poly_reduce_trace param_0 b_param_0).
-auto .
-ecall (__poly_reduce_trace param_1 b_param_1).
-auto .
-rewrite /is_init /valid /= .
-smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
-     all_cat BArray512.init_arrP).
-qed .
-
-lemma __polyvec_pointwise_acc_trace _r _b_r _a _b_a _b _b_b :
-      hoare [M(Syscall).__polyvec_pointwise_acc :
-      (((_b_b = b_b) /\
-       ((_b = b) /\
-       ((_b_a = b_a) /\ ((_a = a) /\ ((_b_r = b_r) /\ (_r = r)))))) /\
-      ((is_init _b_a 0 1536) /\ (is_init _b_b 0 1536))) ==>
-      ((is_init res.`2 0 512) /\ (valid res.`3))].
-proof.
-proc; auto .
-ecall (_poly_add2_trace param_0 (BArray512.init_arr (W8.of_int 255) 512) 
-       param (BArray512.init_arr (W8.of_int 255) 512)).
-auto .
-ecall (_poly_basemul_trace param_3 (BArray512.init_arr (W8.of_int 255) 512) 
-       param_2 b_param_0 param_1 b_param).
-auto .
-ecall (_poly_add2_trace param_5 (BArray512.init_arr (W8.of_int 255) 512) 
-       param_4 (BArray512.init_arr (W8.of_int 255) 512)).
-auto .
-ecall (_poly_basemul_trace param_8 b_param_3 param_7 b_param_2 param_6 
-       b_param_1).
-auto .
-ecall (_poly_basemul_trace param_11 b_param_6 param_10 b_param_5 param_9 
-       b_param_4).
-auto .
-rewrite /is_init /valid /= .
-smt (SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set 
-     BArray512.init_arrP all_cat).
-qed .
-
-lemma __polyvec_tobytes_trace _rp _a _b_a :
-      hoare [M(Syscall).__polyvec_tobytes :
-      (((_b_a = b_a) /\ ((_a = a) /\ (_rp = rp))) /\
-      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
-      (((0 <= _rp) /\ (_rp <= 18446744073709551615)) /\
-      ((is_valid _rp 1152) /\ (is_init _b_a 0 1536))))) ==>
-      (true /\ (valid res))].
-proof.
-proc; auto .
-ecall (_poly_tobytes_trace param_0 param b_param).
-auto .
-ecall (_poly_tobytes_trace param_2 param_1 b_param_0).
-auto .
-ecall (_poly_tobytes_trace param_4 param_3 b_param_1).
-auto .
-rewrite /is_init /valid /= => &m /> 2? h *. have:= is_valid_bound _ _ h => /= *.
-smt (is_validP all_cat  SBArray1536_512.is_init_cell_get SBArray1536_512.is_init_cell_set BArray1536.init_arrP BArray512.init_arrP).
-qed .
-
-
-lemma comp_u64_l_int_and_u64_l_int_trace _a _b _c _d :
-      hoare [M(Syscall).comp_u64_l_int_and_u64_l_int :
-      (((_d = d) /\ ((_c = c) /\ ((_b = b) /\ (_a = a)))) /\ true) ==>
-      (res.`1 = to_uint  _a < _b && to_uint _c < _d /\ (valid res.`2))].
-proof.
-admitted.
-
 lemma __gen_matrix_buf_rejection_filter48_trace _pol _b_pol _counter _buf _b_buf _buf_offset _load_shuffle _mask _bounds _sst _b_sst _ones _ms :
       hoare [M(Syscall).__gen_matrix_buf_rejection_filter48 :
       (((_ms = ms) /\
@@ -35328,14 +32426,14 @@ lemma __gen_matrix_buf_rejection_filter48_trace _pol _b_pol _counter _buf _b_buf
         (((W64.to_uint _counter) + 32) <= 256)) /\
        (0 <= (W64.to_uint _buf_offset))) /\
       ((((W64.to_uint _buf_offset) + 24) + 32) <= 536))) ==>
-      ((( to_uint _counter  <=  W64.to_uint res.`3) /\
+      ((((W64.to_uint _counter) <= (W64.to_uint res.`3)) /\ (to_uint res.`3 <= 256) /\
        (foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
        ((is_init res.`2 k 1) =
        ((is_init _b_pol k 1) \/
-       (((2 * W64.to_uint _counter) <= k) /\ (k < (2* W64.to_uint res.`3))))))
-       (iota_ 0 512)))) /\
+       ((((W64.to_uint _counter) * 2) <= k) /\
+       (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512)))) /\
       (valid res.`4))].
 proof.
 admitted.
@@ -35346,15 +32444,18 @@ lemma __write_u128_boundchk_trace _pol _b_pol _ctr _data _ms :
        ((_data = data) /\
        ((_ctr = ctr) /\ ((_b_pol = b_pol) /\ (_pol = pol))))) /\
       true) ==>
-      (foldr (fun x => (fun acc => (x /\ acc))) true
+      ((foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
        ((is_init res.`2 k 1) =
        ((is_init _b_pol k 1) \/
-       (((2 * to_uint  _ctr) <=  k) /\
-       ( k <  (2 * to_uint  _ctr) +
-         ((16 < ( 256 - to_uint _ctr)) ? 16 : (((256 - to_uint  _ctr) < 0) ? 0 : 256 - to_uint  _ctr))
-       ))))) (iota_ 0 256)) /\
+       (((2 * (W64.to_uint _ctr)) <= k) /\
+       (k <
+       ((2 * (W64.to_uint _ctr)) +
+       ((((16 < (2*(256 - (W64.to_uint _ctr)))) ? 16 : (2*(256 - (W64.to_uint _ctr)))) <
+        0) ? 0 : ((16 < (2*(256 - (W64.to_uint _ctr)))) ? 16 : 2*((256 -
+                                                           (W64.to_uint _ctr)))))))))))
+       (iota_ 0 512))) /\
       (valid res.`4))].
 proof.
   proc. auto. rewrite /is_init /valid /= => &m /> *.  split.
@@ -35365,6 +32466,8 @@ proof.
   move => *. split.  move => *. rewrite !to_uintD_small /=; smt(and_iota W64.to_uint_cmp).
   smt(and_iota W64.to_uint_cmp).
 qed.
+
+
 
 
 lemma __gen_matrix_buf_rejection_filter24_trace _pol _b_pol _counter _buf _b_buf _buf_offset _load_shuffle _mask _bounds _sst _b_sst _ones _ms :
@@ -35384,24 +32487,18 @@ lemma __gen_matrix_buf_rejection_filter24_trace _pol _b_pol _counter _buf _b_buf
         (0 <= (W64.to_uint _counter))) /\
        (0 <= (W64.to_uint _buf_offset))) /\
       (((W64.to_uint _buf_offset) + 32) <= 536))) ==>
-      ((( to_uint _counter <= to_uint res.`3) /\ to_uint res.`3 <= 256 /\
+      (((((W64.of_int (W64.to_uint _counter)) \ule res.`3) /\
+        ((W64.to_uint res.`3) <= 256)) /\
        (foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
        ((is_init res.`2 k 1) =
        ((is_init _b_pol k 1) \/
-       (((W64.to_uint _counter * 2) <= k) /\ (k < (2* W64.to_uint res.`3))))))
-       (iota_ 0 512)))) /\
+       (((2 * (W64.to_uint _counter)) <= k) /\
+       (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512)))) /\
       (valid res.`5))].
 proof.
-proc; auto .
-ecall (__write_u128_boundchk_trace param_2 b_param param_1 param_0 param).
-auto .
-ecall (__write_u128_boundchk_trace param_6 b_param_0 param_5 param_4 param_3).
-auto . admitted.
-(* rewrite /is_init /valid /= => &m /> *.
-smt (all_cat). 
-qed. *)
+admitted.
 
 lemma _gen_matrix_buf_rejection_trace _pol _b_pol _counter _buf _b_buf _buf_offset :
       hoare [M(Syscall)._gen_matrix_buf_rejection :
@@ -35409,69 +32506,72 @@ lemma _gen_matrix_buf_rejection_trace _pol _b_pol _counter _buf _b_buf _buf_offs
        ((_b_buf = b_buf) /\
        ((_buf = buf) /\
        ((_counter = counter) /\ ((_b_pol = b_pol) /\ (_pol = pol)))))) /\
-      ((((is_init _b_buf 0 536) /\ (0 <= (W64.to_uint _counter))) /\
-       (0 <= (W64.to_uint _buf_offset))) /\
-      ((W64.to_uint _buf_offset) < 536))) ==>
-      ((((to_uint _counter) <=  to_uint res.`3) /\ to_uint res.`3 <= 256 /\
+       ((((is_init _b_buf 0 536) /\ (0 <= (W64.to_uint _counter))) /\
+        ((W64.to_uint _counter) <= 256))) /\
+       (0 <= (W64.to_uint _buf_offset)) /\
+      ((W64.to_uint _buf_offset) < 536)) ==>
+      (((((W64.of_int (W64.to_uint _counter)) \ule res.`3) /\
+        to_uint res.`3 <= 256 /\
        (foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
        ((is_init res.`2 k 1) =
        ((is_init _b_pol k 1) \/
-       (((W64.to_uint _counter * 2) <= k) /\ (k < (2 * W64.to_uint res.`3))))))
-       (iota_ 0 512)))) /\
+       (((2 * (W64.to_uint _counter)) <= k) /\
+       (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512))))) /\
       (valid res.`4))].
 proof.
   proc; auto .
-  while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\ to_uint counter <=256 /\
+  while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\ to_uint counter <= 256 /\
          (forall k, 0<=k /\ k<512 => is_init_cell b_pol k = (is_init_cell _b_pol k \/
          (to_uint _counter * 2) <= k /\  k < (2* to_uint counter ))) /\
-         (condition_loop => (to_uint  buf_offset < 481 /\ to_uint counter <=256 )) /\
-         to_uint _counter <= to_uint counter) .
-  + auto .
-    ecall (comp_u64_l_int_and_u64_l_int_trace param_2 param_1 param_0 param). auto .
-    ecall (__gen_matrix_buf_rejection_filter24_trace param_12 b_param param_11 
-       param_10 (BArray536.init_arr (W8.of_int 255) 536) param_9 param_8 
-       param_7 param_6 param_5 (BArray2048.init_arr (W8.of_int 255) 2048) 
-       param_4 param_3). 
+         (condition_loop => (to_uint  buf_offset < 481)) /\
+           to_uint _counter <= to_uint counter) .
+  + auto . sp.
+    if .
+    + auto . 
+      ecall (__gen_matrix_buf_rejection_filter24_trace param_8 b_param param_7 
+       param_6 (BArray536.init_arr (W8.of_int 255) 536) param_5 param_4 
+       param_3 param_2 param_1 (BArray2048.init_arr (W8.of_int 255) 2048) 
+       param_0 param).
+      auto .
+      rewrite /is_init /valid /= => &m /> 7?. rewrite ultE /= => *.
+      split. smt(W64.to_uint_cmp BArray536.init_arrP BArray2048.init_arrP). move => /> 5?.
+      rewrite !uleE !ultE !to_uintD_small /=; smt(and_iota W64.to_uint_cmp all_cat).
+    by auto .
+  auto . 
+  while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\ to_uint counter <= 256 /\
+         to_uint _counter <= to_uint counter /\ 
+         (forall k, 0<=k /\ k<512 => is_init_cell b_pol k = (is_init_cell _b_pol k \/
+         (to_uint _counter * 2) <= k /\  k < (2* to_uint counter ))) /\
+         (to_uint counter < 225 => saved_buf_offset = buf_offset) /\
+         (condition_loop => (to_uint  buf_offset < 457))).
+  + auto . sp.
+    if .
+    + auto .
+      ecall (__gen_matrix_buf_rejection_filter48_trace param_18 b_param_0 param_17 
+       param_16 (BArray536.init_arr (W8.of_int 255) 536) param_15 param_14 
+       param_13 param_12 param_11 (BArray2048.init_arr (W8.of_int 255) 2048) 
+       param_10 param_9).
+      auto .
+      rewrite /is_init /valid /= => &m /> 7?. rewrite ultE /= => *.
+      split. smt(W64.to_uint_cmp BArray536.init_arrP BArray2048.init_arrP). move => /> *.
+      rewrite !ultE !to_uintD_small /=; smt(and_iota W64.to_uint_cmp all_cat).
     auto .
-    rewrite /is_init /valid /= => &m /> 3? h1 *.
-    split. smt(W64.to_uint_cmp BArray536.init_arrP BArray2048.init_arrP). move => /> 7? h2 2?.
-    rewrite !uleE !to_uintD_small /=; smt(and_iota W64.to_uint_cmp all_cat).
-  auto .
-  ecall (comp_u64_l_int_and_u64_l_int_trace param_2 param_1 param_0 param).
-  auto .
-  while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\
-         to_uint _counter <= to_uint counter /\ to_uint counter <=256 /\
-         (forall k, 0<=k /\ k<512 => is_init_cell b_pol k = (is_init_cell _b_pol k \/
-         (to_uint _counter * 2) <= k /\  k < (2* to_uint counter ))) /\
-         (condition_loop => (to_uint  buf_offset < 457 /\ to_uint counter <225 ))).
-  + auto .
-    ecall (comp_u64_l_int_and_u64_l_int_trace param_16 param_15 param_14 param_13). auto .
-    ecall (__gen_matrix_buf_rejection_filter48_trace param_26 b_param_0 param_25 
-       param_24 (BArray536.init_arr (W8.of_int 255) 536) param_23 param_22 
-       param_21 param_20 param_19 (BArray2048.init_arr (W8.of_int 255) 2048) 
-       param_18 param_17).
-    auto.
-    rewrite /is_init /valid /=  => &m />  *.
-    split. smt(BArray536.init_arrP BArray2048.init_arrP W64.to_uint_cmp).  move => /> 7? h2 2?.
-    rewrite !to_uintD_small /=. smt(). move => /> *.
-    smt(all_cat and_iota W64.to_uint_cmp).
-  auto .
-  ecall (comp_u64_l_int_and_u64_l_int_trace param_16 param_15 param_14 param_13).
-  auto .
-  rewrite /is_init /valid /= => &m /> *. split.  smt(all_cat W64.to_uint_cmp). move => /> *.
-  smt(and_iota all_cat W64.to_uint_cmp).
+    rewrite /is_init /valid /= => &m /> 8?. rewrite ultE /= => *. smt().
+auto .
+rewrite /is_init /valid /= => &m /> *. split. rewrite !ultE /=. smt(and_iota). move => *.
+split.  rewrite !ultE /=. smt(). move => *. rewrite uleE /=. smt(and_iota).
 qed .
 
 lemma gen_matrix_get_indexes_trace _b __t :
       hoare [M(Syscall).gen_matrix_get_indexes :
       (((__t = _t) /\ (_b = b)) /\
-      (( 0 <= to_uint _b + (to_uint __t * 16))) /\
-      ((to_uint _b + (to_uint __t * 16)) <=  24)) ==>
+      ((0 <= ((W64.to_uint _b) + ((W64.to_uint __t) * 16))) /\
+      (((W64.to_uint _b) + ((W64.to_uint __t) * 16)) <= 24))) ==>
       (true /\ (valid res.`2))].
 proof.
-  proc; auto . move => &m /> *.
+proc; auto . move => &m /> *.
   rewrite  !to_uintD_small /= . rewrite to_uint_shl /=; smt(W64.to_uint_cmp).
   rewrite !to_uint_shl /=; smt(W64.to_uint_cmp).
 qed .
@@ -35484,8 +32584,7 @@ lemma __gen_matrix_fill_polynomial_trace _pol _b_pol _buf _b_buf :
       (((is_init res.`2 0 512) /\ (is_init res.`4 0 536)) /\ (valid res.`5))].
 proof.
 proc; auto .
-  while ((valid trace___gen_matrix_fill_polynomial) /\ 0 <=to_uint counter /\ to_uint buf_offset = 2*168 /\
-         to_uint counter <= 256 /\ is_init b_pol 0 (to_uint counter*2) /\ is_init b_buf 0 536).
+  while ((valid trace___gen_matrix_fill_polynomial) /\ 0 <=to_uint counter /\ to_uint buf_offset = 2*168  /\ is_init b_pol 0 (to_uint counter*2) /\ is_init b_buf 0 536).
 auto .
 ecall (_gen_matrix_buf_rejection_trace param_2 b_param param_1 param_0 
  (BArray536.init_arr (W8.of_int 255) 536) param).
@@ -35493,15 +32592,15 @@ auto .
 ecall (_shake128_next_state_trace param_3 ( BArray536.init_arr (W8.of_int 255) 536)).
 auto .
    rewrite /is_init /valid /= => &m /> . rewrite !ultE !to_uintK_small /=. smt(). move => *.
-   split.  smt(BArray536.init_arrP W64.to_uint_cmp). move => *. split. smt(). move => *.
-   rewrite !uleE /=.   smt(and_iota all_cat BArray536.init_arrP).
+   split.  smt(BArray536.init_arrP W64.to_uint_cmp). move => *. split. smt(). move => 4?.
+   rewrite !uleE /= => *.   smt(and_iota all_cat BArray536.init_arrP).
 
 auto .
 ecall (_gen_matrix_buf_rejection_trace param_7 b_param_0 param_6 param_5 
        (BArray536.init_arr (W8.of_int 255) 536) param_4).
 auto .
-rewrite /is_init /valid /= => &m /> *. split. smt(BArray536.init_arrP). move => *. split.  rewrite !uleE /=. smt(all_cat and_iota).
-move => 3?. rewrite ultE /=.  smt ().
+         rewrite /is_init /valid /= => &m /> *. split. smt(BArray536.init_arrP). move => 2?.
+  rewrite uleE /= => *. split. smt(and_iota all_cat). move => 3?. rewrite ultE /=.  smt ().
 qed .
 
 lemma _gen_matrix_sample_four_polynomials_trace _polx4 _b_polx4 _buf _b_buf _rho _b_rho _pos_entry _transposed :
@@ -35521,7 +32620,7 @@ proc; auto .
 ecall (__gen_matrix_fill_polynomial_trace param_0 b_param_0 param b_param).
 auto .
 ecall (__gen_matrix_fill_polynomial_trace param_2 b_param_2 param_1 b_param_1).
-  auto .
+auto .
 ecall (__gen_matrix_fill_polynomial_trace param_4 b_param_4 param_3 b_param_3).
 auto .
 ecall (__gen_matrix_fill_polynomial_trace param_6 b_param_6 param_5 b_param_5).
@@ -35573,7 +32672,7 @@ ecall (_shake128_absorb_A32_A2_trace param_4 (BArray32.init_arr
                                              (W8.of_int 255) 32) param_3 
        b_param_1).
 auto .
-rewrite /is_init /valid /= => &m /> *.
+rewrite /is_init /valid /= .
 smt(BArray32.init_arrP BArray224.init_arrP BArray536.init_arrP all_cat BArray512.init_arrP).
 qed .
 
@@ -35582,8 +32681,8 @@ lemma _gen_matrix_avx2_trace _matrix _b_matrix _rho _b_rho _transposed :
       (((_transposed = transposed) /\
        ((_b_rho = b_rho) /\
        ((_rho = rho) /\ ((_b_matrix = b_matrix) /\ (_matrix = matrix))))) /\
-      (((is_init _b_rho 0 32) /\  0 <= to_uint _transposed) /\
-      (to_uint _transposed <= 1))) ==>
+      (((is_init _b_rho 0 32) /\ ((W64.of_int 0) \ule _transposed)) /\
+      (_transposed \ule (W64.of_int 1)))) ==>
       ((is_init res.`2 0 4608) /\ (valid res.`3))].
 proof.
 proc; auto .
@@ -35613,9 +32712,8 @@ auto .
   split. rewrite !W64.to_uintK_small /=; smt(BArray32.init_arrP). move => *.
   smt(all_cat SBArray4608_2048.is_init_cell_set BArray2048.init_arrP).
 auto .
-rewrite /is_init /valid /= => &m /> *. split. rewrite !uleE to_uintK_small /=; smt().
-move => *. split. smt(BArray32.init_arrP). move => *. 
- split. smt(all_cat). smt (all_cat SBArray4608_512.is_init_cell_set).
+rewrite /is_init /valid /= => &m /> ?. rewrite !uleE to_uintK_small /=. smt().
+move => *. split.  smt().  move => *. split. smt(BArray32.init_arrP).  move => *. smt(all_cat SBArray4608_512.is_init_cell_set and_iota).
 qed .
 
 lemma __indcpa_keypair_trace _pkp _skp _randomnessp _b_randomnessp :
@@ -35698,7 +32796,6 @@ split. smt(all_cat BArray4608.init_arrP). move => *.
 split. smt(BArray1536.init_arrP). move => *.
 smt(is_validP all_cat).
 qed.
-
 
 lemma __indcpa_enc_0_trace _sctp _msgp _b_msgp _pkp _noiseseed _b_noiseseed :
       hoare [M(Syscall).__indcpa_enc_0 :
@@ -35981,7 +33078,8 @@ lemma __crypto_kem_keypair_jazz_trace _pkp _skp _randomnessp _b_randomnessp :
       (((is_init _b_randomnessp 0 64) /\ (is_valid _pkp 1184)) /\
       (is_valid _skp 2400))))))) ==> (true /\ (valid res))].
 proof.
-proc; auto .
+
+  proc; auto .
   while ((valid trace___crypto_kem_keypair_jazz) /\ is_valid (skp - i*8) 32 /\ 0<=skp /\ 0<=i /\
          is_init b_randomnessp2 0 32).
 auto .
@@ -36167,6 +33265,7 @@ rewrite /is_init /valid /= => &m /> *.
 smt(BArray64.init_arrP).
 qed .
 
+
 lemma jade_kem_mlkem_mlkem768_amd64_avx2_enc_trace _ciphertext _shared_secret _public_key :
       hoare [M(Syscall).jade_kem_mlkem_mlkem768_amd64_avx2_enc :
       (((_public_key = public_key) /\
@@ -36204,4 +33303,3 @@ proc; auto .
 ecall (__crypto_kem_dec_jazz_trace param_1 param_0 param).
 by auto .
 qed .
- 

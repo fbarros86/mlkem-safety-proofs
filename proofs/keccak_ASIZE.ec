@@ -1924,6 +1924,2035 @@ module M = {
     b_st <- (BArray224.init_arr (W8.of_int 255) 224);
     return (st, b_st, trace___addratebit_avx2);
   }
+  proc __addstate_imem_avx2 (st:BArray224.t, b_st:BArray224.t,
+                                      buf:int, lEN:int, tRAILB:int) : 
+  BArray224.t * BArray224.t * int * trace = {
+    var r0:W256.t;
+    var r1:W256.t;
+    var t64:W64.t;
+    var t128_1:W128.t;
+    var r3:W256.t;
+    var t128_0:W128.t;
+    var r4:W256.t;
+    var r5:W256.t;
+    var r2:W256.t;
+    var r6:W256.t;
+    var param:W256.t;
+    var param_0:W256.t;
+    var param_1:W256.t;
+    var param_2:W256.t;
+    var param_3:BArray224.t;
+    var result:BArray224.t;
+    var param_4:int;
+    var param_5:int;
+    var param_6:int;
+    var result_0:W256.t;
+    var result_1:int;
+    var result_2:int;
+    var result_3:int;
+    var param_7:int;
+    var param_8:int;
+    var param_9:int;
+    var result_4:W64.t;
+    var result_5:int;
+    var result_6:int;
+    var result_7:int;
+    var param_10:int;
+    var param_11:int;
+    var param_12:int;
+    var result_8:W256.t;
+    var result_9:int;
+    var result_10:int;
+    var result_11:int;
+    var param_13:int;
+    var param_14:int;
+    var param_15:int;
+    var result_12:W64.t;
+    var result_13:int;
+    var result_14:int;
+    var result_15:int;
+    var param_16:int;
+    var param_17:int;
+    var param_18:int;
+    var result_16:W256.t;
+    var result_17:int;
+    var result_18:int;
+    var result_19:int;
+    var param_19:int;
+    var param_20:int;
+    var param_21:int;
+    var result_20:W64.t;
+    var result_21:int;
+    var result_22:int;
+    var result_23:int;
+    var param_22:int;
+    var param_23:int;
+    var param_24:int;
+    var result_24:W256.t;
+    var result_25:int;
+    var result_26:int;
+    var result_27:int;
+    var param_25:int;
+    var param_26:int;
+    var param_27:int;
+    var result_28:W64.t;
+    var result_29:int;
+    var result_30:int;
+    var result_31:int;
+    var param_28:int;
+    var param_29:int;
+    var param_30:int;
+    var result_32:W256.t;
+    var result_33:int;
+    var result_34:int;
+    var result_35:int;
+    var param_31:int;
+    var param_32:int;
+    var param_33:int;
+    var result_36:W256.t;
+    var result_37:int;
+    var result_38:int;
+    var result_39:int;
+    var b_result:BArray224.t;
+    var trace___addstate_imem_avx2:trace;
+    b_result <- witness;
+    param_3 <- witness;
+    result <- witness;
+    trace___addstate_imem_avx2 <- [];
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     ((((0 <= lEN) /\ (is_valid buf lEN)) /\ (is_init b_st 0 224)) /\
+     (lEN <= 200))))]);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    param_33 <- buf;
+    param_32 <- lEN;
+    param_31 <- tRAILB;
+    (result_39, result_38, result_37, result_36, tmp__trace) <@ __mread_bcast_4subu64 (
+    param_33, param_32, param_31);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++ tmp__trace);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert,
+     (((0 <=
+       ((0 < ((param_32 < 8) ? param_32 : 8)) ? ((param_32 < 8) ? param_32 : 8) : 0)) /\
+      (((0 < ((param_32 < 8) ? param_32 : 8)) ? ((param_32 < 8) ? param_32 : 8) : 0) <=
+      18446744073709551615)) /\
+     (((0 <=
+       (param_33 +
+       ((0 < ((param_32 < 8) ? param_32 : 8)) ? ((param_32 < 8) ? param_32 : 8) : 0))) /\
+      ((param_33 +
+       ((0 < ((param_32 < 8) ? param_32 : 8)) ? ((param_32 < 8) ? param_32 : 8) : 0)) <=
+      18446744073709551615)) /\
+     (((result_39 =
+       (param_33 +
+       ((0 < ((param_32 < 8) ? param_32 : 8)) ? ((param_32 < 8) ? param_32 : 8) : 0))) /\
+      (result_38 =
+      (param_32 -
+      ((0 < ((param_32 < 8) ? param_32 : 8)) ? ((param_32 < 8) ? param_32 : 8) : 0)))) /\
+     (result_37 = ((8 <= param_32) ? param_31 : 0))))))]);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert, ((0 <= result_39) /\ (result_39 <= 18446744073709551615)))]);
+    buf <- result_39;
+    lEN <- result_38;
+    tRAILB <- result_37;
+    r0 <- result_36;
+    st <- (BArray224.set256 st 0 ((BArray224.get256 st 0) `^` r0));
+    param_30 <- buf;
+    param_29 <- lEN;
+    param_28 <- tRAILB;
+    (result_35, result_34, result_33, result_32, tmp__trace) <@ __mread_subu256 (
+    param_30, param_29, param_28);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++ tmp__trace);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert,
+     (((0 <=
+       ((0 < ((param_29 < 32) ? param_29 : 32)) ? ((param_29 < 32) ? 
+                                                  param_29 : 32) : 0)) /\
+      (((0 < ((param_29 < 32) ? param_29 : 32)) ? ((param_29 < 32) ? 
+                                                  param_29 : 32) : 0) <=
+      18446744073709551615)) /\
+     (((0 <=
+       (param_30 +
+       ((0 < ((param_29 < 32) ? param_29 : 32)) ? ((param_29 < 32) ? 
+                                                  param_29 : 32) : 0))) /\
+      ((param_30 +
+       ((0 < ((param_29 < 32) ? param_29 : 32)) ? ((param_29 < 32) ? 
+                                                  param_29 : 32) : 0)) <=
+      18446744073709551615)) /\
+     (((result_35 =
+       (param_30 +
+       ((0 < ((param_29 < 32) ? param_29 : 32)) ? ((param_29 < 32) ? 
+                                                  param_29 : 32) : 0))) /\
+      (result_34 =
+      (param_29 -
+      ((0 < ((param_29 < 32) ? param_29 : 32)) ? ((param_29 < 32) ? param_29 : 32) : 0)))) /\
+     (result_33 = ((32 <= param_29) ? param_28 : 0))))))]);
+    trace___addstate_imem_avx2 <-
+    (trace___addstate_imem_avx2 ++
+    [(Assert, ((0 <= result_35) /\ (result_35 <= 18446744073709551615)))]);
+    buf <- result_35;
+    lEN <- result_34;
+    tRAILB <- result_33;
+    r1 <- result_32;
+    st <- (BArray224.set256 st 1 ((BArray224.get256 st 1) `^` r1));
+    if ((0 < lEN)) {
+      param_27 <- buf;
+      param_26 <- lEN;
+      param_25 <- tRAILB;
+      (result_31, result_30, result_29, result_28, tmp__trace) <@ __mread_subu64 (
+      param_27, param_26, param_25);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_26 < 8) ? param_26 : 8)) ? ((param_26 < 8) ? param_26 : 8) : 0)) /\
+        (((0 < ((param_26 < 8) ? param_26 : 8)) ? ((param_26 < 8) ? param_26 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_27 +
+         ((0 < ((param_26 < 8) ? param_26 : 8)) ? ((param_26 < 8) ? param_26 : 8) : 0))) /\
+        ((param_27 +
+         ((0 < ((param_26 < 8) ? param_26 : 8)) ? ((param_26 < 8) ? param_26 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_31 =
+         (param_27 +
+         ((0 < ((param_26 < 8) ? param_26 : 8)) ? ((param_26 < 8) ? param_26 : 8) : 0))) /\
+        (result_30 =
+        (param_26 -
+        ((0 < ((param_26 < 8) ? param_26 : 8)) ? ((param_26 < 8) ? param_26 : 8) : 0)))) /\
+       (result_29 = ((8 <= param_26) ? param_25 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_31) /\ (result_31 <= 18446744073709551615)))]);
+      buf <- result_31;
+      lEN <- result_30;
+      tRAILB <- result_29;
+      t64 <- result_28;
+      t128_1 <- (zeroextu128 t64);
+      param_24 <- buf;
+      param_23 <- lEN;
+      param_22 <- tRAILB;
+      (result_27, result_26, result_25, result_24, tmp__trace) <@ __mread_subu256 (
+      param_24, param_23, param_22);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_23 < 32) ? param_23 : 32)) ? ((param_23 < 32) ? 
+                                                    param_23 : 32) : 0)) /\
+        (((0 < ((param_23 < 32) ? param_23 : 32)) ? ((param_23 < 32) ? 
+                                                    param_23 : 32) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_24 +
+         ((0 < ((param_23 < 32) ? param_23 : 32)) ? ((param_23 < 32) ? 
+                                                    param_23 : 32) : 0))) /\
+        ((param_24 +
+         ((0 < ((param_23 < 32) ? param_23 : 32)) ? ((param_23 < 32) ? 
+                                                    param_23 : 32) : 0)) <=
+        18446744073709551615)) /\
+       (((result_27 =
+         (param_24 +
+         ((0 < ((param_23 < 32) ? param_23 : 32)) ? ((param_23 < 32) ? 
+                                                    param_23 : 32) : 0))) /\
+        (result_26 =
+        (param_23 -
+        ((0 < ((param_23 < 32) ? param_23 : 32)) ? ((param_23 < 32) ? 
+                                                   param_23 : 32) : 0)))) /\
+       (result_25 = ((32 <= param_23) ? param_22 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_27) /\ (result_27 <= 18446744073709551615)))]);
+      buf <- result_27;
+      lEN <- result_26;
+      tRAILB <- result_25;
+      r3 <- result_24;
+      param_21 <- buf;
+      param_20 <- lEN;
+      param_19 <- tRAILB;
+      (result_23, result_22, result_21, result_20, tmp__trace) <@ __mread_subu64 (
+      param_21, param_20, param_19);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_20 < 8) ? param_20 : 8)) ? ((param_20 < 8) ? param_20 : 8) : 0)) /\
+        (((0 < ((param_20 < 8) ? param_20 : 8)) ? ((param_20 < 8) ? param_20 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_21 +
+         ((0 < ((param_20 < 8) ? param_20 : 8)) ? ((param_20 < 8) ? param_20 : 8) : 0))) /\
+        ((param_21 +
+         ((0 < ((param_20 < 8) ? param_20 : 8)) ? ((param_20 < 8) ? param_20 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_23 =
+         (param_21 +
+         ((0 < ((param_20 < 8) ? param_20 : 8)) ? ((param_20 < 8) ? param_20 : 8) : 0))) /\
+        (result_22 =
+        (param_20 -
+        ((0 < ((param_20 < 8) ? param_20 : 8)) ? ((param_20 < 8) ? param_20 : 8) : 0)))) /\
+       (result_21 = ((8 <= param_20) ? param_19 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_23) /\ (result_23 <= 18446744073709551615)))]);
+      buf <- result_23;
+      lEN <- result_22;
+      tRAILB <- result_21;
+      t64 <- result_20;
+      t128_0 <- (zeroextu128 t64);
+      param_18 <- buf;
+      param_17 <- lEN;
+      param_16 <- tRAILB;
+      (result_19, result_18, result_17, result_16, tmp__trace) <@ __mread_subu256 (
+      param_18, param_17, param_16);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_17 < 32) ? param_17 : 32)) ? ((param_17 < 32) ? 
+                                                    param_17 : 32) : 0)) /\
+        (((0 < ((param_17 < 32) ? param_17 : 32)) ? ((param_17 < 32) ? 
+                                                    param_17 : 32) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_18 +
+         ((0 < ((param_17 < 32) ? param_17 : 32)) ? ((param_17 < 32) ? 
+                                                    param_17 : 32) : 0))) /\
+        ((param_18 +
+         ((0 < ((param_17 < 32) ? param_17 : 32)) ? ((param_17 < 32) ? 
+                                                    param_17 : 32) : 0)) <=
+        18446744073709551615)) /\
+       (((result_19 =
+         (param_18 +
+         ((0 < ((param_17 < 32) ? param_17 : 32)) ? ((param_17 < 32) ? 
+                                                    param_17 : 32) : 0))) /\
+        (result_18 =
+        (param_17 -
+        ((0 < ((param_17 < 32) ? param_17 : 32)) ? ((param_17 < 32) ? 
+                                                   param_17 : 32) : 0)))) /\
+       (result_17 = ((32 <= param_17) ? param_16 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_19) /\ (result_19 <= 18446744073709551615)))]);
+      buf <- result_19;
+      lEN <- result_18;
+      tRAILB <- result_17;
+      r4 <- result_16;
+      param_15 <- buf;
+      param_14 <- lEN;
+      param_13 <- tRAILB;
+      (result_15, result_14, result_13, result_12, tmp__trace) <@ __mread_subu64 (
+      param_15, param_14, param_13);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_14 < 8) ? param_14 : 8)) ? ((param_14 < 8) ? param_14 : 8) : 0)) /\
+        (((0 < ((param_14 < 8) ? param_14 : 8)) ? ((param_14 < 8) ? param_14 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_15 +
+         ((0 < ((param_14 < 8) ? param_14 : 8)) ? ((param_14 < 8) ? param_14 : 8) : 0))) /\
+        ((param_15 +
+         ((0 < ((param_14 < 8) ? param_14 : 8)) ? ((param_14 < 8) ? param_14 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_15 =
+         (param_15 +
+         ((0 < ((param_14 < 8) ? param_14 : 8)) ? ((param_14 < 8) ? param_14 : 8) : 0))) /\
+        (result_14 =
+        (param_14 -
+        ((0 < ((param_14 < 8) ? param_14 : 8)) ? ((param_14 < 8) ? param_14 : 8) : 0)))) /\
+       (result_13 = ((8 <= param_14) ? param_13 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_15) /\ (result_15 <= 18446744073709551615)))]);
+      buf <- result_15;
+      lEN <- result_14;
+      tRAILB <- result_13;
+      t64 <- result_12;
+      t128_1 <- (VPINSR_2u64 t128_1 t64 (W8.of_int 1));
+      param_12 <- buf;
+      param_11 <- lEN;
+      param_10 <- tRAILB;
+      (result_11, result_10, result_9, result_8, tmp__trace) <@ __mread_subu256 (
+      param_12, param_11, param_10);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_11 < 32) ? param_11 : 32)) ? ((param_11 < 32) ? 
+                                                    param_11 : 32) : 0)) /\
+        (((0 < ((param_11 < 32) ? param_11 : 32)) ? ((param_11 < 32) ? 
+                                                    param_11 : 32) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_12 +
+         ((0 < ((param_11 < 32) ? param_11 : 32)) ? ((param_11 < 32) ? 
+                                                    param_11 : 32) : 0))) /\
+        ((param_12 +
+         ((0 < ((param_11 < 32) ? param_11 : 32)) ? ((param_11 < 32) ? 
+                                                    param_11 : 32) : 0)) <=
+        18446744073709551615)) /\
+       (((result_11 =
+         (param_12 +
+         ((0 < ((param_11 < 32) ? param_11 : 32)) ? ((param_11 < 32) ? 
+                                                    param_11 : 32) : 0))) /\
+        (result_10 =
+        (param_11 -
+        ((0 < ((param_11 < 32) ? param_11 : 32)) ? ((param_11 < 32) ? 
+                                                   param_11 : 32) : 0)))) /\
+       (result_9 = ((32 <= param_11) ? param_10 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_11) /\ (result_11 <= 18446744073709551615)))]);
+      buf <- result_11;
+      lEN <- result_10;
+      tRAILB <- result_9;
+      r5 <- result_8;
+      param_9 <- buf;
+      param_8 <- lEN;
+      param_7 <- tRAILB;
+      (result_7, result_6, result_5, result_4, tmp__trace) <@ __mread_subu64 (
+      param_9, param_8, param_7);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_8 < 8) ? param_8 : 8)) ? ((param_8 < 8) ? param_8 : 8) : 0)) /\
+        (((0 < ((param_8 < 8) ? param_8 : 8)) ? ((param_8 < 8) ? param_8 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_9 +
+         ((0 < ((param_8 < 8) ? param_8 : 8)) ? ((param_8 < 8) ? param_8 : 8) : 0))) /\
+        ((param_9 +
+         ((0 < ((param_8 < 8) ? param_8 : 8)) ? ((param_8 < 8) ? param_8 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_7 =
+         (param_9 +
+         ((0 < ((param_8 < 8) ? param_8 : 8)) ? ((param_8 < 8) ? param_8 : 8) : 0))) /\
+        (result_6 =
+        (param_8 -
+        ((0 < ((param_8 < 8) ? param_8 : 8)) ? ((param_8 < 8) ? param_8 : 8) : 0)))) /\
+       (result_5 = ((8 <= param_8) ? param_7 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_7) /\ (result_7 <= 18446744073709551615)))]);
+      buf <- result_7;
+      lEN <- result_6;
+      tRAILB <- result_5;
+      t64 <- result_4;
+      t128_0 <- (VPINSR_2u64 t128_0 t64 (W8.of_int 1));
+      r2 <-
+      (W256.of_int
+      (((W128.to_uint t128_0) %% (2 ^ 128)) +
+      ((2 ^ 128) * (W128.to_uint t128_1))));
+      st <- (BArray224.set256 st 2 ((BArray224.get256 st 2) `^` r2));
+      param_6 <- buf;
+      param_5 <- lEN;
+      param_4 <- tRAILB;
+      (result_3, result_2, result_1, result_0, tmp__trace) <@ __mread_subu256 (
+      param_6, param_5, param_4);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_5 < 32) ? param_5 : 32)) ? ((param_5 < 32) ? param_5 : 32) : 0)) /\
+        (((0 < ((param_5 < 32) ? param_5 : 32)) ? ((param_5 < 32) ? param_5 : 32) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_6 +
+         ((0 < ((param_5 < 32) ? param_5 : 32)) ? ((param_5 < 32) ? param_5 : 32) : 0))) /\
+        ((param_6 +
+         ((0 < ((param_5 < 32) ? param_5 : 32)) ? ((param_5 < 32) ? param_5 : 32) : 0)) <=
+        18446744073709551615)) /\
+       (((result_3 =
+         (param_6 +
+         ((0 < ((param_5 < 32) ? param_5 : 32)) ? ((param_5 < 32) ? param_5 : 32) : 0))) /\
+        (result_2 =
+        (param_5 -
+        ((0 < ((param_5 < 32) ? param_5 : 32)) ? ((param_5 < 32) ? param_5 : 32) : 0)))) /\
+       (result_1 = ((32 <= param_5) ? param_4 : 0))))))]);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, ((0 <= result_3) /\ (result_3 <= 18446744073709551615)))]);
+      buf <- result_3;
+      r6 <- result_0;
+      param_3 <- st;
+      param_2 <- r3;
+      param_1 <- r4;
+      param_0 <- r5;
+      param <- r6;
+      (result, b_result, tmp__trace) <@ __addstate_r3456_avx2 (
+      param_3, (BArray224.init_arr (W8.of_int 255) 224), param_2, param_1,
+      param_0, param);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++ tmp__trace);
+      trace___addstate_imem_avx2 <-
+      (trace___addstate_imem_avx2 ++
+      [(Assert, (is_init b_result 0 224))]);
+      st <- result;
+    } else {
+      
+    }
+    b_st <- (BArray224.init_arr (W8.of_int 255) 224);
+    return (st, b_st, buf, trace___addstate_imem_avx2);
+  }
+  proc __absorb_imem_avx2 (st:BArray224.t, b_st:BArray224.t,
+                                    buf:int, lEN:int, rATE8:int, tRAILB:int) : 
+  BArray224.t * BArray224.t * int * trace = {
+    var iTERS:int;
+    var i:int;
+    var param:int;
+    var param_0:BArray224.t;
+    var result:BArray224.t;
+    var param_1:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:BArray224.t;
+    var result_0:int;
+    var result_1:BArray224.t;
+    var param_5:BArray224.t;
+    var result_2:BArray224.t;
+    var param_6:int;
+    var param_7:int;
+    var param_8:int;
+    var param_9:BArray224.t;
+    var result_3:int;
+    var result_4:BArray224.t;
+    var b_result:BArray224.t;
+    var b_result_0:BArray224.t;
+    var b_result_1:BArray224.t;
+    var b_result_2:BArray224.t;
+    var trace___absorb_imem_avx2:trace;
+    b_result <- witness;
+    b_result_0 <- witness;
+    b_result_1 <- witness;
+    b_result_2 <- witness;
+    param_0 <- witness;
+    param_4 <- witness;
+    param_5 <- witness;
+    param_9 <- witness;
+    result <- witness;
+    result_1 <- witness;
+    result_2 <- witness;
+    result_4 <- witness;
+    trace___absorb_imem_avx2 <- [];
+    trace___absorb_imem_avx2 <-
+    (trace___absorb_imem_avx2 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     (((((0 <= lEN) /\ (0 < rATE8)) /\ (rATE8 < 200)) /\ (is_valid buf lEN)) /\
+     (is_init b_st 0 224))))]);
+    trace___absorb_imem_avx2 <-
+    (trace___absorb_imem_avx2 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___absorb_imem_avx2 <-
+    (trace___absorb_imem_avx2 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    iTERS <- (lEN %/ rATE8);
+    if ((0 < iTERS)) {
+      i <- 0;
+      trace___absorb_imem_avx2 <-
+      (trace___absorb_imem_avx2 ++
+      [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      while ((i < iTERS)) {
+        param_9 <- st;
+        param_8 <- buf;
+        param_7 <- rATE8;
+        param_6 <- 0;
+        (result_4, b_result_2, result_3, tmp__trace) <@ __addstate_imem_avx2 (
+        param_9, (BArray224.init_arr (W8.of_int 255) 224), param_8, param_7,
+        param_6);
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++ tmp__trace);
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++
+        [(Assert,
+         (((0 <= param_7) /\ (param_7 <= 18446744073709551615)) /\
+         (((0 <= (param_8 + param_7)) /\
+          ((param_8 + param_7) <= 18446744073709551615)) /\
+         ((is_init b_result_2 0 224) /\ (result_3 = (param_8 + param_7))))))]);
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++
+        [(Assert, ((0 <= result_3) /\ (result_3 <= 18446744073709551615)))]);
+        st <- result_4;
+        buf <- result_3;
+        param_5 <- st;
+        (result_2, b_result_1, tmp__trace) <@ _keccakf1600_avx2 (
+        param_5, (BArray224.init_arr (W8.of_int 255) 224));
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++ tmp__trace);
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++
+        [(Assert, (is_init b_result_1 0 224))]);
+        st <- result_2;
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++
+        [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+        i <- (i + 1);
+        trace___absorb_imem_avx2 <-
+        (trace___absorb_imem_avx2 ++
+        [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      }
+    } else {
+      
+    }
+    lEN <- (lEN %% rATE8);
+    param_4 <- st;
+    param_3 <- buf;
+    param_2 <- lEN;
+    param_1 <- tRAILB;
+    (result_1, b_result_0, result_0, tmp__trace) <@ __addstate_imem_avx2 (
+    param_4, (BArray224.init_arr (W8.of_int 255) 224), param_3, param_2,
+    param_1);
+    trace___absorb_imem_avx2 <-
+    (trace___absorb_imem_avx2 ++ tmp__trace);
+    trace___absorb_imem_avx2 <-
+    (trace___absorb_imem_avx2 ++
+    [(Assert,
+     (((0 <= param_2) /\ (param_2 <= 18446744073709551615)) /\
+     (((0 <= (param_3 + param_2)) /\
+      ((param_3 + param_2) <= 18446744073709551615)) /\
+     ((is_init b_result_0 0 224) /\ (result_0 = (param_3 + param_2))))))]);
+    trace___absorb_imem_avx2 <-
+    (trace___absorb_imem_avx2 ++
+    [(Assert, ((0 <= result_0) /\ (result_0 <= 18446744073709551615)))]);
+    st <- result_1;
+    buf <- result_0;
+    if ((tRAILB <> 0)) {
+      param_0 <- st;
+      param <- rATE8;
+      (result, b_result, tmp__trace) <@ __addratebit_avx2 (param_0,
+      (BArray224.init_arr (W8.of_int 255) 224), param);
+      trace___absorb_imem_avx2 <-
+      (trace___absorb_imem_avx2 ++ tmp__trace);
+      trace___absorb_imem_avx2 <-
+      (trace___absorb_imem_avx2 ++
+      [(Assert, (is_init b_result 0 224))]);
+      st <- result;
+    } else {
+      
+    }
+    b_st <- (BArray224.init_arr (W8.of_int 255) 224);
+    return (st, b_st, buf, trace___absorb_imem_avx2);
+  }
+  proc __pstate_imem_avx2 (pst:BArray200.t, b_pst:BArray200.t,
+                                    aT:int, buf:int, lEN:int, tRAILB:int) : 
+  BArray200.t * BArray200.t * int * int * trace = {
+    var aLL:int;
+    var lO:int;
+    var t64:W64.t;
+    var t256:W256.t;
+    var t128:W128.t;
+    var at:int;
+    var param:int;
+    var param_0:int;
+    var param_1:int;
+    var result:W64.t;
+    var result_0:int;
+    var result_1:int;
+    var result_2:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:int;
+    var result_3:W64.t;
+    var result_4:int;
+    var result_5:int;
+    var result_6:int;
+    var param_5:int;
+    var param_6:int;
+    var param_7:int;
+    var result_7:W64.t;
+    var result_8:int;
+    var result_9:int;
+    var result_10:int;
+    var trace___pstate_imem_avx2:trace;
+    trace___pstate_imem_avx2 <- [];
+    trace___pstate_imem_avx2 <-
+    (trace___pstate_imem_avx2 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     ((((((0 <= lEN) /\ (0 <= aT)) /\ (aT < 200)) /\
+       (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) < 200)) /\
+      (is_valid buf lEN)) /\
+     (is_init b_pst 0 200))))]);
+    trace___pstate_imem_avx2 <-
+    (trace___pstate_imem_avx2 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___pstate_imem_avx2 <-
+    (trace___pstate_imem_avx2 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    aLL <- (aT + lEN);
+    lO <- (aT %% 8);
+    trace___pstate_imem_avx2 <-
+    (trace___pstate_imem_avx2 ++
+    [(Assert, ((0 <= (aT %/ 8)) /\ ((aT %/ 8) <= 18446744073709551615)))]);
+    at <- (aT %/ 8);
+    if ((0 < lO)) {
+      if (((lO + lEN) < 8)) {
+        if ((tRAILB <> 0)) {
+          aLL <- (aLL + 1);
+        } else {
+          
+        }
+        param_4 <- buf;
+        param_3 <- lEN;
+        param_2 <- tRAILB;
+        (result_6, result_5, result_4, result_3, tmp__trace) <@ __mread_subu64 (
+        param_4, param_3, param_2);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++ tmp__trace);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert,
+         (((0 <=
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) /\
+          (((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0) <=
+          18446744073709551615)) /\
+         (((0 <=
+           (param_4 +
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+          ((param_4 +
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) <=
+          18446744073709551615)) /\
+         (((result_6 =
+           (param_4 +
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+          (result_5 =
+          (param_3 -
+          ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)))) /\
+         (result_4 = ((8 <= param_3) ? param_2 : 0))))))]);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+        buf <- result_6;
+        tRAILB <- result_4;
+        t64 <- result_3;
+        t64 <- (t64 `<<` (W8.of_int (8 * lO)));
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 200)))]);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 200)))]);
+        pst <- (BArray200.set64 pst at ((BArray200.get64 pst at) `^` t64));
+        aT <- 0;
+        lEN <- 0;
+      } else {
+        if ((8 <= lEN)) {
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++
+          [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++ [(Assert, (is_valid buf 8))]);
+          t64 <- (loadW64 Glob.mem buf);
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++
+          [(Assert, ((0 <= (8 - lO)) /\ ((8 - lO) <= 18446744073709551615)))]);
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++
+          [(Assert,
+           ((0 <= (buf + (8 - lO))) /\
+           ((buf + (8 - lO)) <= 18446744073709551615)))]);
+          buf <- (buf + (8 - lO));
+        } else {
+          param_7 <- buf;
+          param_6 <- (8 - lO);
+          param_5 <- 0;
+          (result_10, result_9, result_8, result_7, tmp__trace) <@ __mread_subu64 (
+          param_7, param_6, param_5);
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++ tmp__trace);
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0)) /\
+            (((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_7 +
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0))) /\
+            ((param_7 +
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0)) <=
+            18446744073709551615)) /\
+           (((result_10 =
+             (param_7 +
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0))) /\
+            (result_9 =
+            (param_6 -
+            ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)))) /\
+           (result_8 = ((8 <= param_6) ? param_5 : 0))))))]);
+          trace___pstate_imem_avx2 <-
+          (trace___pstate_imem_avx2 ++
+          [(Assert,
+           ((0 <= result_10) /\ (result_10 <= 18446744073709551615)))]);
+          buf <- result_10;
+          t64 <- result_7;
+        }
+        lEN <- (lEN - (8 - lO));
+        aT <- (aT + (8 - lO));
+        t64 <- (t64 `<<` (W8.of_int (8 * lO)));
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 200)))]);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 200)))]);
+        pst <- (BArray200.set64 pst at ((BArray200.get64 pst at) `^` t64));
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        at <- (at + 1);
+      }
+    } else {
+      
+    }
+    if ((32 <= lEN)) {
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert,
+       ((0 <= ((aT %/ 8) + (4 * (lEN %/ 32)))) /\
+       (((aT %/ 8) + (4 * (lEN %/ 32))) <= 18446744073709551615)))]);
+      while ((at < ((aT %/ 8) + (4 * (lEN %/ 32))))) {
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++ [(Assert, (is_valid buf 32))]);
+        t256 <- (loadW256 Glob.mem buf);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert,
+         ((0 <= (buf + 32)) /\ ((buf + 32) <= 18446744073709551615)))]);
+        buf <- (buf + 32);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (8 * at)) /\ (((8 * at) + 32) <= 200)))]);
+        pst <- (BArray200.set256d pst (8 * at) t256);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert, ((0 <= (at + 4)) /\ ((at + 4) <= 18446744073709551615)))]);
+        at <- (at + 4);
+        trace___pstate_imem_avx2 <-
+        (trace___pstate_imem_avx2 ++
+        [(Assert,
+         ((0 <= ((aT %/ 8) + (4 * (lEN %/ 32)))) /\
+         (((aT %/ 8) + (4 * (lEN %/ 32))) <= 18446744073709551615)))]);
+      }
+      lEN <- (lEN %% 32);
+    } else {
+      
+    }
+    if ((16 <= lEN)) {
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++ [(Assert, (is_valid buf 16))]);
+      t128 <- (loadW128 Glob.mem buf);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (buf + 16)) /\ ((buf + 16) <= 18446744073709551615)))]);
+      buf <- (buf + 16);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (8 * at)) /\ (((8 * at) + 16) <= 200)))]);
+      pst <- (BArray200.set128d pst (8 * at) t128);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+      at <- (at + 2);
+      lEN <- (lEN - 16);
+    } else {
+      
+    }
+    if ((8 <= lEN)) {
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++ [(Assert, (is_valid buf 8))]);
+      t64 <- (loadW64 Glob.mem buf);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (buf + 8)) /\ ((buf + 8) <= 18446744073709551615)))]);
+      buf <- (buf + 8);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (8 * at)) /\ (((8 * at) + 8) <= 200)))]);
+      pst <- (BArray200.set64d pst (8 * at) t64);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+      lEN <- (lEN - 8);
+    } else {
+      
+    }
+    lO <- ((aT + lEN) %% 8);
+    if (((0 < lEN) \/ (tRAILB <> 0))) {
+      if ((tRAILB <> 0)) {
+        aLL <- (aLL + 1);
+      } else {
+        
+      }
+      param_1 <- buf;
+      param_0 <- lO;
+      param <- tRAILB;
+      (result_2, result_1, result_0, result, tmp__trace) <@ __mread_subu64 (
+      param_1, param_0, param);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++ tmp__trace);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) /\
+        (((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        ((param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_2 =
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        (result_1 =
+        (param_0 -
+        ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)))) /\
+       (result_0 = ((8 <= param_0) ? param : 0))))))]);
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+      buf <- result_2;
+      t64 <- result;
+      trace___pstate_imem_avx2 <-
+      (trace___pstate_imem_avx2 ++
+      [(Assert, ((0 <= ((aLL %/ 8) * 8)) /\ ((((aLL %/ 8) * 8) + 8) <= 200)))]);
+      pst <- (BArray200.set64 pst (aLL %/ 8) t64);
+    } else {
+      
+    }
+    b_pst <- (BArray200.init_arr (W8.of_int 255) 200);
+    return (pst, b_pst, aLL, buf, trace___pstate_imem_avx2);
+  }
+  proc __pabsorb_imem_avx2 (pst:BArray200.t, b_pst:BArray200.t,
+                                     aT:int, st:BArray224.t,
+                                     b_st:BArray224.t, buf:int, lEN:int,
+                                     rATE8:int, tRAILB:int) : BArray200.t *
+                                                              BArray200.t *
+                                                              int *
+                                                              BArray224.t *
+                                                              BArray224.t *
+                                                              int * trace = {
+    var aLL:int;
+    var iTERS:int;
+    var i:int;
+    var param:int;
+    var param_0:BArray224.t;
+    var result:BArray224.t;
+    var param_1:BArray200.t;
+    var param_2:BArray224.t;
+    var result_0:BArray224.t;
+    var param_3:BArray200.t;
+    var param_4:BArray224.t;
+    var result_1:BArray224.t;
+    var param_5:int;
+    var param_6:int;
+    var param_7:int;
+    var param_8:int;
+    var param_9:BArray200.t;
+    var result_2:int;
+    var result_3:int;
+    var result_4:BArray200.t;
+    var param_10:int;
+    var param_11:BArray224.t;
+    var result_5:BArray224.t;
+    var param_12:int;
+    var param_13:int;
+    var param_14:int;
+    var param_15:BArray224.t;
+    var result_6:int;
+    var result_7:BArray224.t;
+    var param_16:int;
+    var param_17:int;
+    var param_18:int;
+    var param_19:int;
+    var param_20:BArray200.t;
+    var result_8:int;
+    var result_9:int;
+    var result_10:BArray200.t;
+    var param_21:BArray224.t;
+    var result_11:BArray224.t;
+    var param_22:int;
+    var param_23:int;
+    var param_24:int;
+    var param_25:BArray224.t;
+    var result_12:int;
+    var result_13:BArray224.t;
+    var param_26:BArray224.t;
+    var result_14:BArray224.t;
+    var param_27:BArray200.t;
+    var param_28:BArray224.t;
+    var result_15:BArray224.t;
+    var param_29:int;
+    var param_30:int;
+    var param_31:int;
+    var param_32:int;
+    var param_33:BArray200.t;
+    var result_16:int;
+    var result_17:int;
+    var result_18:BArray200.t;
+    var b_result:BArray224.t;
+    var b_result_0:BArray224.t;
+    var b_result_1:BArray224.t;
+    var b_result_2:BArray200.t;
+    var b_result_3:BArray224.t;
+    var b_result_4:BArray224.t;
+    var b_result_5:BArray200.t;
+    var b_result_6:BArray224.t;
+    var b_result_7:BArray224.t;
+    var b_result_8:BArray224.t;
+    var b_result_9:BArray224.t;
+    var b_result_10:BArray200.t;
+    var trace___pabsorb_imem_avx2:trace;
+    b_result <- witness;
+    b_result_0 <- witness;
+    b_result_1 <- witness;
+    b_result_2 <- witness;
+    b_result_3 <- witness;
+    b_result_4 <- witness;
+    b_result_5 <- witness;
+    b_result_6 <- witness;
+    b_result_7 <- witness;
+    b_result_8 <- witness;
+    b_result_9 <- witness;
+    b_result_10 <- witness;
+    param_0 <- witness;
+    param_1 <- witness;
+    param_2 <- witness;
+    param_3 <- witness;
+    param_4 <- witness;
+    param_9 <- witness;
+    param_11 <- witness;
+    param_15 <- witness;
+    param_20 <- witness;
+    param_21 <- witness;
+    param_25 <- witness;
+    param_26 <- witness;
+    param_27 <- witness;
+    param_28 <- witness;
+    param_33 <- witness;
+    result <- witness;
+    result_0 <- witness;
+    result_1 <- witness;
+    result_4 <- witness;
+    result_5 <- witness;
+    result_7 <- witness;
+    result_10 <- witness;
+    result_11 <- witness;
+    result_13 <- witness;
+    result_14 <- witness;
+    result_15 <- witness;
+    result_18 <- witness;
+    trace___pabsorb_imem_avx2 <- [];
+    trace___pabsorb_imem_avx2 <-
+    (trace___pabsorb_imem_avx2 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     ((((((((0 <= lEN) /\ (0 <= aT)) /\ (aT < rATE8)) /\ (0 < rATE8)) /\
+        (rATE8 < 200)) /\
+       (is_valid buf lEN)) /\
+      (is_init b_pst 0 200)) /\
+     (is_init b_st 0 224))))]);
+    trace___pabsorb_imem_avx2 <-
+    (trace___pabsorb_imem_avx2 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___pabsorb_imem_avx2 <-
+    (trace___pabsorb_imem_avx2 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    aLL <- (aT + lEN);
+    if (((aT + lEN) < rATE8)) {
+      param_9 <- pst;
+      param_8 <- aT;
+      param_7 <- buf;
+      param_6 <- lEN;
+      param_5 <- tRAILB;
+      (result_4, b_result_2, result_3, result_2, tmp__trace) <@ __pstate_imem_avx2 (
+      param_9, (BArray200.init_arr (W8.of_int 255) 200), param_8, param_7,
+      param_6, param_5);
+      trace___pabsorb_imem_avx2 <-
+      (trace___pabsorb_imem_avx2 ++ tmp__trace);
+      trace___pabsorb_imem_avx2 <-
+      (trace___pabsorb_imem_avx2 ++
+      [(Assert,
+       (((0 <= param_6) /\ (param_6 <= 18446744073709551615)) /\
+       (((0 <= (param_7 + param_6)) /\
+        ((param_7 + param_6) <= 18446744073709551615)) /\
+       (((is_init b_result_2 0 200) /\
+        (result_3 = ((param_8 + param_6) + ((param_5 <> 0) ? 1 : 0)))) /\
+       (result_2 = (param_7 + param_6))))))]);
+      trace___pabsorb_imem_avx2 <-
+      (trace___pabsorb_imem_avx2 ++
+      [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+      pst <- result_4;
+      aT <- result_3;
+      buf <- result_2;
+      if ((tRAILB <> 0)) {
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert,
+         ((0 <= ((aT %/ 8) + 1)) /\
+         (((aT %/ 8) + 1) <= 18446744073709551615)))]);
+        i <- ((aT %/ 8) + 1);
+        if ((aT <= 40)) {
+          while ((i < 5)) {
+            trace___pabsorb_imem_avx2 <-
+            (trace___pabsorb_imem_avx2 ++
+            [(Assert, ((0 <= (i * 8)) /\ (((i * 8) + 8) <= 200)))]);
+            pst <- (BArray200.set64 pst i (W64.of_int 0));
+            trace___pabsorb_imem_avx2 <-
+            (trace___pabsorb_imem_avx2 ++
+            [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+            i <- (i + 1);
+          }
+          param_2 <- st;
+          param_1 <- pst;
+          (result_0, b_result_0, tmp__trace) <@ __addpst01_avx2 (
+          param_2, (BArray224.init_arr (W8.of_int 255) 224), param_1,
+          (BArray200.init_arr (W8.of_int 255) 200));
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++ tmp__trace);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert, (is_init b_result_0 0 224))]);
+          st <- result_0;
+          param_0 <- st;
+          param <- rATE8;
+          (result, b_result, tmp__trace) <@ __addratebit_avx2 (
+          param_0, (BArray224.init_arr (W8.of_int 255) 224), param);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++ tmp__trace);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert, (is_init b_result 0 224))]);
+          st <- result;
+        } else {
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert,
+           ((0 <= (rATE8 %/ 8)) /\ ((rATE8 %/ 8) <= 18446744073709551615)))]);
+          while ((i < (rATE8 %/ 8))) {
+            trace___pabsorb_imem_avx2 <-
+            (trace___pabsorb_imem_avx2 ++
+            [(Assert, ((0 <= (i * 8)) /\ (((i * 8) + 8) <= 200)))]);
+            pst <- (BArray200.set64 pst i (W64.of_int 0));
+            trace___pabsorb_imem_avx2 <-
+            (trace___pabsorb_imem_avx2 ++
+            [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+            i <- (i + 1);
+            trace___pabsorb_imem_avx2 <-
+            (trace___pabsorb_imem_avx2 ++
+            [(Assert,
+             ((0 <= (rATE8 %/ 8)) /\ ((rATE8 %/ 8) <= 18446744073709551615)))]);
+          }
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert, ((0 <= (rATE8 - 1)) /\ (((rATE8 - 1) + 1) <= 200)))]);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert, ((0 <= (rATE8 - 1)) /\ (((rATE8 - 1) + 1) <= 200)))]);
+          pst <-
+          (BArray200.set8 pst (rATE8 - 1)
+          ((BArray200.get8 pst (rATE8 - 1)) `^` (W8.of_int 128)));
+          param_4 <- st;
+          param_3 <- pst;
+          (result_1, b_result_1, tmp__trace) <@ _addpstate_avx2 (
+          param_4, (BArray224.init_arr (W8.of_int 255) 224), param_3,
+          (BArray200.init_arr (W8.of_int 255) 200));
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++ tmp__trace);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert, (is_init b_result_1 0 224))]);
+          st <- result_1;
+        }
+      } else {
+        
+      }
+    } else {
+      if ((aT <> 0)) {
+        param_33 <- pst;
+        param_32 <- aT;
+        param_31 <- buf;
+        param_30 <- (rATE8 - aT);
+        param_29 <- 0;
+        (result_18, b_result_10, result_17, result_16, tmp__trace) <@ 
+        __pstate_imem_avx2 (param_33,
+        (BArray200.init_arr (W8.of_int 255) 200), param_32, param_31,
+        param_30, param_29);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert,
+         (((0 <= param_30) /\ (param_30 <= 18446744073709551615)) /\
+         (((0 <= (param_31 + param_30)) /\
+          ((param_31 + param_30) <= 18446744073709551615)) /\
+         (((is_init b_result_10 0 200) /\
+          (result_17 = ((param_32 + param_30) + ((param_29 <> 0) ? 1 : 0)))) /\
+         (result_16 = (param_31 + param_30))))))]);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, ((0 <= result_16) /\ (result_16 <= 18446744073709551615)))]);
+        pst <- result_18;
+        buf <- result_16;
+        lEN <- (lEN - (rATE8 - aT));
+        param_28 <- st;
+        param_27 <- pst;
+        (result_15, b_result_9, tmp__trace) <@ _addpstate_avx2 (
+        param_28, (BArray224.init_arr (W8.of_int 255) 224), param_27,
+        (BArray200.init_arr (W8.of_int 255) 200));
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, (is_init b_result_9 0 224))]);
+        st <- result_15;
+        param_26 <- st;
+        (result_14, b_result_8, tmp__trace) <@ _keccakf1600_avx2 (
+        param_26, (BArray224.init_arr (W8.of_int 255) 224));
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, (is_init b_result_8 0 224))]);
+        st <- result_14;
+        aT <- 0;
+      } else {
+        
+      }
+      iTERS <- (lEN %/ rATE8);
+      i <- 0;
+      trace___pabsorb_imem_avx2 <-
+      (trace___pabsorb_imem_avx2 ++
+      [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      while ((i < iTERS)) {
+        param_25 <- st;
+        param_24 <- buf;
+        param_23 <- rATE8;
+        param_22 <- 0;
+        (result_13, b_result_7, result_12, tmp__trace) <@ __addstate_imem_avx2 (
+        param_25, (BArray224.init_arr (W8.of_int 255) 224), param_24,
+        param_23, param_22);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert,
+         (((0 <= param_23) /\ (param_23 <= 18446744073709551615)) /\
+         (((0 <= (param_24 + param_23)) /\
+          ((param_24 + param_23) <= 18446744073709551615)) /\
+         ((is_init b_result_7 0 224) /\ (result_12 = (param_24 + param_23))))))]);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, ((0 <= result_12) /\ (result_12 <= 18446744073709551615)))]);
+        st <- result_13;
+        buf <- result_12;
+        param_21 <- st;
+        (result_11, b_result_6, tmp__trace) <@ _keccakf1600_avx2 (
+        param_21, (BArray224.init_arr (W8.of_int 255) 224));
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, (is_init b_result_6 0 224))]);
+        st <- result_11;
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+        i <- (i + 1);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      }
+      lEN <- (aLL %% rATE8);
+      if ((tRAILB <> 0)) {
+        param_15 <- st;
+        param_14 <- buf;
+        param_13 <- lEN;
+        param_12 <- tRAILB;
+        (result_7, b_result_4, result_6, tmp__trace) <@ __addstate_imem_avx2 (
+        param_15, (BArray224.init_arr (W8.of_int 255) 224), param_14,
+        param_13, param_12);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert,
+         (((0 <= param_13) /\ (param_13 <= 18446744073709551615)) /\
+         (((0 <= (param_14 + param_13)) /\
+          ((param_14 + param_13) <= 18446744073709551615)) /\
+         ((is_init b_result_4 0 224) /\ (result_6 = (param_14 + param_13))))))]);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+        st <- result_7;
+        buf <- result_6;
+        param_11 <- st;
+        param_10 <- rATE8;
+        (result_5, b_result_3, tmp__trace) <@ __addratebit_avx2 (
+        param_11, (BArray224.init_arr (W8.of_int 255) 224), param_10);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++ tmp__trace);
+        trace___pabsorb_imem_avx2 <-
+        (trace___pabsorb_imem_avx2 ++
+        [(Assert, (is_init b_result_3 0 224))]);
+        st <- result_5;
+        aT <- 0;
+      } else {
+        if ((lEN <> 0)) {
+          param_20 <- pst;
+          param_19 <- 0;
+          param_18 <- buf;
+          param_17 <- lEN;
+          param_16 <- tRAILB;
+          (result_10, b_result_5, result_9, result_8, tmp__trace) <@ 
+          __pstate_imem_avx2 (param_20,
+          (BArray200.init_arr (W8.of_int 255) 200), param_19, param_18,
+          param_17, param_16);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++ tmp__trace);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert,
+           (((0 <= param_17) /\ (param_17 <= 18446744073709551615)) /\
+           (((0 <= (param_18 + param_17)) /\
+            ((param_18 + param_17) <= 18446744073709551615)) /\
+           (((is_init b_result_5 0 200) /\
+            (result_9 = ((param_19 + param_17) + ((param_16 <> 0) ? 1 : 0)))) /\
+           (result_8 = (param_18 + param_17))))))]);
+          trace___pabsorb_imem_avx2 <-
+          (trace___pabsorb_imem_avx2 ++
+          [(Assert, ((0 <= result_8) /\ (result_8 <= 18446744073709551615)))]);
+          pst <- result_10;
+          aT <- result_9;
+          buf <- result_8;
+        } else {
+          
+        }
+      }
+    }
+    b_pst <- (BArray200.init_arr (W8.of_int 255) 200);
+    b_st <- (BArray224.init_arr (W8.of_int 255) 224);
+    return (pst, b_pst, aT, st, b_st, buf,
+           trace___pabsorb_imem_avx2);
+  }
+  proc __dumpstate_imem_avx2 (buf:int, lEN:int, st:BArray224.t,
+                                       b_st:BArray224.t) : int * trace = {
+    var t128_0:W128.t;
+    var t128_1:W128.t;
+    var t:W64.t;
+    var t256_0:W256.t;
+    var t256_1:W256.t;
+    var t256_2:W256.t;
+    var t256_3:W256.t;
+    var t256_4:W256.t;
+    var param:W256.t;
+    var param_0:int;
+    var param_1:int;
+    var result:int;
+    var result_0:int;
+    var param_2:W64.t;
+    var param_3:int;
+    var param_4:int;
+    var result_1:int;
+    var result_2:int;
+    var param_5:W256.t;
+    var param_6:int;
+    var param_7:int;
+    var result_3:int;
+    var result_4:int;
+    var param_8:W64.t;
+    var param_9:int;
+    var param_10:int;
+    var result_5:int;
+    var result_6:int;
+    var param_11:W256.t;
+    var param_12:int;
+    var param_13:int;
+    var result_7:int;
+    var result_8:int;
+    var param_14:W64.t;
+    var param_15:int;
+    var param_16:int;
+    var result_9:int;
+    var result_10:int;
+    var param_17:W256.t;
+    var param_18:int;
+    var param_19:int;
+    var result_11:int;
+    var result_12:int;
+    var param_20:W64.t;
+    var param_21:int;
+    var param_22:int;
+    var result_13:int;
+    var result_14:int;
+    var param_23:W256.t;
+    var param_24:int;
+    var param_25:int;
+    var result_15:int;
+    var result_16:int;
+    var param_26:W256.t;
+    var param_27:int;
+    var param_28:int;
+    var result_17:int;
+    var result_18:int;
+    var param_29:W256.t;
+    var param_30:int;
+    var param_31:int;
+    var result_19:int;
+    var result_20:int;
+    var trace___dumpstate_imem_avx2:trace;
+    trace___dumpstate_imem_avx2 <- [];
+    trace___dumpstate_imem_avx2 <-
+    (trace___dumpstate_imem_avx2 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     ((((0 <= lEN) /\ (is_valid buf lEN)) /\ (is_init b_st 0 224)) /\
+     (lEN <= 200))))]);
+    trace___dumpstate_imem_avx2 <-
+    (trace___dumpstate_imem_avx2 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    if ((8 <= lEN)) {
+      param_28 <- buf;
+      param_27 <- 8;
+      param_26 <- (BArray224.get256 st 0);
+      (result_18, result_17, tmp__trace) <@ __mwrite_subu256 (
+      param_28, param_27, param_26);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++ tmp__trace);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_27 < 32) ? param_27 : 32)) ? ((param_27 < 32) ? 
+                                                    param_27 : 32) : 0)) /\
+        (((0 < ((param_27 < 32) ? param_27 : 32)) ? ((param_27 < 32) ? 
+                                                    param_27 : 32) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_28 +
+         ((0 < ((param_27 < 32) ? param_27 : 32)) ? ((param_27 < 32) ? 
+                                                    param_27 : 32) : 0))) /\
+        ((param_28 +
+         ((0 < ((param_27 < 32) ? param_27 : 32)) ? ((param_27 < 32) ? 
+                                                    param_27 : 32) : 0)) <=
+        18446744073709551615)) /\
+       ((result_18 =
+        (param_28 +
+        ((0 < ((param_27 < 32) ? param_27 : 32)) ? ((param_27 < 32) ? 
+                                                   param_27 : 32) : 0))) /\
+       (result_17 =
+       (param_27 -
+       ((0 < ((param_27 < 32) ? param_27 : 32)) ? ((param_27 < 32) ? 
+                                                  param_27 : 32) : 0)))))))]);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++
+      [(Assert, ((0 <= result_18) /\ (result_18 <= 18446744073709551615)))]);
+      buf <- result_18;
+      lEN <- (lEN - 8);
+    } else {
+      param_31 <- buf;
+      param_30 <- lEN;
+      param_29 <- (BArray224.get256 st 0);
+      (result_20, result_19, tmp__trace) <@ __mwrite_subu256 (
+      param_31, param_30, param_29);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++ tmp__trace);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_30 < 32) ? param_30 : 32)) ? ((param_30 < 32) ? 
+                                                    param_30 : 32) : 0)) /\
+        (((0 < ((param_30 < 32) ? param_30 : 32)) ? ((param_30 < 32) ? 
+                                                    param_30 : 32) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_31 +
+         ((0 < ((param_30 < 32) ? param_30 : 32)) ? ((param_30 < 32) ? 
+                                                    param_30 : 32) : 0))) /\
+        ((param_31 +
+         ((0 < ((param_30 < 32) ? param_30 : 32)) ? ((param_30 < 32) ? 
+                                                    param_30 : 32) : 0)) <=
+        18446744073709551615)) /\
+       ((result_20 =
+        (param_31 +
+        ((0 < ((param_30 < 32) ? param_30 : 32)) ? ((param_30 < 32) ? 
+                                                   param_30 : 32) : 0))) /\
+       (result_19 =
+       (param_30 -
+       ((0 < ((param_30 < 32) ? param_30 : 32)) ? ((param_30 < 32) ? 
+                                                  param_30 : 32) : 0)))))))]);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++
+      [(Assert, ((0 <= result_20) /\ (result_20 <= 18446744073709551615)))]);
+      buf <- result_20;
+      lEN <- result_19;
+    }
+    param_25 <- buf;
+    param_24 <- lEN;
+    param_23 <- (BArray224.get256 st 1);
+    (result_16, result_15, tmp__trace) <@ __mwrite_subu256 (
+    param_25, param_24, param_23);
+    trace___dumpstate_imem_avx2 <-
+    (trace___dumpstate_imem_avx2 ++ tmp__trace);
+    trace___dumpstate_imem_avx2 <-
+    (trace___dumpstate_imem_avx2 ++
+    [(Assert,
+     (((0 <=
+       ((0 < ((param_24 < 32) ? param_24 : 32)) ? ((param_24 < 32) ? 
+                                                  param_24 : 32) : 0)) /\
+      (((0 < ((param_24 < 32) ? param_24 : 32)) ? ((param_24 < 32) ? 
+                                                  param_24 : 32) : 0) <=
+      18446744073709551615)) /\
+     (((0 <=
+       (param_25 +
+       ((0 < ((param_24 < 32) ? param_24 : 32)) ? ((param_24 < 32) ? 
+                                                  param_24 : 32) : 0))) /\
+      ((param_25 +
+       ((0 < ((param_24 < 32) ? param_24 : 32)) ? ((param_24 < 32) ? 
+                                                  param_24 : 32) : 0)) <=
+      18446744073709551615)) /\
+     ((result_16 =
+      (param_25 +
+      ((0 < ((param_24 < 32) ? param_24 : 32)) ? ((param_24 < 32) ? param_24 : 32) : 0))) /\
+     (result_15 =
+     (param_24 -
+     ((0 < ((param_24 < 32) ? param_24 : 32)) ? ((param_24 < 32) ? param_24 : 32) : 0)))))))]);
+    trace___dumpstate_imem_avx2 <-
+    (trace___dumpstate_imem_avx2 ++
+    [(Assert, ((0 <= result_16) /\ (result_16 <= 18446744073709551615)))]);
+    buf <- result_16;
+    lEN <- result_15;
+    if ((0 < lEN)) {
+      t128_0 <- (truncateu128 (BArray224.get256 st 2));
+      t128_1 <- (VEXTRACTI128 (BArray224.get256 st 2) (W8.of_int 1));
+      t <- (truncateu64 t128_1);
+      param_22 <- buf;
+      param_21 <- lEN;
+      param_20 <- t;
+      (result_14, result_13, tmp__trace) <@ __mwrite_subu64 (
+      param_22, param_21, param_20);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++ tmp__trace);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_21 < 8) ? param_21 : 8)) ? ((param_21 < 8) ? param_21 : 8) : 0)) /\
+        (((0 < ((param_21 < 8) ? param_21 : 8)) ? ((param_21 < 8) ? param_21 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_22 +
+         ((0 < ((param_21 < 8) ? param_21 : 8)) ? ((param_21 < 8) ? param_21 : 8) : 0))) /\
+        ((param_22 +
+         ((0 < ((param_21 < 8) ? param_21 : 8)) ? ((param_21 < 8) ? param_21 : 8) : 0)) <=
+        18446744073709551615)) /\
+       ((result_14 =
+        (param_22 +
+        ((0 < ((param_21 < 8) ? param_21 : 8)) ? ((param_21 < 8) ? param_21 : 8) : 0))) /\
+       (result_13 =
+       (param_21 -
+       ((0 < ((param_21 < 8) ? param_21 : 8)) ? ((param_21 < 8) ? param_21 : 8) : 0)))))))]);
+      trace___dumpstate_imem_avx2 <-
+      (trace___dumpstate_imem_avx2 ++
+      [(Assert, ((0 <= result_14) /\ (result_14 <= 18446744073709551615)))]);
+      buf <- result_14;
+      lEN <- result_13;
+      t128_1 <- (VPUNPCKH_2u64 t128_1 t128_1);
+      if ((0 < lEN)) {
+        t256_0 <-
+        (VPBLEND_8u32 (BArray224.get256 st 3) (BArray224.get256 st 4)
+        (W8.of_int 240));
+        t256_1 <-
+        (VPBLEND_8u32 (BArray224.get256 st 4) (BArray224.get256 st 3)
+        (W8.of_int 240));
+        t256_2 <-
+        (VPBLEND_8u32 (BArray224.get256 st 5) (BArray224.get256 st 6)
+        (W8.of_int 240));
+        t256_3 <-
+        (VPBLEND_8u32 (BArray224.get256 st 6) (BArray224.get256 st 5)
+        (W8.of_int 240));
+        if ((0 < lEN)) {
+          t256_4 <- (VPBLEND_8u32 t256_0 t256_3 (W8.of_int 195));
+          param_19 <- buf;
+          param_18 <- lEN;
+          param_17 <- t256_4;
+          (result_12, result_11, tmp__trace) <@ __mwrite_subu256 (
+          param_19, param_18, param_17);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_18 < 32) ? param_18 : 32)) ? ((param_18 < 32) ? 
+                                                        param_18 : 32) : 0)) /\
+            (((0 < ((param_18 < 32) ? param_18 : 32)) ? ((param_18 < 32) ? 
+                                                        param_18 : 32) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_19 +
+             ((0 < ((param_18 < 32) ? param_18 : 32)) ? ((param_18 < 32) ? 
+                                                        param_18 : 32) : 0))) /\
+            ((param_19 +
+             ((0 < ((param_18 < 32) ? param_18 : 32)) ? ((param_18 < 32) ? 
+                                                        param_18 : 32) : 0)) <=
+            18446744073709551615)) /\
+           ((result_12 =
+            (param_19 +
+            ((0 < ((param_18 < 32) ? param_18 : 32)) ? ((param_18 < 32) ? 
+                                                       param_18 : 32) : 0))) /\
+           (result_11 =
+           (param_18 -
+           ((0 < ((param_18 < 32) ? param_18 : 32)) ? ((param_18 < 32) ? 
+                                                      param_18 : 32) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           ((0 <= result_12) /\ (result_12 <= 18446744073709551615)))]);
+          buf <- result_12;
+          lEN <- result_11;
+        } else {
+          
+        }
+        if ((0 < lEN)) {
+          t <- (truncateu64 t128_0);
+          param_16 <- buf;
+          param_15 <- lEN;
+          param_14 <- t;
+          (result_10, result_9, tmp__trace) <@ __mwrite_subu64 (
+          param_16, param_15, param_14);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_15 < 8) ? param_15 : 8)) ? ((param_15 < 8) ? 
+                                                      param_15 : 8) : 0)) /\
+            (((0 < ((param_15 < 8) ? param_15 : 8)) ? ((param_15 < 8) ? 
+                                                      param_15 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_16 +
+             ((0 < ((param_15 < 8) ? param_15 : 8)) ? ((param_15 < 8) ? 
+                                                      param_15 : 8) : 0))) /\
+            ((param_16 +
+             ((0 < ((param_15 < 8) ? param_15 : 8)) ? ((param_15 < 8) ? 
+                                                      param_15 : 8) : 0)) <=
+            18446744073709551615)) /\
+           ((result_10 =
+            (param_16 +
+            ((0 < ((param_15 < 8) ? param_15 : 8)) ? ((param_15 < 8) ? 
+                                                     param_15 : 8) : 0))) /\
+           (result_9 =
+           (param_15 -
+           ((0 < ((param_15 < 8) ? param_15 : 8)) ? ((param_15 < 8) ? 
+                                                    param_15 : 8) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           ((0 <= result_10) /\ (result_10 <= 18446744073709551615)))]);
+          buf <- result_10;
+          lEN <- result_9;
+          t128_0 <- (VPUNPCKH_2u64 t128_0 t128_0);
+        } else {
+          
+        }
+        if ((0 < lEN)) {
+          t256_4 <- (VPBLEND_8u32 t256_3 t256_1 (W8.of_int 195));
+          param_13 <- buf;
+          param_12 <- lEN;
+          param_11 <- t256_4;
+          (result_8, result_7, tmp__trace) <@ __mwrite_subu256 (
+          param_13, param_12, param_11);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_12 < 32) ? param_12 : 32)) ? ((param_12 < 32) ? 
+                                                        param_12 : 32) : 0)) /\
+            (((0 < ((param_12 < 32) ? param_12 : 32)) ? ((param_12 < 32) ? 
+                                                        param_12 : 32) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_13 +
+             ((0 < ((param_12 < 32) ? param_12 : 32)) ? ((param_12 < 32) ? 
+                                                        param_12 : 32) : 0))) /\
+            ((param_13 +
+             ((0 < ((param_12 < 32) ? param_12 : 32)) ? ((param_12 < 32) ? 
+                                                        param_12 : 32) : 0)) <=
+            18446744073709551615)) /\
+           ((result_8 =
+            (param_13 +
+            ((0 < ((param_12 < 32) ? param_12 : 32)) ? ((param_12 < 32) ? 
+                                                       param_12 : 32) : 0))) /\
+           (result_7 =
+           (param_12 -
+           ((0 < ((param_12 < 32) ? param_12 : 32)) ? ((param_12 < 32) ? 
+                                                      param_12 : 32) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert, ((0 <= result_8) /\ (result_8 <= 18446744073709551615)))]);
+          buf <- result_8;
+          lEN <- result_7;
+        } else {
+          
+        }
+        if ((0 < lEN)) {
+          t <- (truncateu64 t128_1);
+          param_10 <- buf;
+          param_9 <- lEN;
+          param_8 <- t;
+          (result_6, result_5, tmp__trace) <@ __mwrite_subu64 (
+          param_10, param_9, param_8);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? 
+                                                    param_9 : 8) : 0)) /\
+            (((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? 
+                                                    param_9 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_10 +
+             ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? 
+                                                    param_9 : 8) : 0))) /\
+            ((param_10 +
+             ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? 
+                                                    param_9 : 8) : 0)) <=
+            18446744073709551615)) /\
+           ((result_6 =
+            (param_10 +
+            ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0))) /\
+           (result_5 =
+           (param_9 -
+           ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+          buf <- result_6;
+          lEN <- result_5;
+        } else {
+          
+        }
+        if ((0 < lEN)) {
+          t256_4 <- (VPBLEND_8u32 t256_2 t256_0 (W8.of_int 195));
+          param_7 <- buf;
+          param_6 <- lEN;
+          param_5 <- t256_4;
+          (result_4, result_3, tmp__trace) <@ __mwrite_subu256 (
+          param_7, param_6, param_5);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_6 < 32) ? param_6 : 32)) ? ((param_6 < 32) ? 
+                                                      param_6 : 32) : 0)) /\
+            (((0 < ((param_6 < 32) ? param_6 : 32)) ? ((param_6 < 32) ? 
+                                                      param_6 : 32) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_7 +
+             ((0 < ((param_6 < 32) ? param_6 : 32)) ? ((param_6 < 32) ? 
+                                                      param_6 : 32) : 0))) /\
+            ((param_7 +
+             ((0 < ((param_6 < 32) ? param_6 : 32)) ? ((param_6 < 32) ? 
+                                                      param_6 : 32) : 0)) <=
+            18446744073709551615)) /\
+           ((result_4 =
+            (param_7 +
+            ((0 < ((param_6 < 32) ? param_6 : 32)) ? ((param_6 < 32) ? 
+                                                     param_6 : 32) : 0))) /\
+           (result_3 =
+           (param_6 -
+           ((0 < ((param_6 < 32) ? param_6 : 32)) ? ((param_6 < 32) ? 
+                                                    param_6 : 32) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert, ((0 <= result_4) /\ (result_4 <= 18446744073709551615)))]);
+          buf <- result_4;
+          lEN <- result_3;
+        } else {
+          
+        }
+        if ((0 < lEN)) {
+          t <- (truncateu64 t128_0);
+          param_4 <- buf;
+          param_3 <- lEN;
+          param_2 <- t;
+          (result_2, result_1, tmp__trace) <@ __mwrite_subu64 (
+          param_4, param_3, param_2);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? 
+                                                    param_3 : 8) : 0)) /\
+            (((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? 
+                                                    param_3 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_4 +
+             ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? 
+                                                    param_3 : 8) : 0))) /\
+            ((param_4 +
+             ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? 
+                                                    param_3 : 8) : 0)) <=
+            18446744073709551615)) /\
+           ((result_2 =
+            (param_4 +
+            ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+           (result_1 =
+           (param_3 -
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+          buf <- result_2;
+          lEN <- result_1;
+        } else {
+          
+        }
+        if ((0 < lEN)) {
+          t256_4 <- (VPBLEND_8u32 t256_1 t256_2 (W8.of_int 195));
+          param_1 <- buf;
+          param_0 <- lEN;
+          param <- t256_4;
+          (result_0, result, tmp__trace) <@ __mwrite_subu256 (
+          param_1, param_0, param);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++ tmp__trace);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_0 < 32) ? param_0 : 32)) ? ((param_0 < 32) ? 
+                                                      param_0 : 32) : 0)) /\
+            (((0 < ((param_0 < 32) ? param_0 : 32)) ? ((param_0 < 32) ? 
+                                                      param_0 : 32) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_1 +
+             ((0 < ((param_0 < 32) ? param_0 : 32)) ? ((param_0 < 32) ? 
+                                                      param_0 : 32) : 0))) /\
+            ((param_1 +
+             ((0 < ((param_0 < 32) ? param_0 : 32)) ? ((param_0 < 32) ? 
+                                                      param_0 : 32) : 0)) <=
+            18446744073709551615)) /\
+           ((result_0 =
+            (param_1 +
+            ((0 < ((param_0 < 32) ? param_0 : 32)) ? ((param_0 < 32) ? 
+                                                     param_0 : 32) : 0))) /\
+           (result =
+           (param_0 -
+           ((0 < ((param_0 < 32) ? param_0 : 32)) ? ((param_0 < 32) ? 
+                                                    param_0 : 32) : 0)))))))]);
+          trace___dumpstate_imem_avx2 <-
+          (trace___dumpstate_imem_avx2 ++
+          [(Assert, ((0 <= result_0) /\ (result_0 <= 18446744073709551615)))]);
+          buf <- result_0;
+        } else {
+          
+        }
+      } else {
+        
+      }
+    } else {
+      
+    }
+    return (buf, trace___dumpstate_imem_avx2);
+  }
+  proc __squeeze_imem_avx2 (buf:int, lEN:int, st:BArray224.t,
+                                     b_st:BArray224.t, rATE8:int) : int *
+                                                                    BArray224.t *
+                                                                    BArray224.t *
+                                                                    trace = {
+    var iTERS:int;
+    var lO:int;
+    var i:int;
+    var param:BArray224.t;
+    var param_0:int;
+    var param_1:int;
+    var result:int;
+    var param_2:BArray224.t;
+    var result_0:BArray224.t;
+    var param_3:BArray224.t;
+    var param_4:int;
+    var param_5:int;
+    var result_1:int;
+    var param_6:BArray224.t;
+    var result_2:BArray224.t;
+    var b_result:BArray224.t;
+    var b_result_0:BArray224.t;
+    var trace___squeeze_imem_avx2:trace;
+    b_result <- witness;
+    b_result_0 <- witness;
+    param <- witness;
+    param_2 <- witness;
+    param_3 <- witness;
+    param_6 <- witness;
+    result_0 <- witness;
+    result_2 <- witness;
+    trace___squeeze_imem_avx2 <- [];
+    trace___squeeze_imem_avx2 <-
+    (trace___squeeze_imem_avx2 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     (((((0 <= lEN) /\ (0 < rATE8)) /\ (rATE8 < 200)) /\ (is_valid buf lEN)) /\
+     (is_init b_st 0 224))))]);
+    trace___squeeze_imem_avx2 <-
+    (trace___squeeze_imem_avx2 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    iTERS <- (lEN %/ rATE8);
+    lO <- (lEN %% rATE8);
+    if ((0 < lEN)) {
+      if ((0 < iTERS)) {
+        i <- 0;
+        trace___squeeze_imem_avx2 <-
+        (trace___squeeze_imem_avx2 ++
+        [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+        while ((i < iTERS)) {
+          param_6 <- st;
+          (result_2, b_result_0, tmp__trace) <@ _keccakf1600_avx2 (
+          param_6, (BArray224.init_arr (W8.of_int 255) 224));
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++ tmp__trace);
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++
+          [(Assert, (is_init b_result_0 0 224))]);
+          st <- result_2;
+          param_5 <- buf;
+          param_4 <- rATE8;
+          param_3 <- st;
+          (result_1, tmp__trace) <@ __dumpstate_imem_avx2 (param_5,
+          param_4, param_3, (BArray224.init_arr (W8.of_int 255) 224));
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++ tmp__trace);
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++
+          [(Assert,
+           (((0 <= param_4) /\ (param_4 <= 18446744073709551615)) /\
+           (((0 <= (param_5 + param_4)) /\
+            ((param_5 + param_4) <= 18446744073709551615)) /\
+           (result_1 = (param_5 + param_4)))))]);
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++
+          [(Assert, ((0 <= result_1) /\ (result_1 <= 18446744073709551615)))]);
+          buf <- result_1;
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++
+          [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+          i <- (i + 1);
+          trace___squeeze_imem_avx2 <-
+          (trace___squeeze_imem_avx2 ++
+          [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+        }
+      } else {
+        
+      }
+      if ((0 < lO)) {
+        param_2 <- st;
+        (result_0, b_result, tmp__trace) <@ _keccakf1600_avx2 (
+        param_2, (BArray224.init_arr (W8.of_int 255) 224));
+        trace___squeeze_imem_avx2 <-
+        (trace___squeeze_imem_avx2 ++ tmp__trace);
+        trace___squeeze_imem_avx2 <-
+        (trace___squeeze_imem_avx2 ++
+        [(Assert, (is_init b_result 0 224))]);
+        st <- result_0;
+        param_1 <- buf;
+        param_0 <- lO;
+        param <- st;
+        (result, tmp__trace) <@ __dumpstate_imem_avx2 (param_1,
+        param_0, param, (BArray224.init_arr (W8.of_int 255) 224));
+        trace___squeeze_imem_avx2 <-
+        (trace___squeeze_imem_avx2 ++ tmp__trace);
+        trace___squeeze_imem_avx2 <-
+        (trace___squeeze_imem_avx2 ++
+        [(Assert,
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_1 + param_0)) /\
+          ((param_1 + param_0) <= 18446744073709551615)) /\
+         (result = (param_1 + param_0)))))]);
+        trace___squeeze_imem_avx2 <-
+        (trace___squeeze_imem_avx2 ++
+        [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
+        buf <- result;
+      } else {
+        
+      }
+    } else {
+      
+    }
+    b_st <- (BArray224.init_arr (W8.of_int 255) 224);
+    return (buf, st, b_st, trace___squeeze_imem_avx2);
+  }
   proc keccakf1600_4x_theta_sum (a:BArray800.t, b_a:BArray800.t) : 
   BArray160.t * BArray160.t * trace = {
     var c:BArray160.t;
@@ -2660,6 +4689,2684 @@ module M = {
     y2 <- (VPUNPCKL_4u64 x2 x3);
     y3 <- (VPUNPCKH_4u64 x2 x3);
     return (y0, y1, y2, y3, trace___4u64x4_u256x4);
+  }
+  proc __addstate_bcast_imem_avx2x4 (st:BArray800.t,
+                                              b_st:BArray800.t, aT:int,
+                                              buf:int, lEN:int, tRAILB:int) : 
+  BArray800.t * BArray800.t * int * int * trace = {
+    var aLL:int;
+    var lO:int;
+    var t256:W256.t;
+    var at:int;
+    var param:int;
+    var param_0:int;
+    var param_1:int;
+    var result:W256.t;
+    var result_0:int;
+    var result_1:int;
+    var result_2:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:int;
+    var result_3:W256.t;
+    var result_4:int;
+    var result_5:int;
+    var result_6:int;
+    var param_5:int;
+    var param_6:int;
+    var param_7:int;
+    var result_7:W256.t;
+    var result_8:int;
+    var result_9:int;
+    var result_10:int;
+    var trace___addstate_bcast_imem_avx2x4:trace;
+    trace___addstate_bcast_imem_avx2x4 <- [];
+    trace___addstate_bcast_imem_avx2x4 <-
+    (trace___addstate_bcast_imem_avx2x4 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     ((((((0 <= lEN) /\ (0 <= aT)) /\ (aT < 200)) /\
+       (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) < 200)) /\
+      (is_valid buf lEN)) /\
+     (is_init b_st 0 800))))]);
+    trace___addstate_bcast_imem_avx2x4 <-
+    (trace___addstate_bcast_imem_avx2x4 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___addstate_bcast_imem_avx2x4 <-
+    (trace___addstate_bcast_imem_avx2x4 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    aLL <- (aT + lEN);
+    lO <- (aT %% 8);
+    trace___addstate_bcast_imem_avx2x4 <-
+    (trace___addstate_bcast_imem_avx2x4 ++
+    [(Assert,
+     ((0 <= (32 * (aT %/ 8))) /\ ((32 * (aT %/ 8)) <= 18446744073709551615)))]);
+    at <- (32 * (aT %/ 8));
+    if ((0 < lO)) {
+      if (((lO + lEN) < 8)) {
+        if ((tRAILB <> 0)) {
+          aLL <- (aLL + 1);
+        } else {
+          
+        }
+        param_4 <- buf;
+        param_3 <- lEN;
+        param_2 <- tRAILB;
+        (result_6, result_5, result_4, result_3, tmp__trace) <@ __mread_bcast_4subu64 (
+        param_4, param_3, param_2);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert,
+         (((0 <=
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) /\
+          (((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0) <=
+          18446744073709551615)) /\
+         (((0 <=
+           (param_4 +
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+          ((param_4 +
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) <=
+          18446744073709551615)) /\
+         (((result_6 =
+           (param_4 +
+           ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+          (result_5 =
+          (param_3 -
+          ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)))) /\
+         (result_4 = ((8 <= param_3) ? param_2 : 0))))))]);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+        buf <- result_6;
+        tRAILB <- result_4;
+        t256 <- result_3;
+        t256 <- (VPSLL_4u64 t256 (W128.of_int (8 * lO)));
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+        t256 <- (t256 `^` (BArray800.get256d st at));
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+        st <- (BArray800.set256d st at t256);
+        aT <- 0;
+        lEN <- 0;
+      } else {
+        if ((8 <= lEN)) {
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++
+          [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++
+          [(Assert, (is_valid buf 8))]);
+          t256 <- (VPBROADCAST_4u64 (loadW64 Glob.mem buf));
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++
+          [(Assert, ((0 <= (8 - lO)) /\ ((8 - lO) <= 18446744073709551615)))]);
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= (buf + (8 - lO))) /\
+           ((buf + (8 - lO)) <= 18446744073709551615)))]);
+          buf <- (buf + (8 - lO));
+        } else {
+          param_7 <- buf;
+          param_6 <- (8 - lO);
+          param_5 <- 0;
+          (result_10, result_9, result_8, result_7, tmp__trace) <@ __mread_bcast_4subu64 (
+          param_7, param_6, param_5);
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++ tmp__trace);
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0)) /\
+            (((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_7 +
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0))) /\
+            ((param_7 +
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0)) <=
+            18446744073709551615)) /\
+           (((result_10 =
+             (param_7 +
+             ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? 
+                                                    param_6 : 8) : 0))) /\
+            (result_9 =
+            (param_6 -
+            ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)))) /\
+           (result_8 = ((8 <= param_6) ? param_5 : 0))))))]);
+          trace___addstate_bcast_imem_avx2x4 <-
+          (trace___addstate_bcast_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= result_10) /\ (result_10 <= 18446744073709551615)))]);
+          buf <- result_10;
+          t256 <- result_7;
+        }
+        lEN <- (lEN - (8 - lO));
+        aT <- (aT + (8 - lO));
+        t256 <- (VPSLL_4u64 t256 (W128.of_int (8 * lO)));
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+        t256 <- (t256 `^` (BArray800.get256d st at));
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+        st <- (BArray800.set256d st at t256);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 32)) /\ ((at + 32) <= 18446744073709551615)))]);
+        at <- (at + 32);
+      }
+    } else {
+      
+    }
+    if ((8 <= lEN)) {
+      trace___addstate_bcast_imem_avx2x4 <-
+      (trace___addstate_bcast_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= ((32 * (aT %/ 8)) + (32 * (lEN %/ 8)))) /\
+       (((32 * (aT %/ 8)) + (32 * (lEN %/ 8))) <= 18446744073709551615)))]);
+      while ((at < ((32 * (aT %/ 8)) + (32 * (lEN %/ 8))))) {
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, (is_valid buf 8))]);
+        t256 <- (VPBROADCAST_4u64 (loadW64 Glob.mem buf));
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= (buf + 8)) /\ ((buf + 8) <= 18446744073709551615)))]);
+        buf <- (buf + 8);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+        t256 <- (t256 `^` (BArray800.get256d st at));
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+        st <- (BArray800.set256d st at t256);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 32)) /\ ((at + 32) <= 18446744073709551615)))]);
+        at <- (at + 32);
+        trace___addstate_bcast_imem_avx2x4 <-
+        (trace___addstate_bcast_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((32 * (aT %/ 8)) + (32 * (lEN %/ 8)))) /\
+         (((32 * (aT %/ 8)) + (32 * (lEN %/ 8))) <= 18446744073709551615)))]);
+      }
+      lEN <- ((aT + lEN) %% 8);
+    } else {
+      
+    }
+    lO <- ((aT + lEN) %% 8);
+    if (((0 < lO) \/ (tRAILB <> 0))) {
+      if ((tRAILB <> 0)) {
+        aLL <- (aLL + 1);
+      } else {
+        
+      }
+      param_1 <- buf;
+      param_0 <- lO;
+      param <- tRAILB;
+      (result_2, result_1, result_0, result, tmp__trace) <@ __mread_bcast_4subu64 (
+      param_1, param_0, param);
+      trace___addstate_bcast_imem_avx2x4 <-
+      (trace___addstate_bcast_imem_avx2x4 ++ tmp__trace);
+      trace___addstate_bcast_imem_avx2x4 <-
+      (trace___addstate_bcast_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) /\
+        (((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        ((param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_2 =
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        (result_1 =
+        (param_0 -
+        ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)))) /\
+       (result_0 = ((8 <= param_0) ? param : 0))))))]);
+      trace___addstate_bcast_imem_avx2x4 <-
+      (trace___addstate_bcast_imem_avx2x4 ++
+      [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+      buf <- result_2;
+      t256 <- result;
+      trace___addstate_bcast_imem_avx2x4 <-
+      (trace___addstate_bcast_imem_avx2x4 ++
+      [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+      t256 <- (t256 `^` (BArray800.get256d st at));
+      trace___addstate_bcast_imem_avx2x4 <-
+      (trace___addstate_bcast_imem_avx2x4 ++
+      [(Assert, ((0 <= at) /\ ((at + 32) <= 800)))]);
+      st <- (BArray800.set256d st at t256);
+    } else {
+      
+    }
+    b_st <- (BArray800.init_arr (W8.of_int 255) 800);
+    return (st, b_st, aLL, buf, trace___addstate_bcast_imem_avx2x4);
+  }
+  proc __absorb_bcast_imem_avx2x4 (st:BArray800.t, b_st:BArray800.t,
+                                            aT:int, buf:int, lEN:int,
+                                            rATE8:int, tRAILB:int) : 
+  BArray800.t * BArray800.t * int * int * trace = {
+    var aLL:int;
+    var iTERS:int;
+    var i:int;
+    var param:int;
+    var param_0:BArray800.t;
+    var result:BArray800.t;
+    var param_1:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:int;
+    var param_5:BArray800.t;
+    var result_0:int;
+    var result_1:int;
+    var result_2:BArray800.t;
+    var param_6:int;
+    var param_7:BArray800.t;
+    var result_3:BArray800.t;
+    var param_8:int;
+    var param_9:int;
+    var param_10:int;
+    var param_11:int;
+    var param_12:BArray800.t;
+    var result_4:int;
+    var result_5:int;
+    var result_6:BArray800.t;
+    var param_13:BArray800.t;
+    var result_7:BArray800.t;
+    var param_14:int;
+    var param_15:int;
+    var param_16:int;
+    var param_17:int;
+    var param_18:BArray800.t;
+    var result_8:int;
+    var result_9:int;
+    var result_10:BArray800.t;
+    var param_19:BArray800.t;
+    var result_11:BArray800.t;
+    var param_20:int;
+    var param_21:int;
+    var param_22:int;
+    var param_23:int;
+    var param_24:BArray800.t;
+    var result_12:int;
+    var result_13:int;
+    var result_14:BArray800.t;
+    var b_result:BArray800.t;
+    var b_result_0:BArray800.t;
+    var b_result_1:BArray800.t;
+    var b_result_2:BArray800.t;
+    var b_result_3:BArray800.t;
+    var b_result_4:BArray800.t;
+    var b_result_5:BArray800.t;
+    var b_result_6:BArray800.t;
+    var trace___absorb_bcast_imem_avx2x4:trace;
+    b_result <- witness;
+    b_result_0 <- witness;
+    b_result_1 <- witness;
+    b_result_2 <- witness;
+    b_result_3 <- witness;
+    b_result_4 <- witness;
+    b_result_5 <- witness;
+    b_result_6 <- witness;
+    param_0 <- witness;
+    param_5 <- witness;
+    param_7 <- witness;
+    param_12 <- witness;
+    param_13 <- witness;
+    param_18 <- witness;
+    param_19 <- witness;
+    param_24 <- witness;
+    result <- witness;
+    result_2 <- witness;
+    result_3 <- witness;
+    result_6 <- witness;
+    result_7 <- witness;
+    result_10 <- witness;
+    result_11 <- witness;
+    result_14 <- witness;
+    trace___absorb_bcast_imem_avx2x4 <- [];
+    trace___absorb_bcast_imem_avx2x4 <-
+    (trace___absorb_bcast_imem_avx2x4 ++
+    [(Assert,
+     (((0 <= buf) /\ (buf <= 18446744073709551615)) /\
+     ((((((((0 <= lEN) /\ (0 <= aT)) /\ (aT < rATE8)) /\
+         (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) < 200)) /\
+        (0 < rATE8)) /\
+       (rATE8 < 200)) /\
+      (is_valid buf lEN)) /\
+     (is_init b_st 0 800))))]);
+    trace___absorb_bcast_imem_avx2x4 <-
+    (trace___absorb_bcast_imem_avx2x4 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___absorb_bcast_imem_avx2x4 <-
+    (trace___absorb_bcast_imem_avx2x4 ++
+    [(Assert, ((0 <= buf) /\ (buf <= 18446744073709551615)))]);
+    aLL <- (aT + lEN);
+    if (((aT + lEN) < rATE8)) {
+      param_5 <- st;
+      param_4 <- aT;
+      param_3 <- buf;
+      param_2 <- lEN;
+      param_1 <- tRAILB;
+      (result_2, b_result_0, result_1, result_0, tmp__trace) <@ __addstate_bcast_imem_avx2x4 (
+      param_5, (BArray800.init_arr (W8.of_int 255) 800), param_4, param_3,
+      param_2, param_1);
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++
+      [(Assert,
+       (((0 <= param_2) /\ (param_2 <= 18446744073709551615)) /\
+       (((0 <= (param_3 + param_2)) /\
+        ((param_3 + param_2) <= 18446744073709551615)) /\
+       (((is_init b_result_0 0 800) /\
+        (result_1 = ((param_4 + param_2) + ((param_1 <> 0) ? 1 : 0)))) /\
+       (result_0 = (param_3 + param_2))))))]);
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++
+      [(Assert, ((0 <= result_0) /\ (result_0 <= 18446744073709551615)))]);
+      st <- result_2;
+      aT <- result_1;
+      buf <- result_0;
+      if ((tRAILB <> 0)) {
+        param_0 <- st;
+        param <- rATE8;
+        (result, b_result, tmp__trace) <@ __addratebit_avx2x4 (
+        param_0, (BArray800.init_arr (W8.of_int 255) 800), param);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, (is_init b_result 0 800))]);
+        st <- result;
+      } else {
+        
+      }
+    } else {
+      if ((aT <> 0)) {
+        param_24 <- st;
+        param_23 <- aT;
+        param_22 <- buf;
+        param_21 <- (rATE8 - aT);
+        param_20 <- 0;
+        (result_14, b_result_6, result_13, result_12, tmp__trace) <@ 
+        __addstate_bcast_imem_avx2x4 (param_24,
+        (BArray800.init_arr (W8.of_int 255) 800), param_23, param_22,
+        param_21, param_20);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert,
+         (((0 <= param_21) /\ (param_21 <= 18446744073709551615)) /\
+         (((0 <= (param_22 + param_21)) /\
+          ((param_22 + param_21) <= 18446744073709551615)) /\
+         (((is_init b_result_6 0 800) /\
+          (result_13 = ((param_23 + param_21) + ((param_20 <> 0) ? 1 : 0)))) /\
+         (result_12 = (param_22 + param_21))))))]);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= result_12) /\ (result_12 <= 18446744073709551615)))]);
+        st <- result_14;
+        buf <- result_12;
+        lEN <- (lEN - (rATE8 - aT));
+        param_19 <- st;
+        (result_11, b_result_5, tmp__trace) <@ _keccakf1600_avx2x4 (
+        param_19, (BArray800.init_arr (W8.of_int 255) 800));
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, (is_init b_result_5 0 800))]);
+        st <- result_11;
+      } else {
+        
+      }
+      iTERS <- (lEN %/ rATE8);
+      i <- 0;
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++
+      [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      while ((i < iTERS)) {
+        param_18 <- st;
+        param_17 <- 0;
+        param_16 <- buf;
+        param_15 <- rATE8;
+        param_14 <- 0;
+        (result_10, b_result_4, result_9, result_8, tmp__trace) <@ __addstate_bcast_imem_avx2x4 (
+        param_18, (BArray800.init_arr (W8.of_int 255) 800), param_17,
+        param_16, param_15, param_14);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert,
+         (((0 <= param_15) /\ (param_15 <= 18446744073709551615)) /\
+         (((0 <= (param_16 + param_15)) /\
+          ((param_16 + param_15) <= 18446744073709551615)) /\
+         (((is_init b_result_4 0 800) /\
+          (result_9 = ((param_17 + param_15) + ((param_14 <> 0) ? 1 : 0)))) /\
+         (result_8 = (param_16 + param_15))))))]);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= result_8) /\ (result_8 <= 18446744073709551615)))]);
+        st <- result_10;
+        buf <- result_8;
+        param_13 <- st;
+        (result_7, b_result_3, tmp__trace) <@ _keccakf1600_avx2x4 (
+        param_13, (BArray800.init_arr (W8.of_int 255) 800));
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, (is_init b_result_3 0 800))]);
+        st <- result_7;
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+        i <- (i + 1);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      }
+      lEN <- (aLL %% rATE8);
+      param_12 <- st;
+      param_11 <- 0;
+      param_10 <- buf;
+      param_9 <- lEN;
+      param_8 <- tRAILB;
+      (result_6, b_result_2, result_5, result_4, tmp__trace) <@ __addstate_bcast_imem_avx2x4 (
+      param_12, (BArray800.init_arr (W8.of_int 255) 800), param_11, param_10,
+      param_9, param_8);
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++
+      [(Assert,
+       (((0 <= param_9) /\ (param_9 <= 18446744073709551615)) /\
+       (((0 <= (param_10 + param_9)) /\
+        ((param_10 + param_9) <= 18446744073709551615)) /\
+       (((is_init b_result_2 0 800) /\
+        (result_5 = ((param_11 + param_9) + ((param_8 <> 0) ? 1 : 0)))) /\
+       (result_4 = (param_10 + param_9))))))]);
+      trace___absorb_bcast_imem_avx2x4 <-
+      (trace___absorb_bcast_imem_avx2x4 ++
+      [(Assert, ((0 <= result_4) /\ (result_4 <= 18446744073709551615)))]);
+      st <- result_6;
+      aT <- result_5;
+      buf <- result_4;
+      if ((tRAILB <> 0)) {
+        param_7 <- st;
+        param_6 <- rATE8;
+        (result_3, b_result_1, tmp__trace) <@ __addratebit_avx2x4 (
+        param_7, (BArray800.init_arr (W8.of_int 255) 800), param_6);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_bcast_imem_avx2x4 <-
+        (trace___absorb_bcast_imem_avx2x4 ++
+        [(Assert, (is_init b_result_1 0 800))]);
+        st <- result_3;
+      } else {
+        
+      }
+    }
+    b_st <- (BArray800.init_arr (W8.of_int 255) 800);
+    return (st, b_st, aT, buf, trace___absorb_bcast_imem_avx2x4);
+  }
+  proc __addstate_imem_avx2x4 (st:BArray800.t, b_st:BArray800.t,
+                                        aT:int, buf0:int, buf1:int, buf2:int,
+                                        buf3:int, lEN:int, tRAILB:int) : 
+  BArray800.t * BArray800.t * int * int * int * int * int * trace = {
+    var aLL:int;
+    var lO:int;
+    var t0:W64.t;
+    var t1:W64.t;
+    var t2:W64.t;
+    var t3:W64.t;
+    var t256_0:W256.t;
+    var t256_1:W256.t;
+    var t256_2:W256.t;
+    var t256_3:W256.t;
+    var at:int;
+    var param:int;
+    var param_0:int;
+    var param_1:int;
+    var result:W64.t;
+    var result_0:int;
+    var result_1:int;
+    var result_2:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:int;
+    var result_3:W64.t;
+    var result_4:int;
+    var result_5:int;
+    var result_6:int;
+    var param_5:int;
+    var param_6:int;
+    var param_7:int;
+    var result_7:W64.t;
+    var result_8:int;
+    var result_9:int;
+    var result_10:int;
+    var param_8:int;
+    var param_9:int;
+    var param_10:int;
+    var result_11:W64.t;
+    var result_12:int;
+    var result_13:int;
+    var result_14:int;
+    var param_11:W256.t;
+    var param_12:W256.t;
+    var param_13:W256.t;
+    var param_14:W256.t;
+    var result_15:W256.t;
+    var result_16:W256.t;
+    var result_17:W256.t;
+    var result_18:W256.t;
+    var param_15:int;
+    var param_16:int;
+    var param_17:int;
+    var result_19:W64.t;
+    var result_20:int;
+    var result_21:int;
+    var result_22:int;
+    var param_18:int;
+    var param_19:int;
+    var param_20:int;
+    var result_23:W64.t;
+    var result_24:int;
+    var result_25:int;
+    var result_26:int;
+    var param_21:int;
+    var param_22:int;
+    var param_23:int;
+    var result_27:W64.t;
+    var result_28:int;
+    var result_29:int;
+    var result_30:int;
+    var param_24:int;
+    var param_25:int;
+    var param_26:int;
+    var result_31:W64.t;
+    var result_32:int;
+    var result_33:int;
+    var result_34:int;
+    var param_27:int;
+    var param_28:int;
+    var param_29:int;
+    var result_35:W64.t;
+    var result_36:int;
+    var result_37:int;
+    var result_38:int;
+    var param_30:int;
+    var param_31:int;
+    var param_32:int;
+    var result_39:W64.t;
+    var result_40:int;
+    var result_41:int;
+    var result_42:int;
+    var param_33:int;
+    var param_34:int;
+    var param_35:int;
+    var result_43:W64.t;
+    var result_44:int;
+    var result_45:int;
+    var result_46:int;
+    var param_36:int;
+    var param_37:int;
+    var param_38:int;
+    var result_47:W64.t;
+    var result_48:int;
+    var result_49:int;
+    var result_50:int;
+    var trace___addstate_imem_avx2x4:trace;
+    trace___addstate_imem_avx2x4 <- [];
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert,
+     (((0 <= buf0) /\ (buf0 <= 18446744073709551615)) /\
+     (((0 <= buf1) /\ (buf1 <= 18446744073709551615)) /\
+     (((0 <= buf2) /\ (buf2 <= 18446744073709551615)) /\
+     (((0 <= buf3) /\ (buf3 <= 18446744073709551615)) /\
+     (((((((((0 <= lEN) /\ (0 <= aT)) /\ (aT < 200)) /\
+          (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) < 200)) /\
+         (is_valid buf0 lEN)) /\
+        (is_valid buf1 lEN)) /\
+       (is_valid buf2 lEN)) /\
+      (is_valid buf3 lEN)) /\
+     (is_init b_st 0 800)))))))]);
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+    aLL <- (aT + lEN);
+    lO <- (aT %% 8);
+    trace___addstate_imem_avx2x4 <-
+    (trace___addstate_imem_avx2x4 ++
+    [(Assert,
+     ((0 <= (4 * (aT %/ 8))) /\ ((4 * (aT %/ 8)) <= 18446744073709551615)))]);
+    at <- (4 * (aT %/ 8));
+    if ((0 < lO)) {
+      if (((lO + lEN) < 8)) {
+        if ((tRAILB <> 0)) {
+          aLL <- (aLL + 1);
+        } else {
+          
+        }
+        param_26 <- buf0;
+        param_25 <- lEN;
+        param_24 <- tRAILB;
+        (result_34, result_33, result_32, result_31, tmp__trace) <@ __mread_subu64 (
+        param_26, param_25, param_24);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++ tmp__trace);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         (((0 <=
+           ((0 < ((param_25 < 8) ? param_25 : 8)) ? ((param_25 < 8) ? 
+                                                    param_25 : 8) : 0)) /\
+          (((0 < ((param_25 < 8) ? param_25 : 8)) ? ((param_25 < 8) ? 
+                                                    param_25 : 8) : 0) <=
+          18446744073709551615)) /\
+         (((0 <=
+           (param_26 +
+           ((0 < ((param_25 < 8) ? param_25 : 8)) ? ((param_25 < 8) ? 
+                                                    param_25 : 8) : 0))) /\
+          ((param_26 +
+           ((0 < ((param_25 < 8) ? param_25 : 8)) ? ((param_25 < 8) ? 
+                                                    param_25 : 8) : 0)) <=
+          18446744073709551615)) /\
+         (((result_34 =
+           (param_26 +
+           ((0 < ((param_25 < 8) ? param_25 : 8)) ? ((param_25 < 8) ? 
+                                                    param_25 : 8) : 0))) /\
+          (result_33 =
+          (param_25 -
+          ((0 < ((param_25 < 8) ? param_25 : 8)) ? ((param_25 < 8) ? 
+                                                   param_25 : 8) : 0)))) /\
+         (result_32 = ((8 <= param_25) ? param_24 : 0))))))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= result_34) /\ (result_34 <= 18446744073709551615)))]);
+        buf0 <- result_34;
+        t0 <- result_31;
+        param_23 <- buf1;
+        param_22 <- lEN;
+        param_21 <- tRAILB;
+        (result_30, result_29, result_28, result_27, tmp__trace) <@ __mread_subu64 (
+        param_23, param_22, param_21);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++ tmp__trace);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         (((0 <=
+           ((0 < ((param_22 < 8) ? param_22 : 8)) ? ((param_22 < 8) ? 
+                                                    param_22 : 8) : 0)) /\
+          (((0 < ((param_22 < 8) ? param_22 : 8)) ? ((param_22 < 8) ? 
+                                                    param_22 : 8) : 0) <=
+          18446744073709551615)) /\
+         (((0 <=
+           (param_23 +
+           ((0 < ((param_22 < 8) ? param_22 : 8)) ? ((param_22 < 8) ? 
+                                                    param_22 : 8) : 0))) /\
+          ((param_23 +
+           ((0 < ((param_22 < 8) ? param_22 : 8)) ? ((param_22 < 8) ? 
+                                                    param_22 : 8) : 0)) <=
+          18446744073709551615)) /\
+         (((result_30 =
+           (param_23 +
+           ((0 < ((param_22 < 8) ? param_22 : 8)) ? ((param_22 < 8) ? 
+                                                    param_22 : 8) : 0))) /\
+          (result_29 =
+          (param_22 -
+          ((0 < ((param_22 < 8) ? param_22 : 8)) ? ((param_22 < 8) ? 
+                                                   param_22 : 8) : 0)))) /\
+         (result_28 = ((8 <= param_22) ? param_21 : 0))))))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= result_30) /\ (result_30 <= 18446744073709551615)))]);
+        buf1 <- result_30;
+        t1 <- result_27;
+        param_20 <- buf2;
+        param_19 <- lEN;
+        param_18 <- tRAILB;
+        (result_26, result_25, result_24, result_23, tmp__trace) <@ __mread_subu64 (
+        param_20, param_19, param_18);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++ tmp__trace);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         (((0 <=
+           ((0 < ((param_19 < 8) ? param_19 : 8)) ? ((param_19 < 8) ? 
+                                                    param_19 : 8) : 0)) /\
+          (((0 < ((param_19 < 8) ? param_19 : 8)) ? ((param_19 < 8) ? 
+                                                    param_19 : 8) : 0) <=
+          18446744073709551615)) /\
+         (((0 <=
+           (param_20 +
+           ((0 < ((param_19 < 8) ? param_19 : 8)) ? ((param_19 < 8) ? 
+                                                    param_19 : 8) : 0))) /\
+          ((param_20 +
+           ((0 < ((param_19 < 8) ? param_19 : 8)) ? ((param_19 < 8) ? 
+                                                    param_19 : 8) : 0)) <=
+          18446744073709551615)) /\
+         (((result_26 =
+           (param_20 +
+           ((0 < ((param_19 < 8) ? param_19 : 8)) ? ((param_19 < 8) ? 
+                                                    param_19 : 8) : 0))) /\
+          (result_25 =
+          (param_19 -
+          ((0 < ((param_19 < 8) ? param_19 : 8)) ? ((param_19 < 8) ? 
+                                                   param_19 : 8) : 0)))) /\
+         (result_24 = ((8 <= param_19) ? param_18 : 0))))))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= result_26) /\ (result_26 <= 18446744073709551615)))]);
+        buf2 <- result_26;
+        t2 <- result_23;
+        param_17 <- buf3;
+        param_16 <- lEN;
+        param_15 <- tRAILB;
+        (result_22, result_21, result_20, result_19, tmp__trace) <@ __mread_subu64 (
+        param_17, param_16, param_15);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++ tmp__trace);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         (((0 <=
+           ((0 < ((param_16 < 8) ? param_16 : 8)) ? ((param_16 < 8) ? 
+                                                    param_16 : 8) : 0)) /\
+          (((0 < ((param_16 < 8) ? param_16 : 8)) ? ((param_16 < 8) ? 
+                                                    param_16 : 8) : 0) <=
+          18446744073709551615)) /\
+         (((0 <=
+           (param_17 +
+           ((0 < ((param_16 < 8) ? param_16 : 8)) ? ((param_16 < 8) ? 
+                                                    param_16 : 8) : 0))) /\
+          ((param_17 +
+           ((0 < ((param_16 < 8) ? param_16 : 8)) ? ((param_16 < 8) ? 
+                                                    param_16 : 8) : 0)) <=
+          18446744073709551615)) /\
+         (((result_22 =
+           (param_17 +
+           ((0 < ((param_16 < 8) ? param_16 : 8)) ? ((param_16 < 8) ? 
+                                                    param_16 : 8) : 0))) /\
+          (result_21 =
+          (param_16 -
+          ((0 < ((param_16 < 8) ? param_16 : 8)) ? ((param_16 < 8) ? 
+                                                   param_16 : 8) : 0)))) /\
+         (result_20 = ((8 <= param_16) ? param_15 : 0))))))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= result_22) /\ (result_22 <= 18446744073709551615)))]);
+        buf3 <- result_22;
+        t3 <- result_19;
+        t0 <- (t0 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+        t0 <- (t0 `^` (BArray800.get64 st at));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st at t0);
+        t1 <- (t1 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+        t1 <- (t1 `^` (BArray800.get64 st (at + 1)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 1) t1);
+        t2 <- (t2 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+        t2 <- (t2 `^` (BArray800.get64 st (at + 2)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 2) t2);
+        t3 <- (t3 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+        t3 <- (t3 `^` (BArray800.get64 st (at + 3)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 3) t3);
+        aT <- 0;
+        lEN <- 0;
+        tRAILB <- 0;
+      } else {
+        if ((8 <= lEN)) {
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, (is_valid buf0 8))]);
+          t0 <- (loadW64 Glob.mem buf0);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= (8 - lO)) /\ ((8 - lO) <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= (buf0 + (8 - lO))) /\
+           ((buf0 + (8 - lO)) <= 18446744073709551615)))]);
+          buf0 <- (buf0 + (8 - lO));
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, (is_valid buf1 8))]);
+          t1 <- (loadW64 Glob.mem buf1);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= (8 - lO)) /\ ((8 - lO) <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= (buf1 + (8 - lO))) /\
+           ((buf1 + (8 - lO)) <= 18446744073709551615)))]);
+          buf1 <- (buf1 + (8 - lO));
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, (is_valid buf2 8))]);
+          t2 <- (loadW64 Glob.mem buf2);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= (8 - lO)) /\ ((8 - lO) <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= (buf2 + (8 - lO))) /\
+           ((buf2 + (8 - lO)) <= 18446744073709551615)))]);
+          buf2 <- (buf2 + (8 - lO));
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, (is_valid buf3 8))]);
+          t3 <- (loadW64 Glob.mem buf3);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert, ((0 <= (8 - lO)) /\ ((8 - lO) <= 18446744073709551615)))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= (buf3 + (8 - lO))) /\
+           ((buf3 + (8 - lO)) <= 18446744073709551615)))]);
+          buf3 <- (buf3 + (8 - lO));
+        } else {
+          param_38 <- buf0;
+          param_37 <- (8 - lO);
+          param_36 <- tRAILB;
+          (result_50, result_49, result_48, result_47, tmp__trace) <@ 
+          __mread_subu64 (param_38, param_37, param_36);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++ tmp__trace);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_37 < 8) ? param_37 : 8)) ? ((param_37 < 8) ? 
+                                                      param_37 : 8) : 0)) /\
+            (((0 < ((param_37 < 8) ? param_37 : 8)) ? ((param_37 < 8) ? 
+                                                      param_37 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_38 +
+             ((0 < ((param_37 < 8) ? param_37 : 8)) ? ((param_37 < 8) ? 
+                                                      param_37 : 8) : 0))) /\
+            ((param_38 +
+             ((0 < ((param_37 < 8) ? param_37 : 8)) ? ((param_37 < 8) ? 
+                                                      param_37 : 8) : 0)) <=
+            18446744073709551615)) /\
+           (((result_50 =
+             (param_38 +
+             ((0 < ((param_37 < 8) ? param_37 : 8)) ? ((param_37 < 8) ? 
+                                                      param_37 : 8) : 0))) /\
+            (result_49 =
+            (param_37 -
+            ((0 < ((param_37 < 8) ? param_37 : 8)) ? ((param_37 < 8) ? 
+                                                     param_37 : 8) : 0)))) /\
+           (result_48 = ((8 <= param_37) ? param_36 : 0))))))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= result_50) /\ (result_50 <= 18446744073709551615)))]);
+          buf0 <- result_50;
+          t0 <- result_47;
+          param_35 <- buf1;
+          param_34 <- (8 - lO);
+          param_33 <- tRAILB;
+          (result_46, result_45, result_44, result_43, tmp__trace) <@ 
+          __mread_subu64 (param_35, param_34, param_33);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++ tmp__trace);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_34 < 8) ? param_34 : 8)) ? ((param_34 < 8) ? 
+                                                      param_34 : 8) : 0)) /\
+            (((0 < ((param_34 < 8) ? param_34 : 8)) ? ((param_34 < 8) ? 
+                                                      param_34 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_35 +
+             ((0 < ((param_34 < 8) ? param_34 : 8)) ? ((param_34 < 8) ? 
+                                                      param_34 : 8) : 0))) /\
+            ((param_35 +
+             ((0 < ((param_34 < 8) ? param_34 : 8)) ? ((param_34 < 8) ? 
+                                                      param_34 : 8) : 0)) <=
+            18446744073709551615)) /\
+           (((result_46 =
+             (param_35 +
+             ((0 < ((param_34 < 8) ? param_34 : 8)) ? ((param_34 < 8) ? 
+                                                      param_34 : 8) : 0))) /\
+            (result_45 =
+            (param_34 -
+            ((0 < ((param_34 < 8) ? param_34 : 8)) ? ((param_34 < 8) ? 
+                                                     param_34 : 8) : 0)))) /\
+           (result_44 = ((8 <= param_34) ? param_33 : 0))))))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= result_46) /\ (result_46 <= 18446744073709551615)))]);
+          buf1 <- result_46;
+          t1 <- result_43;
+          param_32 <- buf2;
+          param_31 <- (8 - lO);
+          param_30 <- tRAILB;
+          (result_42, result_41, result_40, result_39, tmp__trace) <@ 
+          __mread_subu64 (param_32, param_31, param_30);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++ tmp__trace);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_31 < 8) ? param_31 : 8)) ? ((param_31 < 8) ? 
+                                                      param_31 : 8) : 0)) /\
+            (((0 < ((param_31 < 8) ? param_31 : 8)) ? ((param_31 < 8) ? 
+                                                      param_31 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_32 +
+             ((0 < ((param_31 < 8) ? param_31 : 8)) ? ((param_31 < 8) ? 
+                                                      param_31 : 8) : 0))) /\
+            ((param_32 +
+             ((0 < ((param_31 < 8) ? param_31 : 8)) ? ((param_31 < 8) ? 
+                                                      param_31 : 8) : 0)) <=
+            18446744073709551615)) /\
+           (((result_42 =
+             (param_32 +
+             ((0 < ((param_31 < 8) ? param_31 : 8)) ? ((param_31 < 8) ? 
+                                                      param_31 : 8) : 0))) /\
+            (result_41 =
+            (param_31 -
+            ((0 < ((param_31 < 8) ? param_31 : 8)) ? ((param_31 < 8) ? 
+                                                     param_31 : 8) : 0)))) /\
+           (result_40 = ((8 <= param_31) ? param_30 : 0))))))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= result_42) /\ (result_42 <= 18446744073709551615)))]);
+          buf2 <- result_42;
+          t2 <- result_39;
+          param_29 <- buf3;
+          param_28 <- (8 - lO);
+          param_27 <- tRAILB;
+          (result_38, result_37, result_36, result_35, tmp__trace) <@ 
+          __mread_subu64 (param_29, param_28, param_27);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++ tmp__trace);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           (((0 <=
+             ((0 < ((param_28 < 8) ? param_28 : 8)) ? ((param_28 < 8) ? 
+                                                      param_28 : 8) : 0)) /\
+            (((0 < ((param_28 < 8) ? param_28 : 8)) ? ((param_28 < 8) ? 
+                                                      param_28 : 8) : 0) <=
+            18446744073709551615)) /\
+           (((0 <=
+             (param_29 +
+             ((0 < ((param_28 < 8) ? param_28 : 8)) ? ((param_28 < 8) ? 
+                                                      param_28 : 8) : 0))) /\
+            ((param_29 +
+             ((0 < ((param_28 < 8) ? param_28 : 8)) ? ((param_28 < 8) ? 
+                                                      param_28 : 8) : 0)) <=
+            18446744073709551615)) /\
+           (((result_38 =
+             (param_29 +
+             ((0 < ((param_28 < 8) ? param_28 : 8)) ? ((param_28 < 8) ? 
+                                                      param_28 : 8) : 0))) /\
+            (result_37 =
+            (param_28 -
+            ((0 < ((param_28 < 8) ? param_28 : 8)) ? ((param_28 < 8) ? 
+                                                     param_28 : 8) : 0)))) /\
+           (result_36 = ((8 <= param_28) ? param_27 : 0))))))]);
+          trace___addstate_imem_avx2x4 <-
+          (trace___addstate_imem_avx2x4 ++
+          [(Assert,
+           ((0 <= result_38) /\ (result_38 <= 18446744073709551615)))]);
+          buf3 <- result_38;
+          t3 <- result_35;
+        }
+        lEN <- (lEN - (8 - lO));
+        aT <- (aT + (8 - lO));
+        t0 <- (t0 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+        t0 <- (t0 `^` (BArray800.get64 st at));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st at t0);
+        t1 <- (t1 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+        t1 <- (t1 `^` (BArray800.get64 st (at + 1)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 1) t1);
+        t2 <- (t2 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+        t2 <- (t2 `^` (BArray800.get64 st (at + 2)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 2) t2);
+        t3 <- (t3 `<<` (W8.of_int (8 * lO)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+        t3 <- (t3 `^` (BArray800.get64 st (at + 3)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 3) t3);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 4)) /\ ((at + 4) <= 18446744073709551615)))]);
+        at <- (at + 4);
+      }
+    } else {
+      
+    }
+    if ((8 <= lEN)) {
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= ((4 * (aT %/ 8)) + (32 * (lEN %/ 32)))) /\
+       (((4 * (aT %/ 8)) + (32 * (lEN %/ 32))) <= 18446744073709551615)))]);
+      while ((at < ((4 * (aT %/ 8)) + (32 * (lEN %/ 32))))) {
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf0 32))]);
+        t256_0 <- (loadW256 Glob.mem buf0);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf0 + 32)) /\ ((buf0 + 32) <= 18446744073709551615)))]);
+        buf0 <- (buf0 + 32);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf1 32))]);
+        t256_1 <- (loadW256 Glob.mem buf1);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf1 + 32)) /\ ((buf1 + 32) <= 18446744073709551615)))]);
+        buf1 <- (buf1 + 32);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf2 32))]);
+        t256_2 <- (loadW256 Glob.mem buf2);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf2 + 32)) /\ ((buf2 + 32) <= 18446744073709551615)))]);
+        buf2 <- (buf2 + 32);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf3 32))]);
+        t256_3 <- (loadW256 Glob.mem buf3);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf3 + 32)) /\ ((buf3 + 32) <= 18446744073709551615)))]);
+        buf3 <- (buf3 + 32);
+        param_14 <- t256_0;
+        param_13 <- t256_1;
+        param_12 <- t256_2;
+        param_11 <- t256_3;
+        (result_18, result_17, result_16, result_15, tmp__trace) <@ __4u64x4_u256x4 (
+        param_14, param_13, param_12, param_11);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++ tmp__trace);
+        t256_0 <- result_18;
+        t256_1 <- result_17;
+        t256_2 <- result_16;
+        t256_3 <- result_15;
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (8 * at)) /\ (((8 * at) + 32) <= 800)))]);
+        st <- (BArray800.set256d st (8 * at) t256_0);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((8 * at) + 32)) /\
+         (((8 * at) + 32) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((8 * at) + 32)) /\ ((((8 * at) + 32) + 32) <= 800)))]);
+        st <- (BArray800.set256d st ((8 * at) + 32) t256_1);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((8 * at) + 64)) /\
+         (((8 * at) + 64) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((8 * at) + 64)) /\ ((((8 * at) + 64) + 32) <= 800)))]);
+        st <- (BArray800.set256d st ((8 * at) + 64) t256_2);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (8 * at)) /\ ((8 * at) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((8 * at) + 96)) /\
+         (((8 * at) + 96) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((8 * at) + 96)) /\ ((((8 * at) + 96) + 32) <= 800)))]);
+        st <- (BArray800.set256d st ((8 * at) + 96) t256_3);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 32)) /\ ((at + 32) <= 18446744073709551615)))]);
+        at <- (at + 32);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((4 * (aT %/ 8)) + (32 * (lEN %/ 32)))) /\
+         (((4 * (aT %/ 8)) + (32 * (lEN %/ 32))) <= 18446744073709551615)))]);
+      }
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= ((4 * (aT %/ 8)) + (4 * (lEN %/ 8)))) /\
+       (((4 * (aT %/ 8)) + (4 * (lEN %/ 8))) <= 18446744073709551615)))]);
+      while ((at < ((4 * (aT %/ 8)) + (4 * (lEN %/ 8))))) {
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf0 8))]);
+        t0 <- (loadW64 Glob.mem buf0);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf0 + 8)) /\ ((buf0 + 8) <= 18446744073709551615)))]);
+        buf0 <- (buf0 + 8);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+        t0 <- (t0 `^` (BArray800.get64 st at));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st at t0);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf1 8))]);
+        t1 <- (loadW64 Glob.mem buf1);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf1 + 8)) /\ ((buf1 + 8) <= 18446744073709551615)))]);
+        buf1 <- (buf1 + 8);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+        t1 <- (t1 `^` (BArray800.get64 st (at + 1)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 1) t1);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf2 8))]);
+        t2 <- (loadW64 Glob.mem buf2);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf2 + 8)) /\ ((buf2 + 8) <= 18446744073709551615)))]);
+        buf2 <- (buf2 + 8);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+        t2 <- (t2 `^` (BArray800.get64 st (at + 2)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 2) t2);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, (is_valid buf3 8))]);
+        t3 <- (loadW64 Glob.mem buf3);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= (buf3 + 8)) /\ ((buf3 + 8) <= 18446744073709551615)))]);
+        buf3 <- (buf3 + 8);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+        t3 <- (t3 `^` (BArray800.get64 st (at + 3)));
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+        st <- (BArray800.set64 st (at + 3) t3);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert, ((0 <= (at + 4)) /\ ((at + 4) <= 18446744073709551615)))]);
+        at <- (at + 4);
+        trace___addstate_imem_avx2x4 <-
+        (trace___addstate_imem_avx2x4 ++
+        [(Assert,
+         ((0 <= ((4 * (aT %/ 8)) + (4 * (lEN %/ 8)))) /\
+         (((4 * (aT %/ 8)) + (4 * (lEN %/ 8))) <= 18446744073709551615)))]);
+      }
+      lEN <- ((aT + lEN) %% 8);
+    } else {
+      
+    }
+    lO <- ((aT + lEN) %% 8);
+    if (((0 < lO) \/ (tRAILB <> 0))) {
+      param_10 <- buf0;
+      param_9 <- lO;
+      param_8 <- tRAILB;
+      (result_14, result_13, result_12, result_11, tmp__trace) <@ __mread_subu64 (
+      param_10, param_9, param_8);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++ tmp__trace);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)) /\
+        (((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_10 +
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0))) /\
+        ((param_10 +
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_14 =
+         (param_10 +
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0))) /\
+        (result_13 =
+        (param_9 -
+        ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)))) /\
+       (result_12 = ((8 <= param_9) ? param_8 : 0))))))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_14) /\ (result_14 <= 18446744073709551615)))]);
+      buf0 <- result_14;
+      t0 <- result_11;
+      param_7 <- buf1;
+      param_6 <- lO;
+      param_5 <- tRAILB;
+      (result_10, result_9, result_8, result_7, tmp__trace) <@ __mread_subu64 (
+      param_7, param_6, param_5);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++ tmp__trace);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)) /\
+        (((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_7 +
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0))) /\
+        ((param_7 +
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_10 =
+         (param_7 +
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0))) /\
+        (result_9 =
+        (param_6 -
+        ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)))) /\
+       (result_8 = ((8 <= param_6) ? param_5 : 0))))))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_10) /\ (result_10 <= 18446744073709551615)))]);
+      buf1 <- result_10;
+      t1 <- result_7;
+      param_4 <- buf2;
+      param_3 <- lO;
+      param_2 <- tRAILB;
+      (result_6, result_5, result_4, result_3, tmp__trace) <@ __mread_subu64 (
+      param_4, param_3, param_2);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++ tmp__trace);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) /\
+        (((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_4 +
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+        ((param_4 +
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_6 =
+         (param_4 +
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+        (result_5 =
+        (param_3 -
+        ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)))) /\
+       (result_4 = ((8 <= param_3) ? param_2 : 0))))))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+      buf2 <- result_6;
+      t2 <- result_3;
+      param_1 <- buf3;
+      param_0 <- lO;
+      param <- tRAILB;
+      (result_2, result_1, result_0, result, tmp__trace) <@ __mread_subu64 (
+      param_1, param_0, param);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++ tmp__trace);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) /\
+        (((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        ((param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) <=
+        18446744073709551615)) /\
+       (((result_2 =
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        (result_1 =
+        (param_0 -
+        ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)))) /\
+       (result_0 = ((8 <= param_0) ? param : 0))))))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+      buf3 <- result_2;
+      t3 <- result;
+      if ((tRAILB <> 0)) {
+        aLL <- (aLL + 1);
+      } else {
+        
+      }
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+      t0 <- (t0 `^` (BArray800.get64 st at));
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= at) /\ (at <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at * 8)) /\ (((at * 8) + 8) <= 800)))]);
+      st <- (BArray800.set64 st at t0);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+      t1 <- (t1 `^` (BArray800.get64 st (at + 1)));
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at + 1)) /\ ((at + 1) <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= ((at + 1) * 8)) /\ ((((at + 1) * 8) + 8) <= 800)))]);
+      st <- (BArray800.set64 st (at + 1) t1);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+      t2 <- (t2 `^` (BArray800.get64 st (at + 2)));
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at + 2)) /\ ((at + 2) <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= ((at + 2) * 8)) /\ ((((at + 2) * 8) + 8) <= 800)))]);
+      st <- (BArray800.set64 st (at + 2) t2);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+      t3 <- (t3 `^` (BArray800.get64 st (at + 3)));
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (at + 3)) /\ ((at + 3) <= 18446744073709551615)))]);
+      trace___addstate_imem_avx2x4 <-
+      (trace___addstate_imem_avx2x4 ++
+      [(Assert, ((0 <= ((at + 3) * 8)) /\ ((((at + 3) * 8) + 8) <= 800)))]);
+      st <- (BArray800.set64 st (at + 3) t3);
+    } else {
+      
+    }
+    b_st <- (BArray800.init_arr (W8.of_int 255) 800);
+    return (st, b_st, aLL, buf0, buf1, buf2, buf3,
+           trace___addstate_imem_avx2x4);
+  }
+  proc __absorb_imem_avx2x4 (st:BArray800.t, b_st:BArray800.t,
+                                      aT:int, buf0:int, buf1:int, buf2:int,
+                                      buf3:int, lEN:int, rATE8:int,
+                                      tRAILB:int) : BArray800.t *
+                                                    BArray800.t * int * int *
+                                                    int * int * int * trace = {
+    var aLL:int;
+    var iTERS:int;
+    var i:int;
+    var param:int;
+    var param_0:BArray800.t;
+    var result:BArray800.t;
+    var param_1:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:int;
+    var param_5:int;
+    var param_6:int;
+    var param_7:int;
+    var param_8:BArray800.t;
+    var result_0:int;
+    var result_1:int;
+    var result_2:int;
+    var result_3:int;
+    var result_4:int;
+    var result_5:BArray800.t;
+    var param_9:int;
+    var param_10:BArray800.t;
+    var result_6:BArray800.t;
+    var param_11:int;
+    var param_12:int;
+    var param_13:int;
+    var param_14:int;
+    var param_15:int;
+    var param_16:int;
+    var param_17:int;
+    var param_18:BArray800.t;
+    var result_7:int;
+    var result_8:int;
+    var result_9:int;
+    var result_10:int;
+    var result_11:int;
+    var result_12:BArray800.t;
+    var param_19:BArray800.t;
+    var result_13:BArray800.t;
+    var param_20:int;
+    var param_21:int;
+    var param_22:int;
+    var param_23:int;
+    var param_24:int;
+    var param_25:int;
+    var param_26:int;
+    var param_27:BArray800.t;
+    var result_14:int;
+    var result_15:int;
+    var result_16:int;
+    var result_17:int;
+    var result_18:int;
+    var result_19:BArray800.t;
+    var param_28:BArray800.t;
+    var result_20:BArray800.t;
+    var param_29:int;
+    var param_30:int;
+    var param_31:int;
+    var param_32:int;
+    var param_33:int;
+    var param_34:int;
+    var param_35:int;
+    var param_36:BArray800.t;
+    var result_21:int;
+    var result_22:int;
+    var result_23:int;
+    var result_24:int;
+    var result_25:int;
+    var result_26:BArray800.t;
+    var b_result:BArray800.t;
+    var b_result_0:BArray800.t;
+    var b_result_1:BArray800.t;
+    var b_result_2:BArray800.t;
+    var b_result_3:BArray800.t;
+    var b_result_4:BArray800.t;
+    var b_result_5:BArray800.t;
+    var b_result_6:BArray800.t;
+    var trace___absorb_imem_avx2x4:trace;
+    b_result <- witness;
+    b_result_0 <- witness;
+    b_result_1 <- witness;
+    b_result_2 <- witness;
+    b_result_3 <- witness;
+    b_result_4 <- witness;
+    b_result_5 <- witness;
+    b_result_6 <- witness;
+    param_0 <- witness;
+    param_8 <- witness;
+    param_10 <- witness;
+    param_18 <- witness;
+    param_19 <- witness;
+    param_27 <- witness;
+    param_28 <- witness;
+    param_36 <- witness;
+    result <- witness;
+    result_5 <- witness;
+    result_6 <- witness;
+    result_12 <- witness;
+    result_13 <- witness;
+    result_19 <- witness;
+    result_20 <- witness;
+    result_26 <- witness;
+    trace___absorb_imem_avx2x4 <- [];
+    trace___absorb_imem_avx2x4 <-
+    (trace___absorb_imem_avx2x4 ++
+    [(Assert,
+     (((0 <= buf0) /\ (buf0 <= 18446744073709551615)) /\
+     (((0 <= buf1) /\ (buf1 <= 18446744073709551615)) /\
+     (((0 <= buf2) /\ (buf2 <= 18446744073709551615)) /\
+     (((0 <= buf3) /\ (buf3 <= 18446744073709551615)) /\
+     (((((((((((0 <= lEN) /\ (0 <= aT)) /\ (aT < rATE8)) /\ (0 < rATE8)) /\
+           (rATE8 < 200)) /\
+          (((aT + lEN) + ((tRAILB <> 0) ? 1 : 0)) < 200)) /\
+         (is_valid buf0 lEN)) /\
+        (is_valid buf1 lEN)) /\
+       (is_valid buf2 lEN)) /\
+      (is_valid buf3 lEN)) /\
+     (is_init b_st 0 800)))))))]);
+    trace___absorb_imem_avx2x4 <-
+    (trace___absorb_imem_avx2x4 ++
+    [(Assert, ((0 <= tRAILB) /\ (tRAILB < 256)))]);
+    trace___absorb_imem_avx2x4 <-
+    (trace___absorb_imem_avx2x4 ++
+    [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+    trace___absorb_imem_avx2x4 <-
+    (trace___absorb_imem_avx2x4 ++
+    [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+    trace___absorb_imem_avx2x4 <-
+    (trace___absorb_imem_avx2x4 ++
+    [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+    trace___absorb_imem_avx2x4 <-
+    (trace___absorb_imem_avx2x4 ++
+    [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+    aLL <- (aT + lEN);
+    if (((aT + lEN) < rATE8)) {
+      param_8 <- st;
+      param_7 <- aT;
+      param_6 <- buf0;
+      param_5 <- buf1;
+      param_4 <- buf2;
+      param_3 <- buf3;
+      param_2 <- lEN;
+      param_1 <- tRAILB;
+      (result_5, b_result_0, result_4, result_3, result_2, result_1,
+      result_0, tmp__trace) <@ __addstate_imem_avx2x4 (param_8,
+      (BArray800.init_arr (W8.of_int 255) 800), param_7, param_6, param_5,
+      param_4, param_3, param_2, param_1);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++ tmp__trace);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert,
+       (((0 <= param_2) /\ (param_2 <= 18446744073709551615)) /\
+       (((0 <= (param_6 + param_2)) /\
+        ((param_6 + param_2) <= 18446744073709551615)) /\
+       (((0 <= param_2) /\ (param_2 <= 18446744073709551615)) /\
+       (((0 <= (param_5 + param_2)) /\
+        ((param_5 + param_2) <= 18446744073709551615)) /\
+       (((0 <= param_2) /\ (param_2 <= 18446744073709551615)) /\
+       (((0 <= (param_4 + param_2)) /\
+        ((param_4 + param_2) <= 18446744073709551615)) /\
+       (((0 <= param_2) /\ (param_2 <= 18446744073709551615)) /\
+       (((0 <= (param_3 + param_2)) /\
+        ((param_3 + param_2) <= 18446744073709551615)) /\
+       ((((((is_init b_result_0 0 800) /\
+           (result_4 = ((param_7 + param_2) + ((param_1 <> 0) ? 1 : 0)))) /\
+          (result_3 = (param_6 + param_2))) /\
+         (result_2 = (param_5 + param_2))) /\
+        (result_1 = (param_4 + param_2))) /\
+       (result_0 = (param_3 + param_2))))))))))))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_3) /\ (result_3 <= 18446744073709551615)))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_1) /\ (result_1 <= 18446744073709551615)))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_0) /\ (result_0 <= 18446744073709551615)))]);
+      st <- result_5;
+      aT <- result_4;
+      buf0 <- result_3;
+      buf1 <- result_2;
+      buf2 <- result_1;
+      buf3 <- result_0;
+      if ((tRAILB <> 0)) {
+        param_0 <- st;
+        param <- rATE8;
+        (result, b_result, tmp__trace) <@ __addratebit_avx2x4 (
+        param_0, (BArray800.init_arr (W8.of_int 255) 800), param);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, (is_init b_result 0 800))]);
+        st <- result;
+      } else {
+        
+      }
+    } else {
+      if ((aT <> 0)) {
+        param_36 <- st;
+        param_35 <- aT;
+        param_34 <- buf0;
+        param_33 <- buf1;
+        param_32 <- buf2;
+        param_31 <- buf3;
+        param_30 <- (rATE8 - aT);
+        param_29 <- 0;
+        (result_26, b_result_6, result_25, result_24, result_23, result_22,
+        result_21, tmp__trace) <@ __addstate_imem_avx2x4 (param_36,
+        (BArray800.init_arr (W8.of_int 255) 800), param_35, param_34,
+        param_33, param_32, param_31, param_30, param_29);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert,
+         (((0 <= param_30) /\ (param_30 <= 18446744073709551615)) /\
+         (((0 <= (param_34 + param_30)) /\
+          ((param_34 + param_30) <= 18446744073709551615)) /\
+         (((0 <= param_30) /\ (param_30 <= 18446744073709551615)) /\
+         (((0 <= (param_33 + param_30)) /\
+          ((param_33 + param_30) <= 18446744073709551615)) /\
+         (((0 <= param_30) /\ (param_30 <= 18446744073709551615)) /\
+         (((0 <= (param_32 + param_30)) /\
+          ((param_32 + param_30) <= 18446744073709551615)) /\
+         (((0 <= param_30) /\ (param_30 <= 18446744073709551615)) /\
+         (((0 <= (param_31 + param_30)) /\
+          ((param_31 + param_30) <= 18446744073709551615)) /\
+         ((((((is_init b_result_6 0 800) /\
+             (result_25 =
+             ((param_35 + param_30) + ((param_29 <> 0) ? 1 : 0)))) /\
+            (result_24 = (param_34 + param_30))) /\
+           (result_23 = (param_33 + param_30))) /\
+          (result_22 = (param_32 + param_30))) /\
+         (result_21 = (param_31 + param_30))))))))))))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_24) /\ (result_24 <= 18446744073709551615)))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_23) /\ (result_23 <= 18446744073709551615)))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_22) /\ (result_22 <= 18446744073709551615)))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_21) /\ (result_21 <= 18446744073709551615)))]);
+        st <- result_26;
+        buf0 <- result_24;
+        buf1 <- result_23;
+        buf2 <- result_22;
+        buf3 <- result_21;
+        lEN <- (lEN - (rATE8 - aT));
+        param_28 <- st;
+        (result_20, b_result_5, tmp__trace) <@ _keccakf1600_avx2x4 (
+        param_28, (BArray800.init_arr (W8.of_int 255) 800));
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, (is_init b_result_5 0 800))]);
+        st <- result_20;
+      } else {
+        
+      }
+      iTERS <- (lEN %/ rATE8);
+      i <- 0;
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      while ((i < iTERS)) {
+        param_27 <- st;
+        param_26 <- 0;
+        param_25 <- buf0;
+        param_24 <- buf1;
+        param_23 <- buf2;
+        param_22 <- buf3;
+        param_21 <- rATE8;
+        param_20 <- 0;
+        (result_19, b_result_4, result_18, result_17, result_16, result_15,
+        result_14, tmp__trace) <@ __addstate_imem_avx2x4 (param_27,
+        (BArray800.init_arr (W8.of_int 255) 800), param_26, param_25,
+        param_24, param_23, param_22, param_21, param_20);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert,
+         (((0 <= param_21) /\ (param_21 <= 18446744073709551615)) /\
+         (((0 <= (param_25 + param_21)) /\
+          ((param_25 + param_21) <= 18446744073709551615)) /\
+         (((0 <= param_21) /\ (param_21 <= 18446744073709551615)) /\
+         (((0 <= (param_24 + param_21)) /\
+          ((param_24 + param_21) <= 18446744073709551615)) /\
+         (((0 <= param_21) /\ (param_21 <= 18446744073709551615)) /\
+         (((0 <= (param_23 + param_21)) /\
+          ((param_23 + param_21) <= 18446744073709551615)) /\
+         (((0 <= param_21) /\ (param_21 <= 18446744073709551615)) /\
+         (((0 <= (param_22 + param_21)) /\
+          ((param_22 + param_21) <= 18446744073709551615)) /\
+         ((((((is_init b_result_4 0 800) /\
+             (result_18 =
+             ((param_26 + param_21) + ((param_20 <> 0) ? 1 : 0)))) /\
+            (result_17 = (param_25 + param_21))) /\
+           (result_16 = (param_24 + param_21))) /\
+          (result_15 = (param_23 + param_21))) /\
+         (result_14 = (param_22 + param_21))))))))))))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_17) /\ (result_17 <= 18446744073709551615)))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_16) /\ (result_16 <= 18446744073709551615)))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_15) /\ (result_15 <= 18446744073709551615)))]);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= result_14) /\ (result_14 <= 18446744073709551615)))]);
+        st <- result_19;
+        buf0 <- result_17;
+        buf1 <- result_16;
+        buf2 <- result_15;
+        buf3 <- result_14;
+        param_19 <- st;
+        (result_13, b_result_3, tmp__trace) <@ _keccakf1600_avx2x4 (
+        param_19, (BArray800.init_arr (W8.of_int 255) 800));
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, (is_init b_result_3 0 800))]);
+        st <- result_13;
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+        i <- (i + 1);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+      }
+      lEN <- (aLL %% rATE8);
+      param_18 <- st;
+      param_17 <- 0;
+      param_16 <- buf0;
+      param_15 <- buf1;
+      param_14 <- buf2;
+      param_13 <- buf3;
+      param_12 <- lEN;
+      param_11 <- tRAILB;
+      (result_12, b_result_2, result_11, result_10, result_9, result_8,
+      result_7, tmp__trace) <@ __addstate_imem_avx2x4 (param_18,
+      (BArray800.init_arr (W8.of_int 255) 800), param_17, param_16, param_15,
+      param_14, param_13, param_12, param_11);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++ tmp__trace);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert,
+       (((0 <= param_12) /\ (param_12 <= 18446744073709551615)) /\
+       (((0 <= (param_16 + param_12)) /\
+        ((param_16 + param_12) <= 18446744073709551615)) /\
+       (((0 <= param_12) /\ (param_12 <= 18446744073709551615)) /\
+       (((0 <= (param_15 + param_12)) /\
+        ((param_15 + param_12) <= 18446744073709551615)) /\
+       (((0 <= param_12) /\ (param_12 <= 18446744073709551615)) /\
+       (((0 <= (param_14 + param_12)) /\
+        ((param_14 + param_12) <= 18446744073709551615)) /\
+       (((0 <= param_12) /\ (param_12 <= 18446744073709551615)) /\
+       (((0 <= (param_13 + param_12)) /\
+        ((param_13 + param_12) <= 18446744073709551615)) /\
+       ((((((is_init b_result_2 0 800) /\
+           (result_11 = ((param_17 + param_12) + ((param_11 <> 0) ? 1 : 0)))) /\
+          (result_10 = (param_16 + param_12))) /\
+         (result_9 = (param_15 + param_12))) /\
+        (result_8 = (param_14 + param_12))) /\
+       (result_7 = (param_13 + param_12))))))))))))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_10) /\ (result_10 <= 18446744073709551615)))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_9) /\ (result_9 <= 18446744073709551615)))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_8) /\ (result_8 <= 18446744073709551615)))]);
+      trace___absorb_imem_avx2x4 <-
+      (trace___absorb_imem_avx2x4 ++
+      [(Assert, ((0 <= result_7) /\ (result_7 <= 18446744073709551615)))]);
+      st <- result_12;
+      aT <- result_11;
+      buf0 <- result_10;
+      buf1 <- result_9;
+      buf2 <- result_8;
+      buf3 <- result_7;
+      if ((tRAILB <> 0)) {
+        param_10 <- st;
+        param_9 <- rATE8;
+        (result_6, b_result_1, tmp__trace) <@ __addratebit_avx2x4 (
+        param_10, (BArray800.init_arr (W8.of_int 255) 800), param_9);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++ tmp__trace);
+        trace___absorb_imem_avx2x4 <-
+        (trace___absorb_imem_avx2x4 ++
+        [(Assert, (is_init b_result_1 0 800))]);
+        st <- result_6;
+      } else {
+        
+      }
+    }
+    b_st <- (BArray800.init_arr (W8.of_int 255) 800);
+    return (st, b_st, aT, buf0, buf1, buf2, buf3,
+           trace___absorb_imem_avx2x4);
+  }
+  proc __dumpstate_imem_avx2x4 (buf0:int, buf1:int, buf2:int,
+                                         buf3:int, lEN:int, st:BArray800.t,
+                                         b_st:BArray800.t) : int * int *
+                                                             int * int *
+                                                             trace = {
+    var i:W64.t;
+    var x0:W256.t;
+    var x1:W256.t;
+    var x2:W256.t;
+    var x3:W256.t;
+    var t0:W64.t;
+    var t1:W64.t;
+    var t2:W64.t;
+    var t3:W64.t;
+    var param:W64.t;
+    var param_0:int;
+    var param_1:int;
+    var result:int;
+    var result_0:int;
+    var param_2:W64.t;
+    var param_3:int;
+    var param_4:int;
+    var result_1:int;
+    var result_2:int;
+    var param_5:W64.t;
+    var param_6:int;
+    var param_7:int;
+    var result_3:int;
+    var result_4:int;
+    var param_8:W64.t;
+    var param_9:int;
+    var param_10:int;
+    var result_5:int;
+    var result_6:int;
+    var param_11:W256.t;
+    var param_12:W256.t;
+    var param_13:W256.t;
+    var param_14:W256.t;
+    var result_7:W256.t;
+    var result_8:W256.t;
+    var result_9:W256.t;
+    var result_10:W256.t;
+    var trace___dumpstate_imem_avx2x4:trace;
+    trace___dumpstate_imem_avx2x4 <- [];
+    trace___dumpstate_imem_avx2x4 <-
+    (trace___dumpstate_imem_avx2x4 ++
+    [(Assert,
+     (((0 <= buf0) /\ (buf0 <= 18446744073709551615)) /\
+     (((0 <= buf1) /\ (buf1 <= 18446744073709551615)) /\
+     (((0 <= buf2) /\ (buf2 <= 18446744073709551615)) /\
+     (((0 <= buf3) /\ (buf3 <= 18446744073709551615)) /\
+     ((((((0 <= lEN) /\ (is_valid buf0 lEN)) /\ (is_valid buf1 lEN)) /\
+       (is_valid buf2 lEN)) /\
+      (is_valid buf3 lEN)) /\
+     (is_init b_st 0 800)))))))]);
+    trace___dumpstate_imem_avx2x4 <-
+    (trace___dumpstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+    trace___dumpstate_imem_avx2x4 <-
+    (trace___dumpstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+    trace___dumpstate_imem_avx2x4 <-
+    (trace___dumpstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+    trace___dumpstate_imem_avx2x4 <-
+    (trace___dumpstate_imem_avx2x4 ++
+    [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+    i <- (W64.of_int 0);
+    while ((i \slt (W64.of_int (32 * (lEN %/ 32))))) {
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint ((W64.of_int 4) * i))) /\
+       (((W64.to_uint ((W64.of_int 4) * i)) + 32) <= 800)))]);
+      x0 <- (BArray800.get256d st (W64.to_uint ((W64.of_int 4) * i)));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 32)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 32))) + 32) <= 800)))]);
+      x1 <-
+      (BArray800.get256d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 32))));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 64)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 64))) + 32) <= 800)))]);
+      x2 <-
+      (BArray800.get256d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 64))));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 96)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 96))) + 32) <= 800)))]);
+      x3 <-
+      (BArray800.get256d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 96))));
+      i <- (i + (W64.of_int 32));
+      param_14 <- x0;
+      param_13 <- x1;
+      param_12 <- x2;
+      param_11 <- x3;
+      (result_10, result_9, result_8, result_7, tmp__trace) <@ __4u64x4_u256x4 (
+      param_14, param_13, param_12, param_11);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++ tmp__trace);
+      x0 <- result_10;
+      x1 <- result_9;
+      x2 <- result_8;
+      x3 <- result_7;
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf0 32))]);
+      Glob.mem <- (storeW256 Glob.mem buf0 x0);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (buf0 + 32)) /\ ((buf0 + 32) <= 18446744073709551615)))]);
+      buf0 <- (buf0 + 32);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf1 32))]);
+      Glob.mem <- (storeW256 Glob.mem buf1 x1);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (buf1 + 32)) /\ ((buf1 + 32) <= 18446744073709551615)))]);
+      buf1 <- (buf1 + 32);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf2 32))]);
+      Glob.mem <- (storeW256 Glob.mem buf2 x2);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (buf2 + 32)) /\ ((buf2 + 32) <= 18446744073709551615)))]);
+      buf2 <- (buf2 + 32);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf3 32))]);
+      Glob.mem <- (storeW256 Glob.mem buf3 x3);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (buf3 + 32)) /\ ((buf3 + 32) <= 18446744073709551615)))]);
+      buf3 <- (buf3 + 32);
+    }
+    while ((i \slt (W64.of_int (8 * (lEN %/ 8))))) {
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint ((W64.of_int 4) * i))) /\
+       (((W64.to_uint ((W64.of_int 4) * i)) + 8) <= 800)))]);
+      t0 <- (BArray800.get64d st (W64.to_uint ((W64.of_int 4) * i)));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 8)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 8))) + 8) <= 800)))]);
+      t1 <-
+      (BArray800.get64d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 8))));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 16)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 16))) + 8) <= 800)))]);
+      t2 <-
+      (BArray800.get64d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 16))));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 24)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 24))) + 8) <= 800)))]);
+      t3 <-
+      (BArray800.get64d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 24))));
+      i <- (i + (W64.of_int 8));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf0 8))]);
+      Glob.mem <- (storeW64 Glob.mem buf0 t0);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (buf0 + 8)) /\ ((buf0 + 8) <= 18446744073709551615)))]);
+      buf0 <- (buf0 + 8);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf1 8))]);
+      Glob.mem <- (storeW64 Glob.mem buf1 t1);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (buf1 + 8)) /\ ((buf1 + 8) <= 18446744073709551615)))]);
+      buf1 <- (buf1 + 8);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf2 8))]);
+      Glob.mem <- (storeW64 Glob.mem buf2 t2);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (buf2 + 8)) /\ ((buf2 + 8) <= 18446744073709551615)))]);
+      buf2 <- (buf2 + 8);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, (is_valid buf3 8))]);
+      Glob.mem <- (storeW64 Glob.mem buf3 t3);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= (buf3 + 8)) /\ ((buf3 + 8) <= 18446744073709551615)))]);
+      buf3 <- (buf3 + 8);
+    }
+    if ((0 < (lEN %% 8))) {
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint ((W64.of_int 4) * i))) /\
+       (((W64.to_uint ((W64.of_int 4) * i)) + 8) <= 800)))]);
+      t0 <- (BArray800.get64d st (W64.to_uint ((W64.of_int 4) * i)));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 8)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 8))) + 8) <= 800)))]);
+      t1 <-
+      (BArray800.get64d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 8))));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 16)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 16))) + 8) <= 800)))]);
+      t2 <-
+      (BArray800.get64d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 16))));
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       ((0 <= (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 24)))) /\
+       (((W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 24))) + 8) <= 800)))]);
+      t3 <-
+      (BArray800.get64d st
+      (W64.to_uint (((W64.of_int 4) * i) + (W64.of_int 24))));
+      param_10 <- buf0;
+      param_9 <- (lEN %% 8);
+      param_8 <- t0;
+      (result_6, result_5, tmp__trace) <@ __mwrite_subu64 (param_10,
+      param_9, param_8);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++ tmp__trace);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)) /\
+        (((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_10 +
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0))) /\
+        ((param_10 +
+         ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)) <=
+        18446744073709551615)) /\
+       ((result_6 =
+        (param_10 +
+        ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0))) /\
+       (result_5 =
+       (param_9 -
+       ((0 < ((param_9 < 8) ? param_9 : 8)) ? ((param_9 < 8) ? param_9 : 8) : 0)))))))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+      buf0 <- result_6;
+      param_7 <- buf1;
+      param_6 <- (lEN %% 8);
+      param_5 <- t1;
+      (result_4, result_3, tmp__trace) <@ __mwrite_subu64 (param_7,
+      param_6, param_5);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++ tmp__trace);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)) /\
+        (((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_7 +
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0))) /\
+        ((param_7 +
+         ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)) <=
+        18446744073709551615)) /\
+       ((result_4 =
+        (param_7 +
+        ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0))) /\
+       (result_3 =
+       (param_6 -
+       ((0 < ((param_6 < 8) ? param_6 : 8)) ? ((param_6 < 8) ? param_6 : 8) : 0)))))))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_4) /\ (result_4 <= 18446744073709551615)))]);
+      buf1 <- result_4;
+      param_4 <- buf2;
+      param_3 <- (lEN %% 8);
+      param_2 <- t2;
+      (result_2, result_1, tmp__trace) <@ __mwrite_subu64 (param_4,
+      param_3, param_2);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++ tmp__trace);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) /\
+        (((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_4 +
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+        ((param_4 +
+         ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)) <=
+        18446744073709551615)) /\
+       ((result_2 =
+        (param_4 +
+        ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0))) /\
+       (result_1 =
+       (param_3 -
+       ((0 < ((param_3 < 8) ? param_3 : 8)) ? ((param_3 < 8) ? param_3 : 8) : 0)))))))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+      buf2 <- result_2;
+      param_1 <- buf3;
+      param_0 <- (lEN %% 8);
+      param <- t3;
+      (result_0, result, tmp__trace) <@ __mwrite_subu64 (param_1,
+      param_0, param);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++ tmp__trace);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert,
+       (((0 <=
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) /\
+        (((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0) <=
+        18446744073709551615)) /\
+       (((0 <=
+         (param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+        ((param_1 +
+         ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)) <=
+        18446744073709551615)) /\
+       ((result_0 =
+        (param_1 +
+        ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0))) /\
+       (result =
+       (param_0 -
+       ((0 < ((param_0 < 8) ? param_0 : 8)) ? ((param_0 < 8) ? param_0 : 8) : 0)))))))]);
+      trace___dumpstate_imem_avx2x4 <-
+      (trace___dumpstate_imem_avx2x4 ++
+      [(Assert, ((0 <= result_0) /\ (result_0 <= 18446744073709551615)))]);
+      buf3 <- result_0;
+    } else {
+      
+    }
+    return (buf0, buf1, buf2, buf3, trace___dumpstate_imem_avx2x4);
+  }
+  proc __squeeze_imem_avx2x4 (buf0:int, buf1:int, buf2:int,
+                                       buf3:int, lEN:int, st:BArray800.t,
+                                       b_st:BArray800.t, rATE8:int) : 
+  int * int * int * int * BArray800.t * BArray800.t * trace = {
+    var iTERS:int;
+    var lO:int;
+    var i:int;
+    var param:BArray800.t;
+    var param_0:int;
+    var param_1:int;
+    var param_2:int;
+    var param_3:int;
+    var param_4:int;
+    var result:int;
+    var result_0:int;
+    var result_1:int;
+    var result_2:int;
+    var param_5:BArray800.t;
+    var result_3:BArray800.t;
+    var param_6:BArray800.t;
+    var param_7:int;
+    var param_8:int;
+    var param_9:int;
+    var param_10:int;
+    var param_11:int;
+    var result_4:int;
+    var result_5:int;
+    var result_6:int;
+    var result_7:int;
+    var param_12:BArray800.t;
+    var result_8:BArray800.t;
+    var b_result:BArray800.t;
+    var b_result_0:BArray800.t;
+    var trace___squeeze_imem_avx2x4:trace;
+    b_result <- witness;
+    b_result_0 <- witness;
+    param <- witness;
+    param_5 <- witness;
+    param_6 <- witness;
+    param_12 <- witness;
+    result_3 <- witness;
+    result_8 <- witness;
+    trace___squeeze_imem_avx2x4 <- [];
+    trace___squeeze_imem_avx2x4 <-
+    (trace___squeeze_imem_avx2x4 ++
+    [(Assert,
+     (((0 <= buf0) /\ (buf0 <= 18446744073709551615)) /\
+     (((0 <= buf1) /\ (buf1 <= 18446744073709551615)) /\
+     (((0 <= buf2) /\ (buf2 <= 18446744073709551615)) /\
+     (((0 <= buf3) /\ (buf3 <= 18446744073709551615)) /\
+     ((((((((0 <= lEN) /\ (0 < rATE8)) /\ (rATE8 < 200)) /\
+         (is_valid buf0 lEN)) /\
+        (is_valid buf1 lEN)) /\
+       (is_valid buf2 lEN)) /\
+      (is_valid buf3 lEN)) /\
+     (is_init b_st 0 800)))))))]);
+    trace___squeeze_imem_avx2x4 <-
+    (trace___squeeze_imem_avx2x4 ++
+    [(Assert, ((0 <= buf0) /\ (buf0 <= 18446744073709551615)))]);
+    trace___squeeze_imem_avx2x4 <-
+    (trace___squeeze_imem_avx2x4 ++
+    [(Assert, ((0 <= buf1) /\ (buf1 <= 18446744073709551615)))]);
+    trace___squeeze_imem_avx2x4 <-
+    (trace___squeeze_imem_avx2x4 ++
+    [(Assert, ((0 <= buf2) /\ (buf2 <= 18446744073709551615)))]);
+    trace___squeeze_imem_avx2x4 <-
+    (trace___squeeze_imem_avx2x4 ++
+    [(Assert, ((0 <= buf3) /\ (buf3 <= 18446744073709551615)))]);
+    iTERS <- (lEN %/ rATE8);
+    lO <- (lEN %% rATE8);
+    if ((0 < lEN)) {
+      if ((0 < iTERS)) {
+        i <- 0;
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+        while ((i < iTERS)) {
+          param_12 <- st;
+          (result_8, b_result_0, tmp__trace) <@ _keccakf1600_avx2x4 (
+          param_12, (BArray800.init_arr (W8.of_int 255) 800));
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++ tmp__trace);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, (is_init b_result_0 0 800))]);
+          st <- result_8;
+          param_11 <- buf0;
+          param_10 <- buf1;
+          param_9 <- buf2;
+          param_8 <- buf3;
+          param_7 <- rATE8;
+          param_6 <- st;
+          (result_7, result_6, result_5, result_4, tmp__trace) <@ __dumpstate_imem_avx2x4 (
+          param_11, param_10, param_9, param_8, param_7, param_6,
+          (BArray800.init_arr (W8.of_int 255) 800));
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++ tmp__trace);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert,
+           (((0 <= param_7) /\ (param_7 <= 18446744073709551615)) /\
+           (((0 <= (param_11 + param_7)) /\
+            ((param_11 + param_7) <= 18446744073709551615)) /\
+           (((0 <= param_7) /\ (param_7 <= 18446744073709551615)) /\
+           (((0 <= (param_10 + param_7)) /\
+            ((param_10 + param_7) <= 18446744073709551615)) /\
+           (((0 <= param_7) /\ (param_7 <= 18446744073709551615)) /\
+           (((0 <= (param_9 + param_7)) /\
+            ((param_9 + param_7) <= 18446744073709551615)) /\
+           (((0 <= param_7) /\ (param_7 <= 18446744073709551615)) /\
+           (((0 <= (param_8 + param_7)) /\
+            ((param_8 + param_7) <= 18446744073709551615)) /\
+           ((((result_7 = (param_11 + param_7)) /\
+             (result_6 = (param_10 + param_7))) /\
+            (result_5 = (param_9 + param_7))) /\
+           (result_4 = (param_8 + param_7))))))))))))]);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, ((0 <= result_7) /\ (result_7 <= 18446744073709551615)))]);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, ((0 <= result_6) /\ (result_6 <= 18446744073709551615)))]);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, ((0 <= result_5) /\ (result_5 <= 18446744073709551615)))]);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, ((0 <= result_4) /\ (result_4 <= 18446744073709551615)))]);
+          buf0 <- result_7;
+          buf1 <- result_6;
+          buf2 <- result_5;
+          buf3 <- result_4;
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, ((0 <= (i + 1)) /\ ((i + 1) <= 18446744073709551615)))]);
+          i <- (i + 1);
+          trace___squeeze_imem_avx2x4 <-
+          (trace___squeeze_imem_avx2x4 ++
+          [(Assert, ((0 <= iTERS) /\ (iTERS <= 18446744073709551615)))]);
+        }
+      } else {
+        
+      }
+      if ((0 < lO)) {
+        param_5 <- st;
+        (result_3, b_result, tmp__trace) <@ _keccakf1600_avx2x4 (
+        param_5, (BArray800.init_arr (W8.of_int 255) 800));
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++ tmp__trace);
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert, (is_init b_result 0 800))]);
+        st <- result_3;
+        param_4 <- buf0;
+        param_3 <- buf1;
+        param_2 <- buf2;
+        param_1 <- buf3;
+        param_0 <- lO;
+        param <- st;
+        (result_2, result_1, result_0, result, tmp__trace) <@ __dumpstate_imem_avx2x4 (
+        param_4, param_3, param_2, param_1, param_0, param,
+        (BArray800.init_arr (W8.of_int 255) 800));
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++ tmp__trace);
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert,
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_4 + param_0)) /\
+          ((param_4 + param_0) <= 18446744073709551615)) /\
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_3 + param_0)) /\
+          ((param_3 + param_0) <= 18446744073709551615)) /\
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_2 + param_0)) /\
+          ((param_2 + param_0) <= 18446744073709551615)) /\
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_1 + param_0)) /\
+          ((param_1 + param_0) <= 18446744073709551615)) /\
+         ((((result_2 = (param_4 + param_0)) /\
+           (result_1 = (param_3 + param_0))) /\
+          (result_0 = (param_2 + param_0))) /\
+         (result = (param_1 + param_0))))))))))))]);
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert, ((0 <= result_1) /\ (result_1 <= 18446744073709551615)))]);
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert, ((0 <= result_0) /\ (result_0 <= 18446744073709551615)))]);
+        trace___squeeze_imem_avx2x4 <-
+        (trace___squeeze_imem_avx2x4 ++
+        [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
+        buf0 <- result_2;
+        buf1 <- result_1;
+        buf2 <- result_0;
+        buf3 <- result;
+      } else {
+        
+      }
+    } else {
+      
+    }
+    b_st <- (BArray800.init_arr (W8.of_int 255) 800);
+    return (buf0, buf1, buf2, buf3, st, b_st,
+           trace___squeeze_imem_avx2x4);
   }
   proc __aread_subu64 (buf:BArrayS.t, b_buf:BArrayS.t,
                                 offset:int, dELTA:int, lEN:int, tRAIL:int) : 
@@ -4079,8 +8786,9 @@ module M = {
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
      ((((((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= size)) /\
-        (0 < rATE8)) /\
-       (rATE8 < 200)) /\ lEN <= 200) /\
+         (0 < rATE8)) /\
+        (rATE8 < 200)) /\
+       (lEN <= 200)) /\
       (is_init b_buf offset lEN)) /\
      (is_init b_st 0 224)))))]);
     trace___absorb_array_avx2 <-
@@ -5143,7 +9851,8 @@ module M = {
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
      (((((0 <= offset) /\ (0 <= lEN)) /\ ((offset + lEN) <= size)) /\
-     (is_init b_st 0 224)) /\ lEN <= 200))))]);
+      (is_init b_st 0 224)) /\
+     (lEN <= 200)))))]);
     trace___dumpstate_array_avx2 <-
     (trace___dumpstate_array_avx2 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -5584,24 +10293,10 @@ module M = {
           trace___squeeze_array_avx2 <-
           (trace___squeeze_array_avx2 ++
           [(Assert,
-           (((0 <=
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224))) /\
-            (((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224)) <=
-            18446744073709551615)) /\
-           (((0 <=
-             (param_6 +
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224)))) /\
-            ((param_6 +
-             ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                            param_5 : 224))) <=
-            18446744073709551615)) /\
-           (result_2 =
-           (param_6 +
-           ((((param_5 < 224) ? param_5 : 224) < 0) ? 0 : ((param_5 < 224) ? 
-                                                          param_5 : 224)))))))]);
+           (((0 <= param_5) /\ (param_5 <= 18446744073709551615)) /\
+           (((0 <= (param_6 + param_5)) /\
+            ((param_6 + param_5) <= 18446744073709551615)) /\
+           (result_2 = (param_6 + param_5)))))]);
           trace___squeeze_array_avx2 <-
           (trace___squeeze_array_avx2 ++
           [(Assert, ((0 <= result_2) /\ (result_2 <= 18446744073709551615)))]);
@@ -5642,24 +10337,10 @@ module M = {
         trace___squeeze_array_avx2 <-
         (trace___squeeze_array_avx2 ++
         [(Assert,
-         (((0 <=
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224))) /\
-          (((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224)) <=
-          18446744073709551615)) /\
-         (((0 <=
-           (param_1 +
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224)))) /\
-          ((param_1 +
-           ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                          param_0 : 224))) <=
-          18446744073709551615)) /\
-         (result =
-         (param_1 +
-         ((((param_0 < 224) ? param_0 : 224) < 0) ? 0 : ((param_0 < 224) ? 
-                                                        param_0 : 224)))))))]);
+         (((0 <= param_0) /\ (param_0 <= 18446744073709551615)) /\
+         (((0 <= (param_1 + param_0)) /\
+          ((param_1 + param_0) <= 18446744073709551615)) /\
+         (result = (param_1 + param_0)))))]);
         trace___squeeze_array_avx2 <-
         (trace___squeeze_array_avx2 ++
         [(Assert, ((0 <= result) /\ (result <= 18446744073709551615)))]);
@@ -7791,7 +12472,8 @@ module M = {
      (((0 <= lEN) /\ (lEN <= 18446744073709551615)) /\
      (((0 <= (offset + lEN)) /\ ((offset + lEN) <= 18446744073709551615)) /\
      (((((0 <= offset) /\ (0 <= lEN)) /\ (is_init b_st 0 800)) /\
-     ((offset + lEN) <= size)) /\ lEN < 200))))]);
+      ((offset + lEN) <= size)) /\
+     (lEN <= 200)))))]);
     trace___dumpstate_array_avx2x4 <-
     (trace___dumpstate_array_avx2x4 ++
     [(Assert, ((0 <= offset) /\ (offset <= 18446744073709551615)))]);
@@ -9675,7 +14357,7 @@ proof.
           have h1: (_offset + i{m} * rATE8{m} + rATE8{m} = _offset + (i{m} + 1) * rATE8{m}). smt().
           split. smt( BArray224.init_arrP).
           move=> *. rewrite h1. split. smt().
-          move => *. split. smt(all_cat). split. smt().
+          move => *. split. move => /> *. smt(all_cat).
           smt(and_iota).
         auto .
         rewrite /valid /is_init /= => &m /> *.  smt(and_iota all_cat).
@@ -10080,7 +14762,7 @@ lemma __dumpstate_array_avx2x4_trace _buf0 _b_buf0 _buf1 _b_buf1 _buf2 _b_buf2 _
        ((_buf1 = buf1) /\ ((_b_buf0 = b_buf0) /\ (_buf0 = buf0)))))))))))) /\
       (((0 <= _offset) /\ (_offset <= 18446744073709551615)) /\
       (((0 <= _lEN) /\ (_lEN <= 18446744073709551615)) /\
-      (((0 <= (_offset + _lEN)) /\ _lEN < 200 /\
+      (((0 <= (_offset + _lEN)) /\ _lEN <= 200 /\
        ((_offset + _lEN) <= 18446744073709551615)) /\
       ((((0 <= _offset) /\ (0 <= _lEN)) /\ (is_init _b_st 0 800)) /\
       ((_offset + _lEN) <= size)))))) ==>
@@ -10152,10 +14834,10 @@ proof.
                                         (is_init_cell _b k \/ _offset <=k /\ k < _offset + l).
   seq 21:( valid trace___dumpstate_array_avx2x4 /\ i = 32*(lEN %/ 32) /\0<=_offset /\
            0<=_lEN /\ _offset + _lEN <=size /\ fold_len _b_buf0 b_buf0 i /\
-           fold_len _b_buf1 b_buf1 i /\  fold_len _b_buf2 b_buf2 i /\ lEN< 200 /\
+           fold_len _b_buf1 b_buf1 i /\  fold_len _b_buf2 b_buf2 i /\ lEN<= 200 /\
            fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
   + while (valid trace___dumpstate_array_avx2x4 /\ 0<=i /\ i<= 32*(lEN %/ 32) /\0<=_offset /\
-           0<=_lEN /\ _offset + _lEN <=size /\ fold_len _b_buf0 b_buf0 i /\ lEN < 200 /\
+           0<=_lEN /\ _offset + _lEN <=size /\ fold_len _b_buf0 b_buf0 i /\ lEN <= 200 /\
            fold_len _b_buf1 b_buf1 i  /\  fold_len _b_buf2 b_buf2  i /\ i%%32 = 0 /\
            fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
     + auto. ecall (__4u64x4_u256x4_trace param_22 param_21 param_20 param_19).
@@ -10163,10 +14845,10 @@ proof.
     auto. smt(all_cat and_iota).
   seq 1:( valid trace___dumpstate_array_avx2x4 /\ i = 8*(lEN %/ 8) /\0<=_offset /\
            0<=_lEN /\ _offset + _lEN <=size /\ fold_len _b_buf0 b_buf0 i /\
-           fold_len _b_buf1 b_buf1 i /\  fold_len _b_buf2 b_buf2 i /\ lEN < 200 /\
+           fold_len _b_buf1 b_buf1 i /\  fold_len _b_buf2 b_buf2 i /\ lEN <= 200 /\
            fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
   + while (valid trace___dumpstate_array_avx2x4 /\ 0<=i /\ i<= 8*(lEN %/ 8) /\0<=_offset /\
-           0<=_lEN /\ _offset + _lEN <=size /\ fold_len _b_buf0 b_buf0 i /\ lEN < 200 /\
+           0<=_lEN /\ _offset + _lEN <=size /\ fold_len _b_buf0 b_buf0 i /\ lEN <= 200 /\
            fold_len _b_buf1 b_buf1 i  /\  fold_len _b_buf2 b_buf2  i /\ i%%8 = 0 /\
            fold_len _b_buf3 b_buf3 i /\ offset = _offset + i /\ lEN = _lEN).
     + auto. rewrite /is_init /valid /fold_len /= => &m /> *.  smt(all_cat).

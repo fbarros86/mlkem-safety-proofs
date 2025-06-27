@@ -1,39 +1,7 @@
 require "mlkem_keccak_avx2.jinc"
 
-
-require "params.jinc"
-require "gen_matrix_globals.jinc"
-
-// a < b && c < d
-inline fn comp_u64_l_int_and_u64_l_int(
-  reg u64 a,
-  inline int b,
-  reg u64 c,
-  inline int d) 
-  ->
-  reg bool
-ensures{result.0 == ((int) a < b) && ((int) c < d)}
-{
-  reg bool c1 c2 c3;
-  reg u8 bc1 bc2;
-
-  ?{ "<u" = c1 } = #CMP_64(a, b);
-  // if(c1) <=> if(a <u b)
-  bc1 = #SETcc(c1);
-
-  ?{ "<u" = c2 } = #CMP_64(c, d);
-  // if(c2) <=> if(a <u c)
-  bc2 = #SETcc(c2);
-
-  // zf == 1 => bc1 & bc2 == 0 => cond = false
-  // zf == 0 => bc1 & bc2 == 1 => cond = true
-  ?{ "!=" = c3 } = #TEST_8(bc1, bc2); 
-
-  return c3;
-}
-
-// BUF_size per entry: 21(rate) + 21(rate) + 25(keccak_state) + 1(pad) 
-param int BUF_size = 536; // 168*2+200      (was in u64s: 3*21 + 4 + 1; //544 bytes; 
+// BUF_size per entry: 21(rate) + 21(rate) + 25(keccak_state) + 1(pad)
+param int BUF_size = 536; // 168*2+200      (was in u64s: 3*21 + 4 + 1; //544 bytes;
 
 
 inline fn __gen_matrix_buf_rejection_filter48
@@ -52,8 +20,8 @@ inline fn __gen_matrix_buf_rejection_filter48
 requires {is_arr_init(buf,0,BUF_size) && is_arr_init(sst,0,2048) && 
           0<= (int) counter && (int) counter + 32 <= MLKEM_N &&
           0 <= (int) buf_offset && (int) buf_offset + 24 + 32 <= BUF_size}
-ensures { \all (k \in 0:MLKEM_N) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || ((int) counter * 2 <= k && k< 2* (int) result.1))) }
-ensures {(int) counter <=(int) result.1}
+ensures { \all (k \in 0:((2*MLKEM_N))) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || ((int) counter * 2 <= k && k< 2* (int) result.1))) }
+ensures {(int) counter <=(int) result.1 && (int) result.1 <= MLKEM_N}
 {
   reg u256 f0 f1 g0 g1;
   reg u256 shuffle_0 shuffle_1 shuffle_t;
@@ -71,9 +39,9 @@ ensures {(int) counter <=(int) result.1}
   f0 = #VPERMQ(buf.[u256 (int) buf_offset + 0 ], (4u2)[2,1,1,0]);
   f1 = #VPERMQ(buf.[u256 (int) buf_offset + 24], (4u2)[2,1,1,0]);
 
-  // next, the data is shuffled at byte level. For a given state (in u64s): 
+  // next, the data is shuffled at byte level. For a given state (in u64s):
   // - 0xa8a7a6a5a4a3a2a1, 0xb8b7b6b5b4b3b2b1, 0xc8c7c6c5c4c3c2c1, 0xd8d7d6d5d4d3d2d1
-  // f's get rearranged into: 
+  // f's get rearranged into:
   // - 0xa6a5a5a4a3a2a2a1, 0xb4b3b3b2b1a8a8a7, 0xd2d1d1c8c7c6c6c5, 0xd8d7d7d6d5d4d4d3
 
   f0 = #VPSHUFB_256(f0, load_shuffle);
@@ -90,7 +58,7 @@ ensures {(int) counter <=(int) result.1}
   g1 = #VPSRL_16u16(f1, 4);
 
   // next, blend.
-  // from: 
+  // from:
   // - 0xAA (1010 1010 in binary)
   //
   //   bottom  top    b    t       b    t    b    t
@@ -120,7 +88,7 @@ ensures {(int) counter <=(int) result.1}
   // some input:
   // - 0x0a6a_05a4_0a3a_02a1, 0x0b4b_03b2_0b1a_08a7, 0x0d2d_01c8_0c7c_06c5, 0x0d8d_07d6_0d5d_04d3
   //
-  // output (the 'good' results are highlighted with Fs; what about when equal to 3329?) 
+  // output (the 'good' results are highlighted with Fs; what about when equal to 3329?)
   // - 0xffff_ffff_ffff_ffff, 0xffff_ffff_ffff_ffff, 0x0000_ffff_ffff_ffff, 0x0000_ffff_0000_ffff
   //
   // intuitively, for i=0 to 15: if bounds[i] > input[i] then 0xffff else 0x0
@@ -133,6 +101,7 @@ ensures {(int) counter <=(int) result.1}
   g0 = #VPACKSS_16u16(g0, g1);
 
   // from Intel intrinsics: "Create mask from the most significant bit of each 8-bit element in a, and store the result in dst."
+  #declassify
   good = #VPMOVMSKB_u256u64(g0);
 
   good = #protect(good, ms);
@@ -143,14 +112,14 @@ ensures {(int) counter <=(int) result.1}
   t0_0 = good;
   t0_0 &= 0xFF; // g0[0..7]
 
-  shuffle_0 = (256u) #VMOV(sst[u64 (int)t0_0]);
+  shuffle_0 = (256u) #VMOV(sst[u64 t0_0]);
   ?{}, t0_0 = #POPCNT_64(t0_0);
-  t0_0 += counter;  
+  t0_0 += counter;
 
   t0_1 = good;
   t0_1 >>= 16;
   t0_1 &= 0xFF; // g0[8..15]
-  shuffle_0_1 = #VMOV(sst[u64 (int)t0_1]);
+  shuffle_0_1 = #VMOV(sst[u64 t0_1]);
   ?{}, t0_1 = #POPCNT_64(t0_1);
   t0_1 += t0_0;
 
@@ -158,14 +127,14 @@ ensures {(int) counter <=(int) result.1}
   t1_0 = good;
   t1_0 >>= 8;
   t1_0 &= 0xFF; // g1[0..7]
-  shuffle_1 = (256u) #VMOV(sst[u64 (int)t1_0]);
+  shuffle_1 = (256u) #VMOV(sst[u64 t1_0]);
   ?{}, t1_0 = #POPCNT_64(t1_0);
   t1_0 += t0_1;
 
   t1_1 = good;
   t1_1 >>= 24;
   t1_1 &= 0xFF; // g1[8..15]
-  shuffle_1_1 = #VMOV(sst[u64 (int)t1_1]);
+  shuffle_1_1 = #VMOV(sst[u64 t1_1]);
   ?{}, t1_1 = #POPCNT_64(t1_1);
   t1_1 += t1_0;
 
@@ -204,7 +173,7 @@ inline fn __write_u128_boundchk
 , reg u128 data
 , #msf reg u64 ms
 ) -> reg ptr u16[MLKEM_N], #msf reg u64
-ensures { \all (k \in 0:MLKEM_N) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || (2* (int)ctr <= k && k< 2*(int) ctr + max(0,min(16,MLKEM_N - (int) ctr))))) }
+ensures { \all (k \in 0:((2*MLKEM_N))) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || (2* (int)ctr <= k && k< 2*(int) ctr + max(0,min(16,2 * (MLKEM_N - (int) ctr)))))) }
 {
   reg u64 data_u64;
   reg bool condition_8 condition_4 condition_2 condition_1;
@@ -268,7 +237,7 @@ inline fn __gen_matrix_buf_rejection_filter24
 requires {is_arr_init(buf,0,BUF_size) && is_arr_init(sst,0,2048) &&
           0<= (int) counter &&  // (int) counter + 32 <= MLKEM_N &&
           0 <= (int) buf_offset && (int) buf_offset + 32 <= BUF_size}
-ensures { \all (k \in 0:MLKEM_N) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || (2 * (int) counter <= k && k< 2 * (int) result.1))) }
+ensures { \all (k \in 0:(2*MLKEM_N)) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || (2 * (int) counter <= k && k< 2 * (int) result.1))) }
 ensures {(int) counter <=result.1 && (int) result.1 <= MLKEM_N}
 {
   reg u256 f0 g0 g1;
@@ -284,6 +253,7 @@ ensures {(int) counter <=result.1 && (int) result.1 <= MLKEM_N}
   g0 = #VPCMPGT_16u16(bounds, f0);
   g1 = #set0_256();
   g0 = #VPACKSS_16u16(g0, g1);
+  #declassify
   good = #VPMOVMSKB_u256u64(g0);
 
   good = #protect(good, ms);
@@ -291,14 +261,14 @@ ensures {(int) counter <=result.1 && (int) result.1 <= MLKEM_N}
   // g0
   t0_0 = good;
   t0_0 &= 0xFF; // g0[0..7]
-  shuffle_0 = (256u) #VMOV(sst[u64 (int)t0_0]);
+  shuffle_0 = (256u) #VMOV(sst[u64 t0_0]);
   ?{}, t0_0 = #POPCNT_64(t0_0);
   t0_0 += counter;
 
   t0_1 = good;
   t0_1 >>= 16;
   t0_1 &= 0xFF; // g0[8..15]
-  shuffle_0_1 = #VMOV(sst[u64 (int)t0_1]);
+  shuffle_0_1 = #VMOV(sst[u64 t0_1]);
   ?{}, t0_1 = #POPCNT_64(t0_1);
   t0_1 += t0_0;
 
@@ -311,12 +281,12 @@ ensures {(int) counter <=result.1 && (int) result.1 <= MLKEM_N}
 
   t128 = (128u) f0;
   pol, ms = __write_u128_boundchk(pol, counter, t128, ms);
-  
+
   t128 = #VEXTRACTI128(f0, 1);
   pol, ms = __write_u128_boundchk(pol, t0_0, t128, ms);
 
   counter = t0_1;
-  
+
   return pol, counter, ms;
 }
 
@@ -328,7 +298,7 @@ fn _gen_matrix_buf_rejection
 , reg u64 buf_offset			// start looking at... (bytes)
 
 ) -> reg ptr u16[MLKEM_N], reg u64	// pol. and counter
-requires {is_arr_init(buf,0,BUF_size) && 0<= (int) counter && 
+requires {is_arr_init(buf,0,BUF_size) && 0<= (int) counter &&  (int) counter <= MLKEM_N &&
           0 <= (int) buf_offset && (int) buf_offset < BUF_size}
 ensures { \all (k \in 0:(2*MLKEM_N)) (is_arr_init(result.0,k,1) == (is_arr_init(pol,k,1) || (2* (int) counter <= k && k< 2* (int) result.1))) }
 ensures {(int)counter<=result.1 && (int) result.1 <= MLKEM_N}
@@ -337,6 +307,7 @@ ensures {(int)counter<=result.1 && (int) result.1 <= MLKEM_N}
   reg ptr u8[2048] sst;
   reg u256 load_shuffle mask bounds ones;
   #msf reg u64 ms;
+  stack u64 saved_buf_offset;
 
   ms = #init_msf();
 
@@ -346,46 +317,67 @@ ensures {(int)counter<=result.1 && (int) result.1 <= MLKEM_N}
   ones = sample_ones;
   sst = sample_shuffle_table;
 
+  saved_buf_offset = buf_offset;
   buf_offset = buf_offset;
 
-  while 
-    { condition_loop = comp_u64_l_int_and_u64_l_int(buf_offset, 3*168-48+1, counter, MLKEM_N-32+1);
+  while
+    { condition_loop = buf_offset <u 3 * 168 - 48 + 1;
     }
   ( condition_loop )
     {
     ms = #update_msf(condition_loop, ms);
-() = #spill(buf_offset);
-    pol, counter = __gen_matrix_buf_rejection_filter48(pol, counter, buf, buf_offset, load_shuffle, mask, bounds, sst, ones, ms);
-() = #unspill(buf_offset);
-    buf_offset += 48;
+    condition_loop = counter <u MLKEM_N - 32 + 1;
+    if condition_loop {
+      ms = #update_msf(condition_loop, ms);
+      pol, counter = __gen_matrix_buf_rejection_filter48(pol, counter, buf, buf_offset, load_shuffle, mask, bounds, sst, ones, ms);
+      saved_buf_offset += 48;
+      buf_offset = saved_buf_offset;
+      buf_offset = #protect(buf_offset, ms);
+    } else {
+      ms = #update_msf(!condition_loop, ms);
+      buf_offset = 3 * 168;
+    }
     }
   ms = #update_msf(!condition_loop, ms);
 
-  while { condition_loop = comp_u64_l_int_and_u64_l_int(buf_offset, 3*168-24+1, counter, MLKEM_N); }
+  buf_offset = saved_buf_offset;
+  buf_offset = #protect(buf_offset, ms);
+
+  while { condition_loop = buf_offset <u 3 * 168 - 24 + 1; }
         ( condition_loop )
   {
     ms = #update_msf(condition_loop, ms);
+    condition_loop = counter <u MLKEM_N;
+    if condition_loop {
+      ms = #update_msf(condition_loop, ms);
 () = #spill(buf_offset);
-    pol, counter, ms = __gen_matrix_buf_rejection_filter24(pol, counter, buf, buf_offset, load_shuffle, mask, bounds, sst, ones, ms);
+      pol, counter, ms = __gen_matrix_buf_rejection_filter24(pol, counter, buf, buf_offset, load_shuffle, mask, bounds, sst, ones, ms);
 () = #unspill(buf_offset);
-    buf_offset += 24;
+      buf_offset = #protect(buf_offset, ms);
+      buf_offset += 24;
+    } else {
+      ms = #update_msf(!condition_loop, ms);
+      buf_offset = 3 * 168;
+    }
   }
 
   return pol, counter;
 }
+
+param int IDX_TABLE_SIZE = 32 * (MLKEM_K-2);
 
 inline fn gen_matrix_get_indexes(
   reg u64 b,
   reg u64 _t)
   ->
   reg u64
-requires {0 <= (int) b + (int) _t * 16 && (int) b + (int) _t*16 <= 24}
+requires {0 <= b + (_t << (MLKEM_K + 1)) && b + ( _t << (MLKEM_K + 1)) <= 32 * (MLKEM_K-2) - 8}
 {
   reg u64 t;
-  reg ptr u8[32] idxs;
+  reg ptr u8[IDX_TABLE_SIZE] idxs;
   idxs = gen_matrix_indexes;
 
-  t = _t; t <<= 4; // t * 16
+  t = _t; t <<= (MLKEM_K + 1); // transposed table in the second half
   b += t;
 
   t = idxs.[u64 b];
@@ -410,8 +402,8 @@ ensures { is_arr_init(result.0,0,MLKEM_N * 2) && is_arr_init(result.1,0,BUF_size
     buf = _shake128_next_state(buf);
     pol, counter = _gen_matrix_buf_rejection(pol, counter, buf, buf_offset);
   }
-  
-  return pol, buf;      
+
+  return pol, buf;
 }
 
 fn _gen_matrix_sample_four_polynomials
@@ -421,8 +413,8 @@ fn _gen_matrix_sample_four_polynomials
 , reg u64 pos_entry
 , reg u64 transposed
 ) -> reg ptr u16[4*MLKEM_N], reg ptr u8[BUF_size * 4]
-requires {is_arr_init(rho,0,32) && 0 <= (int) pos_entry + (int)transposed*16 &&
-          (int) pos_entry + (int)transposed*16 <= 24}
+requires {is_arr_init(rho,0,32) && 0 <= pos_entry + (transposed << (MLKEM_K + 1)) &&
+          pos_entry + (transposed << (MLKEM_K + 1)) <= 32 * (MLKEM_K-2) - 8}
 ensures { is_arr_init(result.0,0,2048)}
 {
   reg ptr u16[MLKEM_N] pol;
@@ -473,54 +465,5 @@ ensures { is_arr_init(result.0,0,0) && is_arr_init(result.1,0,BUF_size)}
 
   pol, buf = __gen_matrix_fill_polynomial(pol, buf);
 
-  return pol, buf;      
+  return pol, buf;
 }
-
-
-export fn _gen_matrix_avx2
-( reg mut ptr u16[MLKEM_K * MLKEM_K * MLKEM_N] matrix
-, reg const ptr u8[32] rho
-, #spill_to_mmx reg u64 transposed
-) -> reg ptr u16[MLKEM_K * MLKEM_K * MLKEM_N]
-requires {is_arr_init(rho,0,32) && 0<= transposed && transposed <= 1} 
-ensures { is_arr_init(result.0,0,MLKEM_K * MLKEM_K * MLKEM_N * 2)}
-{
-  // local variables
-  inline int i j;
-  stack u8[BUF_size * 4] buf_s;
-  reg ptr u8[BUF_size * 4] buf;
-  reg ptr u16[4*MLKEM_N] polx4;
-  reg ptr u16[MLKEM_N] pol;
-  reg u64 pos_entry;
-  reg u16 rc;
-
-  () = #spill(transposed);
-
-  buf = buf_s;
-
-  for i = 0 to 2
-  {
-    pos_entry = 8*i;
-    polx4 = matrix[4*i*MLKEM_N:4*MLKEM_N];
-    () = #unspill(transposed);
-    polx4, buf = _gen_matrix_sample_four_polynomials(polx4, buf, rho, pos_entry, transposed);
-    matrix[i*4*MLKEM_N:4*MLKEM_N] = polx4;
-  }
-
-  
-  // sample the last one, (2,2), using single-lane code
-  pol = matrix[8*MLKEM_N:MLKEM_N];
-  rc = 0x0202;
-  pol, buf[BUF_size * 0 : BUF_size] = __gen_matrix_sample_one_polynomial(pol, buf[BUF_size * 0 : BUF_size], rho, rc);
-
-  matrix[8*MLKEM_N:MLKEM_N] = pol;
-
-  for i = 0 to MLKEM_K
-  { for j = 0 to MLKEM_K
-    { matrix[i*MLKEM_VECN+j*MLKEM_N:MLKEM_N] = _nttunpack(matrix[i*MLKEM_VECN+j*MLKEM_N:MLKEM_N]);
-    }
-  }
-
-  return matrix;
-}
-
