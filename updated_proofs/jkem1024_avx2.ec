@@ -28574,8 +28574,10 @@ while ((valid trace_keccakf1600_4x_theta_rol) /\ is_init b_c 0 160 /\ is_init b_
 auto .
 ecall (keccakf1600_4x_rol_trace param_3 b_param param_2 param_1 param_0 param).
 auto .
-rewrite /is_init /valid /= => &m /> *.
-smt (all_cat and_iota).
+rewrite /is_init /valid /= => &m /> ???????? H *.
+rewrite !all_cat /=; do split;1..10,12..13,15..:smt (all_cat and_iota);
+ have := H; rewrite and_iota /= => HH;move => i *;have := HH i _; smt(). 
+
 auto .
 rewrite /is_init /valid /= .
 smt (all_cat and_iota).
@@ -28598,14 +28600,18 @@ proof.
       smt (all_cat).
     if .
     + auto . ecall (keccakf1600_4x_rol_trace param_3 b_param param_2 param_1 param_0 param).
-      auto . rewrite /is_init /valid /= => &m /> *.
-      smt (all_cat and_iota).
-    auto .
-    rewrite /is_init /valid /=.
-    smt (all_cat).
+      auto . 
+   rewrite /is_init /valid /= => &m /> ?????;do split;1:smt().
+   move => ?? H *;do split;2..:smt(all_cat and_iota);
+     have := H; rewrite and_iota /= => HH;move => i *;have := HH i _; smt(). 
   auto .
   rewrite /is_init /valid /=.
   smt (all_cat).
+
+  auto .
+  rewrite /is_init /valid /=.
+  smt (all_cat).
+
 qed .
 
 lemma keccakf1600_4x_set_row_trace _e _b_e _b _b_b _y _rc :
@@ -28642,8 +28648,10 @@ proof.
   while(is_init b_e 0 (y*160) /\ 0<=y /\ y<=5 /\ valid  trace__keccakf1600_4x_round).
   + auto . ecall (keccakf1600_4x_set_row_trace param_2 b_param param_1 (BArray160.init_arr (W8.of_int 255) 160) param_0 param). auto.
     ecall (keccakf1600_4x_rol_sum_trace param_7 (BArray800.init_arr (W8.of_int 255) 800) param_6 (BArray160.init_arr (W8.of_int 255) 160) param_5 param_4 param_3). auto .
-    rewrite /is_init /valid /= => &m /> *.
+    rewrite /is_init /valid /= => &m /> *; do split;1..2:
     smt (all_cat and_iota BArray800.init_arrP BArray160.init_arrP).
+    move => 6?H*;do split;2..:smt (all_cat and_iota);
+     have := H; rewrite and_iota /= => HH;move => i *;have := HH i _; smt(). 
   auto .
   ecall (keccakf1600_4x_theta_rol_trace param_10 (BArray160.init_arr (W8.of_int 255) 160) param_9 param_8).
   auto .
@@ -29454,8 +29462,11 @@ ecall (a33____absorb_array_avx2_trace param_9 (BArray224.init_arr
 auto .
 ecall (__state_init_avx2_trace).
 auto .
-rewrite /is_init /valid => &m /> * .
+rewrite /is_init /valid => &m /> *; do split;1..2:
 smt (all_cat BArray224.init_arrP BArray33.init_arrP and_iota).
+move => ?????????H??;do split; 2..:
+smt (all_cat BArray224.init_arrP BArray33.init_arrP and_iota);
+     have := H; rewrite and_iota /= => HH;move => i *;have := HH i _; smt(). 
 qed .
 
 lemma _sha3_512A_A64_trace _out _b_out _in _b_in :
@@ -29475,8 +29486,11 @@ ecall (a64____absorb_array_avx2_trace param_9 (BArray224.init_arr
 auto .
 ecall (__state_init_avx2_trace).
 auto .
-rewrite /is_init /valid => &m /> * .
+rewrite /is_init /valid => &m /> *; do split;1..2:
 smt (all_cat BArray224.init_arrP BArray64.init_arrP and_iota).
+move => ?????????H??;do split; 2..:
+smt (all_cat BArray224.init_arrP BArray64.init_arrP and_iota);
+     have := H; rewrite and_iota /= => HH;move => i *;have := HH i _; smt(). 
 qed .
 
 lemma _shake256_A128__A32_A1_trace _out _b_out _seed _b_seed _nonce _b_nonce :
@@ -29508,8 +29522,13 @@ ecall (a32____pabsorb_array_avx2_trace param_19 (BArray200.init_arr
 auto .
 ecall (__pstate_init_avx2_trace param_20 b_param_0).
 auto .
-rewrite /is_init /valid /= => &m /> *.
+rewrite /is_init /valid => &m /> *; do split;1..3:
 smt (all_cat and_iota BArray32.init_arrP BArray200.init_arrP BArray224.init_arrP).
+move => *; do split;1:
+smt (all_cat BArray224.init_arrP BArray64.init_arrP BArray1.init_arrP and_iota).
+move => ?????????H??;do split; 2..:
+smt (all_cat BArray224.init_arrP BArray64.init_arrP and_iota);
+     have := H; rewrite and_iota /= => HH;move => i *;have := HH i _; smt(). 
 qed .
 
 lemma _shake256x4_A128__A32_A1_trace _out0 _b_out0 _out1 _b_out1 _out2 _b_out2 _out3 _b_out3 _seed _b_seed _nonces _b_nonces :
@@ -29550,8 +29569,18 @@ ecall (a32____absorb_bcast_array_avx2x4_trace param_23 (BArray800.init_arr
 auto .
 ecall (__state_init_avx2x4_trace param_24 b_param_7).
 auto .
-rewrite /is_init /valid /= => &m /> *.
+rewrite /is_init /valid !and_iota => &m /> *; do split;1..2:
 smt (all_cat  BArray800.init_arrP BArray32.init_arrP and_iota SBArray4_1.is_init_cell_get).
+move => *;do split => ???;1..4:
+smt (all_cat  BArray800.init_arrP BArray32.init_arrP and_iota SBArray4_1.is_init_cell_get).
+move => ???????????;rewrite !and_iota => H0 H1 H2 H3 *;
+do split;5:
+smt (all_cat BArray224.init_arrP BArray64.init_arrP and_iota); move => i *.
+have := H3 i _; smt(). 
+have := H2 i _; smt(). 
+have := H1 i _; smt(). 
+have := H0 i _; smt(). 
+
 qed .
 
 lemma _shake128x4_absorb_A32_A2_trace _st _b_st _seed _b_seed _pos _b_pos :
@@ -29595,7 +29624,14 @@ ecall (_keccakf1600_avx2_trace param_3 (BArray224.init_arr (W8.of_int 255)
 auto .
 ecall (__state_from_pstate_avx2_trace param_4 b_param).
 auto .
-rewrite /is_init /valid /= .
+rewrite /is_init /valid !and_iota => &m /> *; do split;1:
+smt (all_cat and_iota BArray224.init_arrP SBArray536_200.is_init_cell_get BArray536.init_arrP).
+move => *;do split => ???;1:
+smt (all_cat and_iota BArray224.init_arrP SBArray536_200.is_init_cell_get BArray536.init_arrP).
+move => ????;rewrite !and_iota => ? H  *;
+do split;2:
+smt (all_cat BArray224.init_arrP BArray64.init_arrP and_iota); move => i *.
+have /= := H i _;1: smt(). 
  smt (all_cat and_iota BArray224.init_arrP SBArray536_200.is_init_cell_get BArray536.init_arrP).
 qed .
 
@@ -29625,9 +29661,17 @@ ecall (aBUFLEN____dumpstate_array_avx2x4_trace param_21 b_param_10 param_20
 auto .
 ecall (_keccakf1600_avx2x4_trace param_22 (BArray800.init_arr (W8.of_int 255)
                                           800)).
-auto. rewrite /is_init /valid /= => &m /> *. split.  smt( BArray800.init_arrP). move => *.
-split.  smt(). move => *. split. smt(). move => *. split. 
+auto. rewrite /is_init /valid /= => &m /> *. split.  smt( BArray800.init_arrP). 
+move => ?????????; rewrite !and_iota =>H0 H1 H2 H3????;split;1:smt().
+move => ????????; rewrite !and_iota =>H00 H01 H02 H03????;split;1:smt().
+move => ????????; rewrite !and_iota =>H10 H11 H12 H13?;do split. 
+move => i *.
+rewrite !SBArray2144_536.is_init_cell_set => *;do split.
+have /= := H0 (i-1608) _;1: smt().
+have /= := H00 (i-1608) _;1: smt().
+have /= := H10 (i-1608) _; smt().
 smt(all_cat SBArray2144_536.is_init_cell_set SBArray2144_536.is_init_cell_get and_iota).
+
 smt(all_cat).
 qed .
 
@@ -29648,7 +29692,12 @@ ecall (a1568____absorb_array_avx2_trace param_9 (BArray224.init_arr
 auto .
 ecall (__state_init_avx2_trace).
 auto .
-rewrite /is_init /valid /= => &m /> *.
+rewrite /is_init /valid /= => &m /> *;do split;1..2:
+smt (all_cat and_iota BArray224.init_arrP BArray1568.init_arrP).
+move => ?????????; rewrite and_iota => H??; do split; last 
+smt (all_cat and_iota BArray224.init_arrP BArray1568.init_arrP).
+move => i *;
+have /= := H i _;
 smt (all_cat and_iota BArray224.init_arrP BArray1568.init_arrP).
 qed .
 
@@ -29669,7 +29718,12 @@ ecall (a1600____absorb_array_avx2_trace param_9 (BArray224.init_arr
 auto .
 ecall (__state_init_avx2_trace).
 auto .
-rewrite /is_init /valid /= => &m /> *.
+rewrite /is_init /valid /= => &m /> *;do split;1..2:
+smt (all_cat and_iota BArray224.init_arrP BArray1600.init_arrP).
+move => ?????????; rewrite and_iota => H??; do split; last 
+smt (all_cat and_iota BArray224.init_arrP BArray1600.init_arrP).
+move => i *;
+have /= := H i _;
 smt (all_cat and_iota BArray224.init_arrP BArray1600.init_arrP).
 qed .
 
@@ -30063,11 +30117,11 @@ auto .
 ecall (__invntt___butterfly64x_trace param_161 param_160 param_159 param_158 
        param_157 param_156 param_155 param_154 param_153 param_152 param_151 
        param_150 param_149).
-auto .
-rewrite /is_init /valid /=.
+auto.
+rewrite /is_init /valid /= => * /=; do split => *; rewrite !all_cat;
 smt (all_cat  BArray512.init_arrP).
 auto .
-rewrite /is_init /valid /= .
+rewrite /is_init /valid /= => * /=; do split => *;
 smt (all_cat  BArray512.init_arrP).
 qed .
 
@@ -30168,7 +30222,7 @@ ecall (__butterfly64x_trace param_132 param_131 param_130 param_129 param_128
        param_127 param_126 param_125 param_124 param_123 param_122 param_121 
        param_120).
 auto .
-rewrite /is_init /valid /=.
+rewrite /is_init /valid /= => *; do split => *; rewrite !all_cat;
 smt (all_cat BArray512.init_arrP).
 auto .
 ecall (__butterfly64x_trace param_145 param_144 param_143 param_142 param_141 
@@ -30179,7 +30233,7 @@ ecall (__butterfly64x_trace param_158 param_157 param_156 param_155 param_154
        param_153 param_152 param_151 param_150 param_149 param_148 param_147 
        param_146).
 auto .
-rewrite /is_init /valid /= .
+rewrite /is_init /valid /= => *; do split;
 smt (all_cat BArray512.init_arrP).
 qed .
 
@@ -30528,7 +30582,37 @@ lemma __gen_matrix_buf_rejection_filter48_trace _pol _b_pol _counter _buf _b_buf
        (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512)))) /\
       (valid res.`4))].
 proof.
-admitted.
+proc. 
+auto => /> *.
+have H : forall w,0<= count idfun (W64.w2bits (W64.of_int (W64.to_uint w %% 256))) <= 8.
++ move => w; rewrite count_ge0 /=.
+  rewrite w2bitsE (: 64 = 8 + 56) 1://  mkseq_add // count_cat /=.
+  have  ->/= : count idfun (mkseq (fun (i : int) => (W64.of_int (to_uint w %% 256)).[8 + i]) 56) = 0 ; last  by smt(size_mkseq count_ge0 count_size).
+  rewrite /mkseq count_map /preim /idfun /=;apply count_pred0_eq_in => x; rewrite mem_iota  /= => *.
+  rewrite get_to_uint /= (: (0 <= 8 + x < 64)) 1:/# /=.
+  rewrite of_uintK /= (modz_small _ 18446744073709551616); 1:smt().
+  have /= ? : 2^8 <=  2 ^ (8 + x) <= 2^64; last by smt().
+  split; 1: by  apply StdOrder.IntOrder.ler_weexpn2l; smt(). 
+  move => ?. 
+  by have  := StdOrder.IntOrder.ler_weexpn2l 2 _ (8+x) 64 _;  smt(). 
+
+pose w := ((protect_64 _)).
+have H255 : 255 = 2^8 - 1 by auto.
+rewrite H255 !and_mod //=.
+rewrite / POPCNT_64 /rflags_of_popcnt /flags_w /=. 
+rewrite !to_uintM_small => /=;1..4:smt(W64.of_uintK pow2_64 modz_small).
+rewrite !W64.to_uintD_small /=;1..15:
+ smt(W64.of_uintK pow2_64 modz_small).
+do split; 1,2,4..20:smt(W64.of_uintK pow2_64 modz_small);
+  last by  smt(W64.of_uintK pow2_64 modz_small).
+  
+rewrite and_iota => k kb /=.
+pose c1 := (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 8) %% 256))))).
+pose c2 := (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 16) %% 256))))).
+pose c3 := (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 24) %% 256))))).
+pose c4 := (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms) %% 256))))).
+admit.
+qed.
 
 
 lemma __write_u128_boundchk_trace _pol _b_pol _ctr _data _ms :

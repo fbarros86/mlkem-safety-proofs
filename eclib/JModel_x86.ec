@@ -838,13 +838,14 @@ op VPMOVMSKB_u256u64 (v: W256.t) =
 (*
 | MOVEMASK of velem & wsize
 *)
+
 op MOVEMASK_16u8 (v: W128.t) =
    let vb = W16u8.to_list v in
    W64.bits2w (map W8.msb vb).
 
 op MOVEMASK_32u8 (v: W256.t) =
    let vb = W32u8.to_list v in
-   W64.bits2w (map W8.msb vb).
+   W32.bits2w (map W8.msb vb).
 
 op MOVEMASK_4u32 (v: W128.t) =
    let vb = W4u32.to_list v in
