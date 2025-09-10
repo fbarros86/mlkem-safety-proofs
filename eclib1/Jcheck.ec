@@ -1,4 +1,3 @@
-
 require import AllCore IntDiv CoreMap List Distr.
 
 type 'k trace_ = ('k * bool) list.

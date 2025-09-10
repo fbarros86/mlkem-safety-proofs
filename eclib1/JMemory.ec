@@ -12,30 +12,17 @@ export W8List.
 (* -------------------------------------------------------------------- *)
 type address = int.
 
-type global_mem_v_t.
 type global_mem_t.
 
 op "_.[_]" : global_mem_t -> address -> W8.t.
 op "_.[_<-_]" : global_mem_t -> address -> W8.t -> global_mem_t.
 
-op valid1 : global_mem_v_t -> address -> bool.
+op is_valid : address -> int -> bool.
 
-op is_valid (mod :int) (mem_v:global_mem_v_t) (p:address) (l:int) = 
-  (forall i, p <= i < p + l => valid1 mem_v i) /\ (0 <= p /\  p + l <  mod).
+axiom is_validP (a: address) (l : int):
+  is_valid a l <=> (forall a' l' , a <= a' =>  a' + l' <= a + l => is_valid a' l').
 
-lemma is_validP (mod :int) (mem_v:global_mem_v_t) (a: address) (l : int):
-  is_valid mod mem_v a l <=> (forall a' l' , a <= a' =>  a' + l' <= a + l => is_valid mod mem_v a' l').
-proof. 
-  smt().
-qed.
-
-
-lemma is_valid_bound (mod :int) (mem_v:global_mem_v_t) : 
-  forall i l, is_valid mod mem_v i l => i + l <= mod. 
-proof. 
-  smt().
-qed.
-
+axiom is_valid_bound : forall i l, is_valid i l => i + l <= W64.modulus. (*FIXME: ptr size*)
 
 axiom mem_eq_ext (m1 m2:global_mem_t) : (forall j, m1.[j] = m2.[j]) => m1 = m2.
 
@@ -74,7 +61,7 @@ proof. by rewrite storesE. qed.
 
 lemma stores_cons m a w ws : stores m a (w::ws) = stores (m.[a <- w]) (a + 1) ws.
 proof.
-  rewrite !storesE iotaredE /= addrC iotaS 1:List.size_ge0.
+  rewrite !storesE iotaredE /= addrC iotaS 1:List.size_ge0. 
   rewrite (addzC 0 1) iota_addl /=.
   rewrite -(revK (iota_ 0 (size ws))) map_rev !foldl_rev foldr_map /=.
   rewrite -!foldl_rev !revK; apply foldl_in_eq => m0 i /mem_iota /= h.
@@ -115,10 +102,6 @@ op loadW256 (m : global_mem_t) (a : address) =
 lemma loadW32_bits8 m p i : 0 <= i < 4 =>
   loadW32 m p \bits8 i = loadW8 m (p + i).
 proof. by move=> hi;rewrite /loadW32 pack4bE // initiE. qed.
-
-lemma loadW64_bits8 m p i : 0 <= i < 8 =>
-  loadW64 m p \bits8 i = loadW8 m (p + i).
-proof. by move=> hi;rewrite /loadW64 pack8bE // initiE. qed.
 
 lemma loadW128_bits8 m p i : 0 <= i < 16 =>
   loadW128 m p \bits8 i = loadW8 m (p + i).
@@ -162,7 +145,7 @@ proof.
          W4u8.Pack.init (fun i => loadW8 mem (p + i)).
   + by apply W4u8.Pack.all_eqP; rewrite /all_eq.
   apply (can_inj _ _ W4u8.unpack8K); apply W4u8.Pack.packP => i hi.
-  rewrite /loadW32 pack4K //=.
+  rewrite /loadW32 pack4K //=. 
 qed.
 
 lemma load4u32 mem p :
@@ -274,24 +257,9 @@ lemma get_storeW32E m p (w:W32.t) j :
   (storeW32 m p w).[j] = if p <= j < p + 4 then w \bits8 (j - p) else m.[j].
 proof. rewrite storeW32E /= get_storesE /= /#. qed.
 
-lemma store_load64_eq m p w : loadW64 (storeW64 m p w) p = w.
-proof.
-  apply W8u8.wordP => i hi.
-  rewrite loadW64_bits8 // /loadW8 /storeW64 get_storesE size_map /= /#.
-qed.
-
-lemma store_load64_neq m p p' w :
-  p + 8 <= p' || p' + 8 <= p =>
-  loadW64 (storeW64 m p w) p' = loadW64 m p'.
-proof.
-  move=> h; apply W8u8.wordP => i hi.
-  rewrite !loadW64_bits8 // /loadW8 /storeW64 get_storesE size_map /= /#.
-qed.
-
 (* ------------------------------------------------------------------- *)
 (* Global Memory                                                       *)
 
 module Glob = {
   var mem : global_mem_t
-  var mem_v : global_mem_v_t
 }.

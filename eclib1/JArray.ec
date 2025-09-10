@@ -48,6 +48,9 @@ abstract theory MonoArray.
     init (fun j => if j = i then e else t.[j])
   axiomatized by setE.
 
+
+
+
   lemma get_set_if (t:t) (i j :int) (a:elem) :
     t.[i <- a].[j] = if 0 <= i < size /\ j = i then a else t.[j].
   proof.
@@ -304,6 +307,7 @@ abstract theory PolyArray.
   op "_.[_]" : 'a t -> int -> 'a.
 
   op init : (int -> 'a) -> 'a t.
+
 
   axiom get_out (t:'a t) i : !(0 <= i < size) => t.[i] = witness.
 
