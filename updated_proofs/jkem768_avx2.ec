@@ -24802,8 +24802,8 @@ module M(SC:Syscall_t) = {
         trace__gen_matrix_buf_rejection <-
         (trace__gen_matrix_buf_rejection ++
         [(Assert,
-         (((W64.of_int (W64.to_uint param_7)) \ule result_0) /\
-         ((W64.to_uint result_0) <= 256)))]);
+         (((W64.of_int (W64.to_uint param_7)) \ule result_0)
+         ))]);
         b_pol <- b_result;
         pol <- result_1;
         counter <- result_0;
@@ -24896,8 +24896,8 @@ module M(SC:Syscall_t) = {
     trace___gen_matrix_fill_polynomial <-
     (trace___gen_matrix_fill_polynomial ++
     [(Assert,
-     (((W64.of_int (W64.to_uint param_6)) \ule result_2) /\
-     ((W64.to_uint result_2) <= 256)))]);
+     (((W64.of_int (W64.to_uint param_6)) \ule result_2)
+     ))]);
     b_pol <- b_result_1;
     pol <- result_3;
     counter <- result_2;
@@ -24925,8 +24925,8 @@ module M(SC:Syscall_t) = {
       trace___gen_matrix_fill_polynomial <-
       (trace___gen_matrix_fill_polynomial ++
       [(Assert,
-       (((W64.of_int (W64.to_uint param_1)) \ule result) /\
-       ((W64.to_uint result) <= 256)))]);
+       (((W64.of_int (W64.to_uint param_1)) \ule result)
+       ))]);
       b_pol <- b_result;
       pol <- result_0;
       counter <- result;
@@ -29722,13 +29722,42 @@ lemma __gen_matrix_buf_rejection_filter48_trace _pol _b_pol _counter _buf _b_buf
        (foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
-       ((is_init res.`2 k 1) =
        ((is_init _b_pol k 1) \/
        ((((W64.to_uint _counter) * 2) <= k) /\
-       (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512)))) /\
+       (k < (2 * (W64.to_uint res.`3))))) => (is_init res.`2 k 1) ) (iota_ 0 512)))) /\
       (valid res.`4))].
 proof.
-admitted.
+proc.
+auto => /> *.
+have H : forall w,0<= count idfun (W64.w2bits (W64.of_int (W64.to_uint w %% 256))) <= 8.
++ move => w; rewrite count_ge0 /=.
+  rewrite w2bitsE (: 64 = 8 + 56) 1://  mkseq_add // count_cat /=.
+  have  ->/= : count idfun (mkseq (fun (i : int) => (W64.of_int (to_uint w %% 256)).[8 + i]) 56) = 0 ; last  by smt(size_mkseq count_ge0 count_size).
+  rewrite /mkseq count_map /preim /idfun /=;apply count_pred0_eq_in => x; rewrite mem_iota  /= => *.
+  rewrite get_to_uint /= (: (0 <= 8 + x < 64)) 1:/# /=.
+  rewrite of_uintK /= (modz_small _ 18446744073709551616); 1:smt().
+  have /= ? : 2^8 <=  2 ^ (8 + x) <= 2^64; last by smt().
+  split; 1: by  apply StdOrder.IntOrder.ler_weexpn2l; smt(). 
+  move => ?. 
+  by have  := StdOrder.IntOrder.ler_weexpn2l 2 _ (8+x) 64 _;  smt(). 
+
+pose w := ((protect_64 _)).
+have H255 : 255 = 2^8 - 1 by auto.
+rewrite H255 !and_mod //=.
+rewrite / POPCNT_64 /rflags_of_popcnt /flags_w /=. 
+rewrite !to_uintM_small => /=;1..4:smt(W64.of_uintK pow2_64 modz_small).
+rewrite !W64.to_uintD_small /=;1..15:
+ smt(W64.of_uintK pow2_64 modz_small).
+do split; 1,2,4..20:smt(W64.of_uintK pow2_64 modz_small);
+  last by  smt(W64.of_uintK pow2_64 modz_small).
+rewrite and_iota => k kb /=. 
+pose c1 := to_uint (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 8) %% 256))))).
+pose c2 := to_uint (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 16) %% 256))))).
+pose c3 := to_uint (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 24) %% 256))))).
+  pose c4 := to_uint(W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms) %% 256))))).
+  have h : forall w, 0 <=to_uint(W64.of_int (count idfun (w2bits (W64.of_int (W64.to_uint (w) %% 256))))) <=8. move => ?. rewrite !to_uintK_small; smt().
+  smt().
+qed.
 
 lemma __write_u128_boundchk_trace _pol _b_pol _ctr _data _ms :
       hoare [M(Syscall).__write_u128_boundchk :
@@ -29778,21 +29807,74 @@ lemma __gen_matrix_buf_rejection_filter24_trace _pol _b_pol _counter _buf _b_buf
        ((_buf = buf) /\
        ((_counter = counter) /\ ((_b_pol = b_pol) /\ (_pol = pol))))))))))))) /\
       (((((is_init _b_buf 0 536) /\ (is_init _b_sst 0 2048)) /\
-        (0 <= (W64.to_uint _counter))) /\
+        (0 <= (W64.to_uint _counter))) /\ (((W64.to_uint _counter)) < 256) /\
        (0 <= (W64.to_uint _buf_offset))) /\
-      (((W64.to_uint _buf_offset) + 32) <= 536))) ==>
-      (((((W64.of_int (W64.to_uint _counter)) \ule res.`3) /\
-        ((W64.to_uint res.`3) <= 256)) /\
+      (((W64.to_uint _buf_offset) + 32) < 536))) ==>
+      ((((W64.of_int (W64.to_uint _counter)) \ule res.`3) /\
        (foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
-       ((is_init res.`2 k 1) =
+       (
        ((is_init _b_pol k 1) \/
        (((2 * (W64.to_uint _counter)) <= k) /\
-       (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512)))) /\
+       (k < (2 * (W64.to_uint res.`3))))) => (is_init res.`2 k 1))) (iota_ 0 512)))) /\
       (valid res.`5))].
 proof.
-admitted.
+  proc. auto. ecall (__write_u128_boundchk_trace param_2 b_param param_1 param_0 param). auto.
+  ecall (__write_u128_boundchk_trace param_6 b_param_0 param_5 param_4 param_3). auto. rewrite /valid  => /> . 
+  have H : forall w,0<= count idfun (W64.w2bits (W64.of_int (W64.to_uint w %% 256))) <= 8.
++ move => w; rewrite count_ge0 /=. 
+  rewrite w2bitsE (: 64 = 8 + 56) 1://  mkseq_add // count_cat /=.
+  have  ->/= : count idfun (mkseq (fun (i : int) => (W64.of_int (to_uint w %% 256)).[8 + i]) 56) = 0 ; last  by smt(size_mkseq count_ge0 count_size).
+  rewrite /mkseq count_map /preim /idfun /=;apply count_pred0_eq_in => x; rewrite mem_iota  /= => *.
+  rewrite get_to_uint /= (: (0 <= 8 + x < 64)) 1:/# /=.
+  rewrite of_uintK /= (modz_small _ 18446744073709551616); 1:smt().
+  have /= ? : 2^8 <=  2 ^ (8 + x) <= 2^64; last by smt().
+  split; 1: by  apply StdOrder.IntOrder.ler_weexpn2l; smt(). 
+  move => ?.  by have  := StdOrder.IntOrder.ler_weexpn2l 2 _ (8+x) 64 _;  smt(). 
+  have H' : forall w',0<= count idfun (W64.w2bits (W64.of_int (W32.to_uint w' %% 256))) <= 8.
+  + move => w'; rewrite count_ge0 /=.   rewrite w2bitsE (: 64 = 8 + 56) 1://  mkseq_add // count_cat /=.    have  ->/= : count idfun (mkseq (fun (i : int) => (W64.of_int (to_uint w' %% 256)).[8 + i]) 56) = 0 ; last  by smt(size_mkseq count_ge0 count_size).
+  rewrite /mkseq count_map /preim /idfun /=;apply count_pred0_eq_in => x; rewrite mem_iota  /= => *.
+  rewrite get_to_uint /= (: (0 <= 8 + x < 64)) 1:/# /=.
+  rewrite of_uintK /= (modz_small _ 18446744073709551616); 1:smt().
+  have /= ? : 2^8 <=  2 ^ (8 + x) <= 2^64; last by smt().
+  split; 1: by  apply StdOrder.IntOrder.ler_weexpn2l; smt(). 
+  move => ?.  by have  := StdOrder.IntOrder.ler_weexpn2l 2 _ (8+x) 64 _;  smt(). 
+  pose w := ((protect_64 _)). 
+  have H255 : 255 = 2^8 - 1 by auto.
+  rewrite H255 !and_mod //=.
+  rewrite / POPCNT_64 /rflags_of_popcnt /flags_w /=.  rewrite uleE /=.  have h: W32.modulus < 18446744073709551616. by auto.
+  pose c1 := to_uint (W64.of_int (count idfun (w2bits (W64.of_int (to_uint (w _ms) %% 256))))).
+  move => 7? i1 2?.
+  have h2 : forall w, 0 <=to_uint(W64.of_int (count idfun (w2bits (W64.of_int (W64.to_uint (w) %% 256))))) <=8. move => ?. rewrite !to_uintK_small; smt().
+  rewrite !to_uintD_small !to_uintK_small /=;1..23: smt(W32.to_uint_cmp).
+  pose c2 := count idfun
+            (w2bits
+               (W64.of_int
+                  (to_uint
+                     (MOVEMASK_32u8
+                        (VPACKSS_16u16
+                           (VPCMPGT_16u16 _bounds
+                              (VPBLENDW_256
+                                 (VPSHUFB_256
+                                    (VPERMQ
+                                       (get256d _buf (to_uint _buf_offset))
+                                       (W8.of_int 148)) _load_shuffle)
+                                 (VPSRL_16u16
+                                    (VPSHUFB_256
+                                       (VPERMQ
+                                          (get256d _buf (to_uint _buf_offset))
+                                          (W8.of_int 148)) _load_shuffle)
+                                    (W128.of_int 4)) (W8.of_int 170) `&`
+                               _mask)) W256.zero)) %%
+                   256))).
+  pose c3 := count idfun (w2bits (W64.of_int (to_uint (w _ms `>>` W8.of_int 16) %% 256))). move => i2 *.
+  split. split. smt().
+  + move: i1 i2. rewrite !and_iota /=.
+  move => i1 i2 k ?. have := i1 k _. by auto. have := i2 k _. by auto. smt(). 
+  smt(W32.to_uint_cmp all_cat). 
+qed.
+
 
 lemma _gen_matrix_buf_rejection_trace _pol _b_pol _counter _buf _b_buf _buf_offset :
       hoare [M(Syscall)._gen_matrix_buf_rejection :
@@ -29805,20 +29887,20 @@ lemma _gen_matrix_buf_rejection_trace _pol _b_pol _counter _buf _b_buf _buf_offs
        (0 <= (W64.to_uint _buf_offset))) /\
       ((W64.to_uint _buf_offset) < 536))) ==>
       (((((W64.of_int (W64.to_uint _counter)) \ule res.`3) /\
-        ((W64.to_uint res.`3) <= 256)) /\
+        (
        (foldr (fun x => (fun acc => (x /\ acc))) true
        (map
        (fun k =>
-       ((is_init res.`2 k 1) =
+       (
        ((is_init _b_pol k 1) \/
        (((2 * (W64.to_uint _counter)) <= k) /\
-       (k < (2 * (W64.to_uint res.`3))))))) (iota_ 0 512)))) /\
-      (valid res.`4))].
+       (k < (2 * (W64.to_uint res.`3))))) => (is_init res.`2 k 1))) (iota_ 0 512)))) /\
+      (valid res.`4))))].
 proof.
   proc; auto .
-  while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\ to_uint counter <= 256 /\
-         (forall k, 0<=k /\ k<512 => is_init_cell b_pol k = (is_init_cell _b_pol k \/
-         (to_uint _counter * 2) <= k /\  k < (2* to_uint counter ))) /\
+  while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\
+         (forall k, 0<=k /\ k<512 => (is_init_cell _b_pol k \/
+         (to_uint _counter * 2) <= k /\  k < (2* to_uint counter )) => is_init_cell b_pol k ) /\
          (condition_loop => (to_uint  buf_offset < 481)) /\
            to_uint _counter <= to_uint counter) .
   + auto . sp.
@@ -29830,14 +29912,14 @@ proof.
        param_0 param).
       auto .
       rewrite /is_init /valid /= => &m /> 7?. rewrite ultE /= => *.
-      split. smt(W64.to_uint_cmp BArray536.init_arrP BArray2048.init_arrP). move => /> 5?.
-      rewrite !uleE !ultE !to_uintD_small /=; smt(and_iota W64.to_uint_cmp all_cat).
+      split. smt(W64.to_uint_cmp BArray536.init_arrP BArray2048.init_arrP). move => /> 6?.
+      rewrite /protect_64 !uleE !ultE !to_uintD_small /=; smt(and_iota W64.to_uint_cmp all_cat).
     by auto .
   auto . 
   while ((valid trace__gen_matrix_buf_rejection) /\ 0<= to_uint counter /\ to_uint counter <= 256 /\
          to_uint _counter <= to_uint counter /\ 
-         (forall k, 0<=k /\ k<512 => is_init_cell b_pol k = (is_init_cell _b_pol k \/
-         (to_uint _counter * 2) <= k /\  k < (2* to_uint counter ))) /\
+           (forall k, 0<=k /\ k<512 =>  (is_init_cell _b_pol k \/
+         (to_uint _counter * 2) <= k /\  k < (2* to_uint counter )) => is_init_cell b_pol k) /\
          (to_uint counter < 225 => saved_buf_offset = buf_offset) /\
          (condition_loop => (to_uint  buf_offset < 457))).
   + auto . sp.
@@ -29876,7 +29958,7 @@ lemma __gen_matrix_fill_polynomial_trace _pol _b_pol _buf _b_buf :
       (((is_init res.`2 0 512) /\ (is_init res.`4 0 536)) /\ (valid res.`5))].
 proof.
   proc; auto .
-  while ((valid trace___gen_matrix_fill_polynomial) /\ 0 <=to_uint counter /\ to_uint buf_offset = 2*168  /\ is_init b_pol 0 (to_uint counter*2) /\ is_init b_buf 0 536).
+  while ((valid trace___gen_matrix_fill_polynomial) /\ 0 <=to_uint counter /\ to_uint buf_offset = 2*168  /\ (forall k, 0<=k<512 => k<to_uint counter*2 =>  is_init_cell b_pol k)  /\ is_init b_buf 0 536).
 auto .
 ecall (_gen_matrix_buf_rejection_trace param_2 b_param param_1 param_0 
  (BArray536.init_arr (W8.of_int 255) 536) param).
@@ -29885,7 +29967,7 @@ ecall (_shake128_next_state_trace param_3 ( BArray536.init_arr (W8.of_int 255) 5
 auto .
    rewrite /is_init /valid /= => &m /> . rewrite !ultE !to_uintK_small /=. smt(). move => *.
    split.  smt(BArray536.init_arrP W64.to_uint_cmp). move => *. split. smt(). move => 4?.
-   rewrite !uleE /= => *.   smt(and_iota all_cat BArray536.init_arrP).
+   rewrite !uleE /= =>? h *.   smt(and_iota all_cat BArray536.init_arrP).
 
 auto .
 ecall (_gen_matrix_buf_rejection_trace param_7 b_param_0 param_6 param_5 
@@ -30416,3 +30498,4 @@ auto .
 rewrite /is_init /valid /= .
 smt (all_cat  BArray32.init_arrP BArray2400.init_arrP BArray1088.init_arrP).
 qed .
+ 
