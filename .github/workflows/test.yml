@@ -1,0 +1,38 @@
+name: Validate EasyCrypt proofs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  OPAMYES: true
+  OPAMJOBS: 8
+  ECRJOBS: 8
+
+jobs:
+  test-proofs:
+    name: Install EasyCrypt and Run Tests
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/easycrypt/ec-build-box
+    strategy:
+      fail-fast: false
+    steps:
+    - name: Checkout tree
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Compile & Install EasyCrypt
+      run: |
+        opam init
+        opam pin --dev-repo add -n easycrypt https://github.com/EasyCrypt/easycrypt.git
+        opam install -v easycrypt --confirm-level=unsafe-yes
+    - name: Detect SMT provers
+      run: |
+        opam exec -- easycrypt why3config
+    - name: Run Tests
+      run: opam exec -- easycrypt runtest updated_proofs/tests.config  all
+   
