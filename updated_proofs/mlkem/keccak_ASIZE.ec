@@ -7898,13 +7898,10 @@ proof.
 proc; auto .
 while ((valid trace___keccakf1600_avx2x4) /\ is_init b_a 0 800 /\ 0 <=  c /\ ( c) %% 2 = 0).
 auto .
-ecall (_keccakf1600_4x_round_trace param_3 (BArray800.init_arr (W8.of_int 255) 800) param_2 (
-                                                           BArray800.init_arr
-                                                           (W8.of_int 255)
-                                                           800) param_1 
+ecall (_keccakf1600_4x_round_trace param_3 b_param_0 param_2 b_param param_1 
        param_0 param).
 auto .
-ecall (_keccakf1600_4x_round_trace param_8 b_param param_7 (BArray800.init_arr (W8.of_int 255) 800)
+ecall (_keccakf1600_4x_round_trace param_8 b_param_1 param_7 (BArray800.init_arr (W8.of_int 255) 800)
        param_6 param_5 param_4).
 auto .
 rewrite /is_init /valid /= => &m /> *.
