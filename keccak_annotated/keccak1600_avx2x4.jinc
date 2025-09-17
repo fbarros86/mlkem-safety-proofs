@@ -16,9 +16,7 @@ ensures{is_arr_init(result.0,0,800)}
   z256 = #set0_256();
   i = 0;
   while (i < 32*25) {
-    #[prover=safety_inv] assert (0 <= i &&  i <= 32*25 &&
-     (i % 32) == 0 && is_arr_init(st,0,i));
-    st.[u256 (int) i] = z256;
+    st.[:u256 i] = z256;
     i += 32; 
   }
   return st;
@@ -28,7 +26,7 @@ ensures{is_arr_init(result.0,0,800)}
    ADD RATE BIT
    ============
 */
-#[smt="all_cat,BArray800.init_arrP"]
+
 inline fn __addratebit_avx2x4
 ( reg mut ptr u256[25] st
 , inline int RATE8

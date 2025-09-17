@@ -52,7 +52,6 @@ inline fn keccakf1600_4x_theta_sum(reg ptr u256[25] a) -> reg u256[5]
   return c;
 }
 
-#[smt="all_cat,and_iota"]
 inline fn keccakf1600_4x_rol(reg u256[5] a, inline int x r, reg u256 r8 r56) -> reg u256[5]
 requires{is_arr_init(a,x*32,32) && 0<=x && x<5}
 ensures{ \all (k \in 0:160) (is_arr_init(result.0,k,1) == is_arr_init(a,k,1))}
@@ -73,7 +72,6 @@ ensures{ \all (k \in 0:160) (is_arr_init(result.0,k,1) == is_arr_init(a,k,1))}
 }
 
 // D[x] = C[x-1] ^ ROT(C[x+1], 1) 
-#[smt="all_cat,and_iota"]
 inline fn keccakf1600_4x_theta_rol(reg u256[5] c, reg u256 r8 r56) -> reg u256[5]
 {
   inline int x;
@@ -184,8 +182,6 @@ ensures{is_arr_init(result.0,0,800)}
 
 inline fn __keccakf1600_avx2x4(reg ptr u256[25] a) -> reg ptr u256[25]
 {
-  #mmx reg ptr u256[25] a_s;
-
   reg ptr u64[24] RC;
 
   stack u256[25] s_e;
@@ -207,19 +203,14 @@ inline fn __keccakf1600_avx2x4(reg ptr u256[25] a) -> reg ptr u256[25]
 
     e = _keccakf1600_4x_round(e, a, rc, r8, r56);
 
-    // just an expensive pointer swap (#todo request feature)
-    a_s = a; s_e = e;
-    a = a_s; e = s_e;
+    a, e = #swap(e, a);
 
-    //rc = RC.[c + 32];
-    rc = #VPBROADCAST_4u64(RC[c+1]);
+    //rc = RC.[(uint) c + 32];
+    rc = #VPBROADCAST_4u64(RC[(uint) c+1]);
     a = _keccakf1600_4x_round(a, e, rc, r8, r56);
 
-    // just an expensive pointer swap (#todo request feature)
-    a_s = a; s_e = e;
-    a = a_s; e = s_e;
+    a, e = #swap(e, a);
 
-    //c += 64;
     c += 2;
   } 
 
@@ -266,7 +257,7 @@ inline fn __u256x4_4u64x4
 inline fn __st4x_pack
 ( reg mut ptr u256[25] st4x
 , reg const ptr u64[25] st0 st1 st2 st3
-) -> reg ptr u256[25] 
+) -> reg ptr u256[25]
 requires{is_arr_init(st0,0,25*8) && is_arr_init(st1,0,25*8) && is_arr_init(st2,0,25*8) && is_arr_init(st3,0,25*8)}
 ensures{is_arr_init(result.0,0,25*32)}
 {
@@ -274,10 +265,10 @@ ensures{is_arr_init(result.0,0,25*32)}
   reg u256 x0, x1, x2, x3;
   reg u64 t0, t1, t2, t3;
   for i = 0 to 6 {
-    x0 = st0[u256 i];
-    x1 = st1[u256 i];
-    x2 = st2[u256 i];
-    x3 = st3[u256 i];
+    x0 = st0[:u256 i];
+    x1 = st1[:u256 i];
+    x2 = st2[:u256 i];
+    x3 = st3[:u256 i];
     x0, x1, x2, x3 = __u256x4_4u64x4(x0, x1, x2, x3);
     st4x[4*i+0] = x0;
     st4x[4*i+1] = x1;
@@ -288,10 +279,10 @@ ensures{is_arr_init(result.0,0,25*32)}
   t1 = st1[24];
   t2 = st2[24];
   t3 = st3[24];
-  st4x[u64 4*24+0] = t0;
-  st4x[u64 4*24+1] = t1;
-  st4x[u64 4*24+2] = t2;
-  st4x[u64 4*24+3] = t3;
+  st4x[:u64 4*24+0] = t0;
+  st4x[:u64 4*24+1] = t1;
+  st4x[:u64 4*24+2] = t2;
+  st4x[:u64 4*24+3] = t3;
 
   return st4x;
 }
@@ -323,7 +314,7 @@ inline fn __4u64x4_u256x4
 inline fn __st4x_unpack
 ( reg mut ptr u64[25] st0 st1 st2 st3
 , reg const ptr u256[25] st4x
-) -> reg ptr u64[25], reg ptr u64[25], reg ptr u64[25], reg ptr u64[25]
+) -> reg ptr u64[25], reg ptr u64[25], reg ptr u64[25], reg ptr u64[25] 
 requires{is_arr_init(st4x,0,25*32)}
 ensures{is_arr_init(result.0,0,25*8) && is_arr_init(result.1,0,25*8) && is_arr_init(result.2,0,25*8) && is_arr_init(result.3,0,25*8)}
 {
@@ -331,24 +322,24 @@ ensures{is_arr_init(result.0,0,25*8) && is_arr_init(result.1,0,25*8) && is_arr_i
   reg u256 x0, x1, x2, x3;
   reg u64 t0, t1, t2, t3;
   for i = 0 to 6 {
-    x0 = st4x[u256 4*i+0];
-    x1 = st4x[u256 4*i+1];
-    x2 = st4x[u256 4*i+2];
-    x3 = st4x[u256 4*i+3];
+    x0 = st4x[:u256 4*i+0];
+    x1 = st4x[:u256 4*i+1];
+    x2 = st4x[:u256 4*i+2];
+    x3 = st4x[:u256 4*i+3];
     x0, x1, x2, x3 = __4u64x4_u256x4(x0, x1, x2, x3);
-    st0.[u256 4*8*i] = x0;
-    st1.[u256 4*8*i] = x1;
-    st2.[u256 4*8*i] = x2;
-    st3.[u256 4*8*i] = x3;
+    st0.[:u256 4*8*i] = x0;
+    st1.[:u256 4*8*i] = x1;
+    st2.[:u256 4*8*i] = x2;
+    st3.[:u256 4*8*i] = x3;
   }
-  t0 = st4x[u64 4*24+0];
-  t1 = st4x[u64 4*24+1];
-  t2 = st4x[u64 4*24+2];
-  t3 = st4x[u64 4*24+3];
-  st0.[u64 8*24] = t0;
-  st1.[u64 8*24] = t1;
-  st2.[u64 8*24] = t2;
-  st3.[u64 8*24] = t3;
+  t0 = st4x[:u64 4*24+0];
+  t1 = st4x[:u64 4*24+1];
+  t2 = st4x[:u64 4*24+2];
+  t3 = st4x[:u64 4*24+3];
+  st0.[:u64 8*24] = t0;
+  st1.[:u64 8*24] = t1;
+  st2.[:u64 8*24] = t2;
+  st3.[:u64 8*24] = t3;
 
   return st0, st1, st2, st3;
 }
