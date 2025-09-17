@@ -35,12 +35,16 @@ jobs:
     - name: Switch to OCaml 5.2
       run: |
        opam init
-       opam switch create 5.2.1
+       if ! opam switch list --short | grep -q '^5.2.1$'; then
+          opam switch create 5.2.1
+       else
+          opam switch 5.2.1
+       fi
     - name: Install EasyCrypt
       run: |
         opam pin --dev-repo add -n easycrypt https://github.com/EasyCrypt/easycrypt.git
         opam install alt-ergo
-        opam install -v easycrypt --confirm-level=unsafe-yes
+        opam install -v easycrypt
     - name: Detect SMT provers
       run: opam exec -- easycrypt why3config
     - name: Run Tests
