@@ -25,6 +25,13 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
+    - name: Cache opam
+      uses: actions/cache@v4
+      with:
+        path: ~/.opam
+        key: ${{ runner.os }}-opam-${{ hashFiles('**/*.opam', '**/opam.locked') }}
+        restore-keys: |
+          ${{ runner.os }}-opam-
     - name: Switch to OCaml 5.2
       run: |
        opam init
