@@ -25,14 +25,17 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
-    - name: Compile & Install EasyCrypt
+    - name: Switch to OCaml 5.2
       run: |
-        opam init
+       opam init
+       opam switch create 5.2.1
+    - name: Install EasyCrypt
+      run: |
         opam pin --dev-repo add -n easycrypt https://github.com/EasyCrypt/easycrypt.git
+        opam install alt-ergo
         opam install -v easycrypt --confirm-level=unsafe-yes
     - name: Detect SMT provers
-      run: |
-        opam exec -- easycrypt why3config
+      run: opam exec -- easycrypt why3config
     - name: Run Tests
       run: opam exec -- easycrypt runtest updated_proofs/tests.config  all
    
